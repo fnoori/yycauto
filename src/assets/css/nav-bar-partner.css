@@ -1,0 +1,9 @@
+.nav-bar-title {
+    color: white;
+    display: inline;
+    position: absolute;
+    right: 0;
+    padding-right: 1rem;
+    font-size: 1em;
+    padding-top: 3px;
+}

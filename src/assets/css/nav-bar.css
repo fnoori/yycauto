@@ -1,0 +1,147 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+    padding-top: 4.5rem;
+}
+
+button:hover,
+button:focus,
+button:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+input:hover,
+input:focus {
+    box-shadow: none !important;
+    border: 1px solid #ced4da !important;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 1em;
+}
+#yyc {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#automotives {
+    display: inline-block;
+}
+.nav-bar-background {
+	background-color: #F44336 !important;
+}
+.nav-bar-sponser {
+    color: white;
+    display: inline;
+    position: absolute;
+    right: 0;
+    padding-right: 1rem;
+    font-size: 0.9em;
+    padding-top: 3px;
+}
+.nav-bar-sponser img {
+    width: 40px;
+}
+.search-input-and-groups {
+    margin-left: 30px;
+}
+.search-input {
+    border-radius: 0px;
+    width: 40vw !important;
+    border: none !important;
+}
+.search-input:hover,
+.search-input:focus {
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+
+.advance-search-btn,
+.advance-search-btn button {
+    background-color: white;
+}
+.advance-search-btn button i {
+    color: rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+}
+.advance-search-btn button i:hover {
+    cursor: pointer;
+}
+.search-btn {
+    background-color: white;
+    border-radius: 0px;
+}
+.search-btn button {
+    background-color: white;
+    border: none !important;
+    border-radius: 0px;
+    margin-left: 1px !important;
+    width: 6vw;
+}
+.search-btn button:before {
+    content: '';
+    border-left: 1px solid #F44336;
+    position: absolute;
+    height: 100%;
+    bottom: 0px;
+    left: 0px;
+    margin-right: 2px;
+}
+.search-btn button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.search-btn button i {
+    color: rgba(0, 0, 0, 0.5);
+    vertical-align: middle;
+    font-size: 1.3em;
+}
+.hide-nav {
+    display: none !important;
+}
+
+@media (max-width: 991px) {
+}
+
+@media (max-width: 860px) {
+}
+@media (max-width: 800px) {
+    body {
+        padding-top: 7.2rem;
+    }
+    .nav-bar-background {
+        padding-bottom: 10px;    
+    }
+    .navbar-brand {
+        margin-bottom: 5px;
+    }
+    .search-input-and-groups {
+        display: inline !important;
+        margin-left: 0px;
+    }
+    .search-input-and-groups {
+        width: 100%;
+    }
+    .search-btn button {
+        width: 100%;
+    }
+    .input-group-btn:not(:last-child)>.btn {
+        margin-right: 0px !important;
+    }
+}
+@media (max-width: 575px) {
+
+}
+@media (max-width: 414px) {
+    .search-btn button:hover {
+        background-color: white;
+    }
+}

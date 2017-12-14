@@ -5,6 +5,7 @@ import Home from '@/components/Home'
 import SponsersPage from '@/components/SponsersPage'
 import DetailsPage from '@/components/DetailsPage'
 import PartnersPage from '@/components/PartnersPage'
+import PartnersLoginPage from '@/components/PartnersLoginPage'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
             path: '/vehicleDetails/:vehicle',
             name: 'DetailsPage',
             component: DetailsPage
+        },
+        {
+            path: '/partnerLogin',
+            name: 'PartnersLoginPage',
+            component: PartnersLoginPage
         },
         {
             path: '/partnersPage',

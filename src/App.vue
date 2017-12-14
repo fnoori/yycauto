@@ -142,12 +142,12 @@
                     <a href="/home"> Automotives </a>
                 </div>
                 <div class="nav-bar-title">
-                    Welcome Genereic Dealership
+                    {{ pageTitle }}
                 </div>
             </div>
         </nav>
 
-        <router-view/>
+        <router-view partnerCurrLoggedIn="hello"/>
         <footer class="footer">
             <div class="copyright">
                 &#169; Farzam Noori
@@ -190,12 +190,17 @@
                 chosenMinPrice: null,
                 chosenMaxPrice: null,
 
-                partnerLogin: false
+                partnerLogin: false,
+                pageTitle: ''
             }
         },
         mounted: function () {
             if (this.$route.name == 'PartnersPage') {
                 this.partnerLogin = true
+                this.pageTitle = 'Generic Dealership'
+            } else if (this.$route.name == 'PartnersLoginPage') {
+                this.partnerLogin = true
+                this.pageTitle = 'Partner Login'
             } else {
                 this.partnerLogin = false
                 this.pageMount()

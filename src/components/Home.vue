@@ -165,7 +165,7 @@
         data() {
             return {
                 msg: 'Welcome To The Home Page!',
-                getVehicleRoute: 'getVehicles',
+                getVehicleRoute: 'vehicles',
 
                 allVehicles: [],
 
@@ -190,9 +190,9 @@
             '$route'(from, to) {
                 if (this.$route.query.searchIs != null) {
                     this.resetTiers()
-                    this.getVehicleRoute = 'basicSearchAutoComplete/' + this.$route.query.searchIs
+                    this.getVehicleRoute = 'basicSearch/' + this.$route.query.searchIs
 
-                    axios.get('http://localhost:3000/basicSearchAutoComplete/' + this.$route.query.searchIs + '/1/' + this.tierOneLazyLoadSkipBy).then((response) => {
+                    axios.get('http://localhost:3000/basicSearch/' + this.$route.query.searchIs + '/1/' + this.tierOneLazyLoadSkipBy).then((response) => {
                         this.tierOneVehicles = response.data
                         if (this.tierOneVehicles.length <= 0) {
                             this.shouldHideTierOne = true
@@ -203,7 +203,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://localhost:3000/basicSearchAutoComplete/' + this.$route.query.searchIs + '/2/' + this.tierTwoLazyLoadSkipBy).then((response) => {
+                    axios.get('http://localhost:3000/basicSearch/' + this.$route.query.searchIs + '/2/' + this.tierTwoLazyLoadSkipBy).then((response) => {
                         this.tierTwoVehicles = response.data
                         if (this.tierTwoVehicles.length <= 0) {
                             this.shouldHideTierTwo = true
@@ -214,7 +214,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://localhost:3000/basicSearchAutoComplete/' + this.$route.query.searchIs + '/3/' + this.tierThreeLazyLoadSkipBy).then((response) => {
+                    axios.get('http://localhost:3000/basicSearch/' + this.$route.query.searchIs + '/3/' + this.tierThreeLazyLoadSkipBy).then((response) => {
                         this.tierThreeVehicles = response.data
                         if (this.tierThreeVehicles <= 0) {
                             this.shouldHideTierThree = true

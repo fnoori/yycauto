@@ -162,20 +162,97 @@
 
 <script>
     import axios from 'axios'
-    var axios_getVehicleDetails = axios.get('http://localhost:3000/getVehicleDetails')
+    var axios_getVehicleDetails = axios.get('http://localhost:3000/getVehiclesDetails')
 
     export default {
-        name: 'app'
+        name: 'app',
+        data() {
+            return {
+                showModal: false,
+                rawVehicleDetails: JSON,
+
+                vehicleMakes: [],
+                vehicleModels: [],
+                vehicleTypes: [],
+                colors: [],
+                fuelTypes: [],
+                transmissionTypes: [],
+
+                basicSearchValue: null,
+
+                chosenMake: null,
+                chosenModel: null,
+                chosenType: null,
+                chosenInteriorColor: null,
+                chosenExteriorColor: null,
+                chosenFuelType: null,
+                chosenTransmissionType: null,
+                chosenMinPrice: null,
+                chosenMaxPrice: null,
+
+                partnerLogin: false
+            }
+        },
+        mounted: function () {
+            if (this.$route.name == 'PartnersPage') {
+                this.partnerLogin = true
+            } else {
+                this.partnerLogin = false
+                this.pageMount()
+            }
+        },
+        methods: {
+            // Load the advance search dropdown data when page loads
+            pageMount: function () {
+                axios_getVehicleDetails.then((response) => {
+                    this.rawVehicleDetails = response.data[0]
+                    this.vehicleMakes = Object.keys(this.rawVehicleDetails.makeModel)
+                    this.vehicleTypes = this.rawVehicleDetails.bodyType
+                    this.colors = this.rawVehicleDetails.color
+                    this.transmissionTypes = this.rawVehicleDetails.transmission
+                    this.fuelTypes = this.rawVehicleDetails.fuelType
+                })
+                    .catch(error => {
+                        console.log('An error ocurred while trying to retreive the data', error)
+                    })
+            },
+
+            basicSearchAutoComplete: function () {
+
+            },
+
+            basicSearchClick: function () {
+                this.$router.replace({ name: 'Home', query: { searchIs: this.basicSearchValue } })
+            },
+
+            advanceSearchClick: function () {
+                this.showModal = true
+            },
+
+            // When user chooses a make, populate the appropriate model
+            makeChosen: function () {
+                this.vehicleModels = this.rawVehicleDetails.makeModel[this.chosenMake]
+            },
+
+            submitAdvanceSearch: function () {
+                var advancedSearchJSON = {
+                    'make': (this.chosenMake == null) ? -1 : this.chosenMake,
+                    'model': (this.chosenModel == null) ? -1 : this.chosenModel,
+                    'type': (this.chosenType == null) ? -1 : this.chosenType,
+                    'extColor': (this.chosenExteriorColor == null) ? -1 : this.chosenExteriorColor,
+                    'intColor': (this.chosenInteriorColor == null) ? -1 : this.chosenInteriorColor,
+                    'fuelType': (this.chosenFuelType == null) ? -1 : this.chosenFuelType,
+                    'transmission': (this.chosenTransmissionType == null) ? -1 : this.chosenTransmissionType,
+                    'minPrice': (this.chosenMinPrice == null) ? -1 : this.chosenMinPrice,
+                    'maxPrice': (this.chosenMaxPric == null) ? -1 : this.chosenMaxPric
+                }
+
+                this.$router.replace({ name: 'Home', query: { advancedSearchQuery: JSON.stringify(advancedSearchJSON) } })
+                this.showModal = false
+            }
+        }
     }
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
-    }
 </style>

@@ -108,6 +108,22 @@ a:hover {
     display: none !important;
 }
 
+.footer {
+    width: 100%;
+    margin-top: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    padding: 0 1rem;
+    color: white;
+    background-color: rgba(244,67,54,1);
+}
+.footer .copyright {
+    float: left;
+}
+.footer .contact-info {
+    float: right;   
+}
+
 @media (max-width: 991px) {
 }
 

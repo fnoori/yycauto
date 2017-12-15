@@ -2,10 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/components/Home'
-import SponsersPage from '@/components/SponsersPage'
 import DetailsPage from '@/components/DetailsPage'
 import PartnersPage from '@/components/PartnersPage'
-import PartnersLoginPage from '@/components/PartnersLoginPage'
+import PartnerLogin from '@/components/PartnersLoginPage'
 
 import * as store from '../store'
 
@@ -19,19 +18,14 @@ export default new Router({
             component: Home
         },
         {
-            path: '/sponsersPage',
-            name: 'SponsersPage',
-            component: SponsersPage
-        },
-        {
             path: '/vehicleDetails/:vehicle',
             name: 'DetailsPage',
             component: DetailsPage
         },
         {
             path: '/partnerLogin',
-            name: 'PartnersLoginPage',
-            component: PartnersLoginPage
+            name: 'PartnerLogin',
+            component: PartnerLogin
         },
         {
             path: '/partnersPage',

@@ -1,18 +1,9 @@
-export const increment = state => {
-    state.count++
-}
-export const decrement = state => {
-    state.count--
-}
-
-
-
 export const login = state => {
     state.pending = true
 }
-export const loginSuccess = state => {
+export const loginSuccess = (state, payload) => {
     state.isLoggedIn = true
-    state.pending = false
+    state.dealershipLoggedIn = payload.dealership
 }
 export const logout = state => {
     state.isLoggedIn = false

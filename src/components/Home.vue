@@ -188,6 +188,11 @@
         },
         watch: {
             '$route'(from, to) {
+                if (this.$route.query.loggedOut) {
+                    this.pageInit()
+                    return
+                }
+
                 if (this.$route.query.searchIs != null) {
                     this.resetTiers()
                     this.getVehicleRoute = 'basicSearch/' + this.$route.query.searchIs

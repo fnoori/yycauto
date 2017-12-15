@@ -38,6 +38,7 @@ module.exports = {
         'key-spacing': 0,
         'no-unneeded-ternary': 0,
         'no-tabs': 0,
-        'eol-last': 0
+        'eol-last': 0,
+        'object-curly-even-spacing': 0
     }
 }

@@ -11,6 +11,7 @@ const state = {
     count: 0,
 
     isLoggedIn: !!localStorage.getItem('token'),
+    dealershipLoggedIn: localStorage.getItem('dealershipId'),
     pending: false
 }
 

@@ -142,7 +142,8 @@
                     <a href="/home"> Automotives </a>
                 </div>
                 <div class="nav-bar-title">
-                    {{ pageTitle }}
+                    <div>{{ pageTitle }}</div>
+                    <button type="button" class="logout-button" @click="logout">Logout</button>
                 </div>
             </div>
         </nav>
@@ -194,14 +195,25 @@
                 pageTitle: ''
             }
         },
-        mounted: function () {
+        created: function () {
             if (this.$route.name == 'PartnersPage') {
+                this.pageTitle = this.$store.state.dealershipLoggedIn
                 this.partnerLogin = true
-                this.pageTitle = 'Generic Dealership'
             } else {
                 this.partnerLogin = false
                 this.pageMount()
             }
+        },
+        watch: {
+            '$route'(from, to) {
+                if (this.$route.name == 'PartnersPage') {
+                    this.pageTitle = this.$store.state.dealershipLoggedIn
+                    this.partnerLogin = true
+                } else {
+                    this.partnerLogin = false
+                    this.pageMount()
+                }
+            },
         },
         methods: {
             // Load the advance search dropdown data when page loads
@@ -246,6 +258,14 @@
 
                 this.$router.replace({ name: 'Home', query: { advancedSearchQuery: JSON.stringify(advancedSearchJSON) } })
                 this.showModal = false
+            },
+
+            logout: function () {
+                this.$store.dispatch('logout').then(
+                    console.log('Logged out !')
+                ).then (() => {
+                    this.$router.replace({ name: 'Home', query: { loggedOut: true } })
+                })
             }
         }
     }

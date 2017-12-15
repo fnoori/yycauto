@@ -37,6 +37,7 @@ module.exports = {
         'space-before-blocks': 0,
         'key-spacing': 0,
         'no-unneeded-ternary': 0,
-        'no-tabs': 0
+        'no-tabs': 0,
+        'eol-last': 0
     }
 }

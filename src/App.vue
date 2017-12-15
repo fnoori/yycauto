@@ -20,7 +20,7 @@
 
                 <div class="input-group">
                     <input id="basicSearch" v-model="basicSearchValue" class="form-control search-input" placeholder="Search" aria-label="Search"
-                        v-on:keyup="basicSearchAutoComplete" @keyup.enter="basicSearchClick">
+                        @keyup.enter="basicSearchClick">
 
                     <div class="input-group-btn advance-search-btn">
                         <button @click="advanceSearchClick" class="btn" type="button">
@@ -147,7 +147,7 @@
             </div>
         </nav>
 
-        <router-view partnerCurrLoggedIn="hello"/>
+        <router-view />
         <footer class="footer">
             <div class="copyright">
                 &#169; Farzam Noori
@@ -198,9 +198,6 @@
             if (this.$route.name == 'PartnersPage') {
                 this.partnerLogin = true
                 this.pageTitle = 'Generic Dealership'
-            } else if (this.$route.name == 'PartnersLoginPage') {
-                this.partnerLogin = true
-                this.pageTitle = 'Partner Login'
             } else {
                 this.partnerLogin = false
                 this.pageMount()
@@ -216,14 +213,9 @@
                     this.colors = this.rawVehicleDetails.color
                     this.transmissionTypes = this.rawVehicleDetails.transmission
                     this.fuelTypes = this.rawVehicleDetails.fuelType
+                }).catch(error => {
+                    console.log('An error ocurred while trying to retreive the data', error)
                 })
-                    .catch(error => {
-                        console.log('An error ocurred while trying to retreive the data', error)
-                    })
-            },
-
-            basicSearchAutoComplete: function () {
-
             },
 
             basicSearchClick: function () {

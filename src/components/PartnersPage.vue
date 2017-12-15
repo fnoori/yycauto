@@ -40,7 +40,6 @@
 
     export default {
         name: 'PartnersPage',
-        props: ['partnerCurrLoggedIn'],
         data() {
             return {
                 msg: 'Welcome to the partners page',

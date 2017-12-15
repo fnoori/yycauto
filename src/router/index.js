@@ -7,6 +7,8 @@ import DetailsPage from '@/components/DetailsPage'
 import PartnersPage from '@/components/PartnersPage'
 import PartnersLoginPage from '@/components/PartnersLoginPage'
 
+import * as store from '../store'
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,7 +36,15 @@ export default new Router({
         {
             path: '/partnersPage',
             name: 'PartnersPage',
-            component: PartnersPage
+            component: PartnersPage,
+            beforeEnter: (to, from, next) => {
+                if (!store.default.state.isLoggedIn) {
+                    alert('You are not authorized to view this page')
+                    next('/')
+                } else {
+                    next()
+                }
+            }
         }
     ]
 })

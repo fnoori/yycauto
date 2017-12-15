@@ -91,7 +91,7 @@
                 }
 
                 /* Count the number of rows for this dealership */
-                axios.get('http://localhost:3000/countDealershipVehicles/Generic Dealership').then((response) => {
+                axios.get('http://localhost:3000/countDealershipVehicles/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
                     this.totalRows = response.data
                 }).catch(error => {
                     console.log('An error occurred when trying to count the dealerships vehicles', error)
@@ -99,7 +99,7 @@
 
                 /* Get cars for dealership */
                 const items = []
-                return axios.get('http://localhost:3000/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership').then((response) => {
+                return axios.get('http://localhost:3000/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
                     for (var key in response.data) {
                         if (response.data.hasOwnProperty(key)) {
                             //this.items[key] = response.data[key]

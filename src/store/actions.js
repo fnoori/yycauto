@@ -7,11 +7,11 @@ export const login = ({ commit }, creds) => {
             axios.get('http://localhost:3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
 
                 localStorage.setItem('token', response.data.token)
-                localStorage.setItem('dealershipId', response.data.dealershipId)
+                localStorage.setItem('dealership', response.data.dealership)
                 
                 // Need to pass the dealership as payload
                 commit('loginSuccess', {
-                    dealership: response.data.dealershipId
+                    dealership: response.data.dealership
                 })
 
                 resolve()
@@ -24,7 +24,7 @@ export const login = ({ commit }, creds) => {
 
 export const logout = ({ commit }) => {
     localStorage.removeItem('token')
-    localStorage.removeItem('dealershipId')
+    localStorage.removeItem('dealership')
 
     console.log('Logged out !')
 

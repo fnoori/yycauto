@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <nav v-bind:class="[{'hide-nav': partnerLogin}, 'navbar navbar-light fixed-top bg-light justify-content-between nav-bar-background']">
+        <nav v-bind:class="[{'hide-nav': partnersPage}, 'navbar navbar-light fixed-top bg-light justify-content-between nav-bar-background']">
             <div class="navbar-brand">
                 <div id="yyc">
                     <a href="/home"> logo </a>
@@ -133,7 +133,7 @@
             </div>
         </nav>
 
-        <nav v-bind:class="[{'hide-nav': !partnerLogin}, 'navbar navbar-light fixed-top bg-light justify-content-between nav-bar-background']">
+        <nav v-bind:class="[{'hide-nav': !partnersPage}, 'navbar navbar-light fixed-top bg-light justify-content-between nav-bar-background']">
             <div class="navbar-brand">
                 <div id="yyc">
                     <a href="/home"> logo </a>
@@ -141,10 +141,12 @@
                 <div id="automotives">
                     <a href="/home"> Automotives </a>
                 </div>
-                <div class="nav-bar-title">
-                    <div>{{ pageTitle }}</div>
-                    <button type="button" class="logout-button" @click="logout">Logout</button>
-                </div>
+            </div>
+            <b-nav-item-dropdown v-if="!partnerLogin" :text="pageTitle" right>
+                <b-dropdown-item @click="logout">Logout</b-dropdown-item>
+            </b-nav-item-dropdown>
+            <div v-else class="nav-bar-sponser">
+                {{ pageTitle }}
             </div>
         </nav>
 
@@ -191,6 +193,7 @@
                 chosenMinPrice: null,
                 chosenMaxPrice: null,
 
+                partnersPage: false,
                 partnerLogin: false,
                 pageTitle: ''
             }
@@ -198,9 +201,14 @@
         created: function () {
             if (this.$route.name == 'PartnersPage') {
                 this.pageTitle = this.$store.state.dealershipLoggedIn
-                this.partnerLogin = true
-            } else {
+                this.partnersPage = true
                 this.partnerLogin = false
+            } else if (this.$route.name == 'PartnerLogin') {
+                this.partnersPage = true
+                this.partnerLogin = true
+                this.pageTitle = 'Partner Login'
+            } else {
+                this.partnersPage = false
                 this.pageMount()
             }
         },
@@ -208,9 +216,14 @@
             '$route'(from, to) {
                 if (this.$route.name == 'PartnersPage') {
                     this.pageTitle = this.$store.state.dealershipLoggedIn
-                    this.partnerLogin = true
-                } else {
+                    this.partnersPage = true
                     this.partnerLogin = false
+                } else if (this.$route.name == 'PartnerLogin') {
+                    this.partnersPage = true
+                    this.partnerLogin = true
+                    this.pageTitle = 'Partner Login'
+                } else {
+                    this.partnersPage = false
                     this.pageMount()
                 }
             },
@@ -263,7 +276,7 @@
             logout: function () {
                 this.$store.dispatch('logout').then(
                     console.log('Logged out !')
-                ).then (() => {
+                ).then(() => {
                     this.$router.replace({ name: 'Home', query: { loggedOut: true } })
                 })
             }

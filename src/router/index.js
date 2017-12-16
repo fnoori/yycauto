@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/components/Home'
 import DetailsPage from '@/components/DetailsPage'
+import SponsersPage from '@/components/SponsersPage'
 import PartnersPage from '@/components/PartnersPage'
 import PartnerLogin from '@/components/PartnersLoginPage'
 
@@ -21,6 +22,11 @@ export default new Router({
             path: '/vehicleDetails/:vehicle',
             name: 'DetailsPage',
             component: DetailsPage
+        },
+        {
+            path: '/sponsersPage',
+            name: 'SponsersPage',
+            component: SponsersPage
         },
         {
             path: '/partnerLogin',

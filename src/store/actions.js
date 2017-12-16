@@ -6,6 +6,12 @@ export const login = ({ commit }, creds) => {
         setTimeout(() => {
             axios.get('http://localhost:3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
 
+                console.log(response)
+
+                if (!response.data.success) {
+                    return response.data
+                }
+
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('dealership', response.data.dealership)
                 
@@ -17,6 +23,7 @@ export const login = ({ commit }, creds) => {
                 resolve()
             }).catch(error => {
                 console.log('An error occurred when trying to login: ', error)
+                return error
             })
         }, 1000)
     })

@@ -34,8 +34,9 @@
                     email: this.email,
                     password: this.password
                 }).then(() => {
-                    console.log('logged in !')
                     this.$router.push('PartnersPage')
+                }).catch(error => {
+                    console.log('from login page', error)
                 })
             }
         }

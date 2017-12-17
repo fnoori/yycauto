@@ -11,6 +11,7 @@ import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
 
 require('./assets/css/nav-bar.css')
 require('./assets/css/nav-bar-partner.css')
+require('./assets/css/modal.css')
 
 Vue.use(BootstrapVue)
 Vue.component('modal', Modal)

@@ -20,11 +20,21 @@
                     <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" />
                 </div>
             </div>
+
+            <div class="table-modifier-btns">
+                <b-button class="new-btn" variant="success">New</b-button>
+                <b-button class="del-btn" variant="danger">Delete</b-button>
+            </div>
+
         </div>
         <div class="vehicles-list">
             <b-table :fields="fields" :items="myProvider" :current-page="currentPage" :filter="filter" :per-page="perPage" :busy.sync="isBusy">
-                <template slot="index" slot-scope="data">
-                    {{ data.index + 1 }}
+
+                <template slot="actions" slot-scope="row">
+                    <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
+                    <b-button v-b-modal.modal-center size="sm" class="mr-1 edit-btn" variant="warning">
+                        Edit
+                    </b-button>
                 </template>
 
                 <template slot="BasicInfo.Make" slot-scope="data">
@@ -32,6 +42,12 @@
                 </template>
             </b-table>
         </div>
+
+        <!-- Modal Component -->
+        <b-modal id="modal-center" centered title="Bootstrap-Vue">
+            <p class="my-4">Vertically centered modal!</p>
+        </b-modal>
+
     </div>
 </template>
 
@@ -44,11 +60,10 @@
             return {
                 msg: 'Welcome to the partners page',
                 fields: [
-                    { key: 'index', label: ' ' },
-                    { key: 'BasicInfo.IsSold', label: 'Is Sold', sortable: true },
                     { key: 'BasicInfo.Make', label: 'Make & Model', sortable: true },
                     { key: 'BasicInfo.Year', label: 'Year', sortable: true },
                     { key: 'BasicInfo.Kilometers', label: 'Kilometers', sortable: true },
+                    { key: 'actions', label: ' ' }
                 ],
                 totalRows: 0,
                 perPage: 5,
@@ -109,8 +124,7 @@
                                     'Model': response.data[key].BasicInfo.Model
                                 },
                                 'BasicInfo.Kilometers': response.data[key].BasicInfo.Kilometers,
-                                'BasicInfo.Year': response.data[key].BasicInfo.Year,
-                                'BasicInfo.IsSold': response.data[key].BasicInfo.IsSold
+                                'BasicInfo.Year': response.data[key].BasicInfo.Year
                             }
                         }
                     }
@@ -135,6 +149,11 @@
         border-radius: 0 !important;
     }
 
+    button {
+        background-color: white;
+        color: black;
+    }
+
     select:focus {
         box-shadow: none !important;
     }
@@ -144,12 +163,24 @@
     }
 
     th {
-        outline: none;
+        outline: none !important;
+    }
+
+    th:focus {
+        outline: none !important;
     }
 
     .list-controls {}
 
     .vehicles-list {}
+
+    .edit-btn {
+        float: right;
+    }
+
+    .vehicles-list button:hover {
+        cursor: pointer;
+    }
 
     .table-navigation {
         width: 100%;
@@ -160,6 +191,19 @@
     .table-navigation-pagination {
         float: right;
     }
+
+    .table-modifier-btns {
+        float: right;
+        margin-bottom: 0.5rem;
+    }
+
+    .table-modifier-btns button:hover {
+        cursor: pointer;
+    }
+
+    .table-modifier-btns .new-btn {}
+
+    .table-modifier-btns .del-btn {}
 
     .page-link {
         border-radius: 0 !important;
@@ -182,6 +226,8 @@
         top: 50% !important;
         left: 50% !important;
     }
+
+    /* Modal */
 
     @media(max-width: 980px) {
         .partner {

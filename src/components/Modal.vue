@@ -71,63 +71,11 @@
         border-radius: 2px;
     }
 
-    .full-width-header {
-        width: 100%;
-        position: relative;
-    }
-
-    .advance-search-title {
-        color: white;
-        float: left;
-        font-size: 18px;
-        margin-top: -8px;
-    }
-
-    .advance-search-close {
-        margin-top: -8px;
-        background-color: white;
-        color: rgba(0, 0, 0, 1);
-        border-radius: 2px;
-        border: none;
-        width: 25px;
-        height: 25px;
-        padding: 0px;
-        margin-right: -7px;
-        position: absolute;
-        right: 0;
-    }
-
-    .advance-search-close:hover {
-        background-color: lightgrey;
-    }
-
     .modal-body {
         margin-top: 0px;
         padding: 10px 15px 15px 15px;
         height: 405px;
         overflow-y: scroll;
-    }
-
-    .modal-footer {
-        padding: 0 5px;
-        height: 54px;
-    }
-
-    .modal-footer button {
-        background-color: #F44336;
-        border: none;
-        color: white;
-        width: 7rem;
-        height: 2.5rem;
-        border-radius: 2px;
-    }
-
-    .modal-footer button:active {
-        background-color: #D81E0F;
-    }
-
-    .modal-default-button {
-        float: right;
     }
 
     /*
@@ -153,73 +101,10 @@
         transform: scale(1.1);
     }
 
-    .misc-info {
-        margin-bottom: 1rem;
-    }
-
-    .new-car {
-        margin-right: 5%;
-    }
-
-    .used-car {
-        margin-right: 1%;
-    }
-
-    .car-proof {
-        width: 110px;
-    }
-
-    .car-proof img {
-        width: 50%;
-    }
-
-    .basic-info {
-        margin-bottom: 1rem;
-    }
-
-    .basic-info label {
-        justify-content: left;
-        margin: 0px -15px 10px -15px;
-    }
-
-    .left-component {
-        margin-right: 0.1rem;
-    }
-
-    .right-component {
-        margin-left: 0.1rem;
-    }
-
-    .min-price {
-        margin-right: 0.1rem;
-    }
-
-    .max-price {
-        margin-left: 0.1rem;
-    }
-
-    .aesthetics {
-        margin-bottom: 1rem;
-    }
-
-    .aesthetics label {
-        justify-content: left;
-        margin: 0px -15px 10px -15px;
-    }
-
-    .mechanical label {
-        justify-content: left;
-        margin: 0px -15px 10px -15px;
-    }
-
     /* Misc. */
 
     .border-rounding {
         border-radius: 0.25rem !important;
-    }
-
-    .top-margin {
-        margin-top: 0.5rem;
     }
 
     @media (max-width: 800px) {}

@@ -30,6 +30,8 @@
 </script>
 
 <style scoped>
+
+    /*
     select {
         background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e") no-repeat right .4rem center !important;
     }
@@ -85,7 +87,7 @@
 *
 * You can easily play with the modal transition by editing
 * these styles.
-*/
+
 
     .modal-enter {
         opacity: 0;
@@ -101,7 +103,7 @@
         transform: scale(1.1);
     }
 
-    /* Misc. */
+     Misc.
 
     .border-rounding {
         border-radius: 0.25rem !important;
@@ -145,4 +147,5 @@
             -webkit-overflow-scrolling: touch;
         }
     }
+    */
 </style>

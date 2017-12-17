@@ -23,7 +23,7 @@
                         @keyup.enter="basicSearchClick">
 
                     <div class="input-group-btn advance-search-btn">
-                        <button @click="advanceSearchClick" class="btn" type="button">
+                        <button v-b-modal.modal-center class="btn" type="button">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </button>
                     </div>
@@ -34,6 +34,25 @@
                         </button>
                     </div>
 
+                    <!-- Modal Component -->
+                    <b-modal id="modal-center" centered title="Advanced Search">
+
+                        <header slot="modal-header" class="modal-header">
+                            <h5 class="modal-title">Advanced Search</h5>
+                            <button type="button" class="close">
+                                ×
+                            </button>
+                        </header>
+
+                        <p class="my-4">Vertically centered modal!</p>
+                        
+                        <div slot="modal-footer">
+
+                        </div>
+
+                    </b-modal>
+
+                    <!--
                     <modal v-if="showModal" @close="showModal = false">
                         <div slot="header" class="full-width-header">
                             <div class="advance-search-title">
@@ -127,6 +146,7 @@
                             </button>
                         </div>
                     </modal>
+                    -->
 
                 </div>
 
@@ -195,7 +215,9 @@
 
                 partnersPage: false,
                 partnerLogin: false,
-                pageTitle: ''
+                pageTitle: '',
+
+                //Modal
             }
         },
         created: function () {
@@ -245,10 +267,6 @@
 
             basicSearchClick: function () {
                 this.$router.replace({ name: 'Home', query: { searchIs: this.basicSearchValue } })
-            },
-
-            advanceSearchClick: function () {
-                this.showModal = true
             },
 
             // When user chooses a make, populate the appropriate model

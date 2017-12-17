@@ -124,7 +124,12 @@ a:hover {
     float: right;   
 }
 
-/* Modal */
+/* Bootstrap-vue modal */
+.modal-dialog-centered {
+    min-height: calc(100% - 60px) !important;
+}
+
+/* Modal
 .misc-info {
     margin-bottom: 1rem;
 }
@@ -239,6 +244,8 @@ a:hover {
 .modal-default-button {
     float: right;
 }
+
+*/
 
 @media (max-width: 991px) {
 }

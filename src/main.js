@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 
 import BootstrapVue from 'bootstrap-vue'
-import Modal from './components/Modal'
+//import Modal from './components/Modal'
 import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
 
 require('./assets/css/nav-bar.css')
@@ -14,7 +14,7 @@ require('./assets/css/nav-bar-partner.css')
 require('./assets/css/modal.css')
 
 Vue.use(BootstrapVue)
-Vue.component('modal', Modal)
+//Vue.component('modal', Modal)
 Vue.component('fade-loader', FadeLoader)
 
 Vue.config.productionTip = false

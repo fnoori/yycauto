@@ -182,4 +182,41 @@
         top: 50% !important;
         left: 50% !important;
     }
+
+    @media(max-width: 980px) {
+        .partner {
+            height: 200rem;
+            margin: 0 5rem;
+        }
+    }
+
+    @media(max-width: 800px) {
+        .partner {
+            margin: -2rem 5rem;
+        }
+    }
+
+    @media(max-width: 655px) {
+        .partner {
+            height: 200rem;
+            margin: -2rem 1rem;
+        }
+    }
+
+    @media(max-width: 450px) {
+        .partner {
+            font-size: 3vw;
+        }
+
+        .table-navigation-per-page {
+            float: none;
+            margin-left: 0;
+        }
+        .table-navigation-pagination {
+            float: none;
+            margin-left: 4.5rem;
+            margin-top: 1rem;
+            font-size: 1.2em !important;
+        }
+    }
 </style>

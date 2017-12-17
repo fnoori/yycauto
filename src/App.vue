@@ -206,7 +206,7 @@
             } else if (this.$route.name == 'PartnerLogin') {
                 this.partnersPage = true
                 this.partnerLogin = true
-                this.pageTitle = 'Welcome To The Partner Login Page'
+                this.pageTitle = 'Login Page'
             } else {
                 this.partnersPage = false
                 this.pageMount()

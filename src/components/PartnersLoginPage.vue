@@ -1,5 +1,5 @@
 <template>
-    <div class="partner-page">
+    <div class="partner-login">
         <form @submit.prevent="login({email, password})">
             <div>
                 <div id="errorMsg" class="login-failed">{{ errorMsg }}</div>
@@ -57,8 +57,8 @@
 </script>
 
 <style scoped>
-    .partner-page {
-        height: calc(100vh - 216px);
+    .partner-login {
+        height: 95rem;
     }
 
     form {
@@ -115,5 +115,16 @@
 
     form input:focus {
         outline: solid 2px rgba(244,67,54,0.5);
+    }
+
+    @media(max-width: 520px) {
+        form {
+            width: 90vw;
+            margin: 0rem auto;
+        }
+
+        form div input {
+            width: 85vw;
+        }
     }
 </style>

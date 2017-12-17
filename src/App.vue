@@ -153,7 +153,7 @@
         <router-view />
         <footer class="footer">
             <div class="copyright">
-                &#169; Farzam Noori
+                &#169; {{ new Date().getFullYear() }} Farzam Noori
             </div>
             <div class="contact-info">
                 <a href="mailto:farzamn80@gmail.com">farzamn80@gmail.com</a> |
@@ -206,7 +206,7 @@
             } else if (this.$route.name == 'PartnerLogin') {
                 this.partnersPage = true
                 this.partnerLogin = true
-                this.pageTitle = 'Partner Login'
+                this.pageTitle = 'Welcome To The Partner Login Page'
             } else {
                 this.partnersPage = false
                 this.pageMount()
@@ -221,7 +221,7 @@
                 } else if (this.$route.name == 'PartnerLogin') {
                     this.partnersPage = true
                     this.partnerLogin = true
-                    this.pageTitle = 'Partner Login'
+                    this.pageTitle = 'Welcome To The Partner Login Page'
                 } else {
                     this.partnersPage = false
                     this.pageMount()

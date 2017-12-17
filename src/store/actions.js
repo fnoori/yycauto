@@ -1,31 +1,26 @@
 import axios from 'axios'
+const incorrectCreds = 'Incorrect username or password'
 
 export const login = ({ commit }, creds) => {
     commit('login') // show spinner
     return new Promise(resolve => {
-        setTimeout(() => {
-            axios.get('http://localhost:3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
+        axios.get('http://localhost:3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
+            if (!response.data.success) {
+                resolve(false)
+            }
 
-                console.log(response)
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('dealership', response.data.dealership)
 
-                if (!response.data.success) {
-                    return response.data
-                }
-
-                localStorage.setItem('token', response.data.token)
-                localStorage.setItem('dealership', response.data.dealership)
-                
-                // Need to pass the dealership as payload
-                commit('loginSuccess', {
-                    dealership: response.data.dealership
-                })
-
-                resolve()
-            }).catch(error => {
-                console.log('An error occurred when trying to login: ', error)
-                return error
+            // Need to pass the dealership as payload
+            commit('loginSuccess', {
+                dealership: response.data.dealership
             })
-        }, 1000)
+
+            resolve(true)
+        }).catch(error => {
+            console.log(error)
+        })
     })
 }
 

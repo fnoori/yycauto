@@ -23,7 +23,7 @@
                         @keyup.enter="basicSearchClick">
 
                     <div class="input-group-btn advance-search-btn">
-                        <button v-b-modal.modal-center class="btn" type="button">
+                        <button class="btn" type="button" @click="showModal=true">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </button>
                     </div>
@@ -35,118 +35,92 @@
                     </div>
 
                     <!-- Modal Component -->
-                    <b-modal id="modal-center" centered title="Advanced Search">
+                    <b-modal id="modal-center" v-model="showModal" centered title="Advanced Search">
 
-                        <header slot="modal-header" class="modal-header">
+                        <header slot="modal-header" class="modal-header advance-search-header w-100">
                             <h5 class="modal-title">Advanced Search</h5>
-                            <button type="button" class="close">
+                            <button type="button" class="close" @click="showModal=false">
                                 ×
                             </button>
                         </header>
 
-                        <p class="my-4">Vertically centered modal!</p>
-                        
-                        <div slot="modal-footer">
+                        <b-container fluid>
 
-                        </div>
+                            <b-row class="mb-3">
+                                <b-form-checkbox id="newCarCheckbox" checked="true">New</b-form-checkbox>
+                                <b-form-checkbox id="usedCarCheckbox">Used</b-form-checkbox>
+                                <b-form-checkbox id="carProofCheckbox">
+                                    <img src="./assets/images/car-proof.png" class="car-proof-img" />
+                                </b-form-checkbox>
+                            </b-row>
+
+                            <b-row class="mb-2">
+                                <label class="col-md-12 justify-content-start pl-0">Basic Info.</label>
+
+                                <select class="mr-1 form-control custom-select" @change="makeChosen" v-model="chosenMake">
+                                    <option selected :value="null">Make (All)</option>
+                                    <option v-for="make in vehicleMakes" v-bind:value="make">{{ make }}</option>
+                                </select>
+
+                                <select class="ml-1 form-control custom-select" v-model="chosenModel">
+                                    <option selected :value="null">Model (All)</option>
+                                    <option v-for="model in vehicleModels" v-bind:value="model">{{ model }}</option>
+                                </select>
+                            </b-row>
+
+                            <b-row class="mb-2">
+                                <b-form-input v-model="chosenMinPrice" class="mr-1" type="number" placeholder="Min. Price"></b-form-input>
+                                <b-form-input v-model="chosenMaxPrice" class="ml-1" type="number" placeholder="Max. Price"></b-form-input>
+                            </b-row>
+
+                            <b-row class="mb-2">
+                                <select class="mr-1 form-control custom-select" v-model="chosenType">
+                                    <option selected :value="null">Type (All)</option>
+                                    <option v-for="type in vehicleTypes" v-bind:value="type">{{ type }}</option>
+                                </select>
+
+                                <select class="ml-1 form-control custom-select" v-model="chosenYear">
+                                    <option selected :value="null">Year (All)</option>
+                                    <option v-for="year in vehicleYears" v-bind:value="year">{{ year }}</option>
+                                </select>
+                            </b-row>
+
+                            <b-row class="mb-3">
+                                <label class="col-md-12 justify-content-start pl-0">Aesthetics</label>
+
+                                <select class="mr-1 form-control custom-select" v-model="chosenExteriorColor">
+                                    <option selected :value="null">Exterior Colour (All)</option>
+                                    <option v-for="color in colors" v-bind:value="color">{{ color }}</option>
+                                </select>
+
+                                <select class="ml-1 form-control custom-select" v-model="chosenInteriorColor">
+                                    <option selected :value="null">Interior Colour (All)</option>
+                                    <option v-for="color in colors" v-bind:value="color">{{ color }}</option>
+                                </select>
+                            </b-row>
+
+                            <b-row class="mb-3">
+                                <label class="col-md-12 justify-content-start pl-0">Mechanical</label>
+
+                                <select class="mr-1 form-control custom-select" v-model="chosenFuelType">
+                                    <option selected :value="null">Fuel Type (All)</option>
+                                    <option v-for="fuelType in fuelTypes" v-bind:value="fuelType">{{ fuelType }}</option>
+                                </select>
+
+                                <select class="ml-1 form-control custom-select" v-model="chosenTransmissionType">
+                                    <option selected :value="null">Transmission (All)</option>
+                                    <option v-for="transmission in transmissionTypes" v-bind:value="transmission">{{ transmission }}</option>
+                                </select>
+                            </b-row>
+                        </b-container>
+
+                        <template slot="modal-footer" class="modal-footer">
+                            <b-btn size="md" class="float-right advance-search-btn" @click="submitAdvanceSearch">
+                                Search
+                            </b-btn>
+                        </template>
 
                     </b-modal>
-
-                    <!--
-                    <modal v-if="showModal" @close="showModal = false">
-                        <div slot="header" class="full-width-header">
-                            <div class="advance-search-title">
-                                Advanced Search
-                            </div>
-
-                            <button class="advance-search-close" @click="showModal = false">
-                                <i class="material-icons">close</i>
-                            </button>
-                        </div>
-                        <div slot="body">
-
-                            <div class="container misc-info">
-                                <div class="row">
-                                    <label class="form-check-label new-checkbox new-car">
-                                        <input type="checkbox" class="form-check-input" checked> New
-                                    </label>
-                                    <label class="form-check-label used-car">
-                                        <input type="checkbox" class="form-check-input" checked> Used
-                                    </label>
-                                    <label class="form-check-label car-proof">
-                                        <input type="checkbox" class="form-check-input">
-                                        <img src="./assets/images/car-proof.png" />
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="container basic-info">
-
-                                <label>Basic Info.</label>
-                                <div class="row">
-                                    <select class="custom-select col-md left-component" @change="makeChosen" v-model="chosenMake">
-                                        <option selected :value="null">Make (All)</option>
-                                        <option v-for="make in vehicleMakes" v-bind:value="make">{{ make }}</option>
-                                    </select>
-                                    <select class="custom-select col-md right-component mobile-margin-top" v-model="chosenModel">
-                                        <option selected :value="null">Model (All)</option>
-                                        <option v-for="model in vehicleModels" v-bind:value="model">{{ model }}</option>
-                                    </select>
-                                </div>
-
-                                <div class="row top-margin">
-                                    <input type="number" class="form-control col-md min-price border-rounding" placeholder="Min. Price" v-model="chosenMinPrice">
-                                    <input type="number" class="form-control col-md max-price border-rounding" placeholder="Max. Price" v-model="chosenMaxPrice">
-                                </div>
-
-                                <div class="row">
-                                    <select class="custom-select col-md-12 top-margin" v-model="chosenType">
-                                        <option selected :value="null">Type (All)</option>
-                                        <option v-for="type in vehicleTypes" v-bind:value="type">{{ type }}</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="container aesthetics">
-                                <label>Aesthetics</label>
-                                <div class="row">
-                                    <select class="custom-select col-md left-component" v-model="chosenExteriorColor">
-                                        <option selected :value="null">Exterior Colour (All)</option>
-                                        <option v-for="color in colors" v-bind:value="color">{{ color }}</option>
-                                    </select>
-
-                                    <select class="custom-select col-md right-component mobile-margin-top" v-model="chosenInteriorColor">
-                                        <option selected :value="null">Interior Colour (All)</option>
-                                        <option v-for="color in colors" v-bind:value="color">{{ color }}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="container mechanical">
-                                <label>Mechanical</label>
-                                <div class="row">
-                                    <select class="custom-select col-md left-component" v-model="chosenFuelType">
-                                        <option selected :value="null">Fuel Type (All)</option>
-                                        <option v-for="fuelType in fuelTypes" v-bind:value="fuelType">{{ fuelType }}</option>
-                                    </select>
-
-                                    <select class="custom-select col-md right-component mobile-margin-top" v-model="chosenTransmissionType">
-                                        <option selected :value="null">Transmission (All)</option>
-                                        <option v-for="transmission in transmissionTypes" v-bind:value="transmission">{{ transmission }}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div slot="footer">
-                            <button class="modal-default-button" @click="submitAdvanceSearch">
-                                Search
-                            </button>
-                        </div>
-                    </modal>
-                    -->
 
                 </div>
 
@@ -197,6 +171,7 @@
                 vehicleMakes: [],
                 vehicleModels: [],
                 vehicleTypes: [],
+                vehicleYears: [],
                 colors: [],
                 fuelTypes: [],
                 transmissionTypes: [],
@@ -206,6 +181,7 @@
                 chosenMake: null,
                 chosenModel: null,
                 chosenType: null,
+                chosenYear: null,
                 chosenInteriorColor: null,
                 chosenExteriorColor: null,
                 chosenFuelType: null,
@@ -257,6 +233,7 @@
                     this.rawVehicleDetails = response.data[0]
                     this.vehicleMakes = Object.keys(this.rawVehicleDetails.makeModel)
                     this.vehicleTypes = this.rawVehicleDetails.bodyType
+                    this.vehicleYears = this.rawVehicleDetails.year
                     this.colors = this.rawVehicleDetails.color
                     this.transmissionTypes = this.rawVehicleDetails.transmission
                     this.fuelTypes = this.rawVehicleDetails.fuelType
@@ -271,6 +248,7 @@
 
             // When user chooses a make, populate the appropriate model
             makeChosen: function () {
+                console.log('make:', this.chosenMake)
                 this.vehicleModels = this.rawVehicleDetails.makeModel[this.chosenMake]
             },
 

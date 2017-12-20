@@ -3,16 +3,43 @@ body {
     padding-top: 4.5rem;
 }
 
+select {
+    background: #fff url("data:image/svg+xml;charset=UTF-8,%3csvg fill='%23000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3cpath d='M0 0h24v24H0z' fill='none'/%3e%3c/svg%3e") no-repeat right .4rem center !important;
+    border-radius: 0 !important;
+}
+select:focus {
+    border-color: rgba(0,0,0,.2) !important;
+    box-shadow: none !important;
+}
+
 button:hover,
 button:focus,
 button:active {
     outline: none !important;
     box-shadow: none !important;
 }
+input {
+    border-radius: 0 !important;
+}
 input:hover,
 input:focus {
     box-shadow: none !important;
     border: 1px solid #ced4da !important;
+    outline: none !important;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.custom-control-input:focus~.custom-control-indicator {
+    box-shadow: none !important;
+}
+
+span:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 a,
@@ -127,6 +154,53 @@ a:hover {
 /* Bootstrap-vue modal */
 .modal-dialog-centered {
     min-height: calc(100% - 60px) !important;
+}
+
+.car-proof-img {
+    width: 4rem;
+}
+.modal-content {
+    border-radius: .2rem !important;
+    border: none !important;
+}
+.modal-header {
+    padding: 0 !important;
+    border-top-left-radius: .1rem;
+    border-top-right-radius: .1rem;
+    border-bottom: none !important;
+}
+.close {
+    color: white;
+    text-shadow: none !important;
+    opacity: 0.8;
+}
+.close:focus,
+.close:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 1;
+}
+.advance-search-header {
+    background-color: rgba(244,67,54,1);
+    color: white;
+    padding: 15px !important;
+}
+.advance-search-btn {
+    background-color: rgba(244,67,54,1);
+    border-color: rgba(244,67,54,1);
+}
+.advance-search-btn:hover {
+    color: #fff;
+    background-color: rgba(230,67,54,1);
+    border-color: rgba(230,67,54,1);
+}
+.advance-search-btn:focus {
+    background-color: rgba(230,67,54,1);
+    border-color: rgba(230,67,54,1);
+}
+.advance-search-btn:active {
+    background-color: rgba(230,67,54,1) !important;
+    border-color: rgba(230,67,54,1) !important;
 }
 
 /* Modal

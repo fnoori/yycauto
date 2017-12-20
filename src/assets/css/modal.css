@@ -1,0 +1,50 @@
+/* Bootstrap-vue modal */
+.modal-dialog-centered {
+    min-height: calc(100% - 60px) !important;
+}
+
+.car-proof-img {
+    width: 4rem;
+}
+.modal-content {
+    border-radius: 0rem !important;
+    border: none !important;
+}
+.modal-header {
+    padding: 0 !important;
+    border-radius: 0rem !important;
+    border-bottom: none !important;
+}
+.close {
+    color: white;
+    text-shadow: none !important;
+    opacity: 0.8;
+}
+.close:focus,
+.close:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 1;
+}
+.advance-search-header {
+    background-color: rgba(244,67,54,1);
+    color: white;
+    padding: 15px !important;
+}
+.advance-search-btn {
+    background-color: rgba(244,67,54,1);
+    border-color: rgba(244,67,54,1);
+}
+.advance-search-btn:hover {
+    color: #fff;
+    background-color: rgba(230,67,54,1);
+    border-color: rgba(230,67,54,1);
+}
+.advance-search-btn:focus {
+    background-color: rgba(230,67,54,1);
+    border-color: rgba(230,67,54,1);
+}
+.advance-search-btn:active {
+    background-color: rgba(230,67,54,1) !important;
+    border-color: rgba(230,67,54,1) !important;
+}

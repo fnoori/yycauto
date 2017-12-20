@@ -6,7 +6,7 @@ import router from './router'
 import store from './store'
 
 import BootstrapVue from 'bootstrap-vue'
-//import Modal from './components/Modal'
+import Modal from './components/Modal'
 import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
 
 require('./assets/css/nav-bar.css')

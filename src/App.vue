@@ -35,7 +35,7 @@
                     </div>
 
                     <!-- Modal Component -->
-                    <b-modal id="modal-center" v-model="showModal" centered title="Advanced Search">
+                    <b-modal id="advancedSearchModal" v-model="showModal" centered title="Advanced Search">
 
                         <header slot="modal-header" class="modal-header advance-search-header w-100">
                             <h5 class="modal-title">Advanced Search</h5>

@@ -22,8 +22,8 @@
             </div>
 
             <div class="table-modifier-btns">
-                <b-button class="new-btn" variant="success">New</b-button>
-                <b-button class="del-btn" variant="danger">Delete</b-button>
+                <b-button class="new-btn" variant="success" @click="newVehicle">New</b-button>
+                <b-button class="del-btn" variant="danger" @click="deleteVehicle">Delete</b-button>
             </div>
 
         </div>
@@ -38,8 +38,7 @@
                 <template slot="actions" slot-scope="row">
                     <input type="checkbox" name="checked" :key="row.index" :value="row.item" @click.stop v-model="checkedItems">
 
-                    <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
-                    <b-button size="sm" class="mr-1 edit-btn" variant="warning" @click="showModal=true">
+                    <b-button size="sm" class="mr-1 edit-btn" variant="warning" @click="editVehicle">
                         Edit
                     </b-button>
                 </template>
@@ -48,11 +47,8 @@
                     {{ data.value.Make }} {{ data.value.Model }}
                 </template>
 
-
                 <template slot="id" slot-scope="data">
-
                 </template>
-
             </b-table>
         </div>
 
@@ -67,6 +63,12 @@
                 </button>
             </header>
 
+            <template slot="modal-footer" class="modal-footer">
+                <b-btn size="md" class="float-right advance-search-btn" @click="modalSubmit">
+                    {{ submitText }}
+                </b-btn>
+            </template>
+            
         </b-modal>
 
     </div>
@@ -74,6 +76,8 @@
 
 <script>
     import axios from 'axios'
+    const ADD_VEHICLE = 'newVehicle'
+    const EDIT_VEHICLE = 'editVehicle'
 
     export default {
         name: 'PartnersPage',
@@ -102,7 +106,9 @@
                 allSelected: false,
 
                 /* Modal */
+                submitType: 'Add Vehicle',
                 modalTitle: 'Some car',
+                submitText: 'Button',
                 showModal: false
             }
         },
@@ -185,6 +191,27 @@
                     console.log('there was an error', error)
                     return []
                 })
+            },
+            modalSubmit: function() {
+                if (this.submitType == this.ADD_VEHICLE) {
+                    alert('adding new vehicle !')
+                } else if (this.submitType == this.EDIT_VEHICLE) {
+                    alert('editing existing vehicle !')
+                }
+                this.showModal = false
+            },
+            newVehicle: function () {
+                this.submitType = this.ADD_VEHICLE
+                this.submitText = this.modalTitle = 'Add Vehicle'
+                this.showModal = true
+            },
+            editVehicle: function () {
+                this.submitType = this.EDIT_VEHICLE
+                this.submitText = this.modalTitle = 'Edit Vehicle'
+                this.showModal = true
+            },
+            deleteVehicle: function () {
+                confirm('Are you sure you want to delete the vehicle(s)?')
             },
             toggleSelected: function () {
                 if (this.checkedItems == this.allSelected) {

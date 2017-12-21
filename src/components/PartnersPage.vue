@@ -53,7 +53,7 @@
         </div>
 
         <!-- Modal Component -->
-        <b-modal id="modal-center" size="lg" v-model="showModal" centered>
+        <b-modal id="modal-center" size="lg" v-model="showModal" centered class="dealer-vehicle-modal">
 
             <header slot="modal-header" class="modal-header advance-search-header w-100">
                 <h5 class="modal-title">{{ modalTitle }}</h5>
@@ -63,12 +63,85 @@
                 </button>
             </header>
 
+
+            <b-container fluid>
+
+                <b-row>
+                    <label class="col-md-12 justify-content-start">Basic Info.</label>
+
+                    <b-form-group id="make" label="Make" label-for="makeInput" class="col-md-4">
+                        <select id="makeInput" class="form-control custom-select">
+
+                        </select>
+                    </b-form-group>
+
+                    <b-form-group id="model" label="Model" label-for="modelInput" class="col-md-4">
+                        <select id="modelInput" class="form-control custom-select"></select>
+                    </b-form-group>
+
+                    <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
+                        <select id="yearInput" class="form-control custom-select"></select>
+                    </b-form-group>
+                </b-row>
+
+                <b-row>
+                    <b-form-group id="exteriorColor" label="Exterior Colour" label-for="exteriorColorInput" class="col-md-6">
+                        <select id="exteriorColorInput" class="form-control custom-select"></select>
+                    </b-form-group>
+
+                    <b-form-group id="interiorColor" label="Interior Colour" label-for="interiorColorInput" class="col-md-6">
+                        <select id="interiorColorInput" class="form-control custom-select"></select>
+                    </b-form-group>
+                </b-row>
+
+                <b-row>
+                    <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
+                        <b-form-input id="yearInput"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group id="price" label="Price" label-for="priceInput" class="col-md-4" description="Do not include commas ' , '">
+                        <b-input-group left="$">
+                            <b-form-input id="priceInput"></b-form-input>
+                        </b-input-group>
+
+                    </b-form-group>
+
+                    <b-form-group id="kilometers" label="Kilometers" label-for="kilometersInput" class="col-md-4" description="Use ' 0 ' for new vehicles">
+                        <b-form-input id="kilometersInput"></b-form-input>
+                    </b-form-group>
+                </b-row>
+
+                <b-row class="mb-5">
+                    <b-form-group id="fuelType" label="Fuel Type" label-for="fuelTypeInput" class="col-md-6">
+                        <b-form-select id="fuelTypeInput"></b-form-select>
+                    </b-form-group>
+
+                    <b-form-group id="bodyType" label="Body Type" label-for="bodyTypeInput" class="col-md-6">
+                        <b-form-select id="bodyTypeInput"></b-form-select>
+                    </b-form-group>
+                </b-row>
+
+                <b-row>
+                    <label class="col-md-12 justify-content-start">Mechanical Info.</label>
+
+                    <b-form-checkbox id="carProofCheckbox" class="col-md-12 ml-3">
+                        <img src="../assets/images/car-proof.png" class="car-proof-img" />
+                    </b-form-checkbox>
+                </b-row>    
+
+                <b-row>
+                    
+                </b-row>
+
+            </b-container>
+
+
             <template slot="modal-footer" class="modal-footer">
                 <b-btn size="md" class="float-right advance-search-btn" @click="modalSubmit">
-                    {{ submitText }}
+                    {{ modalTitle }}
                 </b-btn>
             </template>
-            
+
         </b-modal>
 
     </div>
@@ -192,7 +265,7 @@
                     return []
                 })
             },
-            modalSubmit: function() {
+            modalSubmit: function () {
                 if (this.submitType == this.ADD_VEHICLE) {
                     alert('adding new vehicle !')
                 } else if (this.submitType == this.EDIT_VEHICLE) {
@@ -202,12 +275,12 @@
             },
             newVehicle: function () {
                 this.submitType = this.ADD_VEHICLE
-                this.submitText = this.modalTitle = 'Add Vehicle'
+                this.modalTitle = 'Add Vehicle'
                 this.showModal = true
             },
             editVehicle: function () {
                 this.submitType = this.EDIT_VEHICLE
-                this.submitText = this.modalTitle = 'Edit Vehicle'
+                this.modalTitle = 'Edit Vehicle'
                 this.showModal = true
             },
             deleteVehicle: function () {
@@ -317,6 +390,14 @@
     }
 
     /* Modal */
+
+    .dealer-vehicle-modal select:focus,
+    .dealer-vehicle-modal input:focus {
+        -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
+        outline: inherit !important;
+        border-color: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
+    }
 
     @media(max-width: 980px) {
         .partner {

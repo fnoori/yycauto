@@ -15,6 +15,9 @@
     border-radius: 0rem !important;
     border-bottom: none !important;
 }
+.modal-footer button{
+    border-radius: 0px !important;
+}
 .close {
     color: white;
     text-shadow: none !important;

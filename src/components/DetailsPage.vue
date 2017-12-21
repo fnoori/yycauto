@@ -4,7 +4,8 @@
             <div class="car-title">{{ vehicle.BasicInfo.Year }} {{ vehicle.BasicInfo.Make }} {{ vehicle.BasicInfo.Model }}</div>
             <div class="top-section">
                 <div class="gallery">
-                    <img v-for="vehicleImage in vehicle.VehiclePictures" :src="vehicleImage" @click="chosenImage = vehicleImage" />
+                    <img v-for="vehicleImage in vehicle.VehiclePictures" 
+                        :src="vehicleImage" @click="chosenImage=vehicleImage"/>
                 </div>
 
                 <div class="chosen-image">
@@ -94,6 +95,7 @@
             return {
                 chosenImage: '',
                 vehicle: null,
+                activeImage: false
             }
         },
         created() {
@@ -112,7 +114,6 @@
                 this.chosenImage = this.vehicle.VehiclePictures[0]
             },
             imageClicked: function (image) {
-                console.log(image)
                 this.chosenImage = image
             }
         }
@@ -279,8 +280,8 @@
     }
 
     .specs ul li a {
-        text-decoration: none;
-        color: black;
+        text-decoration: none !important;
+        color: black !important;
     }
 
     .specs .tabs .tab-content .tab-pane {
@@ -311,9 +312,8 @@
         width: 4rem;
     }
 
-
     .tst-chosen-image {
-        border: 1px solid red;
+        background-color: #F44336;
     }
 
     @media (max-width: 800px) {

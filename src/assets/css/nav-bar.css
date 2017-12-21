@@ -42,8 +42,9 @@ span:focus {
     box-shadow: none !important;
 }
 
-a,
-a:hover {
+
+.navbar a,
+.navbar a:hover {
     text-decoration: none;
     color: white;
 }

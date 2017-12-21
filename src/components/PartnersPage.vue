@@ -28,11 +28,18 @@
 
         </div>
         <div class="vehicles-list">
-            <b-table :fields="fields" :items="myProvider" :current-page="currentPage" :filter="filter" :per-page="perPage" :busy.sync="isBusy">
+            <b-table :fields="fields" :items="myProvider" :current-page="currentPage" :filter="filter" :per-page="perPage" :busy.sync="isBusy"
+                v-model="tableValues">
+
+                <template slot="HEAD_actions" slot-scope="head">
+                    <input type="checkbox" @click.stop="toggleSelected" v-model="allSelected">
+                </template>
 
                 <template slot="actions" slot-scope="row">
+                    <input type="checkbox" name="checked" :key="row.index" :value="row.item" @click.stop v-model="checkedItems">
+
                     <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
-                    <b-button v-b-modal.modal-center size="sm" class="mr-1 edit-btn" variant="warning">
+                    <b-button size="sm" class="mr-1 edit-btn" variant="warning" @click="showModal=true">
                         Edit
                     </b-button>
                 </template>
@@ -40,12 +47,26 @@
                 <template slot="BasicInfo.Make" slot-scope="data">
                     {{ data.value.Make }} {{ data.value.Model }}
                 </template>
+
+
+                <template slot="id" slot-scope="data">
+
+                </template>
+
             </b-table>
         </div>
 
         <!-- Modal Component -->
-        <b-modal id="modal-center" centered title="Bootstrap-Vue">
-            <p class="my-4">Vertically centered modal!</p>
+        <b-modal id="modal-center" size="lg" v-model="showModal" centered>
+
+            <header slot="modal-header" class="modal-header advance-search-header w-100">
+                <h5 class="modal-title">{{ modalTitle }}</h5>
+
+                <button type="button" class="close" @click="showModal=false">
+                    ×
+                </button>
+            </header>
+
         </b-modal>
 
     </div>
@@ -60,10 +81,11 @@
             return {
                 msg: 'Welcome to the partners page',
                 fields: [
+                    { key: 'actions', label: ' ' },
                     { key: 'BasicInfo.Make', label: 'Make & Model', sortable: true },
                     { key: 'BasicInfo.Year', label: 'Year', sortable: true },
                     { key: 'BasicInfo.Kilometers', label: 'Kilometers', sortable: true },
-                    { key: 'actions', label: ' ' }
+                    { key: 'id', label: ' ' }
                 ],
                 totalRows: 0,
                 perPage: 5,
@@ -73,10 +95,38 @@
                 isBusy: false,
                 spinnerColor: 'lightgrey',
                 spinnerHeight: '5px',
-                spinnerWidth: '5px'
+                spinnerWidth: '5px',
+
+                checkedItems: [],
+                tableValues: [],
+                allSelected: false,
+
+                /* Modal */
+                modalTitle: 'Some car',
+                showModal: false
             }
         },
         created: function () {
+        },
+        watch: {
+            checkedItems(a, b) {
+                this.allSelected = (this.tableValues.length == a.length) ? true : false
+            },
+            perPage(a, b) {
+                if (a !== b) {
+                    this.clearSelected()
+                }
+            },
+            currentPage(a, b) {
+                if (a !== b) {
+                    this.clearSelected()
+                }
+            },
+            filter(a, b) {
+                if (a !== b) {
+                    this.clearSelected()
+                }
+            }
         },
         methods: {
             pageInit: function () {
@@ -119,6 +169,7 @@
                         if (response.data.hasOwnProperty(key)) {
                             //this.items[key] = response.data[key]
                             items[key] = {
+                                'id': response.data[key]._id,
                                 'BasicInfo.Make': {
                                     'Make': response.data[key].BasicInfo.Make,
                                     'Model': response.data[key].BasicInfo.Model
@@ -134,6 +185,17 @@
                     console.log('there was an error', error)
                     return []
                 })
+            },
+            toggleSelected: function () {
+                if (this.checkedItems == this.allSelected) {
+                    this.checkedItems = this.tableValues
+                } else {
+                    this.checkedItems = []
+                }
+            },
+            clearSelected() {
+                this.allSelected = false
+                this.checkedItems = []
             }
         }
     }
@@ -149,7 +211,7 @@
         border-radius: 0 !important;
     }
 
-    button {
+    .list-controls button {
         background-color: white;
         color: black;
     }

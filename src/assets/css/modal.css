@@ -10,6 +10,13 @@
     border-radius: 0rem !important;
     border: none !important;
 }
+.modal-body {
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    height: 70vh !important;
+}
+
+
 .modal-header {
     padding: 0 !important;
     border-radius: 0rem !important;

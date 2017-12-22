@@ -63,7 +63,6 @@
                 </button>
             </header>
 
-
             <b-container fluid>
 
                 <b-row>
@@ -71,7 +70,8 @@
 
                     <b-form-group id="make" label="Make" label-for="makeInput" class="col-md-4">
                         <select id="makeInput" class="form-control custom-select">
-
+                            <option v-if="submitType === 'addNewVehicle'" :value="null">Choose Make ...</option>
+                            <option v-for="make in vehicleMakes" v-bind:value="make">{{ make }}</option>
                         </select>
                     </b-form-group>
 
@@ -79,34 +79,35 @@
                         <select id="modelInput" class="form-control custom-select"></select>
                     </b-form-group>
 
-                    <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
-                        <select id="yearInput" class="form-control custom-select"></select>
+
+                    <b-form-group id="trim" label="Trim" label-for="trimInput" class="col-md-4" description="Optional">
+                        <select id="trimInput" class="form-control custom-select"></select>
                     </b-form-group>
                 </b-row>
 
                 <b-row>
-                    <b-form-group id="exteriorColor" label="Exterior Colour" label-for="exteriorColorInput" class="col-md-6">
+                    <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
+                        <select id="yearInput" class="form-control custom-select"></select>
+                    </b-form-group>
+
+                    <b-form-group id="exteriorColor" label="Exterior Colour" label-for="exteriorColorInput" class="col-md-4">
                         <select id="exteriorColorInput" class="form-control custom-select"></select>
                     </b-form-group>
 
-                    <b-form-group id="interiorColor" label="Interior Colour" label-for="interiorColorInput" class="col-md-6">
+                    <b-form-group id="interiorColor" label="Interior Colour" label-for="interiorColorInput" class="col-md-4">
                         <select id="interiorColorInput" class="form-control custom-select"></select>
                     </b-form-group>
                 </b-row>
 
                 <b-row>
-                    <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
-                        <b-form-input id="yearInput"></b-form-input>
-                    </b-form-group>
-
-                    <b-form-group id="price" label="Price" label-for="priceInput" class="col-md-4" description="Do not include commas ' , '">
+                    <b-form-group id="price" label="Price" label-for="priceInput" class="col-md-6" description="Do not include commas ' , '">
                         <b-input-group left="$">
                             <b-form-input id="priceInput"></b-form-input>
                         </b-input-group>
 
                     </b-form-group>
 
-                    <b-form-group id="kilometers" label="Kilometers" label-for="kilometersInput" class="col-md-4" description="Use ' 0 ' for new vehicles">
+                    <b-form-group id="kilometers" label="Kilometers" label-for="kilometersInput" class="col-md-6" description="Use ' 0 ' for new vehicles">
                         <b-form-input id="kilometersInput"></b-form-input>
                     </b-form-group>
                 </b-row>
@@ -127,10 +128,10 @@
                     <b-form-checkbox id="carProofCheckbox" class="col-md-12 ml-3">
                         <img src="../assets/images/car-proof.png" class="car-proof-img" />
                     </b-form-checkbox>
-                </b-row>    
+                </b-row>
 
                 <b-row>
-                    
+
                 </b-row>
 
             </b-container>
@@ -149,8 +150,10 @@
 
 <script>
     import axios from 'axios'
-    const ADD_VEHICLE = 'newVehicle'
-    const EDIT_VEHICLE = 'editVehicle'
+    const ADD_VEHICLE = 'addNewVehicle'
+    const EDIT_VEHICLE = 'editExistingVehicle'
+
+    var axios_getVehicleDetails = axios.get('http://localhost:3000/getVehiclesDetails')
 
     export default {
         name: 'PartnersPage',
@@ -177,6 +180,15 @@
                 checkedItems: [],
                 tableValues: [],
                 allSelected: false,
+
+                rawVehicleDetails: JSON,
+                vehicleMakes: [],
+                vehicleTypes: [],
+                vehicleYears: [],
+                colors: [],
+                transmissionTypes: [],
+                fuelTypes: [],
+
 
                 /* Modal */
                 submitType: 'Add Vehicle',
@@ -205,6 +217,10 @@
                 if (a !== b) {
                     this.clearSelected()
                 }
+            },
+            submitType(a, b) {
+                console.log('old value: ', b)
+                console.log('new value: ', a)
             }
         },
         methods: {
@@ -266,20 +282,37 @@
                 })
             },
             modalSubmit: function () {
-                if (this.submitType == this.ADD_VEHICLE) {
+                if (this.submitType == ADD_VEHICLE) {
                     alert('adding new vehicle !')
-                } else if (this.submitType == this.EDIT_VEHICLE) {
+                } else if (this.submitType == EDIT_VEHICLE) {
                     alert('editing existing vehicle !')
+                } else {
+                    alert('Neither add nor edit?')
                 }
                 this.showModal = false
             },
             newVehicle: function () {
-                this.submitType = this.ADD_VEHICLE
+                this.submitType = ADD_VEHICLE
                 this.modalTitle = 'Add Vehicle'
                 this.showModal = true
+
+                axios_getVehicleDetails.then((response) => {
+
+                    console.log(response.data[0])
+
+                    this.rawVehicleDetails = response.data[0]
+                    this.vehicleMakes = Object.keys(this.rawVehicleDetails.makeModel)
+                    this.vehicleTypes = this.rawVehicleDetails.bodyType
+                    this.vehicleYears = this.rawVehicleDetails.year
+                    this.colors = this.rawVehicleDetails.color
+                    this.transmissionTypes = this.rawVehicleDetails.transmission
+                    this.fuelTypes = this.rawVehicleDetails.fuelType
+                }).catch(error => {
+                    console.log('An error ocurred while trying to retreive the data', error)
+                })
             },
             editVehicle: function () {
-                this.submitType = this.EDIT_VEHICLE
+                this.submitType = EDIT_VEHICLE
                 this.modalTitle = 'Edit Vehicle'
                 this.showModal = true
             },

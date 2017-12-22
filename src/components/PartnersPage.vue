@@ -79,7 +79,6 @@
                         <select id="modelInput" class="form-control custom-select"></select>
                     </b-form-group>
 
-
                     <b-form-group id="trim" label="Trim" label-for="trimInput" class="col-md-4" description="Optional">
                         <select id="trimInput" class="form-control custom-select"></select>
                     </b-form-group>
@@ -122,6 +121,7 @@
                     </b-form-group>
                 </b-row>
 
+                <!-- Start mechanical info -->
                 <b-row>
                     <label class="col-md-12 justify-content-start">Mechanical Info.</label>
 
@@ -131,7 +131,31 @@
                 </b-row>
 
                 <b-row>
+                    <b-form-group id="transmission" label="Transmission" label-for="transmissionInput" class="col-md-4" description="Optional">
+                        <b-form-select id="transmissionInput"></b-form-select>
+                    </b-form-group>
 
+                    <b-form-group id="engineSize" label="Engine Size" label-for="engineSizeInput" class="col-md-4" description="Optional">
+                        <b-form-select id="engineSizeInput"></b-form-select>
+                    </b-form-group>
+
+                    <b-form-group id="recommendedFuel" label="Recommended Fuel" label-for="recommendedFuelInput" class="col-md-4" description="Optional">
+                        <b-form-select id="recommendedFuelInput"></b-form-select>
+                    </b-form-group>
+                </b-row>
+
+                <b-row>
+                    <b-form-group id="cylinders" label="Cylinders" label-for="cylinderInput" class="col-md-4" description="Optional">
+                        <b-form-select id="cylinderInput"></b-form-select>
+                    </b-form-group>
+
+                    <b-form-group id="horsepower" label="Horsepower @ RPM" label-for="horsepowerInput" class="col-md-4" description="Optional">
+                        <b-form-input id="horsepowerInput"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group id="torque" label="Torque (lb - ft) @ RPM" label-for="torqueInput" class="col-md-4" description="Optional">
+                        <b-form-input id="torqueInput"></b-form-input>
+                    </b-form-group>
                 </b-row>
 
             </b-container>

@@ -99,11 +99,20 @@
                 </b-row>
 
                 <b-row>
+                    <b-form-group id="numberOfDoors" label="No. of Doors" label-for="numberOfDoorsInput" class="col-md-6" description="Optional">
+                        <select id="numberOfDoorsInput" class="form-control custom-select"></select>
+                    </b-form-group>
+
+                    <b-form-group id="numberOfSeats" label="No. of Seats" label-for="numberOfSeatsInput" class="col-md-6" description="Optional">
+                        <select id="numberOfSeatsInput" class="form-control custom-select"></select>
+                    </b-form-group>
+                </b-row>
+
+                <b-row>
                     <b-form-group id="price" label="Price" label-for="priceInput" class="col-md-6" description="Do not include commas ' , '">
                         <b-input-group left="$">
                             <b-form-input id="priceInput"></b-form-input>
                         </b-input-group>
-
                     </b-form-group>
 
                     <b-form-group id="kilometers" label="Kilometers" label-for="kilometersInput" class="col-md-6" description="Use ' 0 ' for new vehicles">
@@ -131,7 +140,7 @@
                 </b-row>
 
                 <b-row>
-                    <b-form-group id="transmission" label="Transmission" label-for="transmissionInput" class="col-md-4" description="Optional">
+                    <b-form-group id="transmission" label="Transmission" label-for="transmissionInput" class="col-md-4">
                         <b-form-select id="transmissionInput"></b-form-select>
                     </b-form-group>
 
@@ -155,6 +164,29 @@
 
                     <b-form-group id="torque" label="Torque (lb - ft) @ RPM" label-for="torqueInput" class="col-md-4" description="Optional">
                         <b-form-input id="torqueInput"></b-form-input>
+                    </b-form-group>
+                </b-row>
+
+                <b-row class="mb-5">
+                    <b-form-group id="drivetrain" label="Drivetrain" label-for="drivetrainInput" class="col-md-12" description="Optional">
+                        <select id="drivetrainInput" class="form-control custom-select"></select>
+                    </b-form-group>
+                </b-row>
+
+                <!-- Start fuel economy info -->
+                <b-row>
+                    <label class="col-md-12 justify-content-start">Fuel Economy Info.</label>
+
+                    <b-form-group id="cityFuelEconomy" label="City (L/100Km)" label-for="cityFuelEconomyInput" class="col-md-4" description="Optional">
+                        <b-form-input id="cityFuelEconomyInput"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group id="highwayFuelEconomy" label="Highway (L/100Km)" label-for="highwayFuelEconomyInput" class="col-md-4" description="Optional">
+                        <b-form-input id="highwayFuelEconomyInput"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group id="combinedFuelEconomy" label="Combined (L/100Km)" label-for="combinedFuelEconomyInput" class="col-md-4" description="Optional">
+                        <b-form-input id="combinedFuelEconomyInput"></b-form-input>
                     </b-form-group>
                 </b-row>
 

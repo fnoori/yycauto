@@ -145,11 +145,15 @@ span:focus {
     color: white;
     background-color: rgba(244,67,54,1);
 }
+.footer a {
+    text-decoration: none;
+    color: white;
+}
 .footer .copyright {
     float: left;
 }
 .footer .contact-info {
-    float: right;   
+    float: right;
 }
 
 /* Modal

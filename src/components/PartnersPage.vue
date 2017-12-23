@@ -65,22 +65,47 @@
 
             <b-container fluid>
 
+                <b-row class="mb-5">
+                    <vue-transmit class="col-12" tag="section" v-bind="options" upload-area-classes="bg-faded" ref="uploader">
+                        <div class="d-flex align-items-center justify-content-center w-100" style="height:50vh; border-radius: 1rem;">
+                            <button class="btn btn-primary" @click="triggerBrowse">Upload Files</button>
+                        </div>
+                        <!-- Scoped slot -->
+                        <template slot="files" slot-scope="props">
+                            <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
+                                <div class="media">
+                                    <img :src="file.dataUrl" class="img-fluid d-flex mr-3">
+                                    <div class="media-body">
+                                        <h3>{{ file.name }}</h3>
+                                        <div class="progress" style="width: 50vw;">
+                                            <div class="progress-bar bg-success" :style="{width: file.upload.progress + '%'}"></div>
+                                        </div>
+                                        <pre>{{ file | json }} </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </vue-transmit>
+                </b-row>
+
                 <b-row>
                     <label class="col-md-12 justify-content-start">Basic Info.</label>
 
                     <b-form-group id="make" label="Make" label-for="makeInput" class="col-md-4">
-                        <select id="makeInput" class="form-control custom-select">
+                        <select id="makeInput" class="form-control custom-select" @change="makeChosen" v-model="chosenMake">
                             <option v-if="submitType === 'addNewVehicle'" :value="null">Choose Make ...</option>
                             <option v-for="make in vehicleMakes" v-bind:value="make">{{ make }}</option>
                         </select>
                     </b-form-group>
 
                     <b-form-group id="model" label="Model" label-for="modelInput" class="col-md-4">
-                        <select id="modelInput" class="form-control custom-select"></select>
+                        <select id="modelInput" class="form-control custom-select">
+                            <option v-for="model in vehicleModels" v-bind:value="model">{{ model }}</option>
+                        </select>
                     </b-form-group>
 
                     <b-form-group id="trim" label="Trim" label-for="trimInput" class="col-md-4" description="Optional">
-                        <select id="trimInput" class="form-control custom-select"></select>
+                        <b-form-input id="trimInput"></b-form-input>
                     </b-form-group>
                 </b-row>
 
@@ -238,19 +263,25 @@
                 allSelected: false,
 
                 rawVehicleDetails: JSON,
+                chosenMake: null,
                 vehicleMakes: [],
+                vehicleModels: [],
                 vehicleTypes: [],
                 vehicleYears: [],
                 colors: [],
                 transmissionTypes: [],
                 fuelTypes: [],
 
-
                 /* Modal */
                 submitType: 'Add Vehicle',
                 modalTitle: 'Some car',
                 submitText: 'Button',
-                showModal: false
+                showModal: false,
+                options: {
+                    acceptedFileTypes: ['image/*'],
+                    url: './upload.php',
+                    clickable: false
+                }
             }
         },
         created: function () {
@@ -273,10 +304,6 @@
                 if (a !== b) {
                     this.clearSelected()
                 }
-            },
-            submitType(a, b) {
-                console.log('old value: ', b)
-                console.log('new value: ', a)
             }
         },
         methods: {
@@ -318,7 +345,6 @@
                 return axios.get('http://localhost:3000/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
                     for (var key in response.data) {
                         if (response.data.hasOwnProperty(key)) {
-                            //this.items[key] = response.data[key]
                             items[key] = {
                                 'id': response.data[key]._id,
                                 'BasicInfo.Make': {
@@ -337,6 +363,9 @@
                     return []
                 })
             },
+            makeChosen: function () {
+                this.vehicleModels = this.rawVehicleDetails.makeModel[this.chosenMake]
+            },
             modalSubmit: function () {
                 if (this.submitType == ADD_VEHICLE) {
                     alert('adding new vehicle !')
@@ -353,9 +382,6 @@
                 this.showModal = true
 
                 axios_getVehicleDetails.then((response) => {
-
-                    console.log(response.data[0])
-
                     this.rawVehicleDetails = response.data[0]
                     this.vehicleMakes = Object.keys(this.rawVehicleDetails.makeModel)
                     this.vehicleTypes = this.rawVehicleDetails.bodyType
@@ -385,6 +411,14 @@
             clearSelected() {
                 this.allSelected = false
                 this.checkedItems = []
+            },
+            triggerBrowse() {
+                this.$refs.uploader.triggerBrowseFiles()
+            },
+        },
+        filters: {
+            json(value) {
+                return JSON.stringify(value, null, 2)
             }
         }
     }

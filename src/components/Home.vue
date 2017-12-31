@@ -198,7 +198,7 @@
                     this.resetTiers()
                     this.getVehicleRoute = 'basicSearch/' + this.$route.query.searchIs
 
-                    axios.get('http://' + config.api_address + ':3000/basicSearch/' + this.$route.query.searchIs + '/1/' + this.tierOneLazyLoadSkipBy).then((response) => {
+                    axios.get('http://' + config.api_address + '/basicSearch/' + this.$route.query.searchIs + '/1/' + this.tierOneLazyLoadSkipBy).then((response) => {
                         this.tierOneVehicles = response.data
                         if (this.tierOneVehicles.length <= 0) {
                             this.shouldHideTierOne = true
@@ -209,7 +209,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://' + config.api_address + ':3000/basicSearch/' + this.$route.query.searchIs + '/2/' + this.tierTwoLazyLoadSkipBy).then((response) => {
+                    axios.get('http://' + config.api_address + '/basicSearch/' + this.$route.query.searchIs + '/2/' + this.tierTwoLazyLoadSkipBy).then((response) => {
                         this.tierTwoVehicles = response.data
                         if (this.tierTwoVehicles.length <= 0) {
                             this.shouldHideTierTwo = true
@@ -220,7 +220,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://' + config.api_address + ':3000/basicSearch/' + this.$route.query.searchIs + '/3/' + this.tierThreeLazyLoadSkipBy).then((response) => {
+                    axios.get('http://' + config.api_address + '/basicSearch/' + this.$route.query.searchIs + '/3/' + this.tierThreeLazyLoadSkipBy).then((response) => {
                         this.tierThreeVehicles = response.data
                         if (this.tierThreeVehicles <= 0) {
                             this.shouldHideTierThree = true
@@ -239,7 +239,7 @@
                         incomingAdvancedSearch.extColor + '/' + incomingAdvancedSearch.intColor + '/' + incomingAdvancedSearch.fuelType + '/' +
                         incomingAdvancedSearch.transmission + '/' + incomingAdvancedSearch.minPrice + '/' + incomingAdvancedSearch.maxPrice
 
-                    axios.get('http://' + config.api_address + ':3000/advancedSearch/' +
+                    axios.get('http://' + config.api_address + '/advancedSearch/' +
                         incomingAdvancedSearch.make + '/' + incomingAdvancedSearch.model + '/' + incomingAdvancedSearch.type + '/' +
                         incomingAdvancedSearch.extColor + '/' + incomingAdvancedSearch.intColor + '/' + incomingAdvancedSearch.fuelType + '/' +
                         incomingAdvancedSearch.transmission + '/' + incomingAdvancedSearch.minPrice + '/' + incomingAdvancedSearch.maxPrice + '/1/' +
@@ -255,7 +255,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://' + config.api_address + ':3000/advancedSearch/' +
+                    axios.get('http://' + config.api_address + '/advancedSearch/' +
                         incomingAdvancedSearch.make + '/' + incomingAdvancedSearch.model + '/' + incomingAdvancedSearch.type + '/' +
                         incomingAdvancedSearch.extColor + '/' + incomingAdvancedSearch.intColor + '/' + incomingAdvancedSearch.fuelType + '/' +
                         incomingAdvancedSearch.transmission + '/' + incomingAdvancedSearch.minPrice + '/' + incomingAdvancedSearch.maxPrice + '/2/' +
@@ -271,7 +271,7 @@
                         console.log('An error ocurred while trying to parse your search', error)
                     })
 
-                    axios.get('http://' + config.api_address + ':3000/advancedSearch/' +
+                    axios.get('http://' + config.api_address + '/advancedSearch/' +
                         incomingAdvancedSearch.make + '/' + incomingAdvancedSearch.model + '/' + incomingAdvancedSearch.type + '/' +
                         incomingAdvancedSearch.extColor + '/' + incomingAdvancedSearch.intColor + '/' + incomingAdvancedSearch.fuelType + '/' +
                         incomingAdvancedSearch.transmission + '/' + incomingAdvancedSearch.minPrice + '/' + incomingAdvancedSearch.maxPrice + '/3/' +
@@ -295,7 +295,7 @@
         },
         methods: {
             pageInit: function () {
-                axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/1/' + this.tierOneLazyLoadSkipBy)
+                axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/1/' + this.tierOneLazyLoadSkipBy)
                     .then((response) => {
                         this.tierOneVehicles = response.data
                         if (this.tierOneVehicles.length <= 0) {
@@ -308,7 +308,7 @@
                         console.log('An error ocurred while trying to retreive tier 1 data', error)
                     })
 
-                axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
+                axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
                     .then((response) => {
                         this.tierTwoVehicles = response.data
                         if (this.tierTwoVehicles.length <= 0) {
@@ -321,7 +321,7 @@
                         console.log('An error ocurred while trying to retreive tier 1 data', error)
                     })
 
-                axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/3/' + this.tierThreeLazyLoadSkipBy)
+                axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/3/' + this.tierThreeLazyLoadSkipBy)
                     .then((response) => {
                         this.tierThreeVehicles = response.data
                         if (this.tierThreeVehicles <= 0) {
@@ -337,7 +337,7 @@
 
             loadMore: function (tier) {
                 if (tier == 1) {
-                    axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/1/' + this.tierOneLazyLoadSkipBy)
+                    axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/1/' + this.tierOneLazyLoadSkipBy)
                         .then((response) => {
                             if (response.data.length <= 0) {
                                 console.log('no more !')
@@ -360,7 +360,7 @@
                             console.log('An error ocurred while trying to retreive tier 1 data', error)
                         })
                 } else if (tier == 2) {
-                    axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
+                    axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
                         .then((response) => {
                             var newTierTwo = response.data
                             for (var key in newTierTwo) {
@@ -377,7 +377,7 @@
                             console.log('An error ocurred while trying to retreive tier two cars', error)
                         })
                 } else {
-                    axios.get('http://' + config.api_address + ':3000/' + this.getVehicleRoute + '/3/' + this.tierThreeLazyLoadSkipBy)
+                    axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/3/' + this.tierThreeLazyLoadSkipBy)
                         .then((response) => {
                             var newTierThree = response.data
                             for (var key in newTierThree) {

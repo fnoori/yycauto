@@ -235,7 +235,7 @@
     const ADD_VEHICLE = 'addNewVehicle'
     const EDIT_VEHICLE = 'editExistingVehicle'
 
-    var axios_getVehicleDetails = axios.get('http://' + config.api_address + ':3000/getVehiclesDetails')
+    var axios_getVehicleDetails = axios.get('http://' + config.api_address + '/getVehiclesDetails')
 
     export default {
         name: 'PartnersPage',
@@ -335,7 +335,7 @@
                 }
 
                 /* Count the number of rows for this dealership */
-                axios.get('http://' + config.api_address + ':3000/countDealershipVehicles/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
+                axios.get('http://' + config.api_address + '/countDealershipVehicles/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
                     this.totalRows = response.data
                 }).catch(error => {
                     console.log('An error occurred when trying to count the dealerships vehicles', error)
@@ -343,7 +343,7 @@
 
                 /* Get cars for dealership */
                 const items = []
-                return axios.get('http://' + config.api_address + ':3000/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
+                return axios.get('http://' + config.api_address + '/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
                     for (var key in response.data) {
                         if (response.data.hasOwnProperty(key)) {
                             items[key] = {

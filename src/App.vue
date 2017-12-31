@@ -159,7 +159,8 @@
 
 <script>
     import axios from 'axios'
-    var axios_getVehicleDetails = axios.get('http://localhost:3000/getVehiclesDetails')
+    import config from '../config/config.js'
+    var axios_getVehicleDetails = axios.get('http://' + config.api_address + ':3000/getVehiclesDetails')
 
     export default {
         name: 'app',

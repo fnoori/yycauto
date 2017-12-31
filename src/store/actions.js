@@ -1,10 +1,11 @@
 import axios from 'axios'
+import config from '../../config/config.js'
 const incorrectCreds = 'Incorrect username or password'
 
 export const login = ({ commit }, creds) => {
     commit('login') // show spinner
     return new Promise(resolve => {
-        axios.get('http://localhost:3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
+        axios.get('http://' + config.api_address + ':3000/partnerLogin/' + creds.email + '/' + creds.password).then((response) => {
             if (!response.data.success) {
                 resolve(false)
             }

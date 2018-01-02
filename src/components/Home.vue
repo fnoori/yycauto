@@ -47,7 +47,8 @@
                     </div>
                 </div>
             </div>
-            <div v-bind:class="[{'tier-one-grey-load-more': !tierOneCanLoadMore}, 'load-more']" @click="loadMore(1)">
+            
+            <div v-bind:class="[{'tier-one-grey-load-more': !tierOneCanLoadMore}, 'card load-more']" @click="loadMore(1)">
                 <i class="material-icons">keyboard_arrow_right</i>
             </div>
         </div>
@@ -98,9 +99,11 @@
                     </div>
                 </div>
             </div>
-            <div class="tier-two-load-more" @click="loadMore(2)">
+
+            <div v-bind:class="[{'tier-two-grey-load-more': !tierTwoCanLoadMore}, 'card tier-two-load-more']" @click="loadMore(2)">
                 <i class="material-icons">keyboard_arrow_right</i>
             </div>
+
         </div>
 
         <div id="tierThreeSec" v-bind:class="[{ 'hide-tier':  shouldHideTierThree }, 'tier-three']">
@@ -150,9 +153,11 @@
                     </div>
                 </div>
             </div>
-            <div class="tier-three-load-more" @click="loadMore(3)">
+
+            <div v-bind:class="[{'tier-three-grey-load-more': !tierThreeCanLoadMore}, 'card tier-three-load-more']" @click="loadMore(3)">
                 <i class="material-icons">keyboard_arrow_right</i>
             </div>
+
         </div>
     </div>
 </template>
@@ -179,6 +184,8 @@
                 shouldHideTierThree: false,
 
                 tierOneCanLoadMore: true,
+                tierTwoCanLoadMore: true,
+                tierThreeCanLoadMore: true,
 
                 tierOneLazyLoadSkipBy: 0,
                 tierTwoLazyLoadSkipBy: 0,
@@ -362,6 +369,14 @@
                 } else if (tier == 2) {
                     axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
                         .then((response) => {
+
+                            if (response.data.length <= 0) {
+                                console.log('no more tier 2 vehicles!')
+                                this.tierTwoCanLoadMore = false
+                                return
+                            }
+
+
                             var newTierTwo = response.data
                             for (var key in newTierTwo) {
                                 if (newTierTwo.hasOwnProperty(key)) {
@@ -379,6 +394,13 @@
                 } else {
                     axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/3/' + this.tierThreeLazyLoadSkipBy)
                         .then((response) => {
+
+                            if (response.data.length <= 0) {
+                                console.log('no more tier 3 vehicles!')
+                                this.tierThreeCanLoadMore = false
+                                return
+                            }
+
                             var newTierThree = response.data
                             for (var key in newTierThree) {
                                 if (newTierThree.hasOwnProperty(key)) {
@@ -430,6 +452,7 @@
         overflow-x: scroll;
         padding-bottom: 5px;
         white-space: nowrap;
+        position: relative;
     }
 
     .tier-one-card {
@@ -559,6 +582,7 @@
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
     .tier-one-grey-load-more {
@@ -572,6 +596,7 @@
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
     /* tier 2 */
@@ -582,6 +607,7 @@
         overflow-x: scroll;
         padding-bottom: 5px;
         white-space: nowrap;
+        position: relative;
     }
 
     .tier-two-card {
@@ -630,6 +656,7 @@
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
     .tier-two-grey-load-more {
@@ -643,6 +670,7 @@
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
     /* tier 3 */
@@ -653,6 +681,7 @@
         overflow-x: scroll;
         padding-bottom: 5px;
         white-space: nowrap;
+        position: relative;
     }
 
     .tier-three-card {
@@ -735,19 +764,21 @@
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
-    .tier-two-grey-load-more {
+    .tier-three-grey-load-more {
         width: 3rem;
         height: 14.7rem;
         overflow: hidden;
         padding-top: 7rem;
         margin: 0 0.3rem;
         background-color: lightgray !important;
-        color: black;
+        color: white;
         display: inline-block;
         text-align: center;
         cursor: pointer;
+        position: absolute;
     }
 
     .footer {
@@ -784,11 +815,11 @@
         }
         .load-more {
             height: 17.5rem;
-            padding-top: 8rem;
+            /*padding-top: 8rem;*/
         }
         .tier-one-grey-load-more {
             height: 17.5rem;
-            padding-top: 8rem;
+            /*padding-top: 8rem;*/
         }
 
 
@@ -820,11 +851,11 @@
         }
         .tier-two-load-more {
             height: 16.3rem;
-            padding-top: 8rem;
+            /*padding-top: 8rem;*/
         }
         .tier-two-grey-load-more {
             height: 16.3rem;
-            padding-top: 8rem;
+            /*padding-top: 8rem;*/
         }
 
         .tier-two-card-phone:hover {
@@ -840,6 +871,13 @@
             height: 14.7rem;
             overflow: hidden;
             margin: 0 0.3rem;
+        }
+        .tier-three-load-more {
+            height: 14.7rem;
+        }
+
+        .tier-three-grey-load-more {
+            height: 14.7rem;
         }
     }
 
@@ -879,6 +917,12 @@
         }
         .tier-three-card-phone:after {
             right: 45%;
+        }
+        .tier-three-load-more {
+            height: 14.8rem;
+        }
+        .tier-three-grey-load-more {
+            height: 14.8rem;
         }
     }
 

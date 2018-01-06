@@ -10,6 +10,7 @@ import Modal from './components/Modal'
 import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
 import VueTransmit from 'vue-transmit'
 import config from '../config/config'
+import storage from 'google-cloud'
 
 require('./assets/css/nav-bar.css')
 require('./assets/css/nav-bar-partner.css')
@@ -17,6 +18,7 @@ require('./assets/css/modal.css')
 
 Vue.use(BootstrapVue)
 Vue.use(VueTransmit)
+Vue.use(storage)
 Vue.component('fade-loader', FadeLoader)
 Vue.prototype.$config = config
 

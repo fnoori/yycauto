@@ -160,7 +160,7 @@
 <script>
     import axios from 'axios'
     import config from '../config/config.js'
-    var axios_getVehicleDetails = axios.get('http://' + config.api_address + ':3000/getVehiclesDetails')
+    var axios_getVehicleDetails = axios.get('http://' + config.api_address + '/getVehiclesDetails')
 
     export default {
         name: 'app',

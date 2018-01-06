@@ -66,7 +66,7 @@
             <b-container fluid>
 
                 <b-row class="mb-5">
-                    <vue-transmit class="col-12" tag="section" v-bind="options" upload-area-classes="bg-faded" ref="uploader">
+                    <vue-transmit class="col-md-12" tag="section" v-bind="options" upload-area-classes="bg-faded" ref="uploader">
                         <div class="d-flex align-items-center justify-content-center w-100" style="height:50vh; border-radius: 1rem;">
                             <button class="btn btn-primary" @click="triggerBrowse">Upload Files</button>
                         </div>

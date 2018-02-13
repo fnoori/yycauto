@@ -1,3 +1,3 @@
 module.exports = {
-    'api_address': 'localhost'
+    'api_address': 'localhost:3000'
 }

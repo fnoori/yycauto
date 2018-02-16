@@ -66,12 +66,32 @@
             <b-container fluid>
 
                 <b-row class="mb-5">
-                    <!-- file upload area -->
-                    <!--
-                    <form action="" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" />
-                    </form>
-                -->
+
+
+
+                    <vue-transmit class="col-12" tag="section" v-bind="transmitOptions" upload-area-classes="bg-faded" ref="uploader">
+                        <div class="d-flex align-items-center justify-content-center w-100" style="height:50vh; border-radius: 1rem;">
+                            <button class="btn btn-primary" @click="triggerBrowse">Upload Files</button>
+                        </div>
+                        <!-- Scoped slot -->
+                        <template slot="files" slot-scope="props">
+                            <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
+                                <div class="media">
+                                    <img :src="file.dataUrl" class="img-fluid d-flex mr-3">
+                                    <div class="media-body">
+                                        <h3>{{ file.name }}</h3>
+                                        <div class="progress" style="width: 50vw;">
+                                            <div class="progress-bar bg-success" :style="{width: file.upload.progress + '%'}"></div>
+                                        </div>
+                                        <pre>{{ file | json }} </pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </vue-transmit>
+
+
+
                 </b-row>
 
                 <b-row>
@@ -218,6 +238,7 @@
 <script>
     import axios from 'axios'
     import config from '../../config/config.js'
+
     const ADD_VEHICLE = 'addNewVehicle'
     const EDIT_VEHICLE = 'editExistingVehicle'
 
@@ -263,7 +284,19 @@
                 submitType: 'Add Vehicle',
                 modalTitle: 'Some car',
                 submitText: 'Button',
-                showModal: false
+                showModal: false,
+
+                dealershipAccount: this.$store.state.dealershipLoggedIn,
+                uploadingVehiclePictures: -1,
+                uploadingDealershipLogo: -1,
+
+                transmitOptions: {
+                    acceptedFileTypes: ['image/*'],
+                    clickable: false,
+                    maxFileSize: 10,
+                    url: 'http://localhost:3000/' + this.dealershipAccount + '/' + this.uploadingVehiclePictures + '/' + this.uploadingDealershipLogo + '/pictures/',
+                    paramName: 'pictures'
+                }
             }
         },
         created: function () {
@@ -393,6 +426,14 @@
             clearSelected() {
                 this.allSelected = false
                 this.checkedItems = []
+            },
+            triggerBrowse() {
+                this.$refs.uploader.triggerBrowseFiles()
+            },
+        },
+        filters: {
+            json(value) {
+                return JSON.stringify(value, null, 2)
             }
         }
     }
@@ -494,6 +535,39 @@
         box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
         outline: inherit !important;
         border-color: 0 0 0 0.2rem rgba(0, 123, 255, .25) !important;
+    }
+
+    .dropbox {
+        outline: 2px dashed grey;
+        /* the dash box */
+        outline-offset: -10px;
+        background: lightcyan;
+        color: dimgray;
+        padding: 10px 10px;
+        min-height: 200px;
+        /* minimum height */
+        position: relative;
+        cursor: pointer;
+    }
+
+    .input-file {
+        opacity: 0;
+        /* invisible but it's there! */
+        width: 100%;
+        height: 200px;
+        position: absolute;
+        cursor: pointer;
+    }
+
+    .dropbox:hover {
+        background: lightblue;
+        /* when mouse over to the drop zone, change color */
+    }
+
+    .dropbox p {
+        font-size: 1.2em;
+        text-align: center;
+        padding: 50px 0;
     }
 
     @media(max-width: 980px) {

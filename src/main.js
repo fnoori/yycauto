@@ -8,9 +8,10 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import Modal from './components/Modal'
 import FadeLoader from 'vue-spinner/src/FadeLoader.vue'
-import VueTransmit from 'vue-transmit'
 import config from '../config/config'
 import VueUploadComponent from 'vue-upload-component'
+
+import VueTransmit from 'vue-transmit'
 
 
 require('./assets/css/nav-bar.css')
@@ -19,6 +20,7 @@ require('./assets/css/modal.css')
 
 Vue.use(BootstrapVue)
 Vue.use(VueTransmit)
+
 
 Vue.component('file-upload', VueUploadComponent)
 Vue.component('fade-loader', FadeLoader)

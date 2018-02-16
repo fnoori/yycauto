@@ -14,16 +14,20 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "^1.6.0",
     "axios": "*",
     "bootstrap": "^4.0.0",
     "bootstrap-vue": "^1.5.1",
     "fast-crc32c": "*",
     "google-cloud": "*",
     "vue": "*",
+    "vue-clip": "^1.0.0",
     "vue-masked-input": "*",
     "vue-router": "*",
     "vue-spinner": "*",
     "vue-transmit": "^8.0.0",
+    "vue-upload-component": "^2.8.3",
+    "vue2-dropzone": "^3.0.4",
     "vuex": "*"
   },
   "devDependencies": {

@@ -66,26 +66,12 @@
             <b-container fluid>
 
                 <b-row class="mb-5">
-                    <vue-transmit class="col-md-12" tag="section" v-bind="options" upload-area-classes="bg-faded" ref="uploader">
-                        <div class="d-flex align-items-center justify-content-center w-100" style="height:50vh; border-radius: 1rem;">
-                            <button class="btn btn-primary" @click="triggerBrowse">Upload Files</button>
-                        </div>
-                        <!-- Scoped slot -->
-                        <template slot="files" slot-scope="props">
-                            <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
-                                <div class="media">
-                                    <img :src="file.dataUrl" class="img-fluid d-flex mr-3">
-                                    <div class="media-body">
-                                        <h3>{{ file.name }}</h3>
-                                        <div class="progress" style="width: 50vw;">
-                                            <div class="progress-bar bg-success" :style="{width: file.upload.progress + '%'}"></div>
-                                        </div>
-                                        <pre>{{ file | json }} </pre>
-                                    </div>
-                                </div>
-                            </div>
-                        </template>
-                    </vue-transmit>
+                    <!-- file upload area -->
+                    <!--
+                    <form action="" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" />
+                    </form>
+                -->
                 </b-row>
 
                 <b-row>
@@ -277,12 +263,7 @@
                 submitType: 'Add Vehicle',
                 modalTitle: 'Some car',
                 submitText: 'Button',
-                showModal: false,
-                options: {
-                    acceptedFileTypes: ['image/*'],
-                    url: './upload.php',
-                    clickable: false
-                }
+                showModal: false
             }
         },
         created: function () {
@@ -412,14 +393,6 @@
             clearSelected() {
                 this.allSelected = false
                 this.checkedItems = []
-            },
-            triggerBrowse() {
-                this.$refs.uploader.triggerBrowseFiles()
-            },
-        },
-        filters: {
-            json(value) {
-                return JSON.stringify(value, null, 2)
             }
         }
     }

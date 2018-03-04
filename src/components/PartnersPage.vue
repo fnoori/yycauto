@@ -67,13 +67,15 @@
 
                 <b-row class="mb-5">
 
+                    <vue-transmit class="col-12" tag="section" v-bind="transmitOptions" :url="uploadUrl" @accept-complete="getUploadId" upload-area-classes="bg-faded"
+                        ref="uploader">
 
-
-                    <vue-transmit class="col-12" tag="section" v-bind="transmitOptions" upload-area-classes="bg-faded" ref="uploader">
                         <div class="d-flex align-items-center justify-content-center w-100" style="height:50vh; border-radius: 1rem;">
                             <button class="btn btn-primary" @click="triggerBrowse">Upload Files</button>
                         </div>
+
                         <!-- Scoped slot -->
+                        <!--
                         <template slot="files" slot-scope="props">
                             <div v-for="(file, i) in props.files" :key="file.id" :class="{'mt-5': i === 0}">
                                 <div class="media">
@@ -88,6 +90,8 @@
                                 </div>
                             </div>
                         </template>
+                        -->
+
                     </vue-transmit>
 
 
@@ -98,66 +102,66 @@
                     <label class="col-md-12 justify-content-start">Basic Info.</label>
 
                     <b-form-group id="make" label="Make" label-for="makeInput" class="col-md-4">
-                        <select id="makeInput" class="form-control custom-select" @change="makeChosen" v-model="chosenMake">
+                        <select id="makeInput" class="form-control custom-select" @change="makeChosen" v-model="inputtedMake">
                             <option v-if="submitType === 'addNewVehicle'" :value="null">Choose Make ...</option>
                             <option v-for="make in vehicleMakes" v-bind:value="make">{{ make }}</option>
                         </select>
                     </b-form-group>
 
                     <b-form-group id="model" label="Model" label-for="modelInput" class="col-md-4">
-                        <select id="modelInput" class="form-control custom-select">
+                        <select id="modelInput" class="form-control custom-select" v-model="inputtedModel">
                             <option v-for="model in vehicleModels" v-bind:value="model">{{ model }}</option>
                         </select>
                     </b-form-group>
 
                     <b-form-group id="trim" label="Trim" label-for="trimInput" class="col-md-4" description="Optional">
-                        <b-form-input id="trimInput"></b-form-input>
+                        <b-form-input id="trimInput" v-model="inputtedTrim"></b-form-input>
                     </b-form-group>
                 </b-row>
 
                 <b-row>
                     <b-form-group id="year" label="Year" label-for="yearInput" class="col-md-4">
-                        <select id="yearInput" class="form-control custom-select"></select>
+                        <select id="yearInput" class="form-control custom-select" v-model="inputtedYear"></select>
                     </b-form-group>
 
                     <b-form-group id="exteriorColor" label="Exterior Colour" label-for="exteriorColorInput" class="col-md-4">
-                        <select id="exteriorColorInput" class="form-control custom-select"></select>
+                        <select id="exteriorColorInput" class="form-control custom-select" v-model="inputtedExtColour"></select>
                     </b-form-group>
 
                     <b-form-group id="interiorColor" label="Interior Colour" label-for="interiorColorInput" class="col-md-4">
-                        <select id="interiorColorInput" class="form-control custom-select"></select>
+                        <select id="interiorColorInput" class="form-control custom-select" v-model="inputtedIntColour"></select>
                     </b-form-group>
                 </b-row>
 
                 <b-row>
                     <b-form-group id="numberOfDoors" label="No. of Doors" label-for="numberOfDoorsInput" class="col-md-6" description="Optional">
-                        <select id="numberOfDoorsInput" class="form-control custom-select"></select>
+                        <select id="numberOfDoorsInput" class="form-control custom-select" v-model="inputtedNoOfDoors"></select>
                     </b-form-group>
 
                     <b-form-group id="numberOfSeats" label="No. of Seats" label-for="numberOfSeatsInput" class="col-md-6" description="Optional">
-                        <select id="numberOfSeatsInput" class="form-control custom-select"></select>
+                        <select id="numberOfSeatsInput" class="form-control custom-select" v-model="inputtedNoOfSeats"></select>
                     </b-form-group>
                 </b-row>
 
                 <b-row>
                     <b-form-group id="price" label="Price" label-for="priceInput" class="col-md-6" description="Do not include commas ' , '">
                         <b-input-group left="$">
-                            <b-form-input id="priceInput"></b-form-input>
+                            <b-form-input id="priceInput" v-model="inputtedPrice"></b-form-input>
                         </b-input-group>
                     </b-form-group>
 
                     <b-form-group id="kilometers" label="Kilometers" label-for="kilometersInput" class="col-md-6" description="Use ' 0 ' for new vehicles">
-                        <b-form-input id="kilometersInput"></b-form-input>
+                        <b-form-input id="kilometersInput" v-model="inputtedKilometres"></b-form-input>
                     </b-form-group>
                 </b-row>
 
                 <b-row class="mb-5">
                     <b-form-group id="fuelType" label="Fuel Type" label-for="fuelTypeInput" class="col-md-6">
-                        <b-form-select id="fuelTypeInput"></b-form-select>
+                        <b-form-select id="fuelTypeInput" v-model="inputtedFuelType"></b-form-select>
                     </b-form-group>
 
                     <b-form-group id="bodyType" label="Body Type" label-for="bodyTypeInput" class="col-md-6">
-                        <b-form-select id="bodyTypeInput"></b-form-select>
+                        <b-form-select id="bodyTypeInput" v-model="inputtedBodyType"></b-form-select>
                     </b-form-group>
                 </b-row>
 
@@ -165,60 +169,66 @@
                 <b-row>
                     <label class="col-md-12 justify-content-start">Mechanical Info.</label>
 
-                    <b-form-checkbox id="carProofCheckbox" class="col-md-12 ml-3">
+                    <b-form-checkbox id="carProofCheckbox" class="col-md-12 ml-3" v-model="inputtedCarProof">
                         <img src="../assets/images/car-proof.png" class="car-proof-img" />
                     </b-form-checkbox>
                 </b-row>
 
                 <b-row>
                     <b-form-group id="transmission" label="Transmission" label-for="transmissionInput" class="col-md-4">
-                        <b-form-select id="transmissionInput"></b-form-select>
+                        <b-form-select id="transmissionInput" v-model="inputtedTransmission"></b-form-select>
                     </b-form-group>
 
                     <b-form-group id="engineSize" label="Engine Size" label-for="engineSizeInput" class="col-md-4" description="Optional">
-                        <b-form-select id="engineSizeInput"></b-form-select>
+                        <b-form-select id="engineSizeInput" v-model="inputtedEngineSize"></b-form-select>
                     </b-form-group>
 
                     <b-form-group id="recommendedFuel" label="Recommended Fuel" label-for="recommendedFuelInput" class="col-md-4" description="Optional">
-                        <b-form-select id="recommendedFuelInput"></b-form-select>
-                    </b-form-group>
-                </b-row>
-
-                <b-row>
-                    <b-form-group id="cylinders" label="Cylinders" label-for="cylinderInput" class="col-md-4" description="Optional">
-                        <b-form-select id="cylinderInput"></b-form-select>
-                    </b-form-group>
-
-                    <b-form-group id="horsepower" label="Horsepower @ RPM" label-for="horsepowerInput" class="col-md-4" description="Optional">
-                        <b-form-input id="horsepowerInput"></b-form-input>
-                    </b-form-group>
-
-                    <b-form-group id="torque" label="Torque (lb - ft) @ RPM" label-for="torqueInput" class="col-md-4" description="Optional">
-                        <b-form-input id="torqueInput"></b-form-input>
+                        <b-form-select id="recommendedFuelInput" v-model="inputtedRecommendedFuel"></b-form-select>
                     </b-form-group>
                 </b-row>
 
                 <b-row class="mb-5">
-                    <b-form-group id="drivetrain" label="Drivetrain" label-for="drivetrainInput" class="col-md-12" description="Optional">
-                        <select id="drivetrainInput" class="form-control custom-select"></select>
+                    <b-form-group id="cylinders" label="Cylinders" label-for="cylinderInput" class="col-md-4" description="Optional">
+                        <b-form-select id="cylinderInput" v-model="inputtedCylinders"></b-form-select>
+                    </b-form-group>
+
+                    <b-form-group id="horsepower" label="Horsepower @ RPM" label-for="horsepowerInput" class="col-md-4" description="Optional">
+                        <b-form-input id="horsepowerInput" v-model="inputtedHorsePower"></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group id="torque" label="Torque (lb - ft) @ RPM" label-for="torqueInput" class="col-md-4" description="Optional">
+                        <b-form-input id="torqueInput" v-model="inputtedTorque"></b-form-input>
                     </b-form-group>
                 </b-row>
 
                 <!-- Start fuel economy info -->
-                <b-row>
+                <b-row class="mb-5">
                     <label class="col-md-12 justify-content-start">Fuel Economy Info.</label>
 
                     <b-form-group id="cityFuelEconomy" label="City (L/100Km)" label-for="cityFuelEconomyInput" class="col-md-4" description="Optional">
-                        <b-form-input id="cityFuelEconomyInput"></b-form-input>
+                        <b-form-input id="cityFuelEconomyInput" v-model="inputtedFuelEconomyCity"></b-form-input>
                     </b-form-group>
 
                     <b-form-group id="highwayFuelEconomy" label="Highway (L/100Km)" label-for="highwayFuelEconomyInput" class="col-md-4" description="Optional">
-                        <b-form-input id="highwayFuelEconomyInput"></b-form-input>
+                        <b-form-input id="highwayFuelEconomyInput" v-model="inputtedFuelEconomyHighway"></b-form-input>
                     </b-form-group>
 
                     <b-form-group id="combinedFuelEconomy" label="Combined (L/100Km)" label-for="combinedFuelEconomyInput" class="col-md-4" description="Optional">
-                        <b-form-input id="combinedFuelEconomyInput"></b-form-input>
+                        <b-form-input id="combinedFuelEconomyInput" v-model="inputtedFuelEconomyCombined"></b-form-input>
                     </b-form-group>
+                </b-row>
+
+                <b-row>
+                    <label class="col-md-12 justify-content-start">Short Description</label>
+
+                    <b-form-textarea 
+                        id="description"
+                        v-model="inputtedVehicleDescription"
+                        placeholder="Enter something"
+                        @keyup.native="descriptionCharCount">
+                    </b-form-textarea>
+                    <p class='text-right text-small' v-bind:class="{'text-danger': descriptionMaxReached }">{{ descriptionRemainingChar }}</p>
                 </b-row>
 
             </b-container>
@@ -271,7 +281,7 @@
                 allSelected: false,
 
                 rawVehicleDetails: JSON,
-                chosenMake: null,
+                inputtedMake: null,
                 vehicleMakes: [],
                 vehicleModels: [],
                 vehicleTypes: [],
@@ -285,8 +295,33 @@
                 modalTitle: 'Some car',
                 submitText: 'Button',
                 showModal: false,
+                descriptionRemainingChar: 500,
+                descriptionCharMax: 500,
+                descriptionMaxReached: false,
 
-                dealershipAccount: this.$store.state.dealershipLoggedIn,
+                inputtedModel: null,
+                inputtedTrim: null,
+                inputtedYear: null,
+                inputtedExtColour: null,
+                inputtedIntColour: null,
+                inputtedNoOfDoors: null,
+                inputtedNoOfSeats: null,
+                inputtedPrice: null,
+                inputtedKilometres: null,
+                inputtedFuelType: null,
+                inputtedBodyType: null,
+                inputtedCarProof: null,
+                inputtedTransmission: null,
+                inputtedEngineSize: null,
+                inputtedRecommendedFuel: null,
+                inputtedCylinders: null,
+                inputtedHorsePower: null,
+                inputtedTorque: null,
+                inputtedFuelEconomyCity: null,
+                inputtedFuelEconomyHighway: null,
+                inputtedFuelEconomyCombined: null,
+                inputtedVehicleDescription: null,
+
                 uploadingVehiclePictures: -1,
                 uploadingDealershipLogo: -1,
 
@@ -294,9 +329,9 @@
                     acceptedFileTypes: ['image/*'],
                     clickable: false,
                     maxFileSize: 10,
-                    url: 'http://localhost:3000/' + this.dealershipAccount + '/' + this.uploadingVehiclePictures + '/' + this.uploadingDealershipLogo + '/pictures/',
                     paramName: 'pictures'
-                }
+                },
+                uploadUrl: 'defurl'
             }
         },
         created: function () {
@@ -379,11 +414,18 @@
                 })
             },
             makeChosen: function () {
-                this.vehicleModels = this.rawVehicleDetails.makeModel[this.chosenMake]
+                this.vehicleModels = this.rawVehicleDetails.makeModel[this.inputtedMake]
             },
             modalSubmit: function () {
                 if (this.submitType == ADD_VEHICLE) {
-                    alert('adding new vehicle !')
+                    console.log('adding new vehicle !')
+
+
+
+
+
+
+
                 } else if (this.submitType == EDIT_VEHICLE) {
                     alert('editing existing vehicle !')
                 } else {
@@ -423,13 +465,36 @@
                     this.checkedItems = []
                 }
             },
-            clearSelected() {
+            clearSelected: function() {
                 this.allSelected = false
                 this.checkedItems = []
             },
-            triggerBrowse() {
+
+            descriptionCharCount: function() {
+                this.descriptionRemainingChar = this.descriptionCharMax - this.inputtedVehicleDescription.length
+                this.descriptionMaxReached = this.descriptionRemainingChar < 0
+
+                console.log('description remaining char: ' + this.descriptionRemainingChar)
+                console.log('descriptionMaxReached: ' + this.descriptionMaxReached)
+            },
+
+            triggerBrowse: function() {
+                this.uploadingVehiclePictures = 'hello'
+                this.uploadUrl = 'http://localhost:3000/' + this.$store.state.dealershipLoggedIn + '/' + this.uploadingVehiclePictures + '/-1/pictures/'
                 this.$refs.uploader.triggerBrowseFiles()
             },
+
+            getUploadId: function(file) {
+                axios.post('your/backend/url', { data: file }).then(response => {
+                    this.uploadingVehiclePictures = 'hello'
+
+                    this.uploadUrl = `http://localhost:3000/${
+                        this.$store.state.dealershipLoggedIn
+                        }/${this.uploadingVehiclePictures}/-1/pictures/`
+
+                    this.$refs.uploader.processFile(file)
+                })
+            }
         },
         filters: {
             json(value) {

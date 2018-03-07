@@ -310,10 +310,16 @@
                         } else {
                             this.tierOneLazyLoadSkipBy += 10
                         }
+
+                        //console.log(this.tierOneVehicles)
                     })
                     .catch(error => {
                         console.log('An error ocurred while trying to retreive tier 1 data', error)
                     })
+
+                    
+
+                    return
 
                 axios.get('http://' + config.api_address + '/' + this.getVehicleRoute + '/2/' + this.tierTwoLazyLoadSkipBy)
                     .then((response) => {
@@ -416,6 +422,8 @@
                             console.log('An error ocurred while trying to retreive tier three cars', error)
                         })
                 }
+
+                console.log(this.tierOneVehicles)
             },
 
             resetTiers: function () {

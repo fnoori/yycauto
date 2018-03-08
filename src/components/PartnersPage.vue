@@ -384,7 +384,7 @@
                 }
 
                 /* Count the number of rows for this dealership */
-                axios.get('http://' + config.api_address + '/countDealershipVehicles/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
+                axios.get('http://' + config.api_address + '/countDealershipVehicles/' + localStorage.getItem('dealership') + '?token=' + localStorage.getItem('token')).then((response) => {
                     this.totalRows = response.data
                 }).catch(error => {
                     console.log('An error occurred when trying to count the dealerships vehicles', error)
@@ -392,7 +392,7 @@
 
                 /* Get cars for dealership */
                 const items = []
-                return axios.get('http://' + config.api_address + '/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/Generic Dealership?token=' + localStorage.getItem('token')).then((response) => {
+                return axios.get('http://' + config.api_address + '/getAllVehiclesForDealer/' + ctx.sortBy + '/' + ctx.sortDesc + '/' + ctx.perPage + '/' + ctx.currentPage + '/' + ctx.filter + '/' + localStorage.getItem('dealership') + '?token=' + localStorage.getItem('token')).then((response) => {
                     for (var key in response.data) {
                         if (response.data.hasOwnProperty(key)) {
                             items[key] = {

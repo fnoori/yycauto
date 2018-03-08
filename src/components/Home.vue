@@ -22,8 +22,11 @@
                             <div class="quick-specs-title">
                                 Kilometers
                             </div>
-                            <div class="quick-specs-value">
+                            <div v-if="tierOne.BasicInfo.Kilometers > 0"class="quick-specs-value">
                                 {{ tierOne.BasicInfo.Kilometers }}
+                            </div>
+                            <div v-else>
+                                New
                             </div>
                         </div>
                         <div class="fuel-type">
@@ -39,7 +42,7 @@
                 <div class="custom-card-footer">
                     <div class="btn btn-primary card-phone">
                         <a :href="tierOne.DealershipPhone">
-                            {{ tierOne.DealershipInfo.DealershipPhone }}
+                            {{ tierOne.Dealership.DealershipPhone }}
                         </a>
                     </div>
                     <div class="btn btn-primary">
@@ -74,8 +77,11 @@
                             <div class="quick-specs-title">
                                 Kilometers
                             </div>
-                            <div class="quick-specs-value">
+                            <div v-if="tierTwo.BasicInfo.Kilometers > 0" class="quick-specs-value">
                                 {{ tierTwo.BasicInfo.Kilometers }}
+                            </div>
+                            <div v-else>
+                                New
                             </div>
                         </div>
                         <div class="fuel-type">
@@ -91,7 +97,7 @@
                 <div class="custom-card-footer">
                     <div class="btn btn-primary tier-two-card-phone">
                         <a :href="tierTwo.DealershipPhone">
-                            {{ tierTwo.DealershipInfo.DealershipPhone }}
+                            {{ tierTwo.Dealership.DealershipPhone }}
                         </a>
                     </div>
                     <div class="btn btn-primary">
@@ -128,8 +134,11 @@
                             <div class="quick-specs-title">
                                 Kilometers
                             </div>
-                            <div class="quick-specs-value">
+                            <div v-if="tierThree.BasicInfo.Kilometers > 0" class="quick-specs-value">
                                 {{ tierThree.BasicInfo.Kilometers }}
+                            </div>
+                            <div v-else>
+                                New
                             </div>
                         </div>
                         <div class="fuel-type">
@@ -145,7 +154,7 @@
                 <div class="custom-card-footer tier-three-card-footer">
                     <div class="btn btn-primary tier-three-card-phone">
                         <a :href="tierThree.DealershipPhone">
-                            {{ tierThree.DealershipInfo.DealershipPhone }}
+                            {{ tierThree.Dealership.DealershipPhone }}
                         </a>
                     </div>
                     <div class="btn btn-primary">

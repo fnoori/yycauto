@@ -199,6 +199,8 @@
         },
         created: function () {
             if (this.$route.name == 'PartnersPage') {
+                console.log('created: ' + this.$store.state.dealershipLoggedIn)
+
                 this.pageTitle = this.$store.state.dealershipLoggedIn
                 this.partnersPage = true
                 this.partnerLogin = false
@@ -214,6 +216,8 @@
         watch: {
             '$route'(from, to) {
                 if (this.$route.name == 'PartnersPage') {
+                    console.log('watch: ' + this.$store.state.dealershipLoggedIn)
+
                     this.pageTitle = this.$store.state.dealershipLoggedIn
                     this.partnersPage = true
                     this.partnerLogin = false

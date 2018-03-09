@@ -12,10 +12,11 @@ export const login = ({ commit }, creds) => {
 
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('dealership', response.data.dealership)
+            localStorage.setItem('dealershipName', response.data.dealershipName)
 
             // Need to pass the dealership as payload
             commit('loginSuccess', {
-                dealership: response.data.dealership
+                dealership: response.data.dealershipName
             })
 
             resolve(true)

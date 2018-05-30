@@ -1,23 +1,17 @@
 <template>
-  <div>
-  </div>
+    <div>
+    </div>
 </template>
 
 <script>
-  export default {
-    components: {
+export default {
+  components: {},
+  data() {
+    return {}
+  },
 
-    },
-    data() {
-      return {
-
-      }
-    },
-
-    methods: {
-
-    }
-  }
+  methods: {}
+}
 </script>
 
 <style scoped>

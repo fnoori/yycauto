@@ -4,21 +4,18 @@
 </template>
 
 <script>
-  export default {
-    name: 'app',
-    components: {
+import Header from "./components/Header"
+import Footer from "./components/Footer"
 
-    },
-    data() {
-      return {
+export default {
+  name: "app",
+  components: {},
+  data() {
+    return {};
+  },
 
-      }
-    },
-
-    methods: {
-      
-    }
-  }
+  methods: {}
+}
 </script>
 
 <style scoped>

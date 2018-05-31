@@ -1,21 +1,21 @@
 <template>
-  <div id="app">
-  </div>
+    <div id="app">
+    </div>
 </template>
 
 <script>
-import Header from "./components/Header"
-import Footer from "./components/Footer"
+    import Header from "./components/Header"
+    import Footer from "./components/Footer"
 
-export default {
-  name: "app",
-  components: {},
-  data() {
-    return {};
-  },
+    export default {
+        name: "app",
+        components: {},
+        data() {
+        return {};
+    },
 
-  methods: {}
-}
+    methods: {}
+    }
 </script>
 
 <style scoped>

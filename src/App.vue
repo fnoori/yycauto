@@ -26,5 +26,11 @@
     }
 </script>
 
-<style scoped>
+<style>
+    div,
+    input,
+    button,
+    span {
+        border-radius: 0px !important;
+    }
 </style>

@@ -32,6 +32,8 @@ module.exports = {
     'semi': 'off',
     'quotes': 'off',
     'no-unused-vars': 'off',
-    'indent': 'off'
+    'indent': 'off',
+    'no-trailing-spaces': 'off',
+    'no-multiple-empty-lines': 'off'
   }
 }

@@ -19,14 +19,14 @@
             </b-input-group>
         </b-navbar-nav>
         
-        <b-btn variant="outline-secondary" class="account-btn account-mgmt-btn ml-auto">
-            <i class="material-icons">account_box</i>
-        </b-btn>
-        <!--
-        <b-btn variant="outline-secondary" class="logout-btn account-mgmt-btn">
-            Logout
-        </b-btn>
-        -->
+        <div class="dropdown ml-auto">
+            <button class="dropbtn"><i class="material-icons">account_box</i></button>
+            <div class="dropdown-content">
+                <a href="#">Account</a>
+                <hr class="account-dropdown"/>
+                <a href="#">Logout</a>
+            </div>
+        </div>
     </b-navbar>
 </template>
 
@@ -42,6 +42,74 @@ export default {
 </script>
 
 <style scoped>
+    .account-dropdown {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 0.2rem auto;
+        padding: 0;
+        width: 9rem;
+    }
+
+    .dropbtn {
+        background-color: #f44336 !important;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        height: 3rem;
+    }
+    .dropbtn i {
+        font-size: 1.3em;
+        line-height: 0.5 !important;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+
+        position: absolute;
+        right: 0;
+        background-color: #f44336;
+        min-width: 160px;
+        box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #D81E0F;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #D81E0F !important;
+        color: white !important;
+    }
+    .dropbtn:focus,
+    .dropbtn:active {
+        outline: none !important;
+        box-shadow: inset 0 0 0 #ddd !important;
+        background: #f44336 !important;
+        border-color: #c6c6c6 !important;
+        color: white !important;
+    }
+
     /* Base attribute overwrites */
     input[type="text"] {
         border: none;

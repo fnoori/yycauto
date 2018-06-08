@@ -18,22 +18,26 @@
                 </b-input-group-append>
             </b-input-group>
         </b-navbar-nav>
-        <b-dropdown id="account" right text="Account" class="m-0 account-btn">
-            <b-dropdown-item-button>Inventory</b-dropdown-item-button>
-            <b-dropdown-divider></b-dropdown-divider>
-            <b-dropdown-item-button>Logout</b-dropdown-item-button>
-        </b-dropdown>
+        
+        <b-btn variant="outline-secondary" class="account-btn account-mgmt-btn ml-auto">
+            <i class="material-icons">account_box</i>
+        </b-btn>
+        <!--
+        <b-btn variant="outline-secondary" class="logout-btn account-mgmt-btn">
+            Logout
+        </b-btn>
+        -->
     </b-navbar>
 </template>
 
 <script>
 export default {
-  components: {},
-  data() {
-    return {}
-  },
+    components: {},
+    data() {
+        return {}
+    },
 
-  methods: {}
+    methods: {}
 }
 </script>
 
@@ -53,7 +57,16 @@ export default {
         color: #333;
     }
     button {
-        background: #f8f8f8;
+        background: #f8f8f8 !important;
+        border: none;
+    }
+    button:focus,
+    button:active {
+        outline: none !important;
+        box-shadow: inset 0 1px 0 #ddd !important;
+        background: #e9e9e9 !important;
+        border-color: #c6c6c6 !important;
+        color: #333 !important;
     }
 
     /* Bootstrap overwrites */
@@ -70,13 +83,9 @@ export default {
     }
 
     /* Custom */
-    .account-btn:focus {
-        box-shadow: none !important;
-    }
     .search-btn {
         padding-top: 2px;
         width: 5rem;
-        border: none;
     }
     .search-btn:before {
         content: '';
@@ -86,14 +95,6 @@ export default {
         bottom: 0px;
         left: 0px;
         margin-right: 2px;
-    }
-    .search-btn:focus,
-    .search-btn:active {
-        outline: none !important;
-        box-shadow: inset 0 1px 0 #ddd !important;
-        background: #e9e9e9 !important;
-        border-color: #c6c6c6 !important;
-        color: #333 !important;
     }
     .search-btn i {
         vertical-align: middle;
@@ -114,6 +115,14 @@ export default {
         left: 0px;
         margin-right: 2px;
     }
+    .advanced-btn:focus,
+    .advanced-btn:active {
+        outline: none !important;
+        box-shadow: inset 0 1px 0 #ddd !important;
+        background: #e9e9e9 !important;
+        border-color: #c6c6c6 !important;
+        color: #333 !important;
+    }
     .advanced-btn i {
         vertical-align: middle;
         font-size: 1.3em;
@@ -123,19 +132,24 @@ export default {
         margin: 0 10rem;
     }
 
-    .account-btn button:focus {
-        outline: none !important;
+    .account-btn {
+        height: 2.2rem;
     }
-    .account-btn button:hover {
+    .account-mgmt-btn {
+        background: transparent !important;
+        color: white;
+    }
+    .account-mgmt-btn:hover {
+        background-color: #D81E0F !important;
+        color: white !important;
+    }
+    .account-mgmt-btn:focus,
+    .account-mgmt-btn:active {
+        background-color: #D81E0F !important;
+        color: white !important;
+        border: none !important;
         box-shadow: none !important;
-        padding: 1rem 1rem;
-        background-color: red !important;
     }
-    .account-btn button {
-        background-color: white !important;
-        text-align: right !important;
-    }
-
 
     @media (max-width: 991px) {
         .search-attributes {

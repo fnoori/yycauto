@@ -27,6 +27,9 @@
 </script>
 
 <style>
+    body {
+        font-family: 'Quicksand', sans-serif;
+    }
     div,
     input,
     button,

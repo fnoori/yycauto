@@ -42,74 +42,6 @@ export default {
 </script>
 
 <style scoped>
-    .account-dropdown {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #ccc;
-        margin: 0.2rem auto;
-        padding: 0;
-        width: 9rem;
-    }
-
-    .dropbtn {
-        background-color: #f44336 !important;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        cursor: pointer;
-        height: 3rem;
-    }
-    .dropbtn i {
-        font-size: 1.3em;
-        line-height: 0.5 !important;
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .dropdown-content {
-        display: none;
-
-        position: absolute;
-        right: 0;
-        background-color: #f44336;
-        min-width: 160px;
-        box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 8px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .dropdown-content a:hover {
-        background-color: #D81E0F;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
-    .dropdown:hover .dropbtn {
-        background-color: #D81E0F !important;
-        color: white !important;
-    }
-    .dropbtn:focus,
-    .dropbtn:active {
-        outline: none !important;
-        box-shadow: inset 0 0 0 #ddd !important;
-        background: #f44336 !important;
-        border-color: #c6c6c6 !important;
-        color: white !important;
-    }
-
     /* Base attribute overwrites */
     input[type="text"] {
         border: none;
@@ -135,6 +67,11 @@ export default {
         background: #e9e9e9 !important;
         border-color: #c6c6c6 !important;
         color: #333 !important;
+    }
+    a,
+    a:focus,
+    a:active {
+        color: white !important;
     }
 
     /* Bootstrap overwrites */
@@ -200,23 +137,65 @@ export default {
         margin: 0 10rem;
     }
 
-    .account-btn {
-        height: 2.2rem;
+    .account-dropdown {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 0.2rem auto;
+        padding: 0;
+        width: 9rem;
     }
-    .account-mgmt-btn {
-        background: transparent !important;
+
+    .dropbtn {
+        background-color: #f44336 !important;
         color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        height: 3rem;
     }
-    .account-mgmt-btn:hover {
+    .dropbtn i {
+        font-size: 1.3em;
+        line-height: 0.5 !important;
+    }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f44336;
+        min-width: 160px;
+        box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+    .dropdown-content a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    .dropdown-content a:hover {
+        background-color: #D81E0F;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown:hover .dropbtn {
         background-color: #D81E0F !important;
         color: white !important;
     }
-    .account-mgmt-btn:focus,
-    .account-mgmt-btn:active {
-        background-color: #D81E0F !important;
+    .dropbtn:focus,
+    .dropbtn:active {
+        outline: none !important;
+        box-shadow: inset 0 0 0 #ddd !important;
+        background: #f44336 !important;
+        border-color: #c6c6c6 !important;
         color: white !important;
-        border: none !important;
-        box-shadow: none !important;
     }
 
     @media (max-width: 991px) {

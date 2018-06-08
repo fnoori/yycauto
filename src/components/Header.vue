@@ -210,5 +210,12 @@ export default {
             width: 100vw;
             margin: 0px 0rem;
         }
+        .dropdown[data-v-61dd7a3d] {
+            position: absolute;
+            /* display: inline-block; */
+            right: 0;
+            top: 0;
+            z-index: 10;
+        }
     }
 </style>

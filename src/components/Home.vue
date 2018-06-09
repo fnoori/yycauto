@@ -1,17 +1,28 @@
 <template>
     <div class="home container-fluid">
+        <tier-one></tier-one>
+        <tier-two></tier-two>
+        <tier-three></tier-three>
     </div>
 </template>
 
 <script>
-export default {
-    components: {},
-    data() {
-        return {}
-    },
+    import TierOne from "./TierOne"
+    import TierTwo from "./TierTwo"
+    import TierThree from "./TierThree"
 
-    methods: {}
-}
+    export default {
+        components: {
+            'tier-one': TierOne,
+            'tier-two': TierTwo,
+            'tier-three': TierThree
+        },
+        data() {
+            return {}
+        },
+
+        methods: {}
+    }
 </script>
 
 <style scoped>

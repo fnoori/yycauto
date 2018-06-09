@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <app-header></app-header>
-        <app-home></app-home>
+        <component v-bind:is="mainContent"></component>
         <app-footer></app-footer>
     </div>
 </template>
@@ -19,7 +19,9 @@
             'app-home': Home
         },
         data() {
-        return {};
+        return {
+            mainContent: 'app-home' 
+        }
     },
 
     methods: {}

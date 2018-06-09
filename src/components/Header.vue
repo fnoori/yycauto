@@ -1,7 +1,12 @@
 <template>
     <b-navbar toggleable="md" class="app-navbar">
 
-        <b-navbar-brand href="#">YYC Automotives</b-navbar-brand>
+        <b-navbar-brand>
+            <a href="#">YYC Automotives</a>
+            <a href="#">
+                <img src="https://placekitten.com/g/30/30" alt="kitteh" class="sponsor-logo">
+            </a>
+        </b-navbar-brand>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="search-attributes">
@@ -88,6 +93,10 @@ export default {
     }
 
     /* Custom */
+    .sponsor-logo {
+        margin-left: 0.5rem;
+    }
+
     .search-btn {
         padding-top: 2px;
         width: 5rem;
@@ -114,7 +123,7 @@ export default {
     .advanced-btn:before {
         content: '';
         border-left: 1px solid #F44336;
-        position: absolute;
+        position: absolute; 
         height: 100%;
         bottom: 0px;
         left: 0px;
@@ -134,7 +143,7 @@ export default {
     }
     .search-attributes {
         width: 50vw;
-        margin: 0 10rem;
+        margin: 0 8rem;
     }
 
     .account-dropdown {
@@ -150,11 +159,11 @@ export default {
     .dropbtn {
         background-color: #f44336 !important;
         color: white;
-        padding: 16px;
+        padding: 0.5rem;
         font-size: 16px;
         border: none;
         cursor: pointer;
-        height: 3rem;
+        height: 2rem;
     }
     .dropbtn i {
         font-size: 1.3em;
@@ -206,16 +215,38 @@ export default {
     }
 
     @media (max-width: 767px) {
+        /* Bootstrap overwrites */
+        .navbar-brand {
+            padding-top: 0 !important;
+        }
+
+        /* Custom */
         .search-attributes {
             width: 100vw;
             margin: 0px 0rem;
         }
+
         .dropdown {
             position: absolute;
-            /* display: inline-block; */
-            right: 0;
-            top: 0;
+            right: 0.35rem;
+            top: 0.2rem;
             z-index: 10;
+            padding-top: 0.3125rem;
+            padding-bottom: 0.3125rem;
+        }
+    }
+
+    @media (max-width: 320px) {
+
+        /* Bootstrap override */
+        .navbar-brand {
+            font-size: 1rem;
+        }
+
+        /* Custom */
+        .search-btn {
+            padding-top: 2px;
+            width: 3rem;
         }
     }
 </style>

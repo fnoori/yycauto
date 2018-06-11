@@ -13,20 +13,26 @@
                 class="mb-2">
 
                 <div class="card-text">
-                    <div class="quick-spec-titles">
-                        <div>Kilometres</div>
-                        <div>Fuel Type</div>
-                        <div>Transmission</div>
-                    </div>
                     <div class="quick-spec-values">
-                        <div>{{curr.kilometres}}</div>
-                        <div class="gas-value">{{curr.fuelType}}</div>
-                        <div>{{curr.transmission}}</div>
+                        <div>
+                            {{curr.kilometres}} 
+                            <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                        </div>
+                        <div class="gas-value">
+                            {{curr.fuelType}}
+                            <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
+                        </div>
+                        <div>
+                            {{curr.transmission}}
+                            <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                        </div>
                     </div>
                 </div>
 
-                <b-button href="#" class="card-btn">See Details</b-button>
-                <b-button href="#" class="card-btn">Contact</b-button>
+                <div class="contact-btns">
+                    <b-button href="#" class="card-btn">See Details</b-button>
+                    <b-button href="#" class="card-btn">Contact</b-button>
+                </div>
                 <div slot="footer" class="card-footer-content">
                     <a :href="curr.locationLink" target="_blank">
                         {{ curr.locationName }}
@@ -50,7 +56,7 @@
                 items: [
                     { 
                         title: 'Honda Civic', 
-                        price: '23,000',
+                        price: '$23,000',
                         kilometres: '1,200',
                         fuelType: 'Gas',
                         transmission: 'Auto',
@@ -59,7 +65,7 @@
                     },
                     { 
                         title: 'Toyota Corola', 
-                        price: '22,000',
+                        price: '$22,000',
                         kilometres: '1,100',
                         fuelType: 'Gas',
                         transmission: 'Manual',
@@ -124,6 +130,10 @@
         align-items: center;
         background-color: #bdbdbd;
     }
+    .quick-specs-icon {
+        width: 0.7rem;
+        margin-bottom: 0.2rem;        
+    }
     .quick-spec-values div {
         display: inline-block;
         width: 33%;
@@ -144,6 +154,9 @@
         position: absolute;
         height: 20px;
         left: 0;
+    }
+    .contact-btns {
+        float: right;
     }
     .card-btn {
         background-color: #f44336;
@@ -177,5 +190,14 @@
     .card-footer-content a:hover {
         text-decoration: none;
         color: black;
+    }
+
+    @media (max-width: 991px) {
+    }
+    
+    @media (max-width: 414px) {
+        .quick-spec-titles {
+            font-size: 3vw;
+        }
     }
 </style>

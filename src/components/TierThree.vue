@@ -1,6 +1,6 @@
 <template>
     <div>
-        Tier three
+        
     </div>
 </template>
 

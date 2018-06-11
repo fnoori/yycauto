@@ -28,6 +28,9 @@
 <style scoped>
     .home {
         height: 41.2rem;
-        background-color: lightgray;
+    }
+    .container-fluid {
+        padding-right: 0;
+        padding-left: 0;
     }
 </style>

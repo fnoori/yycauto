@@ -29,6 +29,7 @@
 </script>
 
 <style>
+    /* Base attributes */
     body {
         font-family: 'Quicksand', sans-serif;
     }
@@ -37,5 +38,15 @@
     button,
     span {
         border-radius: 0px !important;
+    }
+
+    /* Bootstrap */
+    .card {
+        border: none !important;
+        border-radius: 0 !important;
+    }
+
+    .card-img-top {
+        border-radius: 0 !important;
     }
 </style>

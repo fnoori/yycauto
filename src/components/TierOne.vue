@@ -15,8 +15,11 @@
                 <div class="card-text">
                     <div class="quick-spec-values">
                         <div>
+                            <!--
                             {{curr.kilometres}} 
                             <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                            -->
+                            <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                         </div>
                         <div class="gas-value">
                             {{curr.fuelType}}
@@ -133,6 +136,9 @@
     .quick-specs-icon {
         width: 0.7rem;
         margin-bottom: 0.2rem;        
+    }
+    .new-vehicle-icon {
+        width: 1.8rem;
     }
     .quick-spec-values div {
         display: inline-block;

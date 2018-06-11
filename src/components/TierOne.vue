@@ -2,8 +2,8 @@
     <div class="tier-one">
         <b-card-group class="tier-one-card" v-for="curr in items" v-bind:key="curr.message">
             <b-card
-                title="Card Title"
-                sub-title="$42,000"
+                :title="curr.title"
+                :sub-title="curr.price"
                 img-src="./static/2017-corolla.jpg"
                 img-alt="Image"
                 img-top
@@ -11,24 +11,29 @@
                 footer-tag="footer"
                 style="max-width: 20rem;"
                 class="mb-2">
-            <div class="card-text">
-                <div class="trans">
-                    {{curr.message}}
-                </div>
-                <div class="kilometres">
 
+                <div class="card-text">
+                    <div class="quick-spec-titles">
+                        <div>Kilometres</div>
+                        <div>Fuel Type</div>
+                        <div>Transmission</div>
+                    </div>
+                    <div class="quick-spec-values">
+                        <div>{{curr.kilometres}}</div>
+                        <div class="gas-value">{{curr.fuelType}}</div>
+                        <div>{{curr.transmission}}</div>
+                    </div>
                 </div>
-                <div class="fuel-type">
 
-                </div>
-            </div>
                 <b-button href="#" class="card-btn">See Details</b-button>
                 <b-button href="#" class="card-btn">Contact</b-button>
                 <div slot="footer" class="card-footer-content">
-                    {{ dealershipLocation }}
-                    <i class="material-icons">
-                        location_on
-                    </i>
+                    <a :href="curr.locationLink" target="_blank">
+                        {{ curr.locationName }}
+                        <i class="material-icons">
+                            location_on
+                        </i>
+                    </a>
                 </div>
             </b-card>
         </b-card-group>
@@ -43,8 +48,24 @@
                 dealershipLocation: '123 ABC St. NW',
 
                 items: [
-                    { message: 'Foo' },
-                    { message: 'Bar' }
+                    { 
+                        title: 'Honda Civic', 
+                        price: '23,000',
+                        kilometres: '1,200',
+                        fuelType: 'Gas',
+                        transmission: 'Auto',
+                        locationLink: 'http://maps.google.com/?q=Village Honda',
+                        locationName: 'Village Honda'
+                    },
+                    { 
+                        title: 'Toyota Corola', 
+                        price: '22,000',
+                        kilometres: '1,100',
+                        fuelType: 'Gas',
+                        transmission: 'Manual',
+                        locationLink: 'http://maps.google.com/?q=Country Hills Toyota',
+                        locationName: 'Country Hills Toyota'
+                    }
                 ]
             }
         },
@@ -63,6 +84,7 @@
     }
     .card-text {
         margin-bottom: 0.5rem;
+        text-align: center;
     }
     .btn {
         border: none;
@@ -81,6 +103,47 @@
     .tier-one-card {
         display: inline-block;
         margin: 0 0.5rem;
+    }
+    .quick-spec-titles {
+        display: flex;
+        font-weight: 800;
+        text-align: center;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+    .quick-spec-titles div {
+        display: inline-block;
+        width: 33%;
+    }
+    .quick-spec-values {
+        display: flex;
+        text-align: center;
+        font-size: 0.9rem;
+        width: 100%;
+        height: 3rem;
+        align-items: center;
+        background-color: #bdbdbd;
+    }
+    .quick-spec-values div {
+        display: inline-block;
+        width: 33%;
+    }
+    .gas-value {
+        position: relative;
+    }
+    .gas-value:after {
+        content: '';
+        border-right: 1px solid rgba(0, 0, 0, 1);
+        position: absolute;
+        height: 20px;
+        right: 0;
+    }
+    .gas-value:before {
+        content: '';
+        border-right: 1px solid rgba(0, 0, 0, 1);
+        position: absolute;
+        height: 20px;
+        left: 0;
     }
     .card-btn {
         background-color: #f44336;
@@ -109,5 +172,10 @@
     }
     .card-footer-content i {
         font-size: inherit;
+    }
+    .card-footer-content a,
+    .card-footer-content a:hover {
+        text-decoration: none;
+        color: black;
     }
 </style>

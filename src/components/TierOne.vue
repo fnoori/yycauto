@@ -9,7 +9,7 @@
                 img-top
                 tag="article"
                 footer-tag="footer"
-                style="max-width: 20rem;"
+                style="max-width: 18rem;"
                 class="mb-2">
 
                 <div class="card-text">

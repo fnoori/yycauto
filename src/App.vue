@@ -32,6 +32,7 @@
     /* Base attributes */
     body {
         font-family: 'Quicksand', sans-serif;
+        -webkit-overflow-scrolling: touch;
     }
     div,
     input,

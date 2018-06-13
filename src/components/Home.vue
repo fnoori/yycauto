@@ -28,9 +28,16 @@
 <style scoped>
     .home {
         height: 41.2rem;
+        margin-top: 3.5rem;
     }
     .container-fluid {
         padding-right: 0;
         padding-left: 0;
+    }
+
+    @media (max-width: 767px) {
+        .home {
+            margin-top: 5.4rem;
+        }
     }
 </style>

@@ -20,7 +20,7 @@
                     </div>
                     <div class="card-text">
                         <div class="quick-spec-values">
-                            <div>
+                            <div class="other-spec-value">
                                 <div v-if="curr.kilometres == 0">
                                     <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                 </div>
@@ -33,7 +33,7 @@
                                 {{curr.fuelType}}
                                 <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                             </div>
-                            <div>
+                            <div class="other-spec-value">
                                 {{curr.transmission}}
                                 <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
                             </div>
@@ -69,7 +69,7 @@
                     { 
                         title: 'Honda Civic', 
                         price: '$23,000',
-                        kilometres: '1,200',
+                        kilometres: '100,219',
                         fuelType: 'Gas',
                         transmission: 'Auto',
                         locationLink: 'http://maps.google.com/?q=Village Honda',
@@ -204,6 +204,7 @@
     .quick-spec-values div {
         display: inline-block;
         width: 33%;
+        text-align: center;
     }
     .gas-value {
         position: relative;
@@ -221,6 +222,9 @@
         position: absolute;
         height: 20px;
         left: 0;
+    }
+    .other-spec-value div {
+        width: 100%;
     }
     .contact-btns {
         float: right;

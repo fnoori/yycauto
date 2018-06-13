@@ -34,6 +34,8 @@ module.exports = {
     'no-unused-vars': 'off',
     'indent': 'off',
     'no-trailing-spaces': 'off',
-    'no-multiple-empty-lines': 'off'
+    'no-multiple-empty-lines': 'off',
+    'block-spacing': 'off',
+    'space-before-blocks': 'off',
   }
 }

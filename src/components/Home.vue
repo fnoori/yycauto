@@ -27,7 +27,6 @@
 
 <style scoped>
     .home {
-        height: 41.2rem;
         margin-top: 3.5rem;
     }
     .container-fluid {

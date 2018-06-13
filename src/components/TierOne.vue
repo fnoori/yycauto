@@ -3,9 +3,6 @@
         <b-card-group class="tier-one-card" v-for="curr in items" v-bind:key="curr.message">
             <b-card
                 no-body
-                display-none
-                :title="curr.title"
-                :sub-title="curr.price"
                 :img-src="curr.image"
                 img-alt="Image"
                 img-top
@@ -46,7 +43,10 @@
                     </div>
                 </div>
                 <div slot="footer" class="card-footer-content">
-                    <a :href="curr.locationLink" target="_blank">
+                    <a href="#" class="dealership-page">
+                        <img src="../../static/dealership_logo.png" class="card-logo">
+                    </a>
+                    <a :href="curr.locationLink" target="_blank" class="location-link">
                         {{ curr.locationName }}
                         <i class="material-icons">
                             location_on
@@ -139,6 +139,11 @@
 </script>
 
 <style scoped>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
     /* Bootstrap */
     .card {
         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -177,6 +182,11 @@
     }
     .card-price {
         color: grey;
+    }
+    .card-logo {
+        width: 3rem;
+        float: left;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     }
     .quick-spec-titles {
         display: flex;
@@ -233,6 +243,9 @@
     .contact-btns {
         float: right;
     }
+    .contact-btns a {
+        color: white;
+    }
     .card-btn {
         background-color: #f44336;
     }
@@ -256,15 +269,18 @@
         font-size: 0.8rem;
     }
     .card-footer-content {
-        float: right;
+        
     }
     .card-footer-content i {
         font-size: inherit;
     }
-    .card-footer-content a,
-    .card-footer-content a:hover {
-        text-decoration: none;
-        color: black;
+    .location-link,
+    .location-link:hover {
+        float: right;
+    }
+    .dealership-page {
+        float: left;
+        margin-top: 0.1rem;
     }
 
     @media (max-width: 480px) {

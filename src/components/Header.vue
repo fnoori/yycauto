@@ -85,6 +85,7 @@ export default {
     }
     .navbar {
         background-color: #f44336 !important;
+        padding: 0.5rem .5rem;
     }
     .navbar a,
     .navbar a:hover {

@@ -2,6 +2,8 @@
     <div class="tier-one">
         <b-card-group class="tier-one-card" v-for="curr in items" v-bind:key="curr.message">
             <b-card
+                no-body
+                display-none
                 :title="curr.title"
                 :sub-title="curr.price"
                 img-src="./static/2017-corolla.jpg"
@@ -9,32 +11,37 @@
                 img-top
                 tag="article"
                 footer-tag="footer"
-                style="max-width: 18rem;"
                 class="mb-2">
 
-                <div class="card-text">
-                    <div class="quick-spec-values">
-                        <div>
-                            <!--
-                            {{curr.kilometres}} 
-                            <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
-                            -->
-                            <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
-                        </div>
-                        <div class="gas-value">
-                            {{curr.fuelType}}
-                            <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
-                        </div>
-                        <div>
-                            {{curr.transmission}}
-                            <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                <div class="card-body">
+                    <div class="card-title">
+                        <div class="card-name">{{curr.title}}</div>
+                        <div class="card-price">{{curr.price}}</div>
+                    </div>
+                    <div class="card-text">
+                        <div class="quick-spec-values">
+                            <div>
+                                <!--
+                                {{curr.kilometres}} 
+                                <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                                -->
+                                <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                            </div>
+                            <div class="gas-value">
+                                {{curr.fuelType}}
+                                <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
+                            </div>
+                            <div>
+                                {{curr.transmission}}
+                                <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="contact-btns">
-                    <b-button href="#" class="card-btn">See Details</b-button>
-                    <b-button href="#" class="card-btn">Contact</b-button>
+                    <div class="contact-btns">
+                        <b-button href="#" class="card-btn">See Details</b-button>
+                        <b-button href="#" class="card-btn">Contact</b-button>
+                    </div>
                 </div>
                 <div slot="footer" class="card-footer-content">
                     <a :href="curr.locationLink" target="_blank">
@@ -87,9 +94,10 @@
     /* Bootstrap */
     .card {
         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+        max-width: 18rem;
     }
     .card-body {
-        padding: 0.8rem;
+        padding: 0.5rem;
     }
     .card-text {
         margin-bottom: 0.5rem;
@@ -112,6 +120,15 @@
     .tier-one-card {
         display: inline-block;
         margin: 0 0.5rem;
+    }
+    .card-title {
+        margin-bottom: 0.5rem;
+    }
+    .card-name {
+        font-size: 1.2rem;
+    }
+    .card-price {
+        color: grey;
     }
     .quick-spec-titles {
         display: flex;
@@ -198,7 +215,27 @@
         color: black;
     }
 
-    @media (max-width: 991px) {
+    @media (max-width: 480px) {
+        /* Bootstrap */
+        .card {
+            box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+            max-width: 14rem;
+        }
+
+        /* Custom */
+        .card-name {
+            font-size: 1rem;
+        }
+        .card-price {
+            font-size: 0.8rem;
+        }
+        .contact-btns a {
+            font-size: 0.8rem !important;
+        }
+        .quick-spec-values {
+            font-size: 0.8rem;
+            height: 2.7rem;
+        }
     }
     
     @media (max-width: 414px) {

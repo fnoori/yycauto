@@ -6,7 +6,7 @@
                 display-none
                 :title="curr.title"
                 :sub-title="curr.price"
-                img-src="./static/2017-corolla.jpg"
+                :img-src="curr.image"
                 img-alt="Image"
                 img-top
                 tag="article"
@@ -21,11 +21,13 @@
                     <div class="card-text">
                         <div class="quick-spec-values">
                             <div>
-                                <!--
-                                {{curr.kilometres}} 
-                                <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
-                                -->
-                                <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                                <div v-if="curr.kilometres == 0">
+                                    <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                                </div>
+                                <div v-else>
+                                    {{curr.kilometres}} 
+                                    <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                                </div>
                             </div>
                             <div class="gas-value">
                                 {{curr.fuelType}}
@@ -71,16 +73,58 @@
                         fuelType: 'Gas',
                         transmission: 'Auto',
                         locationLink: 'http://maps.google.com/?q=Village Honda',
-                        locationName: 'Village Honda'
+                        locationName: 'Village Honda',
+                        image: 'https://fitzdecarts.com/wp-content/uploads/2018/04/honda-civic-456.jpg'
                     },
                     { 
                         title: 'Toyota Corola', 
                         price: '$22,000',
-                        kilometres: '1,100',
+                        kilometres: '0',
                         fuelType: 'Gas',
                         transmission: 'Manual',
                         locationLink: 'http://maps.google.com/?q=Country Hills Toyota',
-                        locationName: 'Country Hills Toyota'
+                        locationName: 'Country Hills Toyota',
+                        image: 'http://autowpaper.com/images/toyota-corolla-2015-sport-2.jpg'
+                    },
+                    { 
+                        title: 'Volkwagon Golf GTI', 
+                        price: '$35,000',
+                        kilometres: '2,000',
+                        fuelType: 'Gas',
+                        transmission: 'Auto',
+                        locationLink: 'http://maps.google.com/?q=Northland Volkswagon',
+                        locationName: 'Northland Volkswagon',
+                        image: 'https://www.conceptcarz.com/images/Volkswagen/2011-Volkswagen-Golf-GTi-Edition-35-01.jpg'
+                    },
+                    { 
+                        title: 'Ford Focus RS', 
+                        price: '$30,000',
+                        kilometres: '0',
+                        fuelType: 'Gas',
+                        transmission: 'Manual',
+                        locationLink: 'http://maps.google.com/?q=Northstar Ford',
+                        locationName: 'Northstar Ford',
+                        image: 'https://icdn-3.motor1.com/images/mgl/J2jkJ/s1/2016-ford-focus-rs.jpg'
+                    },
+                    { 
+                        title: 'Dodge Ram', 
+                        price: '$30,000',
+                        kilometres: '12,000',
+                        fuelType: 'Diesel',
+                        transmission: 'Auto',
+                        locationLink: 'http://maps.google.com/?q=Calgary Ford',
+                        locationName: 'Calgary Ford',
+                        image: 'https://images5.alphacoders.com/892/892407.jpg'
+                    },
+                    { 
+                        title: 'Nissan Sentra Spec-V', 
+                        price: '$40,000',
+                        kilometres: '0',
+                        fuelType: 'Gas',
+                        transmission: 'Manual',
+                        locationLink: 'http://maps.google.com/?q=Cochrane Nissan',
+                        locationName: 'Cochrane Nissan',
+                        image: 'https://i.pinimg.com/originals/c2/57/b8/c257b847e55fd0572fb035ec04bb3a1e.jpg'
                     }
                 ]
             }
@@ -152,7 +196,7 @@
     }
     .quick-specs-icon {
         width: 0.7rem;
-        margin-bottom: 0.2rem;        
+        margin-bottom: 0.15rem;   
     }
     .new-vehicle-icon {
         width: 1.8rem;

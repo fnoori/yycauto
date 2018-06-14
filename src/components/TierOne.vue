@@ -217,6 +217,7 @@
     .location-link,
     .location-link:hover {
         float: right;
+        font-size: 0.8rem;
     }
     .dealership-page {
         float: left;

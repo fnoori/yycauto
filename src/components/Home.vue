@@ -1,8 +1,8 @@
 <template>
     <div class="home container-fluid">
         <tier-one v-bind:carDetails="items"></tier-one>
+        <hr/>
         <tier-two v-bind:carDetails="items"></tier-two>
-        <tier-three></tier-three>
     </div>
 </template>
 
@@ -19,6 +19,7 @@
         },
         data() {
             return {
+
                 items: [
                     { 
                         title: 'Honda Civic', 
@@ -94,6 +95,10 @@
     .container-fluid {
         padding-right: 0;
         padding-left: 0;
+    }
+
+    .sort-area {
+
     }
 
     @media (max-width: 767px) {

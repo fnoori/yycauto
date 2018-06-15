@@ -36,11 +36,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="contact-btns">
-                        <b-button href="#" class="card-btn">See Details</b-button>
-                        <b-button href="#" class="card-btn">Contact</b-button>
-                    </div>
                 </div>
                 <div slot="footer" class="card-footer-content">
                     <a href="#" class="dealership-page">
@@ -88,6 +83,10 @@
     .card {
         box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
         max-width: 18rem;
+    }
+    .card:hover {
+        background-color: #eeeeee;
+        cursor: pointer;
     }
     .card-body {
         padding: 0.5rem;
@@ -180,12 +179,6 @@
     .other-spec-value div {
         width: 100%;
     }
-    .contact-btns {
-        float: right;
-    }
-    .contact-btns a {
-        color: white;
-    }
     .card-btn {
         background-color: #f44336;
     }
@@ -238,9 +231,6 @@
         .card-price {
             font-size: 0.8rem;
         }
-        .contact-btns a {
-            font-size: 0.8rem !important;
-        }
         .quick-spec-values {
             font-size: 0.8rem;
             height: 2.7rem;
@@ -251,5 +241,8 @@
         .quick-spec-titles {
             font-size: 3vw;
         }
+    }
+
+    @media (max-width: 400px) {
     }
 </style>

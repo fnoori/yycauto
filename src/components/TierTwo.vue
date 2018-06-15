@@ -1,5 +1,7 @@
 <template>
     <div id="tierTwo" class="tier-two">
+        <b-form-select v-model="selected" :options="options" class="sort-options">
+        </b-form-select>
         <div class="tier-two-card" v-for="curr in carDetails" v-bind:key="curr.message">
             <img :src="curr.image" alt="">
             <div class="tier-two-card-body">
@@ -28,10 +30,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-btns">
-                    <b-button href="#" class="card-btn">See Details</b-button>
-                    <b-button href="#" class="card-btn">Contact</b-button>
-                </div>
             </div>
             <div class="tier-two-card-footer">
                 <a href="#">
@@ -58,7 +56,16 @@
         },
         components: {},
         data() {
-            return {}
+            return {
+                selected: null,
+                options: [
+                    {value: null, text: 'Sort By'},
+                    {value: 'lowHigh', text: 'Price: Low to High'},
+                    {value: 'highLow', text: 'Price: High to Low'},
+                    {value: 'makeAZ', text: 'Make: A to Z'},
+                    {value: 'makeZA', text: 'Make: Z to A'}
+                ]
+            }
         },
         beforeMount() {
             this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
@@ -78,11 +85,27 @@
         border: none;
         border-radius: 0;
     }
-
-    .tier-two-card {
+    .custom-select:focus {
+        border: 1px solid #ced4da;
+    }
+    
+    /* Custom */
+    .sort-options {
+        width: 25%;
+        margin-left: 28.6rem;
+    }
+    .tier-two {
         width: 38rem;
         margin: 1rem auto;
-        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+    }
+    .tier-two-card {
+        width: 100%;
+        margin: 1rem 0;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+    }
+    .tier-two-card:hover {
+        background-color: #eeeeee;
+        cursor: pointer;
     }
     .tier-two-card img {
         width: 40%;
@@ -100,14 +123,14 @@
         padding: 0.1rem 0.4rem;
     }
     .tier-two-card-text {
-        margin-top: 0.1rem;
+        margin-top: 1rem;
     }
     .quick-spec-values {
         display: flex;
         text-align: center;
         font-size: 0.9rem;
         width: 100%;
-        height: 2.8rem;
+        height: 3rem;
         align-items: center;
         background-color: #bdbdbd;
     }
@@ -142,13 +165,6 @@
     }
     .other-spec-value div {
         width: 100%;
-    }
-    .contact-btns {
-        float: right;
-        margin-top: 0.24rem;
-    }
-    .contact-btns a {
-        color: white;
     }
     .card-btn {
         background-color: #f44336;
@@ -186,4 +202,91 @@
         display: inline-block;
         font-size: 1rem;
     }
+
+    @media (max-width: 630px) {
+        .btn {
+            display: inline;
+        }
+        .tier-two {
+            width: 30rem;
+        }
+        .tier-two-card {
+            width: 100%;
+        }
+        .sort-options {
+            margin-left: 22.6rem;
+        }
+        .tier-two-card-name {
+            font-size: 1rem;
+        }
+        .tier-two-card-text {
+            margin-top: 0.1rem;
+        }
+        .tier-two-card-price {
+            font-size: 0.8rem;
+        }
+        .quick-spec-values {
+            height: 2.5rem;
+        }
+        .new-vehicle-icon {
+            width: 1.1rem !important;
+        }
+        .quick-spec-values div {
+            font-size: 0.7rem;
+        }
+        .card-btn {
+            font-size: 0.6rem;
+            height: 1rem;
+        }
+    }
+
+    @media (max-width: 500px) {
+        .tier-two {
+            width: 90vw;
+        }
+        .sort-options {
+            margin-left: 68vw;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .sort-options {
+            margin-left: 66vw;
+            width: 24vw;
+        }
+        .tier-two-card-name {
+            font-size: 4vw;
+        }
+        .tier-two-card-price {
+            font-size: 3vw;
+        }
+        .quick-spec-values {
+            height: 8vw;
+        }
+        .new-vehicle-icon {
+            width: 5vw !important;
+        }
+        .quick-spec-values div {
+            font-size: 3vw;
+        }
+        .gas-value:before {
+            content: '';
+            border-right: 1px solid rgba(0, 0, 0, 1);
+            position: absolute;
+            height: 5vw;
+            left: 0;
+        }
+        .gas-value:after {
+            content: '';
+            border-right: 1px solid rgba(0, 0, 0, 1);
+            position: absolute;
+            height: 5vw;
+            left: 0;
+        }
+    }
+     @media (max-width: 320px) {
+        .tier-two-card-text {
+            margin-top: 0.1rem;
+        }
+     }
 </style>

@@ -207,6 +207,7 @@
     }
     .location-link div {
         display: inline-block;
+        text-overflow: ellipsis;
     }
     .location-link i {
         display: inline-block;
@@ -230,7 +231,7 @@
             font-size: 1rem;
         }
         .tier-two-card-text {
-            margin-top: 0.1rem;
+            margin-top: 0.1rem !important;
         }
         .tier-two-card-price {
             font-size: 0.8rem;
@@ -259,7 +260,7 @@
         }
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 418px) {
         .sort-options {
             margin-left: 66vw;
             width: 24vw;

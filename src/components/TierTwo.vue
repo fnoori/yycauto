@@ -258,7 +258,8 @@
             font-size: 4vw;
         }
         .tier-two-card-price {
-            font-size: 3vw;
+            font-size: 4vw;
+            margin-top: -0.3rem;
         }
         .quick-spec-values {
             height: 8vw;

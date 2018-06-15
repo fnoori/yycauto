@@ -89,21 +89,11 @@
 </script>
 
 <style scoped>
-    .home {
-        margin-top: 3.5rem;
-    }
     .container-fluid {
         padding-right: 0;
         padding-left: 0;
     }
 
-    .sort-area {
-
-    }
-
     @media (max-width: 767px) {
-        .home {
-            margin-top: 5.4rem;
-        }
     }
 </style>

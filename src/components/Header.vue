@@ -1,5 +1,5 @@
 <template>
-    <b-navbar fixed="top" toggleable="md" class="app-navbar">
+    <b-navbar toggleable="md" class="app-navbar">
 
         <b-navbar-brand>
             <a href="#">YYC Automotives</a>

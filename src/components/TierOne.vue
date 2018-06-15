@@ -86,7 +86,9 @@
 </script>
 
 <style scoped>
-    a {
+    a,
+    a:focus,
+    a:active {
         text-decoration: none;
         color: black;
     }

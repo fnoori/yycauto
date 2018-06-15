@@ -2,10 +2,10 @@
     <b-navbar toggleable="md" class="app-navbar">
 
         <b-navbar-brand>
-            <a href="#">YYC Automotives</a>
-            <a href="#">
+            <router-link to="/">YYC Automotives</router-link>
+            <router-link to="/">
                 <img src="https://placekitten.com/g/30/30" alt="kitteh" class="sponsor-logo">
-            </a>
+            </router-link>
         </b-navbar-brand>
 
         <!-- Right aligned nav items -->

@@ -1,4 +1,8 @@
 export default {
+    extractVehicleToSee(state, data) {
+        state.seeVehicleDetail = data;
+    },
+
     login(state) {
         state.pending = true;
     },

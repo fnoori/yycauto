@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 export default {
+    extractVehicleToSee({ commit }, data) {
+        commit('extractVehicleToSee', data);
+    },
+
     login({ commit }, creds) {
         commit('login');
         return new Promise(resolve => {

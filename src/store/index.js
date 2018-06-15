@@ -8,7 +8,8 @@ import mutations from './mutations';
 Vue.use(Vuex);
 
 const state = {
-    isLoggedIn: !!localStorage.getItem('token')
+    isLoggedIn: !!localStorage.getItem('token'),
+    seeVehicleDetail: null
 };
 
 export default new Vuex.Store({

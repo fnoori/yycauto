@@ -2,35 +2,37 @@
     <div id="tierTwo" class="tier-two">
         <b-form-select v-model="selected" :options="options" class="sort-options">
         </b-form-select>
-        <div class="tier-two-card" v-for="curr in carDetails" v-bind:key="curr.message">
-            <img :src="curr.image" alt="">
-            <div class="tier-two-card-body">
-                <div class="tier-two-card-title">
-                    <div class="tier-two-card-name">{{curr.title}}</div>
-                    <div class="tier-two-card-price">{{curr.price}}</div>
-                </div>
-                <div class="tier-two-card-text">
-                    <div class="quick-spec-values">
-                        <div class="other-spec-value">
-                            <div v-if="curr.kilometres == 0">
-                                <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+        <div v-on:click="extractVehicleToSee(curr)" class="tier-two-card" v-for="curr in carDetails" v-bind:key="curr.message">
+            <router-link to="/vehicle_detail">
+                <img :src="curr.image" alt="">
+                <div class="tier-two-card-body">
+                    <div class="tier-two-card-title">
+                        <div class="tier-two-card-name">{{curr.title}}</div>
+                        <div class="tier-two-card-price">{{curr.price}}</div>
+                    </div>
+                    <div class="tier-two-card-text">
+                        <div class="quick-spec-values">
+                            <div class="other-spec-value">
+                                <div v-if="curr.kilometres == 0">
+                                    <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                                </div>
+                                <div v-else>
+                                    {{curr.kilometres}} 
+                                    <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                                </div>
                             </div>
-                            <div v-else>
-                                {{curr.kilometres}} 
-                                <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                            <div class="gas-value">
+                                {{curr.fuelType}}
+                                <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                             </div>
-                        </div>
-                        <div class="gas-value">
-                            {{curr.fuelType}}
-                            <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
-                        </div>
-                        <div class="other-spec-value">
-                            {{curr.transmission}}
-                            <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                            <div class="other-spec-value">
+                                {{curr.transmission}}
+                                <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </router-link>
             <div class="tier-two-card-footer">
                 <a href="#">
                     <img src="../../static/dealership_logo.png" alt="" class="card-logo">
@@ -47,6 +49,8 @@
 </template>
 
 <script>
+    import {mapActions} from 'vuex'
+
     export default {
         props: {
             carDetails: {
@@ -70,7 +74,11 @@
         beforeMount() {
             this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
         },
-        methods: {}
+        methods: {
+            ...mapActions([
+                'extractVehicleToSee'
+            ])
+        }
     }
 </script>
 

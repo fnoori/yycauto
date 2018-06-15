@@ -1,7 +1,8 @@
 <template>
     <div id="app">
         <app-header></app-header>
-        <component v-bind:is="mainContent"></component>
+        <router-view>
+        </router-view>
         <app-footer></app-footer>
     </div>
 </template>
@@ -11,19 +12,23 @@
     import Footer from "./components/Footer"
     import Home from "./components/Home"
 
+    import {mapGetters} from 'vuex'
+
     export default {
         name: "app",
         components: {
             'app-header': Header,
-            'app-footer': Footer,
-            'app-home': Home
+            'app-footer': Footer
         },
         data() {
         return {
-            mainContent: 'app-home' 
         }
     },
-
+    computed: {
+        ...mapGetters([
+            'getVehicleDetails'
+        ])
+    },
     methods: {}
     }
 </script>

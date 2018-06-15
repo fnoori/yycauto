@@ -1,59 +1,65 @@
 <template>
     <div id="tierOne" class="tier-one">
-        <b-card-group class="tier-one-card" v-for="curr in carDetails" v-bind:key="curr.message">
-            <b-card
-                no-body
-                :img-src="curr.image"
-                img-alt="Image"
-                img-top
-                tag="article"
-                footer-tag="footer"
-                class="mb-2">
+        <b-card-group v-on:click="extractVehicleToSee(curr)" class="tier-one-card" v-for="curr in carDetails" v-bind:key="curr.message">
+            <router-link to="/vehicle_detail">
+                <b-card
+                    no-body
+                    :img-src="curr.image"
+                    img-alt="Image"
+                    img-top
+                    tag="article"
+                    footer-tag="footer"
+                    class="mb-2">
 
-                <div class="card-body">
-                    <div class="card-title">
-                        <div class="card-name">{{curr.title}}</div>
-                        <div class="card-price">{{curr.price}}</div>
-                    </div>
-                    <div class="card-text">
-                        <div class="quick-spec-values">
-                            <div class="other-spec-value">
-                                <div v-if="curr.kilometres == 0">
-                                    <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <div class="card-name">{{curr.title}}</div>
+                            <div class="card-price">{{curr.price}}</div>
+                        </div>
+                        <div class="card-text">
+                            <div class="quick-spec-values">
+                                <div class="other-spec-value">
+                                    <div v-if="curr.kilometres == 0">
+                                        <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                                    </div>
+                                    <div v-else>
+                                        {{curr.kilometres}} 
+                                        <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                                    </div>
                                 </div>
-                                <div v-else>
-                                    {{curr.kilometres}} 
-                                    <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                                <div class="gas-value">
+                                    {{curr.fuelType}}
+                                    <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                                 </div>
-                            </div>
-                            <div class="gas-value">
-                                {{curr.fuelType}}
-                                <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
-                            </div>
-                            <div class="other-spec-value">
-                                {{curr.transmission}}
-                                <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                                <div class="other-spec-value">
+                                    {{curr.transmission}}
+                                    <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div slot="footer" class="card-footer-content">
-                    <a href="#" class="dealership-page">
-                        <img src="../../static/dealership_logo.png" class="card-logo">
-                    </a>
-                    <a :href="curr.locationLink" target="_blank" class="location-link">
-                        {{ curr.locationName }}
-                        <i class="material-icons">
-                            location_on
-                        </i>
-                    </a>
-                </div>
-            </b-card>
+                    <div slot="footer" class="card-footer-content">
+                        <a href="#" class="dealership-page">
+                            <img src="../../static/dealership_logo.png" class="card-logo">
+                        </a>
+                        <a :href="curr.locationLink" target="_blank" class="location-link">
+                            {{ curr.locationName }}
+                            <i class="material-icons">
+                                location_on
+                            </i>
+                        </a>
+                    </div>
+                </b-card>
+            </router-link>
         </b-card-group>
     </div>
 </template>
 
 <script>
+    import router from 'vue-router'
+
+    import {mapActions} from 'vuex'
+
     export default {
         props: {
             carDetails: {
@@ -69,7 +75,13 @@
         beforeMount() {
             this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
         },
-        methods: {}
+        computed: {
+        },
+        methods: {
+            ...mapActions([
+                'extractVehicleToSee'
+            ])
+        }
     }
 </script>
 

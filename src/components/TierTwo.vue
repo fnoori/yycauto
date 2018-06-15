@@ -21,19 +21,22 @@
                             <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
                         </div>
                     </div>
-                    <div class="tier-two-card-footer">
-                        <a href="#">
-                            <img src="../../static/dealership_logo.png" alt="" class="card-logo">
-                        </a>
-                        
-                        <a href="#" target="_blank" class="">
-                            Some Dealership
-                            <i class="material-icons">
-                                location_on
-                            </i>
-                        </a>
-                    </div>
                 </div>
+                <div class="contact-btns">
+                    <b-button href="#" class="card-btn">See Details</b-button>
+                    <b-button href="#" class="card-btn">Contact</b-button>
+                </div>
+            </div>
+            <div class="tier-two-card-footer">
+                <a href="#">
+                    <img src="../../static/dealership_logo.png" alt="" class="card-logo">
+                </a>
+                <a href="#" target="_blank" class="location-link">
+                    <div>Dealership Name</div>
+                    <i class="material-icons">
+                        location_on
+                    </i>
+                </a>
             </div>
         </div>
     </div>
@@ -54,6 +57,12 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    /* Bootstrap */
+    .btn {
+        border: none;
+        border-radius: 0;
     }
 
     .tier-two-card {
@@ -84,7 +93,7 @@
         text-align: center;
         font-size: 0.9rem;
         width: 100%;
-        height: 3rem;
+        height: 2.8rem;
         align-items: center;
         background-color: #bdbdbd;
     }
@@ -120,7 +129,47 @@
     .other-spec-value div {
         width: 100%;
     }
+    .contact-btns {
+        float: right;
+        margin-top: 0.24rem;
+    }
+    .contact-btns a {
+        color: white;
+    }
+    .card-btn {
+        background-color: #f44336;
+        height: 2rem;
+        font-size: 0.9rem;
+    }
+    .card-btn:hover {
+        background-color: #D81E0F;
+    }
+    .card-btn:active,
+    .card-btn:focus {
+        background-color: #D81E0F !important;
+        border-color: white !important;
+        box-shadow: none !important;
+    }
+    .tier-two-card-footer {
+        background-color: rgba(0, 0, 0, 0.03);
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+        padding: 0.13rem 0.4rem;
+        height: 2rem;
+    }
     .card-logo {
-
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+        width: 4rem !important;
+    }
+    .location-link {
+        float: right;
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
+    }
+    .location-link div {
+        display: inline-block;
+    }
+    .location-link i {
+        display: inline-block;
+        font-size: 1rem;
     }
 </style>

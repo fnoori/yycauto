@@ -45,6 +45,9 @@
     span {
         border-radius: 0px !important;
     }
+    a:hover {
+        text-decoration: none !important;
+    }
 
     /* Bootstrap */
     .card {

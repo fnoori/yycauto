@@ -89,8 +89,8 @@
     a,
     a:focus,
     a:active {
-        text-decoration: none;
-        color: black;
+        text-decoration: none !important;
+        color: black !important;
     }
 
     /* Bootstrap */

@@ -1,23 +1,29 @@
 <template>
     <div id="tierTwo" class="tier-two">
-        <div class="tier-two-card">
-            <img src="https://i.pinimg.com/originals/c2/57/b8/c257b847e55fd0572fb035ec04bb3a1e.jpg" alt="">
+        <div class="tier-two-card" v-for="curr in carDetails" v-bind:key="curr.message">
+            <img :src="curr.image" alt="">
             <div class="tier-two-card-body">
                 <div class="tier-two-card-title">
-                    <div class="tier-two-card-name">Honda Civic</div>
-                    <div class="tier-two-card-price">$23,000</div>
+                    <div class="tier-two-card-name">{{curr.title}}</div>
+                    <div class="tier-two-card-price">{{curr.price}}</div>
                 </div>
                 <div class="tier-two-card-text">
                     <div class="quick-spec-values">
                         <div class="other-spec-value">
-                            <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                            <div v-if="curr.kilometres == 0">
+                                <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
+                            </div>
+                            <div v-else>
+                                {{curr.kilometres}} 
+                                <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
+                            </div>
                         </div>
                         <div class="gas-value">
-                            Gas
+                            {{curr.fuelType}}
                             <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                         </div>
                         <div class="other-spec-value">
-                            auto
+                            {{curr.transmission}}
                             <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
                         </div>
                     </div>
@@ -31,8 +37,8 @@
                 <a href="#">
                     <img src="../../static/dealership_logo.png" alt="" class="card-logo">
                 </a>
-                <a href="#" target="_blank" class="location-link">
-                    <div>Dealership Name</div>
+                <a :href="curr.locationLink" target="_blank" class="location-link">
+                    <div>{{ curr.locationName }}</div>
                     <i class="material-icons">
                         location_on
                     </i>
@@ -44,11 +50,19 @@
 
 <script>
     export default {
+        props: {
+            carDetails: {
+                type: Array,
+                required: true
+            }
+        },
         components: {},
         data() {
             return {}
         },
-
+        beforeMount() {
+            this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
+        },
         methods: {}
     }
 </script>

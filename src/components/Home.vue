@@ -1,7 +1,7 @@
 <template>
     <div class="home container-fluid">
         <tier-one v-bind:carDetails="items"></tier-one>
-        <tier-two></tier-two>
+        <tier-two v-bind:carDetails="items"></tier-two>
         <tier-three></tier-three>
     </div>
 </template>

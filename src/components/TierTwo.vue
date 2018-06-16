@@ -12,7 +12,7 @@
                     </div>
                     <div class="tier-two-card-text">
                         <div class="quick-spec-values">
-                            <div class="other-spec-value kilometre-spec-value">
+                            <div class="other-spec-value">
                                 <div v-if="curr.kilometres == 0">
                                     <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                 </div>
@@ -260,26 +260,6 @@
         }
     }
 
-    @media (max-width: 500px) {
-        .quick-spec-values div {
-            width: 50%;
-            font-size: 2.7vw;
-        }
-        .kilometre-spec-value {
-            position: relative;
-        }
-        .kilometre-spec-value:after {
-            content: '';
-            border-right: 1px solid rgba(0, 0, 0, 1);
-            position: absolute;
-            height: 4vw;
-            right: 0;
-        }
-        .gas-value {
-            display: none !important;
-        }
-    }
-
     @media (max-width: 418px) {
         .sort-options {
             margin-left: 66vw;
@@ -297,6 +277,23 @@
         }
         .new-vehicle-icon {
             width: 5vw !important;
+        }
+        .quick-spec-values div {
+            font-size: 3vw;
+        }
+        .gas-value:before {
+            content: '';
+            border-right: 1px solid rgba(0, 0, 0, 1);
+            position: absolute;
+            height: 5vw;
+            left: 0;
+        }
+        .gas-value:after {
+            content: '';
+            border-right: 1px solid rgba(0, 0, 0, 1);
+            position: absolute;
+            height: 5vw;
+            left: 0;
         }
     }
      @media (max-width: 320px) {

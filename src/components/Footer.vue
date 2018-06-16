@@ -1,8 +1,7 @@
 <template>
     <footer>
-        YYC Automotives |
-        <a href="mailto:farzamn80@gmail.com">farzamn80@gmail.com</a> |
-        <a href="tel:1-562-867-5309">1-562-867-5309</a>
+        <a href="#">About Me</a>
+        <div>©2018 Farzam</div>
     </footer>
 </template>
 
@@ -33,25 +32,7 @@
         padding: 0.5rem 1rem;
     }
 
-    @media (max-width: 480px) {
-        footer {
-            font-size: 3.3vw;
-            padding: 0.65rem 1rem;
-        }
-    }
-
-    @media (max-width: 441px) {
-        footer {
-            font-size: 3.2vw;
-            padding: 0.65rem 1rem;
-        }
-    }
-
-    @media (max-width: 399px) {
-        footer {
-            font-size: 3.2vw;
-            padding: 0.75rem 1rem;
-            text-align: center;
-        }
+    footer a {
+        float: right;
     }
 </style>

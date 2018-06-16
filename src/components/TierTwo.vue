@@ -63,7 +63,7 @@
             return {
                 selected: null,
                 options: [
-                    {value: null, text: 'Sort By'},
+                    {value: null, text: 'Sort'},
                     {value: 'lowHigh', text: 'Price: Low to High'},
                     {value: 'highLow', text: 'Price: High to Low'},
                     {value: 'makeAZ', text: 'Make: A to Z'},

@@ -11,6 +11,8 @@
     import TierTwo from "./TierTwo"
     import TierThree from "./TierThree"
 
+    import axios from 'axios'
+
     export default {
         components: {
             'tier-one': TierOne,
@@ -19,7 +21,7 @@
         },
         data() {
             return {
-
+                lazyLoad: 0,
                 items: [
                     { 
                         title: 'Honda Civic', 
@@ -32,7 +34,7 @@
                         image: 'https://fitzdecarts.com/wp-content/uploads/2018/04/honda-civic-456.jpg'
                     },
                     { 
-                        title: 'Toyota Corola', 
+                        title: 'Toyota Corola',
                         price: '$22,000',
                         kilometres: '0',
                         fuelType: 'Gas',
@@ -84,7 +86,20 @@
                 ]
             }
         },
-        methods: {}
+        created() {
+            axios.get(process.env.API_ROUTE + 'vehicles/' + this.lazyLoad + '/10')
+            .then((response) => {
+                //console.log(response)
+                this.items = response.data
+            }).catch(err => {
+                console.log('Error', err)
+            })            
+        },
+        methods: {
+            pageInit: function() {
+                
+            }
+        }
     }
 </script>
 

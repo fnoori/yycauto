@@ -13,8 +13,8 @@
 
                     <div class="card-body">
                         <div class="card-title">
-                            <div class="card-name">{{curr.title}}</div>
-                            <div class="card-price">{{curr.price}}</div>
+                            <div class="card-name">{{curr.BasicInfo.Make}} {{curr.BasicInfo.Model}}</div>
+                            <div class="card-price">{{curr.BasicInfo.Price}}</div>
                         </div>
                         <div class="card-text">
                             <div class="quick-spec-values">
@@ -23,16 +23,16 @@
                                         <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                     </div>
                                     <div v-else>
-                                        {{curr.kilometres}} 
+                                        {{curr.BasicInfo.Kilometres}} 
                                         <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
                                     </div>
                                 </div>
                                 <div class="gas-value">
-                                    {{curr.fuelType}}
+                                    {{curr.BasicInfo['Fuel Type']}}
                                     <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                                 </div>
                                 <div class="other-spec-value">
-                                    {{curr.transmission}}
+                                    {{curr.MechanicalSpecs.Transmission}}
                                     <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
                                 </div>
                             </div>
@@ -42,8 +42,8 @@
                         <a href="#" class="dealership-page">
                             <img src="../../static/dealership_logo.png" class="card-logo">
                         </a>
-                        <a :href="curr.locationLink" target="_blank" class="location-link">
-                            {{ curr.locationName }}
+                        <a :href="'http://maps.google.com/?q=' + curr.Dealership.Name" target="_blank" class="location-link">
+                            {{ curr.Dealership.Name }}
                             <i class="material-icons">
                                 location_on
                             </i>
@@ -74,6 +74,7 @@
         },
         beforeMount() {
             this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
+            console.log(this.carDetails)
         },
         computed: {
         },

@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <a href="#">About Me</a>
+        <router-link to="/about_me">About Me</router-link>
         <div>©2018 Farzam</div>
     </footer>
 </template>

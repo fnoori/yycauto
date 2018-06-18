@@ -37,5 +37,6 @@ module.exports = {
     'no-multiple-empty-lines': 'off',
     'block-spacing': 'off',
     'space-before-blocks': 'off',
+    'spaced-comment': 'off'
   }
 }

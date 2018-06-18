@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import {mapGetters} from 'vuex'
+    //import {mapGetters} from 'vuex'
 
     export default {
         data() {
@@ -14,9 +14,14 @@
             }
         },
         computed: {
+            /*
             ...mapGetters([
                 'getVehicleDetails'
             ])
+            */
+           getVehicleDetails() {
+               return this.$store.state.seeVehicleDetail
+           }
         }
     }
 </script>

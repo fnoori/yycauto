@@ -4,7 +4,7 @@
             <router-link to="/vehicle_detail">
                 <b-card
                     no-body
-                    :img-src="apiRoute + 'uploads/dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0] + '.jpeg'"
+                    :img-src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0] + '.jpeg'"
                     img-alt="Image"
                     img-top
                     tag="article"
@@ -57,7 +57,6 @@
 
 <script>
     import router from 'vue-router'
-
     import {mapActions} from 'vuex'
 
     export default {
@@ -70,7 +69,7 @@
         components: {},
         data() {
             return {
-                apiRoute: process.env.API_ROUTE
+                apiRoute: process.env.GOOGLE_BUCKET
             }
         },
         created() {

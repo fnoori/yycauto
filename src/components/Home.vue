@@ -28,7 +28,9 @@
         created() {
             axios.get(process.env.API_ROUTE + 'vehicles/' + this.lazyLoad + '/10')
             .then((response) => {
-                this.items = response.data.sort(function(a, b){return 0.5 - Math.random()})
+                this.items = response.data.sort(function(a, b) {
+                        return 0.5 - Math.random()
+                    })
             }).catch(err => {
                 console.log('Error', err)
             })

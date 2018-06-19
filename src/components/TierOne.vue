@@ -4,7 +4,7 @@
             <router-link to="/vehicle_detail">
                 <b-card
                     no-body
-                    :img-src="curr.image"
+                    :img-src="apiRoute + 'uploads/dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0] + '.jpeg'"
                     img-alt="Image"
                     img-top
                     tag="article"
@@ -19,7 +19,7 @@
                         <div class="card-text">
                             <div class="quick-spec-values">
                                 <div class="other-spec-value">
-                                    <div v-if="curr.kilometres == 0">
+                                    <div v-if="curr.BasicInfo.Kilometres == 0">
                                         <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                     </div>
                                     <div v-else>
@@ -70,11 +70,10 @@
         components: {},
         data() {
             return {
+                apiRoute: process.env.API_ROUTE
             }
         },
-        beforeMount() {
-            this.carDetails.sort(function(a, b){return 0.5 - Math.random()})
-            console.log(this.carDetails)
+        created() {
         },
         computed: {
         },

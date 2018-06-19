@@ -4,29 +4,29 @@
         </b-form-select>
         <div v-on:click="extractVehicleToSee(curr)" class="tier-two-card" v-for="curr in carDetails" v-bind:key="curr.message">
             <router-link to="/vehicle_detail">
-                <img :src="curr.image" alt="">
+                <img :src="apiRoute + 'uploads/dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0] + '.jpeg'" alt="">
                 <div class="tier-two-card-body">
                     <div class="tier-two-card-title">
-                        <div class="tier-two-card-name">{{curr.title}}</div>
-                        <div class="tier-two-card-price">{{curr.price}}</div>
+                        <div class="tier-two-card-name">{{curr.BasicInfo.Make}} {{curr.BasicInfo.Model}}</div>
+                        <div class="tier-two-card-price">{{curr.BasicInfo.Price}}</div>
                     </div>
                     <div class="tier-two-card-text">
                         <div class="quick-spec-values">
                             <div class="other-spec-value">
-                                <div v-if="curr.kilometres == 0">
+                                <div v-if="curr.BasicInfo.Kilometres == 0">
                                     <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                 </div>
                                 <div v-else>
-                                    {{curr.kilometres}} 
+                                    {{curr.BasicInfo.Kilometres}} 
                                     <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
                                 </div>
                             </div>
                             <div class="gas-value">
-                                {{curr.fuelType}}
+                                {{curr.BasicInfo['Fuel Type']}}
                                 <img class="quick-specs-icon" src="../../static/gasoline-pump.png">
                             </div>
                             <div class="other-spec-value">
-                                {{curr.transmission}}
+                                {{curr.MechanicalSpecs.Transmission}}
                                 <img class="quick-specs-icon" src="../../static/quick-spec-transmission.png">
                             </div>
                         </div>
@@ -37,8 +37,8 @@
                 <a href="#">
                     <img src="../../static/dealership_logo.png" alt="" class="card-logo">
                 </a>
-                <a :href="curr.locationLink" target="_blank" class="location-link">
-                    <div>{{ curr.locationName }}</div>
+                <a ::href="'http://maps.google.com/?q=' + curr.Dealership.Name" target="_blank" class="location-link">
+                    <div>{{ curr.Dealership.Name }}</div>
                     <i class="material-icons">
                         location_on
                     </i>
@@ -61,6 +61,7 @@
         components: {},
         data() {
             return {
+                apiRoute: process.env.API_ROUTE,
                 selected: null,
                 options: [
                     {value: null, text: 'Sort'},

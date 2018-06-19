@@ -4,7 +4,7 @@
             <router-link to="/vehicle_detail">
                 <b-card
                     no-body
-                    :img-src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0] + '.jpeg'"
+                    :img-src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]"
                     img-alt="Image"
                     img-top
                     tag="article"
@@ -40,7 +40,7 @@
                     </div>
                     <div slot="footer" class="card-footer-content">
                         <a href="#" class="dealership-page">
-                            <img src="../../static/dealership_logo.png" class="card-logo">
+                            <img :src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/' + curr.Dealership.Logo" class="card-logo">
                         </a>
                         <a :href="'http://maps.google.com/?q=' + curr.Dealership.Name" target="_blank" class="location-link">
                             {{ curr.Dealership.Name }}

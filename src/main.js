@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import firebase from 'firebase'
 
 import store from './store'
 
@@ -13,6 +14,16 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
+
+// Initialize Firebase
+let config = {
+    apiKey: "../YYCAutomotives-7de8639e0a53.json",
+    authDomain: "yyc-automotives-190021.firebaseapp.com",
+    databaseURL: "https://yyc-automotives-190021.firebaseio.com",
+    projectId: "yyc-automotives-190021"
+};
+
+firebase.initializeApp(config);
 
 /* eslint-disable no-new */
 new Vue({

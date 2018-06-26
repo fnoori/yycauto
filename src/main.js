@@ -17,10 +17,12 @@ Vue.use(BootstrapVue)
 
 // Initialize Firebase
 let config = {
-    apiKey: "../YYCAutomotives-7de8639e0a53.json",
+    apiKey: "AIzaSyD9DOTVBhw54WdiKIazix9gFtvbNiP2rUA",
     authDomain: "yyc-automotives-190021.firebaseapp.com",
     databaseURL: "https://yyc-automotives-190021.firebaseio.com",
-    projectId: "yyc-automotives-190021"
+    projectId: "yyc-automotives-190021",
+    storageBucket: "",
+    messagingSenderId: "156709461219"
 };
 
 firebase.initializeApp(config);

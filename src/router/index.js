@@ -3,8 +3,7 @@ import Router from 'vue-router'
 
 import Home from '@/components/Home'
 import VehicleDetail from '@/components/VehicleDetail'
-import AboutMe from '@/components/AboutMe'
-import Login from '@/components/Login'
+import AboueMe from '@/components/AboutMe'
 
 Vue.use(Router)
 
@@ -23,12 +22,7 @@ export default new Router({
         {
             path: '/about_me',
             name: 'AboutMe',
-            component: AboutMe
-        },
-        {
-            path: '/login',
-            name: 'Login',
-            component: Login
+            component: AboueMe
         }
     ]
 })

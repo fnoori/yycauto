@@ -1,67 +1,93 @@
 <template>
-    <div>
-        <input type="text" v-model="email" placeholder="Email"/>
-        <input type="password" v-model="password" placeholder="Password"/>
-        <button v-on:click="signUp">Signup</button>
-        <br/><br/><br/><br/>
-
-        <input type="text" v-model="email" placeholder="Email"/>
-        <input type="password" v-model="password" placeholder="Password"/>
-        <button v-on:click="login">Login</button>
-        <div>{{token}}</div>
+    <div class="login">
+        <b-form @submit="login" @reset="onReset">
+            <div>
+                <b-form-input v-model="email"
+                              type="email"
+                              placeholder="Email"
+                              class="email"></b-form-input>
+                <b-form-input v-model="password"
+                            type="password"
+                            placeholder="Password"
+                            class="password"></b-form-input>
+            </div>
+            <b-button type="button" variant="primary">Forgot Password</b-button>
+            <b-button type="submit" variant="primary">Login</b-button>
+        </b-form>
     </div>
 </template>
 
 <script>
-import firebase from 'firebase'
 import axios from 'axios'
 
 export default {
     data() {
         return {
             email: '',
-            passwrod: '',
+            password: '',
             token: 'something'
         }
     },
 
     methods: {
-        signUp: function() {
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-            .catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                if (errorCode === 'auth/weak-password') {
-                    alert('The password is too weak.');
-                } else {
-                    alert(errorMessage);
-                }
-                console.log(error);
-            });
+        login: function() {
+
         },
 
-        login: function() {
-            firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-            .then(loginRes => {
-                //this.token = loginRes.user.accessToken
-                alert(loginRes.user.stsTokenManager.accessToken)
-            })
-            .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
-            } else {
-                alert(errorMessage);
-            }
-            console.log(error);
-            });
+        onReset: function() {
+
         }
     }
 }
 </script>
 
 <style scoped>
+    /* Base attribute overwrites */
+    input[type="text"] {
+        border: none;
+    }
+    input:focus {
+        border-color: rgba(0,0,0,.2) !important;
+        box-shadow: none !important;
+    }
+    button:hover {
+        border-color: #c6c6c6;
+        background: #D81E0F;
+    }
+    button {
+        background: #f44336 !important;
+        border: none;
+    }
+    button:focus,
+    button:active {
+        outline: none !important;
+        box-shadow: inset 0 1px 0 #ddd !important;
+        background: #e9e9e9 !important;
+        border-color: #c6c6c6 !important;
+        color: #333 !important;
+    }
+
+    .login {
+        height: 100vh;
+    }
+    .login form {
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+        width: 30rem;
+        height: 25rem;
+        margin: 10rem auto;
+        padding: 2rem;
+        text-align: center;
+    }
+    .login form div {
+        margin-top: 10rem;
+    }
+    .email {
+        margin-bottom: 1rem;
+    }
+    .password {
+
+    }
+    .login form button {
+        margin-top: 1rem;
+    }
 </style>

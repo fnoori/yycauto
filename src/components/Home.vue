@@ -21,7 +21,7 @@
         },
         data() {
             return {
-                lazyLoad: 0,
+                lazyLoad: 10,
                 items: []
             }
         },
@@ -31,6 +31,8 @@
                 this.items = response.data.sort(function(a, b) {
                         return 0.5 - Math.random()
                     })
+
+                    console.log(this.items);
             }).catch(err => {
                 console.log('Error', err)
             })

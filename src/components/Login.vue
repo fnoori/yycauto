@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <b-form @submit="login" @reset="onReset">
+        <b-form @submit="onLogin()" @reset="onReset">
             <img src="../../static/yycauto-logo-secondary.svg">
             <div>
                 <b-form-input v-model="email"
@@ -15,26 +15,28 @@
             <b-button type="button" variant="primary">Forgot Password</b-button>
             <b-button type="submit" variant="primary">Login</b-button>
         </b-form>
+
+        <button @click="onLogin()">Click me</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { login, getAccessToken } from '../auth/auth.js'
 
 export default {
     data() {
         return {
             email: '',
-            password: '',
-            token: 'something'
+            password: ''
         }
     },
 
     methods: {
-        login: function() {
-
+        onLogin: function() {
+            login()
+            //axios.post
         },
-
         onReset: function() {
 
         }

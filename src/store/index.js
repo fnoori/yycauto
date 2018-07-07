@@ -10,14 +10,12 @@ import createPersistedState from 'vuex-persistedstate';
 Vue.use(Vuex);
 
 const state = {
-    isLoggedIn: !!localStorage.getItem('token'),
-    seeVehicleDetail: null
 };
 
 export default new Vuex.Store({
-    state,
-    mutations,
-    getters,
-    actions,
-    plugins: [createPersistedState()]
+  state,
+  mutations,
+  getters,
+  actions,
+  plugins: [createPersistedState()]
 });

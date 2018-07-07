@@ -1,18 +1,14 @@
+// Auth0
+import AuthService from '../auth/AuthService'
+const auth = new AuthService()
+const { login, logout, authenticated, authNotifier, handleAuthentication } = auth
+
 export default {
-    extractVehicleToSee(state, data) {
-        state.seeVehicleDetail = data;
-    },
+  login: () => {
+    login()
+  },
 
-    login(state) {
-        state.pending = true;
-    },
-
-    loginSuccess(state) {
-        state.isLoggedIn = true;
-        state.pending = false;
-    },
-
-    logout(state) {
-        state.isLoggedIn = false;
-    }
-};
+  handleAuthentication: () => {
+    handleAuthentication()
+  }
+}

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div class="login">
         <b-form @submit="onLogin()" @reset="onReset">
             <img src="../../static/yycauto-logo-secondary.svg">
@@ -17,10 +18,23 @@
         </b-form>
 
         <button @click="onLogin()">Click me</button>
+=======
+    <div>
+        <input type="text" v-model="email" placeholder="Email"/>
+        <input type="password" v-model="password" placeholder="Password"/>
+        <button v-on:click="signUp">Signup</button>
+        <br/><br/><br/><br/>
+
+        <input type="text" v-model="email" placeholder="Email"/>
+        <input type="password" v-model="password" placeholder="Password"/>
+        <button v-on:click="login">Login</button>
+        <div>{{token}}</div>
+>>>>>>> parent of 0dbeba4... Created login page
     </div>
 </template>
 
 <script>
+import firebase from 'firebase'
 import axios from 'axios'
 import { login, getAccessToken } from '../auth/auth.js'
 
@@ -28,23 +42,64 @@ export default {
     data() {
         return {
             email: '',
+<<<<<<< HEAD
             password: ''
+=======
+            passwrod: '',
+            token: 'something'
+>>>>>>> parent of 0dbeba4... Created login page
         }
     },
 
     methods: {
+<<<<<<< HEAD
         onLogin: function() {
             login()
             //axios.post
         },
         onReset: function() {
 
+=======
+        signUp: function() {
+            firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+            .catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode === 'auth/weak-password') {
+                    alert('The password is too weak.');
+                } else {
+                    alert(errorMessage);
+                }
+                console.log(error);
+            });
+        },
+
+        login: function() {
+            firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+            .then(loginRes => {
+                //this.token = loginRes.user.accessToken
+                alert(loginRes.user.stsTokenManager.accessToken)
+            })
+            .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+            }
+            console.log(error);
+            });
+>>>>>>> parent of 0dbeba4... Created login page
         }
     }
 }
 </script>
 
 <style scoped>
+<<<<<<< HEAD
     /* Base attribute overwrites */
     input[type="text"] {
         border: none;
@@ -96,4 +151,6 @@ export default {
     .login form button {
         margin-top: 1rem;
     }
+=======
+>>>>>>> parent of 0dbeba4... Created login page
 </style>

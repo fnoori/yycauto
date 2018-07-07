@@ -23,7 +23,7 @@
                                         <img class="new-vehicle-icon" src="../../static/store-new-badges-red-white-text.png">
                                     </div>
                                     <div v-else>
-                                        {{curr.BasicInfo.Kilometres}}
+                                        {{curr.BasicInfo.Kilometres}} 
                                         <img class="quick-specs-icon" src="../../static/km-quick-spec.png">
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
     }
     .quick-specs-icon {
         width: 0.7rem;
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.15rem;   
     }
     .new-vehicle-icon {
         width: 1.8rem;
@@ -215,7 +215,7 @@
         font-size: 0.8rem;
     }
     .card-footer-content {
-
+        
     }
     .card-footer-content i {
         font-size: inherit;
@@ -249,7 +249,7 @@
             height: 2.7rem;
         }
     }
-
+    
     @media (max-width: 414px) {
         .quick-spec-titles {
             font-size: 3vw;

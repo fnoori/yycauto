@@ -2,14 +2,10 @@
     <b-navbar toggleable="md" class="app-navbar">
 
         <b-navbar-brand>
-            <router-link to="/">
-                <img src="../../static/yycauto-logo-primary.svg" class="logo">
-            </router-link>
-            <!--
+            <router-link to="/">YYC Automotives</router-link>
             <router-link to="/">
                 <img src="https://placekitten.com/g/30/30" alt="kitteh" class="sponsor-logo">
             </router-link>
-            -->
         </b-navbar-brand>
 
         <!-- Right aligned nav items -->
@@ -87,12 +83,6 @@ export default {
     .input-group-append {
         margin-left: 0 !important;
     }
-    .input-group {
-        box-shadow: 0px 0px 0.3rem rgba(0, 0, 0, 0.2);
-    }
-    .input-group:hover {
-        box-shadow: 0px 0px 1rem rgba(0, 0, 0, 0.2);   
-    }
     .navbar {
         background-color: #f44336 !important;
         padding: 0.5rem .5rem;
@@ -104,9 +94,6 @@ export default {
     }
 
     /* Custom */
-    .logo {
-        width: 7rem;
-    }
     .sponsor-logo {
         margin-left: 0.5rem;
     }

@@ -28,18 +28,22 @@
         created() {
             axios.get(process.env.API_ROUTE + 'vehicles/' + this.lazyLoad + '/10')
             .then((response) => {
+<<<<<<< HEAD
                 this.items = response.data.sort(function(a, b) {
                         return 0.5 - Math.random()
                     })
 
                     console.log(this.items);
+=======
+                this.items = response.data.sort(function(a, b){return 0.5 - Math.random()})
+>>>>>>> parent of f17ebff... going back to before google auth
             }).catch(err => {
                 console.log('Error', err)
             })
         },
         methods: {
             pageInit: function() {
-                
+
             }
         }
     }

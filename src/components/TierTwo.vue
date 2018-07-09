@@ -4,7 +4,7 @@
         </b-form-select>
         <div v-on:click="extractVehicleToSee(curr)" class="tier-two-card" v-for="curr in carDetails" v-bind:tmp="curr" v-bind:key="curr.message">
             <router-link to="/vehicle_detail">
-                <img :src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]" alt="">
+                <img :src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]">
                 <div class="tier-two-card-body">
                     <div class="tier-two-card-title">
                         <div class="tier-two-card-name">{{curr.BasicInfo.Make}} {{curr.BasicInfo.Model}}</div>

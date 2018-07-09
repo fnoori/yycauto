@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import auth0 from 'auth0-js'
 
 import store from './store'
 
@@ -14,13 +13,12 @@ import BootstrapVue from 'bootstrap-vue'
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue)
-Vue.use(auth0)
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    store,
-    router,
-    components: { App },
-    template: '<App/>'
+  el: '#app',
+  store,
+  router,
+  components: { App },
+  template: '<App/>'
 })

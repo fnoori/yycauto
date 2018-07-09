@@ -1,16 +1,16 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import Vuex from 'vuex'
 
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
+import actions from './actions'
+import getters from './getters'
+import mutations from './mutations'
 
-import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from 'vuex-persistedstate'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 const state = {
-};
+}
 
 export default new Vuex.Store({
   state,
@@ -18,4 +18,4 @@ export default new Vuex.Store({
   getters,
   actions,
   plugins: [createPersistedState()]
-});
+})

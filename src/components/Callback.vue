@@ -10,7 +10,8 @@
   export default {
     name: 'callback',
     data() {
-      this.$store.dispatch('handleAuthentication')
+      this.handleAuthentication()
+      return {}
     },
     methods: {
       ...mapActions([

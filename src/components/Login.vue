@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <button @click="login">Login</button>
+    <button @click="handleAuthentication">handleAuthentication</button>
   </div>
 </template>
 
@@ -16,7 +17,8 @@
     },
     methods: {
       ...mapActions([
-        'login'
+        'login',
+        'handleAuthentication'
       ])
     }
   }

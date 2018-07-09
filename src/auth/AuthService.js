@@ -12,6 +12,7 @@ export default class AuthService {
     this.setSession = this.setSession.bind(this)
     this.logout = this.logout.bind(this)
     this.isAuthenticated = this.isAuthenticated.bind(this)
+    this.handleAuthentication = this.handleAuthentication.bind(this)
   }
 
   auth0 = new auth0.WebAuth({
@@ -24,10 +25,12 @@ export default class AuthService {
   })
 
   login () {
+    console.log('this.auth0', this.auth0)
     this.auth0.authorize()
   }
 
   handleAuthentication () {
+    console.log('this.auth0', this.auth0)
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)

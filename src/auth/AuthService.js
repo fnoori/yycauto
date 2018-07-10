@@ -32,8 +32,10 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult)
+        location.reload()
         router.replace('home')
       } else if (err) {
+        location.reload()
         router.replace('home')
         console.log(err)
       }
@@ -59,6 +61,7 @@ export default class AuthService {
     this.userProfile = null
     this.authNotifier.emit('authChange', false)
     // navigate to the home route
+    location.reload()
     router.replace('home')
   }
 

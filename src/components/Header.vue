@@ -2,9 +2,8 @@
   <b-navbar toggleable="md" class="app-navbar">
 
     <b-navbar-brand>
-      <router-link to="/">YYC Automotives</router-link>
       <router-link to="/">
-        <img src="https://placekitten.com/g/30/30" alt="kitteh" class="sponsor-logo">
+        <img src="../../static/yycauto-logo-primary.svg" class="logo">
       </router-link>
     </b-navbar-brand>
 
@@ -29,11 +28,8 @@
       <div class="dropdown-content">
         <a href="#">Account</a>
         <hr class="account-dropdown"/>
-        <a @click="logout">Logout</a>
+        <a @click="logout" href="#">Logout</a>
       </div>
-    </div>
-    <div v-else>
-      you ain't allowed here
     </div>
   </b-navbar>
 </template>
@@ -109,6 +105,9 @@
   }
 
   /* Custom */
+  .logo {
+        width: 7rem;
+  }
   .sponsor-logo {
     margin-left: 0.5rem;
   }

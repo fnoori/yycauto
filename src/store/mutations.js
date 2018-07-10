@@ -12,10 +12,6 @@ export default {
     handleAuthentication()
   },
 
-  loginSuccess: (state) => {
-    state.loginSuccess = true
-  },
-
   logout: () => {
     logout()
   }

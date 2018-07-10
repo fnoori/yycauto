@@ -2,9 +2,10 @@
   <div id="tierOne" class="tier-one">
     <b-card-group v-on:click="extractVehicleToSee(curr)" class="tier-one-card" v-for="curr in carDetails" v-bind:key="curr.message">
         <router-link to="/vehicle_detail">
+        <!--:img-src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]"-->
           <b-card
               no-body
-              :img-src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]"
+              img-src='../../static/no-photo.png'
               img-alt="Image"
               img-top
               tag="article"
@@ -39,10 +40,10 @@
               </div>
               <div slot="footer" class="card-footer-content">
                 <a href="#" class="dealership-page">
-                <img :src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/' + curr.Dealership.Logo" class="card-logo">
+                <img :src="apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/logo.png'" class="card-logo">
                 </a>
-                <a :href="'http://maps.google.com/?q=' + curr.Dealership.Name" target="_blank" class="location-link">
-                {{ curr.Dealership.Name }}
+                <a :href="'http://maps.google.com/?q=' + curr.Dealership.name" target="_blank" class="location-link">
+                {{ curr.Dealership.name }}
                 <i class="material-icons">
                 location_on
                 </i>

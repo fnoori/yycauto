@@ -3,8 +3,9 @@
         <b-form-select v-model="selected" :options="options" class="sort-options">
         </b-form-select>
         <div v-on:click="extractVehicleToSee(curr)" class="tier-two-card" v-for="curr in carDetails" v-bind:tmp="curr" v-bind:key="curr.message">
+            <!-- <img :src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]"> -->
             <router-link to="/vehicle_detail">
-                <img :src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]">
+                <img src="../../static/no-photo.png"/>    
                 <div class="tier-two-card-body">
                     <div class="tier-two-card-title">
                         <div class="tier-two-card-name">{{curr.BasicInfo.Make}} {{curr.BasicInfo.Model}}</div>
@@ -35,10 +36,10 @@
             </router-link>
             <div class="tier-two-card-footer">
                 <a href="#">
-                    <img :src="apiRoute + 'dealerships/' + curr.Dealership.Name.split(' ').join('_') + '/' + curr.Dealership.Logo" alt="" class="card-logo">
+                    <img :src="apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/logo.png'" alt="" class="card-logo">
                 </a>
-                <a :href="'http://maps.google.com/?q=' + curr.Dealership.Name" target="_blank" class="location-link">
-                    <div>{{ curr.Dealership.Name }}</div>
+                <a :href="'http://maps.google.com/?q=' + curr.Dealership.name" target="_blank" class="location-link">
+                    <div>{{ curr.Dealership.name }}</div>
                     <i class="material-icons">
                         location_on
                     </i>

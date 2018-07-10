@@ -27,7 +27,10 @@
     },
     mounted() {
       var config = {
-        headers: {'Authorization': 'bearer ' + localStorage.getItem('access_token')}
+        headers: {
+          'Authorization': 'bearer ' + localStorage.getItem('access_token'),
+          'id_token': localStorage.getItem('id_token')
+        }
       }
 
       axios.get(process.env.API_ROUTE + 'vehicles/' + this.lazyLoad + '/10', config)

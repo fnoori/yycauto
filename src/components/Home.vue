@@ -1,9 +1,9 @@
 <template>
-<div class="home container-fluid">
-<tier-one v-bind:carDetails="items"></tier-one>
-<hr/>
-<tier-two v-bind:carDetails="items"></tier-two>
-</div>
+  <div class="home container-fluid">
+    <tier-one v-bind:carDetails="items"></tier-one>
+    <hr/>
+    <tier-two v-bind:carDetails="items"></tier-two>
+  </div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@
         items: []
       }
     },
-    created() {
+    mounted() {
       var config = {
         headers: {'Authorization': 'bearer ' + localStorage.getItem('access_token')}
       }

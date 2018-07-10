@@ -24,25 +24,40 @@
       </b-input-group>
     </b-navbar-nav>
 
-    <div class="dropdown ml-auto">
+    <div v-if="isAuthenticated" class="dropdown ml-auto">
       <button class="dropbtn"><i class="material-icons">account_box</i></button>
       <div class="dropdown-content">
-      <a href="#">Account</a>
-      <hr class="account-dropdown"/>
-      <a href="#">Logout</a>
+        <a href="#">Account</a>
+        <hr class="account-dropdown"/>
+        <a @click="logout">Logout</a>
       </div>
+    </div>
+    <div v-else>
+      you ain't allowed here
     </div>
   </b-navbar>
 </template>
 
 <script>
+  import {mapActions, mapGetters} from 'vuex'
+
   export default {
     components: {},
     data() {
-    return {}
-  },
+      return {}
+    },
 
-  methods: {}
+    computed: {
+      ...mapGetters([
+        'isAuthenticated'
+      ])
+    },
+
+    methods: {
+      ...mapActions([
+        'logout'
+      ])
+    }
   }
 </script>
 

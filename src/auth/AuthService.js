@@ -21,7 +21,7 @@ export default class AuthService {
     redirectUri: AUTH_CONFIG.callbackUrl,
     audience: AUTH_CONFIG.audience,
     responseType: 'token id_token',
-    scope: 'user_metadata openid'
+    scope: 'openid'
   })
 
   login () {
@@ -45,7 +45,6 @@ export default class AuthService {
     let expiresAt = JSON.stringify(
       authResult.expiresIn * 1000 + new Date().getTime()
     )
-    console.log(authResult)
     localStorage.setItem('access_token', authResult.accessToken)
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('expires_at', expiresAt)

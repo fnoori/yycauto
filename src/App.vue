@@ -13,24 +13,19 @@
   import Footer from "./components/Footer"
   import Home from "./components/Home"
 
-  import {mapGetters} from 'vuex'
-
   export default {
-  name: "app",
-  components: {
-    'app-header': Header,
-    'app-footer': Footer
-  },
-  data() {
-    return {
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'getVehicleDetails'
-    ])
-  },
-  methods: {}
+    name: "app",
+    components: {
+      'app-header': Header,
+      'app-footer': Footer
+    },
+    data() {
+      return {
+      }
+    },
+    computed: {
+    },
+    methods: {}
   }
 </script>
 

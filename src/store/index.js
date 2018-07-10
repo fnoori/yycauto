@@ -10,6 +10,8 @@ import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 const state = {
+  isAuthenticated: !!localStorage.getItem('access_token'),
+  loginSuccess: !!localStorage.getItem('login_success')
 }
 
 export default new Vuex.Store({

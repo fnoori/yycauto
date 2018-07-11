@@ -21,6 +21,7 @@
     "express": "^4.16.3",
     "serve-static": "^1.13.2",
     "vue": "^2.5.2",
+    "vue-carousel": "^0.9.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4"

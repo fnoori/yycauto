@@ -10,7 +10,6 @@ import createPersistedState from 'vuex-persistedstate'
 Vue.use(Vuex)
 
 const state = {
-  isAuthenticated: !!localStorage.getItem('access_token')
 }
 
 export default new Vuex.Store({

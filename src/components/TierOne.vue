@@ -1,11 +1,11 @@
 <template>
   <div id="tierOne" class="tier-one">
-    <b-card-group v-on:click="extractVehicleToSee(curr)" class="tier-one-card" v-for="curr in carDetails" v-bind:key="curr.message">
-        <router-link to="/vehicle_detail">
-        <!--:img-src="curr.VehiclePhotos[0] ? '../../static/no-photo.png' : apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/vehicles/' + curr._id + '/' + curr.VehiclePhotos[0]"-->
+    <b-card-group class="tier-one-card" v-for="curr in carDetails" v-bind:key="curr.message">
+        <router-link :to="{name: 'Vehicle', params: {vehicleId: curr._id}}">
+        <!--img-src='../../static/no-photo.png'-->
           <b-card
               no-body
-              img-src='../../static/no-photo.png'
+              :img-src="apiRoute + 'dealerships/' + curr.Dealership.name.split(' ').join('_') + '/' + curr._id + '/' + curr.VehiclePhotos[0]"
               img-alt="Image"
               img-top
               tag="article"
@@ -76,9 +76,6 @@
     computed: {
     },
     methods: {
-      ...mapActions([
-        'extractVehicleToSee'
-      ])
     }
   }
 </script>

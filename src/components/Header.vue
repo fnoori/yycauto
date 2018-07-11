@@ -26,7 +26,7 @@
     <div v-if="isAuthenticated" class="dropdown ml-auto">
       <button class="dropbtn"><i class="material-icons">account_box</i></button>
       <div class="dropdown-content">
-        <a href="#">Account</a>
+        <router-link to="/account">Account</router-link>
         <hr class="account-dropdown"/>
         <a @click="logout" href="#">Logout</a>
       </div>

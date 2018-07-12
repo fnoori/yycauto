@@ -24,6 +24,16 @@
             class="carousel-img"/>
         </slide>
       </carousel>
+
+      <div class="basic-info">
+        <h5>Basic Info.</h5>
+      </div>
+      <div class="description">
+        <h5>Description</h5>
+      </div>
+      <div class="detailed-info">
+        <h5>Detaild Info.</h5>
+      </div>
     </div>
   </div>
 </template>
@@ -81,5 +91,18 @@ export default {
   }
   .title .price {
     color: #70A036;
+  }
+  .basic-info {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    height: 20rem;
+  }
+  .description {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    height: 20rem;
+    margin: 1rem 0;
+  }
+  .detailed-info {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    height: 20rem;
   }
 </style>

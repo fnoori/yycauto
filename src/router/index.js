@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/components/Home'
-import AboueMe from '@/components/AboutMe'
+import About from '@/components/AboutMe'
 import Login from '@/components/Login'
 import Callback from '@/components/Callback'
 import Account from '@/components/Account'
@@ -24,9 +24,9 @@ export default new Router({
       component: Vehicle
     },
     {
-      path: '/about_me',
-      name: 'AboutMe',
-      component: AboueMe
+      path: '/about',
+      name: 'About',
+      component: About
     },
     {
       path: '/login',

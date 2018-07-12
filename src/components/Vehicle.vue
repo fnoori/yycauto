@@ -1,50 +1,30 @@
 <template>
   <div class="vehicle">
-    <b-carousel id="carousel1"
-                style="text-shadow: 1px 1px 2px #333;"
-                controls
-                indicators
-                background="#ababab"
-                :interval="4000"
-                img-width="1024"
-                img-height="480"
-                v-model="slide"
-                @sliding-start="onSlideStart"
-                @sliding-end="onSlideEnd"
-    >
+    <div v-if="dataReady">
+      <div class="title">
+        <h4>
+          <div class="name">
+            {{vehicleDetails.vehicle.BasicInfo.Year}}
+            {{vehicleDetails.vehicle.BasicInfo.Make}}
+            {{vehicleDetails.vehicle.BasicInfo.Model}}
+          </div>
+          <div class="price">
+            $ {{vehicleDetails.vehicle.BasicInfo.Price}}
+          </div>
+        </h4>
+      </div>
 
-      <!-- Text slides with image -->
-      <b-carousel-slide caption="First slide"
-                        text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-                        img-src="https://picsum.photos/1024/480/?image=52"
-      ></b-carousel-slide>
-
-      <!-- Slides with custom text -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-        <h1>Hello world!</h1>
-      </b-carousel-slide>
-
-      <!-- Slides with image only -->
-      <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58">
-      </b-carousel-slide>
-
-      <!-- Slides with img slot -->
-      <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-      <b-carousel-slide>
-        <img slot="img" class="d-block img-fluid w-100" width="1024" height="480"
-             src="https://picsum.photos/1024/480/?image=55" alt="image slot">
-      </b-carousel-slide>
-
-      <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-      <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          eros felis, tincidunt a tincidunt eget, convallis vel est. Ut pellentesque
-          ut lacus vel interdum.
-        </p>
-      </b-carousel-slide>
-
-    </b-carousel>
+      <carousel 
+        :per-page="1" 
+        :paginationSize=5
+        class="text-center">
+        <slide v-for="photo in vehicleDetails.vehicle.VehiclePhotos" v-bind:key="photo.message">
+          <img 
+            :src="apiRoute + 'dealerships/' + vehicleDetails.vehicle.Dealership.name.split(' ').join('_') + '/' + vehicleDetails.vehicle._id + '/' + photo"
+            class="carousel-img"/>
+        </slide>
+      </carousel>
+    </div>
   </div>
 </template>
 
@@ -86,15 +66,15 @@ export default {
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
   .vehicle {
-    width: 55vw;
+    width: 70vw;
     margin: 1rem auto;
   }
   .carousel-img {
-    width: 28rem !important;
+    width: 35rem !important;
     padding: 0 0.5rem;
   }
   .title h4 div {
-    display: inline-block;
+    display: block;
   }
   .title .name {
     font-weight: bold;

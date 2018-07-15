@@ -27,12 +27,35 @@
 
       <div class="basic-info">
         <h5>Basic Info.</h5>
+        <div class="container">
+          <div class="row">
+            <div class="col basic-info-cols">
+              <img src="../../static/basic-info/makeModel.svg"/>
+              Make & Model
+            </div>
+            <div class="col basic-info-cols">
+              <img src="../../static/basic-info/year.svg"/>
+              Year
+            </div>
+            <div class="w-100"></div>
+            <div class="col basic-info-cols">
+              Column
+            </div>
+            <div class="col basic-info-cols">
+              Column
+            </div>
+          </div>
+        </div>
       </div>
       <div class="description">
         <h5>Description</h5>
+        <div class="container">
+        </div>
       </div>
       <div class="detailed-info">
         <h5>Detaild Info.</h5>
+        <div class="container">
+        </div>
       </div>
     </div>
   </div>
@@ -95,6 +118,15 @@ export default {
   .basic-info {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     height: 20rem;
+    padding: 1rem;
+  }
+  .basic-info-cols {
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: .2rem;
+  }
+  .basic-info-cols img {
+    width: 2rem;
   }
   .description {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);

@@ -30,19 +30,42 @@
         <div class="container">
           <div class="row">
             <div class="col basic-info-cols">
-              <img src="../../static/basic-info/makeModel.svg"/>
-              Make & Model
+              <div class="info-title">Make & Model</div>
+              <div class="info-value">
+                {{vehicleDetails.vehicle.BasicInfo.Make}}
+                {{vehicleDetails.vehicle.BasicInfo.Model}}
+              </div>
             </div>
             <div class="col basic-info-cols">
-              <img src="../../static/basic-info/year.svg"/>
-              Year
+              <div class="info-title">Year</div>
+              <div class="info-value"></div>
             </div>
             <div class="w-100"></div>
             <div class="col basic-info-cols">
-              Column
+              <div class="info-title">Interior Colour</div>
+              <div class="info-value"></div>
             </div>
             <div class="col basic-info-cols">
-              Column
+              <div class="info-title">Exterior Colour</div>
+              <div class="info-value"></div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col basic-info-cols">
+              <div class="info-title">Body Type</div>
+              <div class="info-value"></div>
+            </div>
+            <div class="col basic-info-cols">
+              <div class="info-title">Doors</div>
+              <div class="info-value"></div>
+            </div>
+            <div class="w-100"></div>
+            <div class="col basic-info-cols">
+              <div class="info-title">Seats</div>
+              <div class="info-value"></div>
+            </div>
+            <div class="col basic-info-cols">
+              <div class="info-title">Fuel Type</div>
+              <div class="info-value"></div>
             </div>
           </div>
         </div>
@@ -72,23 +95,31 @@ export default {
       dataReady: false
     };
   },
+  watch: {
+    '$route': function(from, to) {
+      this.fetchVehicle()
+    }
+  },
   computed: {
     vehicleId() {
       return this.$route.params.vehicleId;
     }
   },
   created() {
-    axios
-      .get(process.env.API_ROUTE + `vehicles/byId/${this.vehicleId}`)
-      .then(response => {
-        this.vehicleDetails = response.data
-        this.$nextTick(() => this.afterDataLoad())
-      })
-      .catch(err => {
-        console.log("Error", err);
-      });
+    this.fetchVehicle()
   },
   methods: {
+    fetchVehicle: function() {
+      axios
+        .get(process.env.API_ROUTE + `vehicles/byId/${this.vehicleId}`)
+        .then(response => {
+          this.vehicleDetails = response.data
+          this.$nextTick(() => this.afterDataLoad())
+        })
+        .catch(err => {
+          console.log("Error", err);
+        });
+    },
     afterDataLoad: function() {
       this.dataReady = true
     }
@@ -115,6 +146,21 @@ export default {
   .title .price {
     color: #70A036;
   }
+  .info-title {
+    background: rgba(0,0,0,0.1);
+    width: 40%;
+    text-align: center;
+    margin: -1rem;
+    padding: 1rem;
+    font-weight: bold;
+    display: inline-block;
+  }
+  .info-value {
+    width: 60%;
+    text-align: center;
+    display: inline-block;
+    margin-left: 1rem;
+  }
   .basic-info {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     height: 20rem;
@@ -127,6 +173,8 @@ export default {
   }
   .basic-info-cols img {
     width: 2rem;
+  }
+  .basic-info-cols div {
   }
   .description {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);

@@ -24,8 +24,27 @@
             class="carousel-img"/>
         </slide>
       </carousel>
-
+      <div class="description">
+        <h5>Description</h5>
+        <div class="container">
+          {{vehicleDetails.vehicle.BasicInfo.Description}}
+        </div>
+      </div>
       <div class="basic-info">
+<b-card no-body>
+  <b-tabs pills card>
+    <b-tab title="Basic Info" active>
+      Basic Info
+    </b-tab>
+    <b-tab title="Mechanical">
+      Mechanical
+    </b-tab>
+    <b-tab title="Economy">
+      Economy
+    </b-tab>
+  </b-tabs>
+</b-card>
+        <!--
         <h5>Basic Info.</h5>
         <div class="basic-info-content">
           <div class="row">
@@ -69,17 +88,7 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="description">
-        <h5>Description</h5>
-        <div class="container">
-          {{vehicleDetails.vehicle.BasicInfo.Description}}
-        </div>
-      </div>
-      <div class="detailed-info">
-        <h5>Detaild Info.</h5>
-        <div class="container">
-        </div>
+        -->
       </div>
     </div>
   </div>
@@ -131,7 +140,23 @@ export default {
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  .nav-item a {
+    color: black !important;
+  }
+  .nav-link.active {
+    background: red !important;
+    color: white !important;
+    width: 100%;
+  }
+  .nav:focus {
+    border: none !important;
+    outline: none !important;
+  }
+  .card-header {
+    border-bottom: none !important;
+  }
+
   .vehicle {
     width: 70vw;
     margin: 1rem auto;

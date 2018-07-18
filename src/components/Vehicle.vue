@@ -110,15 +110,17 @@ export default {
   },
   methods: {
     fetchVehicle: function() {
-      axios
-        .get(process.env.API_ROUTE + `vehicles/byId/${this.vehicleId}`)
-        .then(response => {
-          this.vehicleDetails = response.data
-          this.$nextTick(() => this.afterDataLoad())
-        })
-        .catch(err => {
-          console.log("Error", err);
-        });
+      if (this.vehicleId !== undefined) {
+        axios
+          .get(process.env.API_ROUTE + `vehicles/byId/${this.vehicleId}`)
+          .then(response => {
+            this.vehicleDetails = response.data
+            this.$nextTick(() => this.afterDataLoad())
+          })
+          .catch(err => {
+            console.log("Error", err);
+          });
+      }
     },
     afterDataLoad: function() {
       this.dataReady = true

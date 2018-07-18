@@ -27,7 +27,7 @@
 
       <div class="basic-info">
         <h5>Basic Info.</h5>
-        <div class="container">
+        <div class="basic-info-content">
           <div class="row">
             <div class="col basic-info-cols">
               <div class="info-title">Make & Model</div>
@@ -38,34 +38,34 @@
             </div>
             <div class="col basic-info-cols">
               <div class="info-title">Year</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Year}}</div>
             </div>
             <div class="w-100"></div>
             <div class="col basic-info-cols">
               <div class="info-title">Interior Colour</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Interior Colour']}}</div>
             </div>
             <div class="col basic-info-cols">
               <div class="info-title">Exterior Colour</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Exterior Colour']}}</div>
             </div>
             <div class="w-100"></div>
             <div class="col basic-info-cols">
               <div class="info-title">Body Type</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Type}}</div>
             </div>
             <div class="col basic-info-cols">
               <div class="info-title">Doors</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Doors}}</div>
             </div>
             <div class="w-100"></div>
             <div class="col basic-info-cols">
               <div class="info-title">Seats</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Seats}}</div>
             </div>
             <div class="col basic-info-cols">
               <div class="info-title">Fuel Type</div>
-              <div class="info-value"></div>
+              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Fuel Type']}}</div>
             </div>
           </div>
         </div>
@@ -73,6 +73,7 @@
       <div class="description">
         <h5>Description</h5>
         <div class="container">
+          {{vehicleDetails.vehicle.BasicInfo.Description}}
         </div>
       </div>
       <div class="detailed-info">
@@ -149,28 +150,34 @@ export default {
     color: #70A036;
   }
   .info-title {
+    float: left;
     background: rgba(0,0,0,0.1);
-    width: 40%;
+    height: 3rem;
+    line-height: 3rem;
+    vertical-align: middle;
+    padding: 0 1rem;
+    width: 13vw;
+    font-size: 1.3vw;
     text-align: center;
-    margin: -1rem;
-    padding: 1rem;
-    font-weight: bold;
-    display: inline-block;
   }
   .info-value {
-    width: 60%;
     text-align: center;
-    display: inline-block;
-    margin-left: 1rem;
+    height: 3rem;
+    line-height: 3rem;
+    font-size: 1.5vw;
+    vertical-align: middle;
   }
   .basic-info {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     height: 20rem;
     padding: 1rem;
   }
+  .basic-info-content {
+    padding: 1rem;
+  }
   .basic-info-cols {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 0 !important;
     margin: .2rem;
   }
   .basic-info-cols img {
@@ -186,5 +193,20 @@ export default {
   .detailed-info {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     height: 20rem;
+  }
+
+  @media(max-width: 800px) {
+    .vehicle {
+      width: 90vw;
+      margin: 1rem auto;
+    }
+    .info-title {
+      padding: 0rem !important;
+      width: 18vw;
+      font-size: 2vw;
+    }
+    .info-value {
+      font-size: 2vw;
+    }
   }
 </style>

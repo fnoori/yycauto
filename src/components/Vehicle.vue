@@ -30,65 +30,103 @@
           {{vehicleDetails.vehicle.BasicInfo.Description}}
         </div>
       </div>
-      <div class="basic-info">
-<b-card no-body>
-  <b-tabs pills card>
-    <b-tab title="Basic Info" active>
-      Basic Info
-    </b-tab>
-    <b-tab title="Mechanical">
-      Mechanical
-    </b-tab>
-    <b-tab title="Economy">
-      Economy
-    </b-tab>
-  </b-tabs>
-</b-card>
-        <!--
-        <h5>Basic Info.</h5>
-        <div class="basic-info-content">
-          <div class="row">
-            <div class="col basic-info-cols">
-              <div class="info-title">Make & Model</div>
-              <div class="info-value">
+      <div class="vehicle-info">
+        <div class="row">
+          <b-list-group class="col-md-4">
+            <h5>Basic Info.</h5>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Make & Model</div>
+              <div class="d-inline-block list-value">
                 {{vehicleDetails.vehicle.BasicInfo.Make}}
                 {{vehicleDetails.vehicle.BasicInfo.Model}}
               </div>
-            </div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Year</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Year}}</div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Interior Colour</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Interior Colour']}}</div>
-            </div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Exterior Colour</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Exterior Colour']}}</div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Body Type</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Type}}</div>
-            </div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Doors</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Doors}}</div>
-            </div>
-            <div class="w-100"></div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Seats</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo.Seats}}</div>
-            </div>
-            <div class="col basic-info-cols">
-              <div class="info-title">Fuel Type</div>
-              <div class="info-value">{{vehicleDetails.vehicle.BasicInfo['Fuel Type']}}</div>
-            </div>
-          </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Tier</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo.Trim}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Year</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo.Year}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Interior Colour</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo['Interior Colour']}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Exterior Colour</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo['Exterior Colour']}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Type</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo.Type}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Doors</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo.Doors}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Seats</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo.Seats}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Fuel Type</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.BasicInfo['Fuel Type']}}</div>
+            </b-list-group-item>
+          </b-list-group>
+
+          <b-list-group class="col-md-4">
+            <h5>Mechanical Info.</h5>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Transmission</div>
+              <div class="d-inline-block list-value">
+                {{vehicleDetails.vehicle.MechanicalSpecs.Transmission}}
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Engine Size</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.MechanicalSpecs['Engine Size (L)']}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Cylinders</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.MechanicalSpecs.Cylinders}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Horsepower</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.MechanicalSpecs['Horsepower @ RPM']}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Torque</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.MechanicalSpecs['Torque (lb - ft) @ RPM']}}</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Rec Fuel</div>
+              <div class="d-inline-block list-value">{{vehicleDetails.vehicle.MechanicalSpecs['Recommended Fuel']}}</div>
+            </b-list-group-item>
+          </b-list-group>
+
+          <b-list-group class="col-md-4">
+            <h5>Fuel Economy</h5>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">City</div>
+              <div class="d-inline-block list-value">
+                {{vehicleDetails.vehicle.FuelEconomy['City (L/100Km)']}}
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Highway</div>
+              <div class="d-inline-block list-value">
+                {{vehicleDetails.vehicle.FuelEconomy['Highway (L/100Km)']}}
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-title d-inline-block">Combined</div>
+              <div class="d-inline-block list-value">
+                {{vehicleDetails.vehicle.FuelEconomy['Combined (L/100Km)']}}
+              </div>
+            </b-list-group-item>
+          </b-list-group>
         </div>
-        -->
       </div>
     </div>
   </div>
@@ -106,8 +144,8 @@ export default {
     };
   },
   watch: {
-    '$route': function(from, to) {
-      this.fetchVehicle()
+    $route: function(from, to) {
+      this.fetchVehicle();
     }
   },
   computed: {
@@ -116,7 +154,7 @@ export default {
     }
   },
   created() {
-    this.fetchVehicle()
+    this.fetchVehicle();
   },
   methods: {
     fetchVehicle: function() {
@@ -124,8 +162,8 @@ export default {
         axios
           .get(process.env.API_ROUTE + `vehicles/byId/${this.vehicleId}`)
           .then(response => {
-            this.vehicleDetails = response.data
-            this.$nextTick(() => this.afterDataLoad())
+            this.vehicleDetails = response.data;
+            this.$nextTick(() => this.afterDataLoad());
           })
           .catch(err => {
             console.log("Error", err);
@@ -133,7 +171,7 @@ export default {
       }
     },
     afterDataLoad: function() {
-      this.dataReady = true
+      this.dataReady = true;
     }
   }
 };
@@ -141,97 +179,98 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style>
-  .nav-item a {
-    color: black !important;
-  }
-  .nav-link.active {
-    background: red !important;
-    color: white !important;
-    width: 100%;
-  }
-  .nav:focus {
-    border: none !important;
-    outline: none !important;
-  }
-  .card-header {
-    border-bottom: none !important;
-  }
+.nav-item a {
+  color: black !important;
+}
+.nav-link.active {
+  background: #f44336 !important;
+  color: white !important;
+  width: 100%;
+}
+.nav:focus {
+  border: none !important;
+  outline: none !important;
+}
+.card-header {
+  border-bottom: none !important;
+}
+.list-group-item {
+  padding: 0 !important;
+  margin: 0.1rem;
+}
+.row {
+  margin-left: 0 !important;
+}
 
+.vehicle {
+  width: 70vw;
+  height: 90rem;
+  margin: 1rem auto;
+}
+.carousel-img {
+  width: 35rem !important;
+  padding: 0 0.5rem;
+}
+.title h4 div {
+  display: block;
+}
+.title .name {
+  font-weight: bold;
+}
+.title .price {
+  color: #70a036;
+}
+.vehicle-info {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  padding: 1rem;
+}
+.basic-info-content {
+  padding: 1rem;
+}
+.list-title {
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+  background: rgba(0, 0, 0, 0.1);
+  width: 7.2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.list-value {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.basic-info-cols {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  padding: 0 !important;
+  margin: 0.2rem;
+}
+.basic-info-cols img {
+  width: 2rem;
+}
+.basic-info-cols div {
+}
+.description {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  height: 20rem;
+  margin: 1rem 0;
+}
+.detailed-info {
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+  height: 20rem;
+}
+
+@media (max-width: 800px) {
   .vehicle {
-    width: 70vw;
+    width: 90vw;
     margin: 1rem auto;
   }
-  .carousel-img {
-    width: 35rem !important;
-    padding: 0 0.5rem;
-  }
-  .title h4 div {
-    display: block;
-  }
-  .title .name {
-    font-weight: bold;
-  }
-  .title .price {
-    color: #70A036;
-  }
   .info-title {
-    float: left;
-    background: rgba(0,0,0,0.1);
-    height: 3rem;
-    line-height: 3rem;
-    vertical-align: middle;
-    padding: 0 1rem;
-    width: 13vw;
-    font-size: 1.3vw;
-    text-align: center;
+    padding: 0rem !important;
+    width: 18vw;
+    font-size: 2vw;
   }
   .info-value {
-    text-align: center;
-    height: 3rem;
-    line-height: 3rem;
-    font-size: 1.5vw;
-    vertical-align: middle;
+    font-size: 2vw;
   }
-  .basic-info {
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    height: 20rem;
-    padding: 1rem;
-  }
-  .basic-info-content {
-    padding: 1rem;
-  }
-  .basic-info-cols {
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    padding: 0 !important;
-    margin: .2rem;
-  }
-  .basic-info-cols img {
-    width: 2rem;
-  }
-  .basic-info-cols div {
-  }
-  .description {
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    height: 20rem;
-    margin: 1rem 0;
-  }
-  .detailed-info {
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
-    height: 20rem;
-  }
-
-  @media(max-width: 800px) {
-    .vehicle {
-      width: 90vw;
-      margin: 1rem auto;
-    }
-    .info-title {
-      padding: 0rem !important;
-      width: 18vw;
-      font-size: 2vw;
-    }
-    .info-value {
-      font-size: 2vw;
-    }
-  }
+}
 </style>

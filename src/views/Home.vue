@@ -46,3 +46,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .home {
+    height: 50rem;
+  }
+</style>

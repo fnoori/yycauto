@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="md">
+    <b-navbar toggleable="md" sticky="true">
       <b-navbar-brand to="/">
         <img src="@/assets/logos/primary_logo.png" alt=""/>
       </b-navbar-brand>
-      <img class="sponsor" src="@/assets/logos/sponsored_logo.png" alt="">
+      <a href="#">
+        <img class="sponsor" src="@/assets/logos/sponsored_logo.png" alt="">
+      </a>
 
       <b-nav-form class="mx-auto">
         <b-input-group>
@@ -98,7 +100,6 @@ export default {
     width: 4rem;
     margin: -0.5rem 0rem -0.5rem 0.5rem;
   }
-
 
   /* custom css */
   .sign-out-btn {

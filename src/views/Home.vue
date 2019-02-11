@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    hello
+    <!--
     <button
       id="qsLoginBtn"
       class="btn btn-primary btn-margin"
@@ -15,6 +17,7 @@
       @click="logout()">
         Log Out
     </button>
+  -->
   </div>
 </template>
 
@@ -30,12 +33,14 @@ export default {
       authenticated: auth.authenticated
     }
   },
+  /*
   created () {
     auth.authNotifier.on('authChange', authState => {
       this.authenticated = authState.authenticated
     })
     auth.renewSession()
   },
+  */
   methods: {
     login () {
       auth.login()
@@ -49,6 +54,6 @@ export default {
 
 <style scoped>
   .home {
-    height: 50rem;
+    height: 100rem;
   }
 </style>

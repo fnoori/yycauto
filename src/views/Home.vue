@@ -1,6 +1,17 @@
 <template>
   <div class="home">
-    <premium-card/>
+    <div class="tier-one-row">
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+    </div>
+
     <!--
     <button
       id="qsLoginBtn"
@@ -23,13 +34,13 @@
 
 <script>
 import AuthService from '../auth/AuthService'
-import PremiumCard from '../components/PremiumCard'
+import TierOne from '../components/TierOne'
 const auth = new AuthService()
 
 export default {
   name: 'home',
   components: {
-    'premium-card': PremiumCard
+    'premium-card': TierOne
   },
   data () {
     return {
@@ -59,5 +70,15 @@ export default {
 <style scoped>
   .home {
     height: 100rem;
+    margin: 1rem 0;
+  }
+
+  .tier-one-row {
+    width: 100%;
+    padding-top: 10px;
+    overflow-x: scroll;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    position: relative;
   }
 </style>

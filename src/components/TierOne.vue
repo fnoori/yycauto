@@ -1,54 +1,51 @@
 <template>
-  <div class="premium-card">
+  <div class="tier-one">
     <b-card-group class="tier-one-card">
-        <!--<router-link :to="{name: 'Vehicle', params: {vehicleId: curr._id}}">-->
-        <!--<img src='@/assets/no-photo.png'/>-->
-          <b-card
-              no-body
-              img-top
-              img-src="https://previews.123rf.com/images/blankstock/blankstock1401/blankstock140100368/24929930-no-photo-camera-sign-icon-digital-photo-camera-symbol-red-prohibition-sign-stop-symbol-vector-illust.jpg"
-              tag="article"
-              footer-tag="footer"
-              class="mb-2">
-              <div class="card-body">
-                <div class="card-title">
-                    <div class="card-name">Honda Civic</div>
-                    <div class="card-price">23000</div>
+      <b-card
+          no-body
+          img-top
+          img-src="http://www.lmht.com/wp-content/uploads/2016/01/no-image.jpg"
+          tag="article"
+          footer-tag="footer"
+          class="mb-2">
+          <div class="card-body">
+            <div class="card-title">
+                <div class="card-name">Honda Civic</div>
+                <div class="card-price">$23,000</div>
+            </div>
+            <div class="card-text">
+                <div class="quick-spec-values">
+                  <div class="other-spec-value">
+                        10000
+                        <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                  </div>
+                  <div class="gas-value">
+                      Gas
+                      <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
+                  </div>
+                  <div class="other-spec-value">
+                      Auto
+                      <img class="quick-specs-icon" src="@/assets/quick-spec-transmission.png">
+                  </div>
                 </div>
-                <div class="card-text">
-                    <div class="quick-spec-values">
-                      <div class="other-spec-value">
-                            10000
-                            <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
-                      </div>
-                      <div class="gas-value">
-                          Gas
-                          <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
-                      </div>
-                      <div class="other-spec-value">
-                          Auto
-                          <img class="quick-specs-icon" src="@/assets//quick-spec-transmission.png">
-                      </div>
-                    </div>
-                </div>
-              </div>
-              <div slot="footer" class="card-footer-content">
-                <a href="#" class="dealership-page">
-                  <img src="@/assets/logos/sponsored_logo.png" class="card-logo">
-                </a>
-                <a href="#" target="_blank" class="location-link">
-                  Best Dealership
-                </a>
-              </div>
-          </b-card>
-        </router-link>
-</b-card-group>
+            </div>
+          </div>
+          <div slot="footer" class="card-footer-content">
+            <a href="#" class="dealership-page">
+              <img src="@/assets/logos/sponsored_logo.png" class="card-logo">
+            </a>
+            <a href="#" target="_blank" class="location-link">
+              Best Dealership
+            </a>
+          </div>
+      </b-card>
+    </b-card-group>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'PremiumCard',
+  name: 'TierOne',
   props: {
     msg: String
   }
@@ -56,8 +53,9 @@ export default {
 </script>
 
 <style scoped>
-  .premium-card {
-
+  .tier-one {
+    transition: 0.2s;
+    display: inline-flex;
   }
   a,
   a:focus,
@@ -71,7 +69,8 @@ export default {
     max-width: 18rem;
   }
   .card:hover {
-    background-color: #eeeeee;
+    transition: 0.2s;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
     cursor: pointer;
   }
   .card-body {
@@ -86,14 +85,6 @@ export default {
     border-radius: 0;
   }
   /* Custom */
-  .tier-one {
-    width: 100%;
-    padding-top: 10px;
-    overflow-x: scroll;
-    padding-bottom: 5px;
-    white-space: nowrap;
-    position: relative;
-  }
   .tier-one-card {
     display: inline-block;
     margin: 0 0.5rem;

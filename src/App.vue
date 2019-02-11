@@ -40,6 +40,7 @@ export default {
 
   #app {
     font-family: 'Comfortaa', cursive;
+    -webkit-overflow-scrolling: touch;
   }
 
   nav {

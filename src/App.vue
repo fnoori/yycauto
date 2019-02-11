@@ -2,11 +2,11 @@
   <div id="app">
     <b-navbar toggleable="md">
       <b-navbar-brand to="/">
-        <img src="@/assets/primary_logo.png" alt=""/>
+        <img src="@/assets/logos/primary_logo.png" alt=""/>
       </b-navbar-brand>
+      <img class="sponsor" src="@/assets/logos/sponsored_logo.png" alt="">
 
       <b-nav-form class="mx-auto">
-        <!--<b-form-input size="sm" class="mr-sm-2" type="text"/>-->
         <b-input-group>
           <b-form-input></b-form-input>
           <b-input-group-append>
@@ -18,7 +18,6 @@
       <b-button
         v-if="authenticated"
         class="ml-auto sign-out-btn">Logout</b-button>
-
     </b-navbar>
     <router-view/>
   </div>
@@ -59,6 +58,10 @@ export default {
     width: 8rem;
     margin: -0.5rem 0rem;
   }
+  .navbar form .input-group {
+    width: -moz-available;
+    width: -webkit-fill-available;
+  }
   .navbar form input {
     width: 50vw !important;
     box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
@@ -91,6 +94,11 @@ export default {
     border: none !important;
     color: #f44336 !important;
   }
+  .sponsor {
+    width: 4rem;
+    margin: -0.5rem 0rem -0.5rem 0.5rem;
+  }
+
 
   /* custom css */
   .sign-out-btn {
@@ -109,7 +117,7 @@ export default {
     box-shadow: 0px 0px 2px 3px rgba(0,0,0,0.1) !important;
   }
 
-  @media (max-width: 485px) {
+  @media (max-width: 630px) {
     /* bootstrap-vue overwritten rules */
 
     .navbar form {

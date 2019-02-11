@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    hello
+    <premium-card/>
     <!--
     <button
       id="qsLoginBtn"
@@ -23,10 +23,14 @@
 
 <script>
 import AuthService from '../auth/AuthService'
+import PremiumCard from '../components/PremiumCard'
 const auth = new AuthService()
 
 export default {
   name: 'home',
+  components: {
+    'premium-card': PremiumCard
+  },
   data () {
     return {
       auth,

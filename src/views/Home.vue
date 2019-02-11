@@ -1,15 +1,26 @@
 <template>
   <div class="home">
     <div class="tier-one-row">
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
-      <premium-card/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+      <tier-one/>
+    </div>
+
+    <div class="tier-two-row">
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
+      <tier-two/>
     </div>
 
     <!--
@@ -35,12 +46,14 @@
 <script>
 import AuthService from '../auth/AuthService'
 import TierOne from '../components/TierOne'
+import TierTwo from '../components/TierTwo'
 const auth = new AuthService()
 
 export default {
   name: 'home',
   components: {
-    'premium-card': TierOne
+    'tier-one': TierOne,
+    'tier-two': TierTwo
   },
   data () {
     return {
@@ -69,7 +82,6 @@ export default {
 
 <style scoped>
   .home {
-    height: 100rem;
     margin: 1rem 0;
   }
 

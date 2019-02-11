@@ -36,6 +36,7 @@
             </a>
             <a href="#" target="_blank" class="location-link">
               Best Dealership
+              <img src="@/assets/location.svg" alt="">
             </a>
           </div>
       </b-card>
@@ -67,6 +68,7 @@ export default {
   .card {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
     max-width: 18rem;
+    border: none;
   }
   .card:hover {
     transition: 0.2s;
@@ -102,6 +104,8 @@ export default {
     width: 3rem;
     float: left;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    padding: 2px;
   }
   .quick-spec-titles {
     display: flex;
@@ -167,29 +171,22 @@ export default {
     border-color: white !important;
     box-shadow: none !important;
   }
-  .location-btn {
-    float: right;
+  .location-link {
+    margin-left: auto;
   }
-  .location-btn i {
-    font-size: inherit !important;
+  .location-link img {
+    width: 0.7rem;
   }
   .card-footer {
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
   .card-footer-content {
-  }
-  .card-footer-content i {
-    font-size: inherit;
-  }
-  .location-link,
-  .location-link:hover {
-    float: right;
-    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
   }
   .dealership-page {
-    float: left;
-    margin-top: 0.1rem;
+    margin-right: auto;
   }
   @media (max-width: 480px) {
     /* Bootstrap */

@@ -22,24 +22,6 @@
       <tier-two/>
       <tier-two/>
     </div>
-
-    <!--
-    <button
-      id="qsLoginBtn"
-      class="btn btn-primary btn-margin"
-      v-if="!authenticated"
-      @click="login()">
-        Log In
-    </button>
-
-    <button
-      id="qsLogoutBtn"
-      class="btn btn-primary btn-margin"
-      v-if="authenticated"
-      @click="logout()">
-        Log Out
-    </button>
-  -->
   </div>
 </template>
 
@@ -47,6 +29,7 @@
 import AuthService from '../auth/AuthService'
 import TierOne from '../components/TierOne'
 import TierTwo from '../components/TierTwo'
+import axios from 'axios'
 const auth = new AuthService()
 
 export default {
@@ -58,17 +41,20 @@ export default {
   data () {
     return {
       auth,
-      authenticated: auth.authenticated
+      authenticated: auth.authenticated,
+
+      vehicles: null
     }
   },
-  /*
-  created () {
-    auth.authNotifier.on('authChange', authState => {
-      this.authenticated = authState.authenticated
+  mounted() {
+    axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_all_vehicles/0/5`)
+    .then((vehicles) => {
+      this.vehicles = vehicles.data
+    }).catch(axiosGetErr => {
+      alert(`Error when trying to retrieve vehicles
+              ${axiosGetErr}`)
     })
-    auth.renewSession()
   },
-  */
   methods: {
     login () {
       auth.login()

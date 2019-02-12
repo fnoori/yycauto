@@ -64,6 +64,10 @@ export default {
     text-decoration: none !important;
     color: black !important;
   }
+  footer {
+    height: auto;
+  }
+
   /* Bootstrap */
   .card {
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
@@ -102,7 +106,6 @@ export default {
   }
   .card-logo {
     width: 3rem;
-    float: left;
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
     background-color: white;
     padding: 2px;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="md" sticky="true">
+    <b-navbar toggleable="md" :sticky="true">
       <b-navbar-brand to="/">
         <img src="@/assets/logos/primary_logo.png" alt=""/>
       </b-navbar-brand>

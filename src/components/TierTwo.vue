@@ -54,6 +54,9 @@ a:active {
   text-decoration: none !important;
   color: black !important;
 }
+footer {
+  height: auto;
+}
 
 /* Bootstrap */
 .btn {
@@ -76,7 +79,8 @@ a:active {
 .tier-two-card {
   width: 100%;
   margin: 1rem 0;
-  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 0.25rem;
 }
 .tier-two-card:hover {
   transition: 0.2s;

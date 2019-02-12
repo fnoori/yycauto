@@ -43,13 +43,24 @@ export default {
       auth,
       authenticated: auth.authenticated,
 
-      vehicles: null
+      tierOneVehicles: null,
+      tierTwoVehicles: null
     }
   },
   mounted() {
     axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_all_vehicles/0/5`)
     .then((vehicles) => {
-      this.vehicles = vehicles.data
+      this.tierTwoVehicles = vehicles.data
+      console.log(this.tierTwoVehicles)
+    }).catch(axiosGetErr => {
+      alert(`Error when trying to retrieve vehicles
+              ${axiosGetErr}`)
+    })
+
+    axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/tier_one`)
+    .then((vehicles) => {
+      this.tierOneVehicles = vehicles.data
+      console.log(this.tierOneVehicles)
     }).catch(axiosGetErr => {
       alert(`Error when trying to retrieve vehicles
               ${axiosGetErr}`)

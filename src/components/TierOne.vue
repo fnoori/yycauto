@@ -70,10 +70,10 @@ export default {
   },
 
   created() {
-    setTimeout(() => {
-      //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`)
-      //console.log(this.cl.url(this.vehicle.Dealership + '/' + this.vehicle._id))
-     }, 2000)
+    //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`)
+    //console.log(this.baseImageUrl + '/' + this.vehicle.Dealership + '/' + this.cl.imageTag(this.vehicle._id))
+    //console.log(this.cl.imageTag(this.vehicle._id).toHtml())
+    console.log(this.cl.url(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`))
   },
 
   methods: {

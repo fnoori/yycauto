@@ -43,7 +43,6 @@ export default {
     axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_all_tier_two_vehicles/0/5`)
     .then((vehicles) => {
       this.tierTwoVehicles = vehicles.data
-      console.log(this.tierTwoVehicles)
     }).catch(axiosGetErr => {
       alert(`Error when trying to retrieve vehicles
               ${axiosGetErr}`)
@@ -52,7 +51,6 @@ export default {
     axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/tier_one`)
     .then((vehicles) => {
       this.tierOneVehicles = vehicles.data
-      console.log(this.tierOneVehicles)
     }).catch(axiosGetErr => {
       alert(`Error when trying to retrieve vehicles
               ${axiosGetErr}`)

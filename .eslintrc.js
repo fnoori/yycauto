@@ -22,7 +22,11 @@ module.exports = {
     'no-multiple-empty-lines': 'off',
     'block-spacing': 'off',
     'space-before-blocks': 'off',
-    'spaced-comment': 'off'
+    'spaced-comment': 'off',
+    'no-unneeded-ternary': 'off',
+    'comma-spacing': 'off',
+    'arrow-spacing': 'off',
+    'object-curly-spacing': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

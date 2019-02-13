@@ -1,15 +1,7 @@
 <template>
   <div class="home">
     <div class="tier-one-row">
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
-      <tier-one/>
+      <tier-one v-for="vehicle in tierOneVehicles" v-bind:key="vehicle._id" v-bind:vehicle="vehicle"/>
     </div>
 
     <div class="tier-two-row">
@@ -48,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_all_vehicles/0/5`)
+    axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_all_tier_two_vehicles/0/5`)
     .then((vehicles) => {
       this.tierTwoVehicles = vehicles.data
       console.log(this.tierTwoVehicles)

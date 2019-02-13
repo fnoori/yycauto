@@ -10,21 +10,21 @@
           class="mb-2">
           <div class="card-body">
             <div class="card-title">
-                <div class="card-name">Honda Civic</div>
-                <div class="card-price">$23,000</div>
+                <div class="card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
+                <div class="card-price">$ {{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
             </div>
             <div class="card-text">
                 <div class="quick-spec-values">
                   <div class="other-spec-value">
-                        10000
+                        {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
                         <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
                   </div>
                   <div class="gas-value">
-                      Gas
+                      {{ vehicle.basicInfo['Fuel Type'] }}
                       <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
                   </div>
                   <div class="other-spec-value">
-                      Auto
+                      {{ vehicle.mechanicalSpecs.Transmission }}
                       <img class="quick-specs-icon" src="@/assets/quick-spec-transmission.png">
                   </div>
                 </div>
@@ -32,7 +32,9 @@
           </div>
           <div slot="footer" class="card-footer-content">
             <a href="#" class="dealership-page">
-              <img src="@/assets/logos/sponsored_logo.png" class="card-logo">
+              <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
+              <img v-else-if="!isDevCloudinary" :src="baseImageUrl/vehicle.Dealership._id/vehicle._id" class="card-logo">
+              <!-- <img v-else-if="!isProdEnvironment" :src="" class="card-logo"/> -->
             </a>
             <a href="#" target="_blank" class="location-link">
               Best Dealership
@@ -45,10 +47,39 @@
 </template>
 
 <script>
+import cloudinary from 'cloudinary-core'
+
 export default {
   name: 'TierOne',
   props: {
-    msg: String
+    vehicle: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      isDevEnvironment: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_DEV ? true : false,
+      isProdEnvironment: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_PROD ? true : false,
+      isDevCloudinary: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_DEV_CLOUDINARY ? true : false,
+
+      baseImageUrl: process.env.VUE_APP_DEV_CLOUDINARY_URL,
+
+      cl: cloudinary.Cloudinary.new( { cloud_name: process.env.VUE_APP_CLOUDINARY_CLOUD_NAME})
+    }
+  },
+
+  created() {
+    setTimeout(() => {
+      //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`)
+      //console.log(this.cl.url(this.vehicle.Dealership + '/' + this.vehicle._id))
+     }, 2000)
+  },
+
+  methods: {
+    addCommaToNum(price) {
+      return (String(price).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
+    }
   }
 }
 </script>

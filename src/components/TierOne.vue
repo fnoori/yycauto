@@ -11,13 +11,18 @@
           <div class="card-body">
             <div class="card-title">
                 <div class="card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
-                <div class="card-price">$ {{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
+                <div class="card-price">${{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
             </div>
             <div class="card-text">
                 <div class="quick-spec-values">
                   <div class="other-spec-value">
-                        {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
-                        <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                    <div v-if="vehicle.basicInfo.Kilometres === '0'">
+                      <img class="new-vehicle-icon" src="@/assets/new-kilometre.png">
+                    </div>
+                    <div class="kilometre-spacing" v-else>
+                      {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
+                      <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                    </div>
                   </div>
                   <div class="gas-value">
                       {{ vehicle.basicInfo['Fuel Type'] }}
@@ -70,7 +75,7 @@ export default {
   },
 
   created() {
-    //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}/${this.vehicle.photos[0]}.${this.vehicle.photos[0].split('.')[1]}`)
+    console.log(this.vehicle)
   },
 
   methods: {
@@ -131,6 +136,7 @@ export default {
   }
   .card-price {
     color: grey;
+    letter-spacing: 1px;
   }
   .card-logo {
     width: 3rem;
@@ -189,6 +195,9 @@ export default {
   }
   .other-spec-value div {
     width: 100%;
+  }
+  .kilometre-spacing {
+    letter-spacing: 1px;
   }
   .card-btn {
     background-color: #f44336;

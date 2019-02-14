@@ -5,14 +5,7 @@
     </div>
 
     <div class="tier-two-row">
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
-      <tier-two/>
+      <tier-two v-for="vehicle in tierTwoVehicles" v-bind:key="vehicle._id" v-bind:vehicle="vehicle"/>
     </div>
   </div>
 </template>

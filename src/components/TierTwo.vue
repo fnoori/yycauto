@@ -1,24 +1,29 @@
 <template lang="html">
   <div class="tier-two">
     <div class="tier-two-card">
-      <img src="http://www.lmht.com/wp-content/uploads/2016/01/no-image.jpg">
+      <img :src="baseImageUrl+'/'+vehicle.Dealership._id+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]">
       <div class="tier-two-card-body">
           <div class="tier-two-card-title">
-              <div class="tier-two-card-name">Honda Civic</div>
-              <div class="tier-two-card-price">25,000</div>
+              <div class="tier-two-card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
+              <div class="tier-two-card-price">${{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
           </div>
           <div class="tier-two-card-text">
               <div class="quick-spec-values">
                   <div class="other-spec-value">
-                    10000
-                    <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                    <div v-if="vehicle.basicInfo.Kilometres === '0'">
+                      <img class="new-vehicle-icon" src="@/assets/new-kilometre.png">
+                    </div>
+                    <div class="kilometre-spacing" v-else>
+                      {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
+                      <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                    </div>
                   </div>
                   <div class="gas-value">
-                      Gas
+                      {{ vehicle.basicInfo['Fuel Type'] }}
                       <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
                   </div>
                   <div class="other-spec-value">
-                      Manual
+                      {{ vehicle.mechanicalSpecs.Transmission }}
                       <img class="quick-specs-icon" src="@/assets/quick-spec-transmission.png">
                   </div>
               </div>
@@ -27,7 +32,9 @@
       <footer class="card-footer">
         <div class="tier-two-card-footer-content">
           <a href="#" class="dealership-page">
-            <img src="@/assets/logos/sponsored_logo.png" alt="" class="card-logo">
+            <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
+            <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership._id+'/logo'" class="card-logo">
+            <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
           </a>
           <a href="#" class="location-link">
             Best Dealership
@@ -40,9 +47,36 @@
 </template>
 
 <script>
+import cloudinary from 'cloudinary-core'
+
 export default {
   name: 'TierTwo',
   props: {
+    vehicle: {
+      type: Object,
+      required: true
+    }
+  },
+  data() {
+    return {
+      isDevEnvironment: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_DEV ? true : false,
+      isProdEnvironment: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_PROD ? true : false,
+      isDevCloudinary: process.env.NODE_ENV === process.env.VUE_APP_ENVIRONMENT_DEV_CLOUDINARY ? true : false,
+
+      baseImageUrl: process.env.VUE_APP_DEV_CLOUDINARY_URL,
+
+      cl: cloudinary.Cloudinary.new( { cloud_name: process.env.VUE_APP_CLOUDINARY_CLOUD_NAME})
+    }
+  },
+
+  created() {
+    //console.log(this.vehicle);
+  },
+
+  methods: {
+    addCommaToNum(price) {
+      return (String(price).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
+    }
   }
 }
 </script>
@@ -95,6 +129,7 @@ footer {
 }
 .tier-two-card-price {
   font-size: 0.9rem;
+  letter-spacing: 1px;
   color: grey;
 }
 .tier-two-card-body {
@@ -146,6 +181,9 @@ footer {
 .other-spec-value div {
   width: 100%;
 }
+.kilometre-spacing {
+  letter-spacing: 1px;
+}
 .card-btn {
   background-color: #f44336;
   height: 2rem;
@@ -173,7 +211,7 @@ footer {
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 2px;
-  width: 3rem !important;
+  width: 2.5rem !important;
 }
 .location-link {
   margin-left: auto;

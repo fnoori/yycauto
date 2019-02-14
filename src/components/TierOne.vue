@@ -4,7 +4,7 @@
       <b-card
           no-body
           img-top
-          :img-src="baseImageUrl+'/'+vehicle.Dealership._id+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]"
+          :img-src="baseImageUrl+'/'+vehicle.Dealership+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]"
           tag="article"
           footer-tag="footer"
           class="mb-2">
@@ -38,7 +38,7 @@
           <div slot="footer" class="card-footer-content">
             <a href="#" class="dealership-page">
               <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
-              <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership._id+'/logo'" class="card-logo">
+              <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
               <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
             </a>
             <!--

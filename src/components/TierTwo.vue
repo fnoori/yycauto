@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="tier-two">
     <div class="tier-two-card">
-      <img :src="baseImageUrl+'/'+vehicle.Dealership._id+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]">
+      <img :src="baseImageUrl+'/'+vehicle.Dealership+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]">
       <div class="tier-two-card-body">
           <div class="tier-two-card-title">
               <div class="tier-two-card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
@@ -33,7 +33,7 @@
         <div class="tier-two-card-footer-content">
           <a href="#" class="dealership-page">
             <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
-            <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership._id+'/logo'" class="card-logo">
+            <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
             <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
           </a>
           <a href="#" class="location-link">

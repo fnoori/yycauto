@@ -4,7 +4,7 @@
       <b-card
           no-body
           img-top
-          img-src="http://www.lmht.com/wp-content/uploads/2016/01/no-image.jpg"
+          :img-src="baseImageUrl+'/'+vehicle.Dealership+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]"
           tag="article"
           footer-tag="footer"
           class="mb-2">
@@ -33,8 +33,8 @@
           <div slot="footer" class="card-footer-content">
             <a href="#" class="dealership-page">
               <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
-              <img v-else-if="!isDevCloudinary" :src="baseImageUrl/vehicle.Dealership._id/vehicle._id" class="card-logo">
-              <!-- <img v-else-if="!isProdEnvironment" :src="" class="card-logo"/> -->
+              <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
+              <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
             </a>
             <a href="#" target="_blank" class="location-link">
               Best Dealership
@@ -70,10 +70,7 @@ export default {
   },
 
   created() {
-    //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`)
-    //console.log(this.baseImageUrl + '/' + this.vehicle.Dealership + '/' + this.cl.imageTag(this.vehicle._id))
-    //console.log(this.cl.imageTag(this.vehicle._id).toHtml())
-    console.log(this.cl.url(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}`))
+    //console.log(`${this.baseImageUrl}/${this.vehicle.Dealership}/${this.vehicle._id}/${this.vehicle.photos[0]}.${this.vehicle.photos[0].split('.')[1]}`)
   },
 
   methods: {

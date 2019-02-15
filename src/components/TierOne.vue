@@ -1,54 +1,56 @@
 <template>
   <div class="tier-one">
     <b-card-group class="tier-one-card">
-      <b-card
-          no-body
-          img-top
-          :img-src="baseImageUrl+'/'+vehicle.Dealership+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]"
-          tag="article"
-          footer-tag="footer"
-          class="mb-2">
-          <div class="card-body">
-            <div class="card-title">
-                <div class="card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
-                <div class="card-price">${{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
-            </div>
-            <div class="card-text">
-                <div class="quick-spec-values">
-                  <div class="other-spec-value">
-                    <div v-if="vehicle.basicInfo.Kilometres === '0'">
-                      <img class="new-vehicle-icon" src="@/assets/new-kilometre.png">
+      <router-link :to="{ name: 'vehicle', params: { vehicle_id: vehicle._id } }">
+        <b-card
+            no-body
+            img-top
+            :img-src="baseImageUrl+'/'+vehicle.Dealership+'/'+vehicle._id+'/'+vehicle.photos[0]+'.'+vehicle.photos[0].split('.')[1]"
+            tag="article"
+            footer-tag="footer"
+            class="mb-2">
+            <div class="card-body">
+              <div class="card-title">
+                  <div class="card-name">{{ vehicle.basicInfo.Make }} {{ vehicle.basicInfo.Model }}</div>
+                  <div class="card-price">${{ addCommaToNum(vehicle.basicInfo.Price) }}</div>
+              </div>
+              <div class="card-text">
+                  <div class="quick-spec-values">
+                    <div class="other-spec-value">
+                      <div v-if="vehicle.basicInfo.Kilometres === '0'">
+                        <img class="new-vehicle-icon" src="@/assets/new-kilometre.png">
+                      </div>
+                      <div class="kilometre-spacing" v-else>
+                        {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
+                        <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                      </div>
                     </div>
-                    <div class="kilometre-spacing" v-else>
-                      {{ addCommaToNum(vehicle.basicInfo.Kilometres) }}
-                      <img class="quick-specs-icon" src="@/assets/km-quick-spec.png">
+                    <div class="gas-value">
+                        {{ vehicle.basicInfo['Fuel Type'] }}
+                        <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
+                    </div>
+                    <div class="other-spec-value">
+                        {{ vehicle.mechanicalSpecs.Transmission }}
+                        <img class="quick-specs-icon" src="@/assets/quick-spec-transmission.png">
                     </div>
                   </div>
-                  <div class="gas-value">
-                      {{ vehicle.basicInfo['Fuel Type'] }}
-                      <img class="quick-specs-icon" src="@/assets/gasoline-pump.png">
-                  </div>
-                  <div class="other-spec-value">
-                      {{ vehicle.mechanicalSpecs.Transmission }}
-                      <img class="quick-specs-icon" src="@/assets/quick-spec-transmission.png">
-                  </div>
-                </div>
+              </div>
             </div>
-          </div>
-          <div slot="footer" class="card-footer-content">
-            <a href="#" class="dealership-page">
-              <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
-              <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
-              <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
-            </a>
-            <!--
-            <a :href="'http://maps.google.com/?q='+vehicle" target="_blank" class="location-link">
-              Best Dealership
-              <img src="@/assets/location.svg" alt="">
-            </a>
-            -->
-          </div>
-      </b-card>
+            <div slot="footer" class="card-footer-content">
+              <a href="#" class="dealership-page">
+                <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
+                <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
+                <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
+              </a>
+              <!--
+              <a :href="'http://maps.google.com/?q='+vehicle" target="_blank" class="location-link">
+                Best Dealership
+                <img src="@/assets/location.svg" alt="">
+              </a>
+              -->
+            </div>
+        </b-card>
+      </router-link>
     </b-card-group>
   </div>
 </template>
@@ -77,7 +79,6 @@ export default {
   },
 
   created() {
-    console.log(this.vehicle)
   },
 
   methods: {

@@ -53,24 +53,14 @@
             <div class="">Best Dealership</div>
             <img src="@/assets/logos/sponsored_logo.png" alt="">
           </h4>
-          <b-list-group>
-            <b-list-group-item>
-              <div class="title">Price</div>
-              <div class="value">19,000</div>
-            </b-list-group-item>
-            <b-list-group-item>
-              <div class="title">Year</div>
-              <div class="value">2017</div>
-            </b-list-group-item>
-            <b-list-group-item>
+          <h5>Summary</h5>
+          <div class="basic-info">
+            <div class="row">
               <div class="title">Kilometres</div>
               <div class="value">32,000</div>
-            </b-list-group-item>
-            <b-list-group-item>
-              <div class="title">Doors</div>
-              <div class="value">5</div>
-            </b-list-group-item>
-          </b-list-group>
+            </div>
+
+          </div>
         </div>
       </div>
 
@@ -108,25 +98,33 @@
 <style lang="css" scoped>
 
   /* Bootstrap-vue overwrite */
-  .dealership-info .list-group-item {
-    display: flex;
-    border-radius: 0 !important;
-    border: none !important;
-    padding: initial;
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
-    margin: .2rem;
-  }
-  .dealership-info .list-group-item .title {
-    background-color: lightcoral;
-    padding: 0.5rem;
-    display: flex;
-    color: white;
-    width: 7rem;
-  }
-  .dealership-info .list-group-item .value {
-    padding: 0.5rem;
+
+  /*sdffg*/
+  .basic-info {
     display: flex;
   }
+  .basic-info h5 {
+    color: rgba(0,0,0,0.5);
+  }
+  .basic-info .row {
+    height: 3rem;
+    width: 100%;
+    margin: 0;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+  }
+  .basic-info .row .title {
+    color: rgba(0,0,0,0.5);
+    width: 50%;
+    text-align: center;
+  }
+  .basic-info .row .value {
+    color: black;
+    width: 50%;
+    text-align: center;
+  }
+  /*sfsdf*/
 
 
   .vehicle {

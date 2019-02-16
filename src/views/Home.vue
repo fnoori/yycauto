@@ -3,7 +3,7 @@
     <div class="tier-one-row">
       <tier-one v-for="vehicle in tierOneVehicles" v-bind:key="vehicle._id" v-bind:vehicle="vehicle"/>
     </div>
-    <hr></hr>
+
     <div class="tier-two-row">
       <tier-two v-for="vehicle in tierTwoVehicles" v-bind:key="vehicle._id" v-bind:vehicle="vehicle"/>
     </div>

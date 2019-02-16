@@ -1,6 +1,6 @@
 <template>
   <div class="container vehicle">
-    <h3>Honda Civic</h3>
+    <h3>2017 Honda Civic SE</h3>
     <div class="main-content">
 
       <div class="top-content">
@@ -10,13 +10,11 @@
             style="text-shadow: 1px 1px 2px #333;"
             controls
             background="#ababab"
-            no-animation: true
+            no-animation
             img-width="1024"
             img-height="480"
-            v-model="slide"
-            :interval="0"
-            @sliding-start="onSlideStart"
-            @sliding-end="onSlideEnd">
+            indicators
+            :interval="0">
             <!-- Text slides with image -->
             <b-carousel-slide
               img-src="https://picsum.photos/1024/480/?image=52"/>
@@ -51,7 +49,28 @@
         </div>
 
         <div class="dealership-info">
-
+          <h4>
+            <div class="">Best Dealership</div>
+            <img src="@/assets/logos/sponsored_logo.png" alt="">
+          </h4>
+          <b-list-group>
+            <b-list-group-item>
+              <div class="title">Price</div>
+              <div class="value">19,000</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="title">Year</div>
+              <div class="value">2017</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="title">Kilometres</div>
+              <div class="value">32,000</div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="title">Doors</div>
+              <div class="value">5</div>
+            </b-list-group-item>
+          </b-list-group>
         </div>
       </div>
 
@@ -87,6 +106,29 @@
 </script>
 
 <style lang="css" scoped>
+
+  /* Bootstrap-vue overwrite */
+  .dealership-info .list-group-item {
+    display: flex;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: initial;
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+    margin: .2rem;
+  }
+  .dealership-info .list-group-item .title {
+    background-color: lightcoral;
+    padding: 0.5rem;
+    display: flex;
+    color: white;
+    width: 7rem;
+  }
+  .dealership-info .list-group-item .value {
+    padding: 0.5rem;
+    display: flex;
+  }
+
+
   .vehicle {
     height: 38rem;
     margin-top: 1rem;
@@ -107,11 +149,24 @@
   }
   .dealership-info {
     height: auto;
-    display: flex;
+    display: block;
     width: 21rem;
     margin-left: 0.3rem;
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+    padding: 0.5rem;
   }
+  .dealership-info h4 {
+    display: inline-block;
+  }
+  .dealership-info h4 img {
+    width: 3rem;
+    display: inline-block;
+    margin-left: 0.5rem;
+  }
+  .dealership-info h4 div {
+    display: inline-block;
+  }
+
 
   @media (max-width: 991px) {
     .top-content {
@@ -125,6 +180,24 @@
       height: 5rem;
       display: inline-block;
       width: 100%;
+      margin-left: 0rem;
+    }
+  }
+
+  @media (max-width: 525px) {
+    h3 {
+      font-size: 1.5rem;
+    }
+    h4 {
+      font-size: 1.2rem;
+    }
+
+    .main-content {
+      padding: 0;
+    }
+    .vehicle {
+      padding: 0.2rem !important;
+      box-shadow: none;
     }
   }
 </style>

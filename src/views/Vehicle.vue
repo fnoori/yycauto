@@ -2,56 +2,57 @@
   <div class="container vehicle">
     <h3>Honda Civic</h3>
     <div class="main-content">
-      <div class="image-display">
-        <b-carousel
-          id="carousel1"
-          style="text-shadow: 1px 1px 2px #333;"
-          controls
-          indicators
-          background="#ababab"
-          no-animation: true
-          img-width="1024"
-          img-height="480"
-          v-model="slide"
-          @sliding-start="onSlideStart"
-          @sliding-end="onSlideEnd"
-        >
-          <!-- Text slides with image -->
-          <b-carousel-slide
-            caption="First slide"
-            text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-            img-src="https://picsum.photos/1024/480/?image=52"
-          />
 
-          <!-- Slides with custom text -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-            <h1>Hello world!</h1>
-          </b-carousel-slide>
+      <div class="top-content">
+        <div class="image-display">
+          <b-carousel
+            id="carousel1"
+            style="text-shadow: 1px 1px 2px #333;"
+            controls
+            background="#ababab"
+            no-animation: true
+            img-width="1024"
+            img-height="480"
+            v-model="slide"
+            :interval="0"
+            @sliding-start="onSlideStart"
+            @sliding-end="onSlideEnd">
+            <!-- Text slides with image -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=52"/>
 
-          <!-- Slides with image only -->
-          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58" />
+            <!-- Slides with custom text -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=54">
+            </b-carousel-slide>
 
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide>
-            <img
-              slot="img"
-              class="d-block img-fluid w-100"
-              width="1024"
-              height="480"
-              src="https://picsum.photos/1024/480/?image=55"
-              alt="image slot"
-            />
-          </b-carousel-slide>
+            <!-- Slides with image only -->
+            <b-carousel-slide
+              img-src="https://picsum.photos/1024/480/?image=58" />
 
-          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-          <b-carousel-slide caption="Blank Image" img-blank img-alt="Blank image">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eros felis, tincidunt
-              a tincidunt eget, convallis vel est. Ut pellentesque ut lacus vel interdum.
-            </p>
-          </b-carousel-slide>
-        </b-carousel>
+            <!-- Slides with img slot -->
+            <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+            <b-carousel-slide>
+              <img
+                slot="img"
+                class="d-block img-fluid w-100"
+                width="1024"
+                height="480"
+                src="https://picsum.photos/1024/480/?image=55"
+                alt="image slot"/>
+            </b-carousel-slide>
+
+            <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+            <b-carousel-slide
+              caption="Blank Image" img-blank img-alt="Blank image">
+            </b-carousel-slide>
+          </b-carousel>
+
+        </div>
+
+        <div class="dealership-info">
+
+        </div>
       </div>
 
     </div>
@@ -94,5 +95,36 @@
   .main-content {
     height: 30rem;
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+    padding: 1rem;
+  }
+  .top-content {
+    display: flex;
+  }
+  .image-display {
+    width: 60vw;
+    display: flex;
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+  }
+  .dealership-info {
+    height: auto;
+    display: flex;
+    width: 21rem;
+    margin-left: 0.3rem;
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 991px) {
+    .top-content {
+      display: inline-block;
+    }
+    .image-display {
+      width: 100%;
+      display: inline-block;
+    }
+    .dealership-info {
+      height: 5rem;
+      display: inline-block;
+      width: 100%;
+    }
   }
 </style>

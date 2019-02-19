@@ -49,35 +49,42 @@
         </div>
 
         <div class="dealership-info">
-          <h4>
-            <div class="">Best Dealership</div>
-            <img src="@/assets/logos/sponsored_logo.png" alt="">
-          </h4>
-          <h5>
-            Vehicle Summary | <div class="price">$22,000</div>
-          </h5>
-          <div class="basic-info">
-            <div class="row">
-              <div class="title">Kilometres</div>
-              <div class="value">32,000</div>
-            </div>
-            <div class="row">
-              <div class="title">CarProof</div>
-              <div class="value">Yes</div>
-            </div>
-            <div class="row">
-              <div class="title">Transmission</div>
-              <div class="value">Auto</div>
-            </div>
-            <div class="row">
-              <div class="title">Body</div>
-              <div class="value">Sedan</div>
-            </div>
-            <div class="row">
-              <div class="title">Fuel Type</div>
-              <div class="value">Gas</div>
+          <div class="inner">
+            <h4>
+              <div class="">Best Dealership</div>
+              <img src="@/assets/logos/sponsored_logo.png" alt="">
+            </h4>
+            <h5>
+              Vehicle Summary | <div class="price">$22,000</div>
+            </h5>
+            <div class="basic-info">
+              <div class="row">
+                <div class="title">Kilometres</div>
+                <div class="value">32,000</div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="title">CarProof</div>
+                <div class="value">Yes</div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="title">Transmission</div>
+                <div class="value">Auto</div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="title">Body</div>
+                <div class="value">Sedan</div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="title">Fuel Type</div>
+                <div class="value">Gas</div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
@@ -113,6 +120,10 @@
 </script>
 
 <style lang="css" scoped>
+
+  hr {
+    display: none;
+  }
 
   /* Bootstrap-vue overwrite */
 
@@ -160,9 +171,14 @@
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
   }
   .dealership-info {
-    display: block;
+    display: flex;
     width: 21rem;
     padding: 0.5rem;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .dealership-info .inner {
+    margin: 0 auto;
   }
   .dealership-info h4 {
     display: inline-block;
@@ -189,6 +205,7 @@
   @media (max-width: 1199px) {
     .basic-info {
       margin: 0 15%;
+      margin-top: 3px;
     }
     .basic-info .row {
       height: 2vw;
@@ -200,12 +217,25 @@
   }
 
   @media (max-width: 991px) {
+    hr {
+      display: block;
+      width: 18rem;
+      margin-left: 0;
+    }
+
     .top-content {
       display: inline-block;
     }
     .image-display {
       width: 100%;
       display: inline-block;
+    }
+    .basic-info {
+      margin: 0 20%;
+      margin-top: 1rem;
+    }
+    .basic-info .row {
+      padding: 0 0 0.5rem;
     }
     .dealership-info {
       height: 5rem;

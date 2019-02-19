@@ -53,13 +53,30 @@
             <div class="">Best Dealership</div>
             <img src="@/assets/logos/sponsored_logo.png" alt="">
           </h4>
-          <h5>Summary</h5>
+          <h5>
+            Vehicle Summary | <div class="price">$22,000</div>
+          </h5>
           <div class="basic-info">
             <div class="row">
               <div class="title">Kilometres</div>
               <div class="value">32,000</div>
             </div>
-
+            <div class="row">
+              <div class="title">CarProof</div>
+              <div class="value">Yes</div>
+            </div>
+            <div class="row">
+              <div class="title">Transmission</div>
+              <div class="value">Auto</div>
+            </div>
+            <div class="row">
+              <div class="title">Body</div>
+              <div class="value">Sedan</div>
+            </div>
+            <div class="row">
+              <div class="title">Fuel Type</div>
+              <div class="value">Gas</div>
+            </div>
           </div>
         </div>
       </div>
@@ -99,41 +116,38 @@
 
   /* Bootstrap-vue overwrite */
 
-  /*sdffg*/
   .basic-info {
-    display: flex;
+    display: inline-block;
+    width: 100%;
+    margin: 2vw 15%;
   }
   .basic-info h5 {
     color: rgba(0,0,0,0.5);
+    display: block;
   }
   .basic-info .row {
-    height: 3rem;
+    height: 1.5rem;
     width: 100%;
-    margin: 0;
-    padding: .5rem;
+    margin: 0 0 1rem 0;
+    padding: 0 0.5rem;
     display: flex;
     align-items: center;
   }
   .basic-info .row .title {
     color: rgba(0,0,0,0.5);
     width: 50%;
-    text-align: center;
   }
   .basic-info .row .value {
     color: black;
     width: 50%;
-    text-align: center;
   }
-  /*sfsdf*/
-
 
   .vehicle {
-    height: 38rem;
     margin-top: 1rem;
+    margin-bottom: 1rem;
     padding: 1rem;
   }
   .main-content {
-    height: 30rem;
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
     padding: 1rem;
   }
@@ -146,11 +160,8 @@
     box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
   }
   .dealership-info {
-    height: auto;
     display: block;
     width: 21rem;
-    margin-left: 0.3rem;
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
     padding: 0.5rem;
   }
   .dealership-info h4 {
@@ -164,7 +175,29 @@
   .dealership-info h4 div {
     display: inline-block;
   }
+  .dealership-info h5 {
+    font-size: 1.1rem;
+    display: flex;
+  }
+  .dealership-info h5 .price {
+    color: green;
+    margin-left: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 
+  @media (max-width: 1199px) {
+    .basic-info {
+      margin: 0 15%;
+    }
+    .basic-info .row {
+      height: 2vw;
+    }
+  }
+
+  @media (max-width: 1164px) {
+
+  }
 
   @media (max-width: 991px) {
     .top-content {
@@ -181,6 +214,7 @@
       margin-left: 0rem;
     }
   }
+
 
   @media (max-width: 525px) {
     h3 {

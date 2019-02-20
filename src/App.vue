@@ -62,6 +62,10 @@ export default {
   a:active {
     color: white !important;
   }
+  a.text-light:hover,
+  a.text-light:focus {
+    color: white !important;
+  }
   footer {
     background-color: #f44336;
     bottom: 0;
@@ -125,6 +129,12 @@ export default {
   .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #f44336 !important;
+  }
+  .list-group-item {
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: .5rem 0 !important;
   }
 
   /* custom css */

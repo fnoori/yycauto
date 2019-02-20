@@ -54,8 +54,20 @@
     </div>
 
     <div class="details">
-      <b-tabs pills>
-        <b-tab title="Tab 1" active>
+      <b-tabs pills v-model="tabIndex">
+        <b-tab title="Basic" :title-link-class="linkClass(0)">
+          <b-list-group class="vehicle-details">
+            <b-list-group-item>
+              <div class="title">Make</div>
+              <div class="value">Honda</div>
+            </b-list-group-item>
+            <b-list-group-item></b-list-group-item>
+            <b-list-group-item></b-list-group-item>
+            <b-list-group-item></b-list-group-item>
+            <b-list-group-item></b-list-group-item>
+          </b-list-group>
+        </b-tab>
+        <b-tab title="Mechanical" :title-link-class="linkClass(1)">
           <b-list-group class="vehicle-details">
             <b-list-group-item>Cras justo odio</b-list-group-item>
             <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
@@ -64,7 +76,7 @@
             <b-list-group-item>Vestibulum at eros</b-list-group-item>
           </b-list-group>
         </b-tab>
-        <b-tab title="Tab 2">
+        <b-tab title="Environmental" :title-link-class="linkClass(2)">
           <b-list-group class="vehicle-details">
             <b-list-group-item>Cras justo odio</b-list-group-item>
             <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
@@ -84,6 +96,11 @@
 
   export default {
     name: 'vehicle',
+    data() {
+      return {
+        tabIndex: 0
+      }
+    },
     computed: {
       vehicleId() {
         return this.$route.params.vehicle_id
@@ -102,6 +119,15 @@
                 ${axiosGetErr}`)
       })
       */
+    },
+    methods: {
+      linkClass(idx) {
+        if (this.tabIndex === idx) {
+          return ['text-light']
+        } else {
+          return ['text-dark']
+        }
+      }
     }
   }
 </script>
@@ -144,11 +170,18 @@
 
   .details {
     padding: 0.5rem;
-    margin: 2rem 1rem;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    box-shadow: 1px 1px 1px 1px;
+    width: 30rem;
+    margin: 1rem auto;
   }
   .details .vehicle-details {
     margin-top: 1rem;
+  }
+  .details .title {
+    display: inline-block;
+  }
+  .details .value {
+    display: inline-block;
   }
 
   @media (max-width: 630px) {

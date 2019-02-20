@@ -1,93 +1,51 @@
 <template>
   <div class="container vehicle">
     <h3>2017 Honda Civic SE</h3>
-    <div class="main-content">
+    <div class="vehicle">
 
-      <div class="top-content">
-        <div class="image-display">
-          <b-carousel
-            id="carousel1"
-            style="text-shadow: 1px 1px 2px #333;"
-            controls
-            background="#ababab"
-            no-animation
-            img-width="1024"
-            img-height="480"
-            indicators
-            :interval="0">
-            <!-- Text slides with image -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=52"/>
+      <div class="image-display">
+        <b-carousel
+          id="carousel1"
+          style="text-shadow: 1px 1px 2px #333;"
+          controls
+          background="#ababab"
+          no-animation
+          img-width="1024"
+          img-height="480"
+          indicators
+          :interval="0">
+          <!-- Text slides with image -->
+          <b-carousel-slide
+            img-src="https://picsum.photos/1024/480/?image=52"/>
 
-            <!-- Slides with custom text -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=54">
-            </b-carousel-slide>
+          <!-- Slides with custom text -->
+          <b-carousel-slide
+            img-src="https://picsum.photos/1024/480/?image=54">
+          </b-carousel-slide>
 
-            <!-- Slides with image only -->
-            <b-carousel-slide
-              img-src="https://picsum.photos/1024/480/?image=58" />
+          <!-- Slides with image only -->
+          <b-carousel-slide
+            img-src="https://picsum.photos/1024/480/?image=58" />
 
-            <!-- Slides with img slot -->
-            <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-            <b-carousel-slide>
-              <img
-                slot="img"
-                class="d-block img-fluid w-100"
-                width="1024"
-                height="480"
-                src="https://picsum.photos/1024/480/?image=55"
-                alt="image slot"/>
-            </b-carousel-slide>
+          <!-- Slides with img slot -->
+          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+          <b-carousel-slide>
+            <img
+              slot="img"
+              class="d-block img-fluid w-100"
+              width="1024"
+              height="480"
+              src="https://picsum.photos/1024/480/?image=55"
+              alt="image slot"/>
+          </b-carousel-slide>
 
-            <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-            <b-carousel-slide
-              caption="Blank Image" img-blank img-alt="Blank image">
-            </b-carousel-slide>
-          </b-carousel>
+          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+          <b-carousel-slide
+            caption="Blank Image" img-blank img-alt="Blank image">
+          </b-carousel-slide>
+        </b-carousel>
 
-        </div>
-
-        <div class="dealership-info">
-          <div class="inner">
-            <h4>
-              <div class="">Best Dealership</div>
-              <img src="@/assets/logos/sponsored_logo.png" alt="">
-            </h4>
-            <h5>
-              Vehicle Summary | <div class="price">$22,000</div>
-            </h5>
-            <div class="basic-info">
-              <div class="row">
-                <div class="title">Kilometres</div>
-                <div class="value">32,000</div>
-              </div>
-              <hr/>
-              <div class="row">
-                <div class="title">CarProof</div>
-                <div class="value">Yes</div>
-              </div>
-              <hr/>
-              <div class="row">
-                <div class="title">Transmission</div>
-                <div class="value">Auto</div>
-              </div>
-              <hr/>
-              <div class="row">
-                <div class="title">Body</div>
-                <div class="value">Sedan</div>
-              </div>
-              <hr/>
-              <div class="row">
-                <div class="title">Fuel Type</div>
-                <div class="value">Gas</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -121,145 +79,15 @@
 
 <style lang="css" scoped>
 
-  hr {
-    display: none;
-  }
-
-  /* Bootstrap-vue overwrite */
-
-  .basic-info {
-    display: inline-block;
-    width: 100%;
-    margin: 2vw 15%;
-  }
-  .basic-info h5 {
-    color: rgba(0,0,0,0.5);
-    display: block;
-  }
-  .basic-info .row {
-    height: 1.5rem;
-    width: 100%;
-    margin: 0 0 1rem 0;
-    padding: 0 0.5rem;
-    display: flex;
-    align-items: center;
-  }
-  .basic-info .row .title {
-    color: rgba(0,0,0,0.5);
-    width: 50%;
-  }
-  .basic-info .row .value {
-    color: black;
-    width: 50%;
-  }
-
   .vehicle {
+    height: 50rem;
     margin-top: 1rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-  }
-  .main-content {
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
-    padding: 1rem;
-  }
-  .top-content {
-    display: flex;
   }
   .image-display {
-    width: 60vw;
-    display: flex;
-    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
-  }
-  .dealership-info {
-    display: flex;
-    width: 21rem;
-    padding: 0.5rem;
-    margin: 0 auto;
-    align-items: center;
-  }
-  .dealership-info .inner {
+    width: 80%;
     margin: 0 auto;
   }
-  .dealership-info h4 {
-    display: inline-block;
-  }
-  .dealership-info h4 img {
-    width: 3rem;
-    display: inline-block;
-    margin-left: 0.5rem;
-  }
-  .dealership-info h4 div {
-    display: inline-block;
-  }
-  .dealership-info h5 {
-    font-size: 1.1rem;
-    display: flex;
-  }
-  .dealership-info h5 .price {
-    color: green;
-    margin-left: 0.5rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-
-  @media (max-width: 1199px) {
-    .basic-info {
-      margin: 0 15%;
-      margin-top: 3px;
-    }
-    .basic-info .row {
-      height: 2vw;
-    }
-  }
-
-  @media (max-width: 1164px) {
-
-  }
-
-  @media (max-width: 991px) {
-    hr {
-      display: block;
-      width: 18rem;
-      margin-left: 0;
-    }
-
-    .top-content {
-      display: inline-block;
-    }
-    .image-display {
-      width: 100%;
-      display: inline-block;
-    }
-    .basic-info {
-      margin: 0 20%;
-      margin-top: 1rem;
-    }
-    .basic-info .row {
-      padding: 0 0 0.5rem;
-    }
-    .dealership-info {
-      height: 5rem;
-      display: inline-block;
-      width: 100%;
-      margin-left: 0rem;
-    }
-  }
-
 
   @media (max-width: 525px) {
-    h3 {
-      font-size: 1.5rem;
-    }
-    h4 {
-      font-size: 1.2rem;
-    }
-
-    .main-content {
-      padding: 0;
-    }
-    .vehicle {
-      padding: 0.2rem !important;
-      box-shadow: none;
-    }
   }
 </style>

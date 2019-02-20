@@ -122,6 +122,10 @@ export default {
     width: 4rem;
     margin: -0.5rem 0rem -0.5rem 0.5rem;
   }
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #f44336 !important;
+  }
 
   /* custom css */
   .sign-out-btn {

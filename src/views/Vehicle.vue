@@ -1,7 +1,7 @@
 <template>
   <div class="container vehicle">
     <h3>
-      2017 Honda Civic SE
+      <div class="title">2017 Honda Civic SE</div>
       <div class="price">$23,000</div>
     </h3>
 
@@ -53,6 +53,29 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
 
+    <div class="details">
+      <b-tabs pills>
+        <b-tab title="Tab 1" active>
+          <b-list-group class="vehicle-details">
+            <b-list-group-item>Cras justo odio</b-list-group-item>
+            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
+            <b-list-group-item>Morbi leo risus</b-list-group-item>
+            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          </b-list-group>
+        </b-tab>
+        <b-tab title="Tab 2">
+          <b-list-group class="vehicle-details">
+            <b-list-group-item>Cras justo odio</b-list-group-item>
+            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
+            <b-list-group-item>Morbi leo risus</b-list-group-item>
+            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
+            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+          </b-list-group>
+        </b-tab>
+      </b-tabs>
+    </div>
+
   </div>
 </template>
 
@@ -87,14 +110,22 @@
   h3 {
     display: flex;
   }
+  h3 .title {
+    text-overflow: ellipsis;
+    width: 25rem;
+    white-space: nowrap;
+    overflow: hidden;
+  }
   h3 .price {
     margin-left: auto;
     color: green;
     font-weight: bold;
   }
 
+  /* bootstrap-vue overrides */
+
+
   .vehicle {
-    height: 50rem;
     margin-top: 1rem;
     width: 80%;
   }
@@ -111,6 +142,25 @@
     color: rgba(0,0,0,0.6);
   }
 
-  @media (max-width: 525px) {
+  .details {
+    padding: 0.5rem;
+    margin: 2rem 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+  }
+  .details .vehicle-details {
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 630px) {
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    .vehicle {
+      margin: 1rem 0;
+      padding: 0.3rem;
+      width: 100%;
+      max-width: none;
+    }
   }
 </style>

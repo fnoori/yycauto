@@ -58,44 +58,117 @@
         <b-tab title="Basic" :title-link-class="linkClass(0)">
           <b-list-group class="vehicle-details">
             <b-list-group-item>
-              <div class="title">Make</div>
-              <div class="value">Honda</div>
+              <div class="list-contents">
+                <div class="title">Make</div>
+                <div class="value">Honda</div>
+              </div>
             </b-list-group-item>
-            <b-list-group-item></b-list-group-item>
-            <b-list-group-item></b-list-group-item>
-            <b-list-group-item></b-list-group-item>
-            <b-list-group-item></b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Model</div>
+                <div class="value">Civic</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Trim</div>
+                <div class="value">SE</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Kilometres</div>
+                <div class="value">23,000</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Fuel Type</div>
+                <div class="value">Gas</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Seats</div>
+                <div class="value">5</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">CarProof</div>
+                <div class="value">No</div>
+              </div>
+            </b-list-group-item>
           </b-list-group>
         </b-tab>
         <b-tab title="Mechanical" :title-link-class="linkClass(1)">
           <b-list-group class="vehicle-details">
-            <b-list-group-item>Cras justo odio</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Morbi leo risus</b-list-group-item>
-            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Transmission</div>
+                <div class="value">Auto</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Engine (L)</div>
+                <div class="value">1.8</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Torque</div>
+                <div class="value">120 @ 5,000</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Fuel Grade</div>
+                <div class="value">Regular</div>
+              </div>
+            </b-list-group-item>
           </b-list-group>
         </b-tab>
         <b-tab title="Environmental" :title-link-class="linkClass(2)">
           <b-list-group class="vehicle-details">
-            <b-list-group-item>Cras justo odio</b-list-group-item>
-            <b-list-group-item>Dapibus ac facilisis in</b-list-group-item>
-            <b-list-group-item>Morbi leo risus</b-list-group-item>
-            <b-list-group-item>Porta ac consectetur ac</b-list-group-item>
-            <b-list-group-item>Vestibulum at eros</b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">City</div>
+                <div class="value">7.8</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Highway</div>
+                <div class="value">8.4</div>
+              </div>
+            </b-list-group-item>
+            <b-list-group-item>
+              <div class="list-contents">
+                <div class="title">Combined</div>
+                <div class="value">8.0</div>
+              </div>
+            </b-list-group-item>
           </b-list-group>
         </b-tab>
       </b-tabs>
     </div>
+
+    <related-vehicles class="related">
+    </related-vehicles>
 
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import RelatedVehicles from '../components/RelatedVehicles'
 
   export default {
     name: 'vehicle',
+    components: {
+      'related-vehicles': RelatedVehicles
+    },
     data() {
       return {
         tabIndex: 0
@@ -170,7 +243,6 @@
 
   .details {
     padding: 0.5rem;
-    box-shadow: 1px 1px 1px 1px;
     width: 30rem;
     margin: 1rem auto;
   }
@@ -179,9 +251,22 @@
   }
   .details .title {
     display: inline-block;
+    width: 50%;
+    color: rgba(0,0,0,0.6);
+    font-size: 0.9rem;
   }
   .details .value {
     display: inline-block;
+    font-size: 0.9rem;
+    width: 50%;
+  }
+  .list-contents {
+    margin: 0 auto;
+    width: 50%;
+  }
+
+  .related-vehicles {
+
   }
 
   @media (max-width: 630px) {

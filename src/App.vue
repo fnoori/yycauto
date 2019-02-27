@@ -162,4 +162,11 @@ export default {
       width: 100vw;
     }
   }
+
+  @media (max-width: 456px) {
+    #__BVID__13__BV_tab_controls_ {
+      font-size: 0.8rem;
+    }
+  }
+
 </style>

@@ -373,7 +373,7 @@
   .details-cols {
     display: inline-block;
     width: 100%;
-    margin: 0 5%;
+    margin: 2rem 5%;
   }
   .details-cols .details-basic {
     width: 33.33%;
@@ -409,25 +409,19 @@
       display: none;
     }
     .details {
-      width: 80%;
-      margin: 0 auto;
+      width: 25rem;
+      margin: 2rem auto;
     }
     .list-contents {
-      margin: 0 auto;
-      width: 70%;
+      display: flex;
+      margin: 0 5rem 0 6rem;
+      font-size: 0.9rem;
     }
-    .details .vehicle-details {
-      margin-top: 1rem;
-    }
-    .details .title {
-      display: inline-block;
+    .list-contents .title {
       width: 50%;
       color: rgba(0,0,0,0.6);
-      font-size: 0.9rem;
     }
-    .details .value {
-      display: inline-block;
-      font-size: 0.9rem;
+    .list-contents .value {
       width: 50%;
     }
   }
@@ -443,5 +437,21 @@
       width: 100%;
       max-width: none;
     }
+  }
+
+  @media (max-width: 456px) {
+    .details {
+      margin: 2rem 10%;
+    }
+    .list-contents {
+      margin: 0 15%;
+    }
+  }
+
+  @media (max-width: 365px) {
+    .details {
+      margin: 2rem 6%;
+    }
+
   }
 </style>

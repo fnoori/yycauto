@@ -3,7 +3,7 @@
     <div v-if="dataReady">
       <h3>
         <div class="title">{{vehicleData.basicInfo.Year}} {{vehicleData.basicInfo.Make}} {{vehicleData.basicInfo.Model}} {{vehicleData.basicInfo.Trim}}</div>
-        <div class="price">$23,000</div>
+        <div class="price">${{addCommaToNum(vehicleData.basicInfo.Price)}}</div>
       </h3>
 
       <div class="image-display">
@@ -51,7 +51,7 @@
 
       <div class="description">
         <h6>Description</h6>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        {{vehicleData.basicInfo.Description}}
       </div>
 
       <div class="details-cols">
@@ -63,7 +63,7 @@
                 Make
               </div>
               <div class="details-cols-value">
-                Honda
+                {{vehicleData.basicInfo.Make}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -71,7 +71,7 @@
                 Model
               </div>
               <div class="details-cols-value">
-                Civic
+                {{vehicleData.basicInfo.Model}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -79,7 +79,7 @@
                 Trim
               </div>
               <div class="details-cols-value">
-                SE
+                {{vehicleData.basicInfo.Trim}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -87,7 +87,7 @@
                 Kilometres
               </div>
               <div class="details-cols-value">
-                23,000
+                {{vehicleData.basicInfo.Kilometres}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -95,7 +95,7 @@
                 Fuel Type
               </div>
               <div class="details-cols-value">
-                Gas
+                {{vehicleData.basicInfo['Fuel Type']}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -103,7 +103,7 @@
                 Seats
               </div>
               <div class="details-cols-value">
-                5
+                {{vehicleData.basicInfo.Seats}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -111,7 +111,7 @@
                 CarProof
               </div>
               <div class="details-cols-value">
-                No
+                {{vehicleData.mechanicalSpecs.CarProof}}
               </div>
             </b-list-group-item>
           </b-list-group>
@@ -124,7 +124,7 @@
                 Transmission
               </div>
               <div class="details-cols-value">
-                Auto
+                {{vehicleData.mechanicalSpecs.Transmission}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -132,7 +132,7 @@
                 Engine (L)
               </div>
               <div class="details-cols-value">
-                1.8
+                {{vehicleData.mechanicalSpecs['Engine Size (L)']}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -140,15 +140,15 @@
                 Torque
               </div>
               <div class="details-cols-value">
-                120 @ 5,000
+                {{vehicleData.mechanicalSpecs['Torque (lb - ft) @ RPM']}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
               <div class="details-cols-title">
-                Fuel Grade
+                Recommended Fuel
               </div>
               <div class="details-cols-value">
-                Regular
+                {{vehicleData.mechanicalSpecs['Recommended Fuel']}}
               </div>
             </b-list-group-item>
           </b-list-group>
@@ -161,7 +161,7 @@
                 City
               </div>
               <div class="details-cols-value">
-                7.8
+                {{vehicleData.fuelEconomy['City (L/100Km)']}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -169,7 +169,7 @@
                 Highway
               </div>
               <div class="details-cols-value">
-                8.4
+                {{vehicleData.fuelEconomy['Highway (L/100Km)']}}
               </div>
             </b-list-group-item>
             <b-list-group-item class="details-cols-row">
@@ -177,7 +177,7 @@
                 Combined
               </div>
               <div class="details-cols-value">
-                8.0
+                {{vehicleData.fuelEconomy['Combined (L/100Km)']}}
               </div>
             </b-list-group-item>
           </b-list-group>
@@ -193,43 +193,43 @@
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Make</div>
-                  <div class="value">Honda</div>
+                  <div class="value">{{vehicleData.basicInfo.Make}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Model</div>
-                  <div class="value">Civic</div>
+                  <div class="value">{{vehicleData.basicInfo.Model}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Trim</div>
-                  <div class="value">SE</div>
+                  <div class="value">{{vehicleData.basicInfo.Trim}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Kilometres</div>
-                  <div class="value">23,000</div>
+                  <div class="value">{{addCommaToNum(vehicleData.basicInfo.Kilometres)}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Fuel Type</div>
-                  <div class="value">Gas</div>
+                  <div class="value">{{vehicleData.basicInfo['Fuel Type']}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Seats</div>
-                  <div class="value">5</div>
+                  <div class="value">{{vehicleData.basicInfo.Seats}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">CarProof</div>
-                  <div class="value">No</div>
+                  <div class="value">{{vehicleData.mechanicalSpecs.CarProof}}</div>
                 </div>
               </b-list-group-item>
             </b-list-group>
@@ -239,25 +239,25 @@
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Transmission</div>
-                  <div class="value">Auto</div>
+                  <div class="value">{{vehicleData.mechanicalSpecs.Transmission}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Engine (L)</div>
-                  <div class="value">1.8</div>
+                  <div class="value">{{vehicleData.mechanicalSpecs['Engine Size (L)']}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Torque</div>
-                  <div class="value">120 @ 5,000</div>
+                  <div class="value">{{vehicleData.mechanicalSpecs['Torque (lb - ft) @ RPM']}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Fuel Grade</div>
-                  <div class="value">Regular</div>
+                  <div class="value">{{vehicleData.mechanicalSpecs['Recommended Fuel']}}</div>
                 </div>
               </b-list-group-item>
             </b-list-group>
@@ -267,19 +267,19 @@
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">City</div>
-                  <div class="value">7.8</div>
+                  <div class="value">{{vehicleData.fuelEconomy['City (L/100Km)']}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Highway</div>
-                  <div class="value">8.4</div>
+                  <div class="value">{{vehicleData.fuelEconomy['Highway (L/100Km)']}}</div>
                 </div>
               </b-list-group-item>
               <b-list-group-item>
                 <div class="list-contents">
                   <div class="title">Combined</div>
-                  <div class="value">8.0</div>
+                  <div class="value">{{vehicleData.fuelEconomy['Combined (L/100Km)']}}</div>
                 </div>
               </b-list-group-item>
             </b-list-group>
@@ -316,11 +316,8 @@
     mounted() {
       axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_vehicle_by_id/${this.vehicleId}`)
       .then(vehicle => {
-        console.log(vehicle.data)
-        this.vehicleData = vehicle
-        this.$nextTick(() => {
-          this.dataReady = true
-        })
+        this.vehicleData = vehicle.data
+        this.dataReady = true
       }).catch(axiosGetErr => {
         alert(`Error when trying to retrieve vehicle with id
                 ${axiosGetErr}`)
@@ -333,6 +330,10 @@
         } else {
           return ['text-dark']
         }
+      },
+
+      addCommaToNum(price) {
+        return (String(price).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
       }
     }
   }

@@ -17,35 +17,12 @@
           img-height="480"
           indicators
           :interval="0">
-          <!-- Text slides with image -->
-          <b-carousel-slide
-            img-src="https://picsum.photos/1024/480/?image=52"/>
 
-          <!-- Slides with custom text -->
           <b-carousel-slide
-            img-src="https://picsum.photos/1024/480/?image=54">
-          </b-carousel-slide>
+            v-for="image in vehicleData.photos"
+            :img-src="image"
+            :key="vehicleData.key"/>
 
-          <!-- Slides with image only -->
-          <b-carousel-slide
-            img-src="https://picsum.photos/1024/480/?image=58" />
-
-          <!-- Slides with img slot -->
-          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-          <b-carousel-slide>
-            <img
-              slot="img"
-              class="d-block img-fluid w-100"
-              width="1024"
-              height="480"
-              src="https://picsum.photos/1024/480/?image=55"
-              alt="image slot"/>
-          </b-carousel-slide>
-
-          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-          <b-carousel-slide
-            caption="Blank Image" img-blank img-alt="Blank image">
-          </b-carousel-slide>
         </b-carousel>
       </div>
 
@@ -300,9 +277,11 @@
     data() {
       return {
         tabIndex: 0,
+        baseImageUrl: process.env.VUE_APP_DEV_CLOUDINARY_URL,
 
         dataReady: false,
-        vehicleData: null
+        vehicleData: null,
+        vehicleImages: []
       }
     },
     computed: {
@@ -317,6 +296,13 @@
       axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get_vehicle_by_id/${this.vehicleId}`)
       .then(vehicle => {
         this.vehicleData = vehicle.data
+
+        for (var i = 0; i < this.vehicleData['photos'].length; i++) {
+          this.vehicleData['photos'][i] = `${this.baseImageUrl}/${this.vehicleData.Dealership._id}/${this.vehicleData._id}/${this.vehicleData['photos'][i]+'.'+this.vehicleData['photos'][i].split('.')[1]}`
+        }
+
+        console.log(this.vehicleData)
+
         this.dataReady = true
       }).catch(axiosGetErr => {
         alert(`Error when trying to retrieve vehicle with id

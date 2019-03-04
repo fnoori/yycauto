@@ -1,6 +1,7 @@
 import auth0 from 'auth0-js'
 import EventEmitter from 'eventemitter3'
 import router from './../router'
+let store = require('../store')
 
 export default class AuthService {
   accessToken
@@ -41,6 +42,12 @@ export default class AuthService {
     this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
 
     this.authNotifier.emit('authChange', { authenticated: true })
+
+    //this.$store.commit('change', event.target.value)
+    // localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
+    store.commit('change', true)
+
+    console.log('in setSession()')
 
     localStorage.setItem('loggedIn', true)
   }

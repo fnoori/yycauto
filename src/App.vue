@@ -18,8 +18,13 @@
       </b-nav-form>
 
       <b-button
-        v-if="authenticated"
-        class="ml-auto sign-out-btn">Logout</b-button>
+        v-if="isLoggedIn"
+        class="ml-auto sign-out-btn"
+        @click="logout">Logout</b-button>
+      <b-button
+        v-else
+        class="ml-auto sign-out-btn"
+        @click="login">Login</b-button>
     </b-navbar>
     <router-view/>
     <footer>
@@ -30,10 +35,29 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+import AuthService from './auth/AuthService'
+const auth = new AuthService()
+
 export default {
   data () {
     return {
       authenticated: false
+    }
+  },
+
+  computed: {
+    ...mapGetters([
+      'isLoggedIn'
+    ])
+  },
+
+  methods: {
+    login () {
+      auth.login()
+    },
+    logout () {
+      auth.logout()
     }
   }
 }

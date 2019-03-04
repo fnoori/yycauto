@@ -84,7 +84,6 @@ export default {
 
   methods: {
     addCommaToNum(price) {
-      console.log(`isDevCloudinary: ${this.isDevCloudinary}`)
       return (String(price).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
     }
   }

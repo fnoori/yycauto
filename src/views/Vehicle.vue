@@ -21,7 +21,7 @@
           <b-carousel-slide
             v-for="image in vehicleData.photos"
             :img-src="image"
-            :key="vehicleData.key"/>
+            :key="image"/>
 
         </b-carousel>
       </div>

@@ -39,8 +39,8 @@
             <div slot="footer" class="card-footer-content">
               <a href="#" class="dealership-page">
                 <img v-if="isDevEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo">
-                <img v-else-if="!isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
-                <img v-else-if="!isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
+                <img v-else-if="isDevCloudinary" :src="baseImageUrl+'/'+vehicle.Dealership+'/logo'" class="card-logo">
+                <img v-else-if="isProdEnvironment" src="@/assets/logos/sponsored_logo.png" class="card-logo"/>
               </a>
               <!--
               <a :href="'http://maps.google.com/?q='+vehicle" target="_blank" class="location-link">
@@ -79,10 +79,12 @@ export default {
   },
 
   created() {
+
   },
 
   methods: {
     addCommaToNum(price) {
+      console.log(`isDevCloudinary: ${this.isDevCloudinary}`)
       return (String(price).replace(/(.)(?=(\d{3})+$)/g,'$1,'))
     }
   }

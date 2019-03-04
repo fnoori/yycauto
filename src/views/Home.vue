@@ -11,11 +11,9 @@
 </template>
 
 <script>
-import AuthService from '../auth/AuthService'
 import TierOne from '../components/TierOne'
 import TierTwo from '../components/TierTwo'
 import axios from 'axios'
-const auth = new AuthService()
 
 export default {
   name: 'home',
@@ -25,9 +23,6 @@ export default {
   },
   data () {
     return {
-      auth,
-      authenticated: auth.authenticated,
-
       tierOneVehicles: null,
       tierTwoVehicles: null
     }
@@ -50,12 +45,6 @@ export default {
     })
   },
   methods: {
-    login () {
-      auth.login()
-    },
-    logout () {
-      auth.logout()
-    }
   }
 }
 </script>

@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "dev": "NODE_ENV=development vue-cli-service serve",
-    "dev-cloudinary": "NODE_ENV=VUE_APP_ENVIRONMENT_DEV_CLOUDINARY vue-cli-service serve",
+    "dev-cloudinary": "NODE_ENV=development-cloudinary vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },

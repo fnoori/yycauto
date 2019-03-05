@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Home from './views/Home.vue'
 import Vehicle from './views/Vehicle.vue'
+import Auth from './views/Auth.vue'
 
 Vue.use(Router)
 
@@ -19,6 +20,11 @@ export default new Router({
       path: '/vehicle/:vehicle_id',
       name: 'vehicle',
       component: Vehicle
+    },
+    {
+      path: '/auth',
+      name: 'auth',
+      component: Auth
     },
     {
       path: '/about',

@@ -35,9 +35,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import AuthService from './auth/AuthService'
-const auth = new AuthService()
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -52,13 +50,14 @@ export default {
     ])
   },
 
+  created() {
+  },
+
   methods: {
-    login () {
-      auth.login()
-    },
-    logout () {
-      auth.logout()
-    }
+    ...mapActions([
+      'login', 'logout',
+      'handleAuthentication'
+    ])
   }
 }
 </script>

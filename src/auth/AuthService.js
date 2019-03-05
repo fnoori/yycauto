@@ -1,87 +1,115 @@
-import auth0 from 'auth0-js'
-import EventEmitter from 'eventemitter3'
-import router from './../router'
-let store = require('../store')
+import auth0 from 'auth0-js';
+import { EventEmitter } from 'events';
 
-export default class AuthService {
-  accessToken
-  idToken
-  expiresAt
-  authenticated = this.isAuthenticated()
-  authNotifier = new EventEmitter()
+const webAuth = new auth0.WebAuth({
+  domain: process.env.VUE_APP_DOMAIN,
+  redirectUri: process.env.VUE_APP_REDIRECT_URI,
+  clientID: process.env.VUE_APP_CLIENT_ID,
+  responseType: process.env.VUE_APP_RESPONSE_TYPE,
+  scope: process.env.VUE_APP_SCOPE
+});
 
-  auth0 = new auth0.WebAuth({
-    domain: process.env.VUE_APP_DOMAIN,
-    clientID: process.env.VUE_APP_CLIENT_ID,
-    redirectUri: process.env.VUE_APP_REDIRECT_URI,
-    responseType: process.env.VUE_APP_RESPONSE_TYPE,
-    audience: process.env.VUE_APP_AUDIENCE,
-    scope: process.env.VUE_APP_SCOPE
-  })
+const localStorageKey = 'loggedIn';
+const loginEvent = 'loginEvent';
 
-  login () {
-    this.auth0.authorize()
+export default class AuthService extends EventEmitter {
+  idToken = null;
+  profile = null;
+  tokenExpiry = null;
+
+  login(customState) {
+    webAuth.authorize({
+      appState: customState
+    });
   }
 
-  handleAuthentication () {
-    this.auth0.parseHash((err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult)
-        router.replace('home')
-      } else if (err) {
-        router.replace('home')
-        console.log(err)
-        alert(`Error: ${err.error}. Check the console for further details.`)
+  logOut() {
+    localStorage.removeItem(localStorageKey);
+
+    this.idToken = null;
+    this.tokenExpiry = null;
+    this.profile = null;
+
+    webAuth.logout({
+      returnTo: `${window.location.origin}`
+    });
+
+    this.emit(loginEvent, { loggedIn: false });
+  }
+
+  handleAuthentication() {
+    return new Promise((resolve, reject) => {
+      webAuth.parseHash((err, authResult) => {
+        if (err) {
+          reject(err);
+        } else {
+          this.localLogin(authResult);
+          resolve(authResult.idToken);
+        }
+      });
+    });
+  }
+
+  isAuthenticated() {
+    return (
+      Date.now() < this.tokenExpiry &&
+      localStorage.getItem(localStorageKey) === 'true'
+    );
+  }
+
+  isIdTokenValid() {
+    return (
+      this.idToken &&
+      this.tokenExpiry &&
+      Date.now() < this.tokenExpiry
+    );
+  }
+
+  getIdToken() {
+    return new Promise((resolve, reject) => {
+      if (this.isIdTokenValid()) {
+        resolve(this.idToken);
+      } else if (this.isAuthenticated()) {
+        this.renewTokens().then(authResult => {
+          resolve(authResult.idToken);
+        }, reject);
+      } else {
+        resolve();
       }
-    })
+    });
   }
 
-  setSession (authResult) {
-    this.accessToken = authResult.accessToken
-    this.idToken = authResult.idToken
-    this.expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
+  localLogin(authResult) {
+    this.idToken = authResult.idToken;
+    this.profile = authResult.idTokenPayload;
 
-    this.authNotifier.emit('authChange', { authenticated: true })
+    // Convert the expiry time from seconds to milliseconds,
+    // required by the Date constructor
+    this.tokenExpiry = new Date(this.profile.exp * 1000);
 
-    //this.$store.commit('change', event.target.value)
-    // localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-    store.commit('change', true)
+    localStorage.setItem(localStorageKey, 'true');
 
-    console.log('in setSession()')
-
-    localStorage.setItem('loggedIn', true)
+    this.emit(loginEvent, {
+      loggedIn: true,
+      profile: authResult.idTokenPayload,
+      state: authResult.appState || {}
+    });
   }
 
-  renewSession () {
-    this.auth0.checkSession({}, (err, authResult) => {
-      if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult)
-      } else if (err) {
-        this.logout()
-        console.log(err)
-        alert(`Could not get a new token (${err.error}: ${err.error_description}).`)
+  renewTokens() {
+    return new Promise((resolve, reject) => {
+      if (localStorage.getItem(localStorageKey) !== 'true') {
+        return reject(new Error('Not logged in'));
       }
-    })
-  }
 
-  logout () {
-    // Clear access token and ID token from local storage
-    this.accessToken = null
-    this.idToken = null
-    this.expiresAt = null
-
-    this.userProfile = null
-    this.authNotifier.emit('authChange', false)
-
-    localStorage.removeItem('loggedIn')
-
-    // navigate to the home route
-    router.replace('home')
-  }
-
-  isAuthenticated () {
-    // Check whether the current time is past the
-    // access token's expiry time
-    return new Date().getTime() < this.expiresAt && localStorage.getItem('loggedIn') === 'true'
+      webAuth.checkSession({}, (err, authResult) => {
+        if (err) {
+          reject(err);
+        } else {
+          this.localLogin(authResult);
+          resolve(authResult);
+        }
+      });
+    });
   }
 }

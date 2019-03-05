@@ -29,7 +29,8 @@ module.exports = {
     'object-curly-spacing': 'off',
     'standard/object-curly-even-spacing': 'off',
     'space-in-parens': 'off',
-    'space-infix-ops': 'off'
+    'space-infix-ops': 'off',
+    'padded-blocks': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

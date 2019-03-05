@@ -17,15 +17,22 @@
         </b-input-group>
       </b-nav-form>
 
+<!--
       <b-button
         v-if="authenticated"
         class="ml-auto sign-out-btn"
         @click="logout">Logout</b-button>
-      <b-button
-        v-else
-        class="ml-auto sign-out-btn"
-        @click="login">Login</b-button>
+-->
 
+      <div class="dropdown">
+        <button class="dropbtn">Account</button>
+        <div class="dropdown-content">
+          <a href="#">Inventory</a>
+          <a href="#">Dealership</a>
+          <hr/>
+          <a href="#">Logout</a>
+        </div>
+      </div>
     </b-navbar>
     <router-view/>
     <footer>
@@ -51,6 +58,50 @@ export default {
 <style>
   @import url('https://fonts.googleapis.com/css?family=Comfortaa');
 
+  .dropbtn {
+    background-color: white;
+    color: #f44336;
+    font-size: 16px;
+    border: none;
+    padding: 0.375rem 0.75rem;
+    box-shadow: 0px 1px 1px 0px rgba(0,0,0,0.1);
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.1);
+    z-index: 1;
+    right: 0rem;
+  }
+
+  .dropdown-content a {
+    color: #f44336 !important;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    text-decoration: none !important;
+  }
+
+  .dropdown:hover .dropdown-content {display: block;}
+
+  .dropdown:hover .dropbtn {
+    box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.1);
+  }
+
+
+/*sdfsafasfsfasfasdfsadsadsadasdfsdasdfasdfsd*/
   #app {
     font-family: 'Comfortaa', cursive;
     -webkit-overflow-scrolling: touch;

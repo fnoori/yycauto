@@ -34,6 +34,7 @@ const mutations = {
     state.authenticated = false
     state.accessToken = null
     state.idToken = null
+    state.expiresAt = null
     state.dealership = null
 
     localStorage.removeItem('access_token')

@@ -17,15 +17,8 @@
         </b-input-group>
       </b-nav-form>
 
-<!--
-      <b-button
-        v-if="authenticated"
-        class="ml-auto sign-out-btn"
-        @click="logout">Logout</b-button>
--->
-
       <div
-
+        v-if="authenticated"
         class="dropdown">
         <button class="dropbtn sign-out-btn">
           Account
@@ -38,12 +31,11 @@
           <a href="#" @click="logout">Logout</a>
         </div>
       </div>
-<!--
       <b-button
         v-else
         class="ml-auto sign-out-btn"
         @click="login">Login</b-button>
--->
+
     </b-navbar>
     <router-view/>
     <footer>

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Vehicle from './views/Vehicle.vue'
 import Auth from './views/Auth.vue'
+import Inventory from './views/Inventory.vue'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/vehicle/:vehicle_id',
       name: 'vehicle',
       component: Vehicle
+    },
+    {
+      path: '/dealership_inventory',
+      name: 'Inventory',
+      component: Inventory
     },
     {
       path: '/auth',

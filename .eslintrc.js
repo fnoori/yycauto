@@ -30,7 +30,8 @@ module.exports = {
     'standard/object-curly-even-spacing': 'off',
     'space-in-parens': 'off',
     'space-infix-ops': 'off',
-    'padded-blocks': 'off'
+    'padded-blocks': 'off',
+    'camelcase': 'off'
   },
   parserOptions: {
     parser: 'babel-eslint'

@@ -24,15 +24,26 @@
         @click="logout">Logout</b-button>
 -->
 
-      <div class="dropdown">
-        <button class="dropbtn">Account</button>
+      <div
+
+        class="dropdown">
+        <button class="dropbtn sign-out-btn">
+          Account
+          <i class="arrow down"></i>
+        </button>
         <div class="dropdown-content">
           <a href="#">Inventory</a>
           <a href="#">Dealership</a>
           <hr/>
-          <a href="#">Logout</a>
+          <a href="#" @click="logout">Logout</a>
         </div>
       </div>
+<!--
+      <b-button
+        v-else
+        class="ml-auto sign-out-btn"
+        @click="login">Login</b-button>
+-->
     </b-navbar>
     <router-view/>
     <footer>
@@ -100,7 +111,18 @@ export default {
     box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.1);
   }
 
-
+  i {
+    border: solid #f44336;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: .2rem;
+    margin-left: .2rem;
+  }
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
 /*sdfsafasfsfasfasdfsadsadsadasdfsdasdfasdfsd*/
   #app {
     font-family: 'Comfortaa', cursive;

@@ -62,8 +62,18 @@
           :sort-by.sync="sortBy"
           :sort-desc.sync="sortDesc"
           :sort-direction="sortDirection"
-          @filtered="onFiltered"
-        >
+          @filtered="onFiltered">
+
+          <template slot="HEAD_multi-select">
+            <b-form-checkbox></b-form-checkbox>
+          </template>
+          <template slot="multi-select" slot-scope="row">
+            <b-form-checkbox @click.stop
+              name="checked"
+              :key="row.index"
+              :value="row.item"></b-form-checkbox>
+          </template>
+
           <template slot="name" slot-scope="row">
             {{ row.value.first }} {{ row.value.last }}
           </template>
@@ -73,20 +83,12 @@
           </template>
 
           <template slot="actions" slot-scope="row">
-            <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-              Info modal
+            <b-button size="sm btn-warning" @click="info(row.item, row.index, $event.target)" class="mr-1">
+              Edit
             </b-button>
-            <b-button size="sm" @click="row.toggleDetails">
-              {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
+            <b-button size="sm btn-danger" @click="delete(row.item, row.index, $event.target)" class="mr-1">
+              Delete
             </b-button>
-          </template>
-
-          <template slot="row-details" slot-scope="row">
-            <b-card>
-              <ul>
-                <li v-for="(value, key) in row.item" :key="key">{{ key }}: {{ value }}</li>
-              </ul>
-            </b-card>
           </template>
         </b-table>
 
@@ -146,6 +148,7 @@ export default {
     return {
       items: items,
       fields: [
+        { key: 'multi-select', label: 'Choose'},
         { key: 'name', label: 'Person Full name', sortable: true, sortDirection: 'desc' },
         { key: 'age', label: 'Person age', sortable: true, class: 'text-center' },
         { key: 'isActive', label: 'is Active' },
@@ -179,6 +182,11 @@ export default {
 
   methods: {
     info(item, index, button) {
+      this.modalInfo.title = `Row index: ${index}`
+      this.modalInfo.content = JSON.stringify(item, null, 2)
+      this.$root.$emit('bv::show::modal', 'modalInfo', button)
+    },
+    delete(item, index, button) {
       this.modalInfo.title = `Row index: ${index}`
       this.modalInfo.content = JSON.stringify(item, null, 2)
       this.$root.$emit('bv::show::modal', 'modalInfo', button)

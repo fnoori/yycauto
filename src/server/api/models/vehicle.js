@@ -14,12 +14,12 @@ const vehicleSchema = mongoose.Schema({
       maxlength: 20
     },
     year: {
-      type: String,
+      type: Number,
       required: true,
       maxlength: 20
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
       maxlength: 20
      }

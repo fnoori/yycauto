@@ -6,7 +6,7 @@ const { check, validationResult, checkSchema, body } = require('express-validato
 
 exports.addNewVehicle = async (req, res) => {
   let validations = validationResult(req);
-  
+
   if (!validations.isEmpty()) {
     return res.status(422).json({ validations: validations.array() });
   }
@@ -16,8 +16,6 @@ exports.addNewVehicle = async (req, res) => {
   let model = req.body.model;
   let year = req.body.year;
   let price = req.body.price;
-
-/*
 
   let newVehicle = new Vehicles({
     '_id': new mongoose.Types.ObjectId(),
@@ -47,7 +45,6 @@ exports.addNewVehicle = async (req, res) => {
     console.log(e);
     return res.status(500).send('failed to save vehicle');
   }
-  */
 }
 
 exports.validate = (method) => {
@@ -61,10 +58,10 @@ exports.validate = (method) => {
           .isAlpha()
           .isLength({ max: 20 }),
         check('year')
-          .isAlpha()
+          .isNumeric()
           .isLength({ max: 20 }),
         check('price')
-          .isAlpha()
+          .isNumeric()
           .isLength({ max: 20 })
       ];
     }

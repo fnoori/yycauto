@@ -19,6 +19,10 @@ mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// initialize passport
+require('./api/middlewares/passport');
+app.use(passport.initialize());
+
 // configure routes
 app.use('/users', userRoutes);
 

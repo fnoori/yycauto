@@ -43,27 +43,16 @@ passport.use(new LocalStrategy(
   }
 ));
 
-/*
-
-passport.use(new LocalStrategy(
-  async (username, password, cb) => {
-    try {
-      let user = await psql('users').where('username', username);
-
-      if (!user[0]) {
-        return cb(null, false);
-      }
-
-      let verifyResult = await argon2.verify(user[0].password, password);
-      if (verifyResult) {
-        return cb(null, user);
-      } else {
-        return cb(null, false);
-      }
-
-    } catch (e) {
-      console.log(e);
-      return cb(null, false);
+passport.use(new JwtStrategy(options, (jwt_payload, done) => {
+  User.findById(jwt_payload['user']['_id'], (err, user) => {
+    if (err) {
+      return done(err, false);
     }
+
+    if (user) {
+      return done(null, user);
+    } else {
+      return done(null, false);
+    }
+  });
 }));
-*/

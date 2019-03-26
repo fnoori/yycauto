@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Vehicles = require('../models/vehicle');
 const validator = require('validator');
 const passport = require('passport');
-const { check, validationResult, checkSchema, body } = require('express-validator/check');
+const { check, validationResult } = require('express-validator/check');
 
 exports.addNewVehicle = async (req, res) => {
   let validations = validationResult(req);
@@ -44,30 +44,5 @@ exports.addNewVehicle = async (req, res) => {
   } catch (e) {
     console.log(e);
     return res.status(500).send('failed to save vehicle');
-  }
-}
-
-exports.validate = (method) => {
-  switch (method) {
-    case 'addNewVehicle': {
-      return [
-        check('make')
-          .isAlpha()
-          .isLength({ max: 20 }),
-        check('model')
-          .isAlpha()
-          .isLength({ max: 20 }),
-        check('year')
-          .isNumeric()
-          .isLength({ max: 20 }),
-        check('price')
-          .isNumeric()
-          .isLength({ max: 20 })
-      ];
-    }
-
-    default: {
-      return []
-    }
   }
 }

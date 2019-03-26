@@ -5,21 +5,17 @@ const passport = require('passport');
 const { check, validationResult, checkSchema, body } = require('express-validator/check');
 
 exports.addNewVehicle = async (req, res) => {
+  let validations = validationResult(req);
+  
+  if (!validations.isEmpty()) {
+    return res.status(422).json({ validations: validations.array() });
+  }
+
   let saved;
   let make = req.body.make && (!validator.isEmpty(req.body.make));
   let model = req.body.model;
   let year = req.body.year;
   let price = req.body.price;
-
-  checkSchema({
-    _id: {
-      custom: {
-        options: () => {
-          return validator.isMongoId(req['user']['_id']);
-        }
-      }
-    }
-  })(req, res);
 
 /*
 
@@ -56,17 +52,25 @@ exports.addNewVehicle = async (req, res) => {
 
 exports.validate = (method) => {
   switch (method) {
-    case 'createUser': {
+    case 'addNewVehicle': {
+      return [
+        check('make')
+          .isAlpha()
+          .isLength({ max: 20 }),
+        check('model')
+          .isAlpha()
+          .isLength({ max: 20 }),
+        check('year')
+          .isAlpha()
+          .isLength({ max: 20 }),
+        check('price')
+          .isAlpha()
+          .isLength({ max: 20 })
+      ];
+    }
 
-     return [
-        body('userName', 'userName doesn't exists').exists(),
-
-        body('email', 'Invalid email').exists().isEmail(),
-
-        body('phone').optional().isInt(),
-
-        body('status').optional().isIn(['enabled', 'disabled'])
-      ]
+    default: {
+      return []
     }
   }
 }

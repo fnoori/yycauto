@@ -8,14 +8,15 @@ const passport = require('passport');
 const http = require('http');
 const server = http.createServer(app);
 const expressValidator = require('express-validator')
-
 const userRoutes = require('./api/routes/user');
 const vehicleRoutes = require('./api/routes/vehicle');
 
+// configure mongoose
 mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true })
 .then().catch(err => {
 	console.log('Mongo Connection Error', err);
 });
+
 
 // initialize express-validator
 app.use(expressValidator())

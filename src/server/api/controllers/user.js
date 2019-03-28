@@ -4,6 +4,43 @@ const validator = require('validator');
 const argon2 = require('argon2');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const AWS = require('aws-sdk');
+let s3;
+
+//configuring the AWS environment
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
+
+s3 = new AWS.S3();
+
+/*
+file:
+  { fieldname: 'logo',
+    originalname: 'logo.png',
+    encoding: '7bit',
+    mimetype: 'image/png',
+    size: 6849,
+    bucket: 'yycautomotives',
+    key: '1553738817389.png',
+    acl: 'public-read',
+    contentType: 'application/octet-stream',
+    contentDisposition: null,
+    storageClass: 'STANDARD',
+    serverSideEncryption: null,
+    metadata: null,
+    location: 'https://yycautomotives.s3.amazonaws.com/1553738817389.png',
+    etag: '"82b9c7a5a3f405032b1db71a25f67021"',
+    versionId: undefined },
+ __onFinished: null }
+
+ var params = {
+ Bucket: "destinationbucket",
+ CopySource: "/sourcebucket/HappyFacejpg",
+ Key: "HappyFaceCopyjpg"
+};
+*/
 
 exports.register = async (req, res) => {
   let email = validator.isEmail(req.body.email) ? req.body.email : null;
@@ -12,6 +49,8 @@ exports.register = async (req, res) => {
   let hash;
   let user;
   let saved;
+  let awsCopy;
+  let awsDelete;
 
   // Validates email
   if (!email) {
@@ -43,6 +82,37 @@ exports.register = async (req, res) => {
     });
 
     saved = await newUser.save();
+
+    awsCopy = {
+      Bucket: `${process.env.AWS_BUCKET_NAME}/development/users/${saved._id}`,
+      CopySource: req['file']['location'],
+      Key: `logo.${req['file']['mimetype'].split('/')[1]}`
+    };
+
+    let awsCopyRes = await s3.copyObject(awsCopy);
+    console.log(awsCopy);
+
+/*
+    s3.copyObject(awsCopy, function(err, data) {
+       if (err) {
+         return res.status(500).send('failed to upload logo');
+       } else {
+
+          awsDelete = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: `${req['file']['key']}`
+          };
+          s3.deleteObject(awsDelete, function(err, data) {
+            if (err) {
+              return res.status(500).send('failed to upload logo');
+            } else {
+              res.status(200).send('file uploaded successfully');
+            }
+          });
+       }
+     });
+*/
+
     res.status(200).send('user created successfully');
 
   } catch (e) {

@@ -34,6 +34,8 @@ if (process.env.NODE_ENV === 'development') {
     }),
     fileFilter: fileFilter
   });
+} else if (process.env.NODE_ENV === 'development-aws') {
+
 } else if (process.env.NODE_ENV === 'production') {
   upload = multer({
     storage: multerS3({

@@ -15,33 +15,6 @@ AWS.config.update({
 
 s3 = new AWS.S3();
 
-/*
-file:
-  { fieldname: 'logo',
-    originalname: 'logo.png',
-    encoding: '7bit',
-    mimetype: 'image/png',
-    size: 6849,
-    bucket: 'yycautomotives',
-    key: '1553738817389.png',
-    acl: 'public-read',
-    contentType: 'application/octet-stream',
-    contentDisposition: null,
-    storageClass: 'STANDARD',
-    serverSideEncryption: null,
-    metadata: null,
-    location: 'https://yycautomotives.s3.amazonaws.com/1553738817389.png',
-    etag: '"82b9c7a5a3f405032b1db71a25f67021"',
-    versionId: undefined },
- __onFinished: null }
-
- var params = {
- Bucket: "destinationbucket",
- CopySource: "/sourcebucket/HappyFacejpg",
- Key: "HappyFaceCopyjpg"
-};
-*/
-
 exports.register = async (req, res) => {
   let email = validator.isEmail(req.body.email) ? req.body.email : null;
   let password = req.body.password;
@@ -49,8 +22,6 @@ exports.register = async (req, res) => {
   let hash;
   let user;
   let saved;
-  let awsCopy;
-  let awsDelete;
 
   // Validates email
   if (!email) {
@@ -62,7 +33,6 @@ exports.register = async (req, res) => {
   if (user.length > 0) {
     return res.status(500).send('user already exists');
   }
-
 
   // Hash password, create new user and save
   try {
@@ -83,38 +53,27 @@ exports.register = async (req, res) => {
 
     saved = await newUser.save();
 
-    awsCopy = {
-      Bucket: `${process.env.AWS_BUCKET_NAME}/development/users/${saved._id}`,
-      CopySource: req['file']['location'],
-      Key: `logo.${req['file']['mimetype'].split('/')[1]}`
-    };
+    try {
+      let awsCopy = {
+        Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved._id}`,
+        CopySource: req['file']['location'],
+        Key: `logo.${req['file']['mimetype'].split('/')[1]}`
+      };
+      let awsDelete = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `${req['file']['key']}`
+      };
 
-    let awsCopyRes = await s3.copyObject(awsCopy);
-    console.log(awsCopy);
+      await s3.copyObject('asdf').promise();
+      await s3.deleteObject(awsDelete).promise();
 
-/*
-    s3.copyObject(awsCopy, function(err, data) {
-       if (err) {
-         return res.status(500).send('failed to upload logo');
-       } else {
+      res.status(200).send('user created successfully');
 
-          awsDelete = {
-            Bucket: process.env.AWS_BUCKET_NAME,
-            Key: `${req['file']['key']}`
-          };
-          s3.deleteObject(awsDelete, function(err, data) {
-            if (err) {
-              return res.status(500).send('failed to upload logo');
-            } else {
-              res.status(200).send('file uploaded successfully');
-            }
-          });
-       }
-     });
-*/
-
-    res.status(200).send('user created successfully');
-
+    } catch (e) {
+      console.log(e);
+      deleteOnFail(saved._id, req.file);
+      return res.status(500).send('failed to upload logo');
+    }
   } catch (e) {
     console.log(e);
     return res.status(500).send('error registering');
@@ -160,4 +119,30 @@ exports.login = (req, res) => {
       res.status(200).json({ 'token': token });
     });
   })(req, res);
+}
+
+deleteOnFail = async (id, files) => {
+  let filesToDelete = [];
+  filesToDelete.push(files);
+
+  try {
+    await Users.findOneAndRemove({ _id: id });
+
+    let awsDelete = {};
+    if (filesToDelete.length > 0) {
+      filesToDelete.forEach(async (file) => {
+        awsDelete = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: `${file.key}`
+        };
+
+        await s3.deleteObject(awsDelete).promise();
+      });
+    }
+
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 }

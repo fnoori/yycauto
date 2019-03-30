@@ -64,7 +64,7 @@ exports.register = async (req, res) => {
         Key: `${req['file']['key']}`
       };
 
-      await s3.copyObject('asdf').promise();
+      await s3.copyObject(awsCopy).promise();
       await s3.deleteObject(awsDelete).promise();
 
       res.status(200).send('user created successfully');

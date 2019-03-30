@@ -37,6 +37,7 @@ const vehicleSchema = mongoose.Schema({
     end: { type: Date, required: false }
   },
   dealership: mongoose.Schema.Types.ObjectId,
+  images: { type: Array, required: false },
   date: {
     created: { type: Date,required: true },
     modified: { type: Date,required: true }

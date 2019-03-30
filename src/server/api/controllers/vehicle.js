@@ -3,6 +3,17 @@ const Vehicles = require('../models/vehicle');
 const validator = require('validator');
 const passport = require('passport');
 const { check, validationResult } = require('express-validator/check');
+const AWS = require('aws-sdk');
+let s3;
+
+//configuring the AWS environment
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+});
+
+s3 = new AWS.S3();
+
 
 exports.getAllVehicles = (req, res) => {
   const limit = parseInt(req.params.limit);
@@ -57,13 +68,63 @@ exports.addNewVehicle = async (req, res) => {
   try {
     saved = await newVehicle.save();
 
-    if (!saved) {
-      return res.status(500).send('failed to save vehicle');
-    }
+    try {
+      let awsCopy = {};
+      let awsDelete = {};
+      let filesToCopy = req.files;
 
-    res.status(200).send('vehicle saved successfully');
+      filesToCopy.forEach(async (file) => {
+        awsCopy = {
+          Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}`,
+          CopySource: file.location,
+          Key: file.key.split('/')[2]
+        };
+
+        await s3.copyObject(awsCopy).promise();
+      });
+
+      filesToCopy.forEach(async (file) => {
+        awsDelete = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: file.key
+        };
+
+        await s3.deleteObject(awsDelete).promise();
+      });
+
+      res.status(200).send('vehicle created successfully');
+    } catch (e) {
+      console.log(e);
+      res.status(500).send('failed to upload images');
+    }
   } catch (e) {
     console.log(e);
     return res.status(500).send('failed to save vehicle');
+  }
+}
+
+deleteOnFail = async (id, files) => {
+  let filesToDelete = [];
+  filesToDelete.push(files);
+
+  try {
+    await Vehicles.findOneAndRemove({ _id: id });
+
+    let awsDelete = {};
+    if (filesToDelete.length > 0) {
+      filesToDelete.forEach(async (files) => {
+        awsDelete = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: `${file.key}`
+        };
+
+        await s3.deleteObject(awsDelete).promise();
+      });
+    }
+
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
   }
 }

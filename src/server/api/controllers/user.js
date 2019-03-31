@@ -64,7 +64,7 @@ exports.register = async (req, res) => {
         Key: `${req['file']['key']}`
       };
 
-      await s3.copyObject(awsCopy).promise();
+      await s3.copyObject('awsCopy').promise();
       await s3.deleteObject(awsDelete).promise();
 
       res.status(200).send('user created successfully');
@@ -121,24 +121,17 @@ exports.login = (req, res) => {
   })(req, res);
 }
 
-deleteOnFail = async (id, files) => {
-  let filesToDelete = [];
-  filesToDelete.push(files);
+deleteOnFail = async (id, file) => {
 
   try {
     await Users.findOneAndRemove({ _id: id });
 
-    let awsDelete = {};
-    if (filesToDelete.length > 0) {
-      filesToDelete.forEach(async (file) => {
-        awsDelete = {
-          Bucket: process.env.AWS_BUCKET_NAME,
-          Key: `${file.key}`
-        };
+    let awsDelete = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: `${file.key}`
+    };
 
-        await s3.deleteObject(awsDelete).promise();
-      });
-    }
+    await s3.deleteObject(awsDelete).promise();
 
     return true;
   } catch (e) {

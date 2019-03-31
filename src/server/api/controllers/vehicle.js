@@ -73,29 +73,27 @@ exports.addNewVehicle = async (req, res) => {
       let awsDelete = {};
       let filesToCopy = req.files;
 
-      filesToCopy.forEach(async (file) => {
+      for (const file of filesToCopy) {
         awsCopy = {
           Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}`,
           CopySource: file.location,
-          Key: file.key.split('/')[2]
+          Key: `${file.key.split('/')[2]}`
         };
 
-        await s3.copyObject(awsCopy).promise();
-      });
-
-      filesToCopy.forEach(async (file) => {
         awsDelete = {
           Bucket: process.env.AWS_BUCKET_NAME,
-          Key: file.key
+          Key: `${file.key}`
         };
 
+        await s3.copyObject('awsCopy').promise();
         await s3.deleteObject(awsDelete).promise();
-      });
+      }
 
       res.status(200).send('vehicle created successfully');
     } catch (e) {
       console.log(e);
-      res.status(500).send('failed to upload images');
+      deleteOnFail(saved._id, req.files);
+      return res.status(500).send('failed to upload images');
     }
   } catch (e) {
     console.log(e);
@@ -104,22 +102,19 @@ exports.addNewVehicle = async (req, res) => {
 }
 
 deleteOnFail = async (id, files) => {
-  let filesToDelete = [];
-  filesToDelete.push(files);
-
   try {
     await Vehicles.findOneAndRemove({ _id: id });
-
     let awsDelete = {};
-    if (filesToDelete.length > 0) {
-      filesToDelete.forEach(async (files) => {
+
+    if (files.length > 0) {
+      for (const file of files) {
         awsDelete = {
           Bucket: process.env.AWS_BUCKET_NAME,
-          Key: `${file.key}`
+          Key: file.key
         };
 
         await s3.deleteObject(awsDelete).promise();
-      });
+      }
     }
 
     return true;

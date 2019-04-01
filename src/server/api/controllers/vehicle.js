@@ -207,7 +207,10 @@ exports.updateVehicle = async (req, res) => {
 
   try {
     let vehicle = await Vehicles.findById(vehicleId)
-    let updated = await Vehicles.update({ _id: vehicleId }, updateVehicleDotNotation)
+    let updated = await Vehicles.update({
+      _id: vehicleId,
+      dealership: req['user']['_id']
+    }, updateVehicleDotNotation)
 
     if (updated.n === 0) {
       this.deleteFiles(req.files)
@@ -266,10 +269,10 @@ exports.updateVehicle = async (req, res) => {
 exports.deleteVehicle = async (req, res) => {
 
   const vehicle = await Vehicles
-                  .find({
-                      _id: req.params.vehicle_id,
-                      dealership: req['user']['_id']
-                    })
+    .find({
+      _id: req.params.vehicle_id,
+      dealership: req['user']['_id']
+    })
 
   try {
     let images = vehicle[0].images

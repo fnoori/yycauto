@@ -143,16 +143,16 @@ exports.updateVehicle = async (req, res) => {
   if (req.body.description) updateVehicle['basic_info']['description'] = req.body.description;
   if (req.body.year) updateVehicle['basic_info']['year'] = req.body.year;
   if (req.body.price) updateVehicle['basic_info']['price'] = req.body.price;
-  if (req.body.car_proof) updateVehicle.car_proof = req.body.car_proof;
-  if (req.body.transmission) updateVehicle.transmission = req.body.transmission;
-  if (req.body.engine_size) updateVehicle.engine_size = req.body.engine_size;
-  if (req.body.cylinders) updateVehicle.cylinders = req.body.cylinders;
-  if (req.body.horsepower) updateVehicle.horsepower = req.body.horsepower;
-  if (req.body.torque) updateVehicle.torque = req.body.torque;
-  if (req.body.recommended_fuel) updateVehicle.recommended_fuel = req.body.recommended_fuel;
-  if (req.body.city) updateVehicle.city = req.body.city;
-  if (req.body.highway) updateVehicle.highway = req.body.highway;
-  if (req.body.combined) updateVehicle.combined = req.body.combined;
+  if (req.body.car_proof) updateVehicle['mechanical_info']['car_proof'] = req.body.car_proof;
+  if (req.body.transmission) updateVehicle['mechanical_info']['transmission'] = req.body.transmission;
+  if (req.body.engine_size) updateVehicle['mechanical_info']['engine_size'] = req.body.engine_size;
+  if (req.body.cylinders) updateVehicle['mechanical_info']['cylinders'] = req.body.cylinders;
+  if (req.body.horsepower) updateVehicle['mechanical_info']['horsepower'] = req.body.horsepower;
+  if (req.body.torque) updateVehicle['mechanical_info']['torque'] = req.body.torque;
+  if (req.body.recommended_fuel) updateVehicle['mechanical_info']['recommended_fuel'] = req.body.recommended_fuel;
+  if (req.body.city) updateVehicle['fuel_economy']['city'] = req.body.city;
+  if (req.body.highway) updateVehicle['fuel_economy']['highway'] = req.body.highway;
+  if (req.body.combined) updateVehicle['fuel_economy']['combined'] = req.body.combined;
 
   updateVehicle['date']['modified'] = new Date();
 

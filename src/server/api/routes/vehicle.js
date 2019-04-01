@@ -3,6 +3,7 @@ const router = express.Router();
 const Controller = require('../controllers/vehicle');
 const passport = require('passport');
 const validation = require('../validations/vehicleValidation');
+const mongoose = require('mongoose');
 
 let aws = require('aws-sdk');
 let multer = require('multer');
@@ -24,33 +25,17 @@ fileFilter = (req, file, cb) => {
   }
 };
 
-if (process.env.NODE_ENV === 'development') {
-  upload = multer({
-    storage: multerS3({
-      s3: s3,
-      bucket: process.env.AWS_BUCKET_NAME,
-      acl: 'public-read',
-      key: function (req, file, cb) {
-        cb(null, `development/uploads/${Date.now().toString()}.${file.mimetype.split('/')[1]}`);
-      }
-    }),
-    fileFilter: fileFilter
-  });
-} else if (process.env.NODE_ENV === 'development-aws') {
-
-} else if (process.env.NODE_ENV === 'production') {
-  upload = multer({
-    storage: multerS3({
-      s3: s3,
-      bucket: process.env.AWS_BUCKET_NAME,
-      acl: 'public-read',
-      key: function (req, file, cb) {
-        cb(null, `${Date.now().toString()}.${file.mimetype.split('/')[1]}`);
-      }
-    }),
-    fileFilter: fileFilter
-  });
-}
+upload = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: process.env.AWS_BUCKET_NAME,
+    acl: 'public-read',
+    key: function (req, file, cb) {
+      cb(null, `${process.env.NODE_ENV}/uploads/${mongoose.Types.ObjectId()}.${file.mimetype.split('/')[1]}`);
+    }
+  }),
+  fileFilter: fileFilter
+});
 
 router.get('/get-all-vehicles/:skip/:limit', Controller.getAllVehicles);
 

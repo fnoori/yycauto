@@ -105,7 +105,3 @@ exports.validate = (method) => {
     }
   }
 }
-/*
-
-
-*/

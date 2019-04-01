@@ -1,3 +1,7 @@
+exports.EMAIL_MAX_LENGTH = 80;
+exports.DEALERSHIP_NAME_MAX_LENGTH = 80;
+
+
 exports.MAKE_MAX_LENGTH = 15;
 exports.MODEL_MAX_LENGTH = 15;
 exports.TRIM_MAX_LENGTH = 10;

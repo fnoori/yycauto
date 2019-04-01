@@ -5,6 +5,7 @@ const argon2 = require('argon2');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const AWS = require('aws-sdk');
+const { check, validationResult } = require('express-validator/check');
 let s3;
 
 //configuring the AWS environment
@@ -22,11 +23,22 @@ exports.register = async (req, res) => {
   let hash;
   let user;
   let saved;
+  let validations = validationResult(req);
+
+  if (!validations.isEmpty()) {
+    deleteFile(req.file);
+    return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) });
+  }
 
   // Validates email
   if (!email) {
     deleteFile(req.file);
     return res.status(400).send('invalid email');
+  }
+
+  // Check if a logo is included
+  if (!req.file) {
+    return res.status(400).send('must include a logo');
   }
 
   // Check if email/dealership already exists
@@ -66,7 +78,7 @@ exports.register = async (req, res) => {
         Key: `${req['file']['key']}`
       };
 
-      await s3.copyObject('awsCopy').promise();
+      await s3.copyObject(awsCopy).promise();
       await s3.deleteObject(awsDelete).promise();
 
       res.status(200).send('user created successfully');
@@ -124,18 +136,19 @@ exports.login = (req, res) => {
   })(req, res);
 }
 
+// TODO: These functions could possibly be moved into a separate file
 deleteOnFail = async (id, file) => {
   try {
     await Users.findOneAndDelete({ _id: id });
 
-    let awsDelete = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: file.key
-    };
+    if (file.length > 0) {
+      let awsDelete = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: file.key
+      };
 
-    console.log(awsDelete);
-
-    await s3.deleteObject(awsDelete).promise();
+      await s3.deleteObject(awsDelete).promise();
+    }
 
     return true;
   } catch (e) {
@@ -146,12 +159,14 @@ deleteOnFail = async (id, file) => {
 
 deleteFile = async (file) => {
   try {
-    let awsDelete = {
-      Bucket: process.env.AWS_BUCKET_NAME,
-      Key: file.key
-    };
+    if (file.length > 0) {
+      let awsDelete = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: file.key
+      };
 
-    await s3.deleteObject(awsDelete).promise();
+      await s3.deleteObject(awsDelete).promise();
+    }
 
     return true;
   } catch (e) {

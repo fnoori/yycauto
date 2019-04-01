@@ -1,7 +1,5 @@
-const { check } = require('express-validator/check');
-const globalVars = require('../utils/globalVars');
-const _ = require('underscore');
-const validator = require('validator');
+const { check } = require('express-validator/check')
+const globalVars = require('../utils/globalVars')
 
 exports.validate = (method) => {
   switch (method) {
@@ -57,7 +55,6 @@ exports.validate = (method) => {
           .isNumeric()
           .isLength({ max: globalVars.PRICE_MAX_LENGTH }),
 
-
         check('car_proof')
           .optional()
           .isBoolean(),
@@ -86,7 +83,6 @@ exports.validate = (method) => {
           .isAlpha()
           .isLength({ max: globalVars.RECOMMENDED_FUEL_MAX_LENGTH }),
 
-
         check('city')
           .optional()
           .isNumeric()
@@ -99,9 +95,7 @@ exports.validate = (method) => {
           .optional()
           .isNumeric()
           .isLength({ max: globalVars.FUEL_ECONOMY_COMBINED })
-      ];
-
-      break;
+      ]
     }
 
     case 'updateVehicle': {
@@ -156,7 +150,6 @@ exports.validate = (method) => {
           .isNumeric()
           .isLength({ max: globalVars.PRICE_MAX_LENGTH }),
 
-
         check('car_proof')
           .optional()
           .isBoolean(),
@@ -185,7 +178,6 @@ exports.validate = (method) => {
           .isAlpha()
           .isLength({ max: globalVars.RECOMMENDED_FUEL_MAX_LENGTH }),
 
-
         check('city')
           .optional()
           .isNumeric()
@@ -198,9 +190,7 @@ exports.validate = (method) => {
           .optional()
           .isNumeric()
           .isLength({ max: globalVars.FUEL_ECONOMY_COMBINED })
-      ];
-
-      break;
+      ]
     }
 
     default: {

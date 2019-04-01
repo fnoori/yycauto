@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const globalVars = require('../utils/globalVars');
+const mongoose = require('mongoose')
+const globalVars = require('../utils/globalVars')
 
 const vehicleSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -16,7 +16,7 @@ const vehicleSchema = mongoose.Schema({
     fuel_type: { type: String, required: true, maxlength: globalVars.FUEL_TYPE },
     doors: { type: Number, required: false, maxlength: globalVars.DOORS },
     seats: { type: Number, required: false, maxlength: globalVars.SEATS },
-    description: { type: String, required: false, maxlength: globalVars.DESCRIPTION },
+    description: { type: String, required: false, maxlength: globalVars.DESCRIPTION }
   },
   mechanical_info: {
     car_proof: { type: Boolean, require: false },
@@ -39,10 +39,10 @@ const vehicleSchema = mongoose.Schema({
   dealership: mongoose.Schema.Types.ObjectId,
   images: { type: Array, required: false },
   date: {
-    created: { type: Date,required: true },
-    modified: { type: Date,required: true }
+    created: { type: Date, required: true },
+    modified: { type: Date, required: true }
   },
   views: { type: Number, required: true }
-});
+})
 
-module.exports = mongoose.model('Vehicle', vehicleSchema);
+module.exports = mongoose.model('Vehicle', vehicleSchema)

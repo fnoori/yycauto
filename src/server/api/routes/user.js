@@ -1,28 +1,28 @@
-const express = require('express');
-const router = express.Router();
-const Controller = require('../controllers/user');
-const validation = require('../validations/userValidation');
-const mongoose = require('mongoose');
+const express = require('express')
+const router = express.Router()
+const Controller = require('../controllers/user')
+const validation = require('../validations/userValidation')
+const mongoose = require('mongoose')
 
-let aws = require('aws-sdk');
-let multer = require('multer');
-let multerS3 = require('multer-s3');
-let fileFilter;
-let upload;
+let aws = require('aws-sdk')
+let multer = require('multer')
+let multerS3 = require('multer-s3')
+let fileFilter
+let upload
 
 let s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-});
+})
 
 fileFilter = (req, file, cb) => {
-  if (file.mimetype == 'image/jpeg' ||
-  file.mimetype == 'image/png') {
-    cb(null, true);
+  if (file.mimetype === 'image/jpeg' ||
+  file.mimetype === 'image/png') {
+    cb(null, true)
   } else {
-    cb(null, false);
+    cb(null, false)
   }
-};
+}
 
 upload = multer({
   storage: multerS3({
@@ -30,16 +30,15 @@ upload = multer({
     bucket: process.env.AWS_BUCKET_NAME,
     acl: 'public-read',
     key: function (req, file, cb) {
-      cb(null, `${process.env.NODE_ENV}/uploads/${mongoose.Types.ObjectId()}.${file.mimetype.split('/')[1]}`);
+      cb(null, `${process.env.NODE_ENV}/uploads/${mongoose.Types.ObjectId()}.${file.mimetype.split('/')[1]}`)
     }
   }),
   fileFilter: fileFilter
-});
-
+})
 
 router.post('/register', upload.single('logo'),
-            validation.validate('registration'),
-            Controller.register);
-router.post('/login', Controller.login);
+  validation.validate('registration'),
+  Controller.register)
+router.post('/login', Controller.login)
 
-module.exports = router;
+module.exports = router

@@ -1,5 +1,5 @@
-const { check } = require('express-validator/check');
-const globalVars = require('../utils/globalVars');
+const { check } = require('express-validator/check')
+const globalVars = require('../utils/globalVars')
 
 exports.validate = (method) => {
   switch (method) {
@@ -12,8 +12,8 @@ exports.validate = (method) => {
           .exists(),
         check('dealership')
           .exists()
-          .isLength({ max: globalVars.DEALERSHIP_NAME_MAX_LENGTH }),
-      ];
+          .isLength({ max: globalVars.DEALERSHIP_NAME_MAX_LENGTH })
+      ]
     }
 
     default: {

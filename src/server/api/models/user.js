@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const globalVars = require('../utils/globalVars');
+const mongoose = require('mongoose')
+const globalVars = require('../utils/globalVars')
 
 const userSchema = mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -39,6 +39,6 @@ const userSchema = mongoose.Schema({
       required: true
     }
   }
-});
+})
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema)

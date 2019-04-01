@@ -25,12 +25,14 @@ exports.register = async (req, res) => {
 
   // Validates email
   if (!email) {
+    deleteFile(req.file);
     return res.status(400).send('invalid email');
   }
 
   // Check if email/dealership already exists
   user = await Users.find().or([{ 'email': email }, { 'dealership.name': dealership }]);
   if (user.length > 0) {
+    deleteFile(req.file);
     return res.status(500).send('user already exists');
   }
 
@@ -76,6 +78,7 @@ exports.register = async (req, res) => {
     }
   } catch (e) {
     console.log(e);
+    deleteFile(req.file);
     return res.status(500).send('error registering');
   }
 }
@@ -122,13 +125,30 @@ exports.login = (req, res) => {
 }
 
 deleteOnFail = async (id, file) => {
-
   try {
-    await Users.findOneAndRemove({ _id: id });
+    await Users.findOneAndDelete({ _id: id });
 
     let awsDelete = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `${file.key}`
+      Key: file.key
+    };
+
+    console.log(awsDelete);
+
+    await s3.deleteObject(awsDelete).promise();
+
+    return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
+}
+
+deleteFile = async (file) => {
+  try {
+    let awsDelete = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: file.key
     };
 
     await s3.deleteObject(awsDelete).promise();

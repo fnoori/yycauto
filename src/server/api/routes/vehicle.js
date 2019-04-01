@@ -45,4 +45,10 @@ router.post('/new-vehicle',
   validation.validate('addNewVehicle'),
   Controller.addNewVehicle);
 
+router.patch('/update-vehicle/:vehicle_id',
+  passport.authenticate('jwt', { session: false }),
+  upload.array('images', 10),
+  validation.validate('updateVehicle'),
+  Controller.updateVehicle);
+
 module.exports = router;

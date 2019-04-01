@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const Vehicles = require('../models/vehicle');
 const validator = require('validator');
+const _ = require('underscore');
 const passport = require('passport');
+const dot = require('dot-object');
 const { check, validationResult } = require('express-validator/check');
 const AWS = require('aws-sdk');
 let s3;
@@ -103,6 +105,112 @@ exports.addNewVehicle = async (req, res) => {
     console.log(e);
     const deleteRes = deleteFiles(req.files);
     return res.status(500).send('failed to save vehicle');
+  }
+}
+
+exports.updateVehicle = async (req, res) => {
+  let validations = validationResult(req);
+  let includesPhotos = false;
+  let updateVehicle = {
+    basic_info: {},
+    mechanical_info: {},
+    fuel_economy: {},
+    date: {}
+  };
+  let updateVehicleDotNotation;
+  let vehicleId = req.params.vehicle_id;
+
+  if (!validations.isEmpty()) {
+    //const deleteRes = deleteFiles(req.files);
+    return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) });
+  }
+
+  if (!_.isEmpty(req.files)) {
+    includesPhotos = true;
+  }
+
+  // only update those values that need to be updated
+  if (req.body.make) updateVehicle['basic_info']['make'] = req.body.make;
+  if (req.body.model) updateVehicle['basic_info']['model'] = req.body.model;
+  if (req.body.trim) updateVehicle['basic_info']['trim'] = req.body.trim;
+  if (req.body.type) updateVehicle['basic_info']['type'] = req.body.type;
+  if (req.body.exterior_colour) updateVehicle['basic_info']['exterior_colour'] = req.body.exterior_colour;
+  if (req.body.interior_colour) updateVehicle['basic_info']['interior_colour'] = req.body.interior_colour;
+  if (req.body.kilometres) updateVehicle['basic_info']['kilometres'] = req.body.kilometres;
+  if (req.body.fuel_type) updateVehicle['basic_info']['fuel_type'] = req.body.fuel_type;
+  if (req.body.doors) updateVehicle['basic_info']['doors'] = req.body.doors;
+  if (req.body.seats) updateVehicle['basic_info']['seats'] = req.body.seats;
+  if (req.body.description) updateVehicle['basic_info']['description'] = req.body.description;
+  if (req.body.year) updateVehicle['basic_info']['year'] = req.body.year;
+  if (req.body.price) updateVehicle['basic_info']['price'] = req.body.price;
+  if (req.body.car_proof) updateVehicle.car_proof = req.body.car_proof;
+  if (req.body.transmission) updateVehicle.transmission = req.body.transmission;
+  if (req.body.engine_size) updateVehicle.engine_size = req.body.engine_size;
+  if (req.body.cylinders) updateVehicle.cylinders = req.body.cylinders;
+  if (req.body.horsepower) updateVehicle.horsepower = req.body.horsepower;
+  if (req.body.torque) updateVehicle.torque = req.body.torque;
+  if (req.body.recommended_fuel) updateVehicle.recommended_fuel = req.body.recommended_fuel;
+  if (req.body.city) updateVehicle.city = req.body.city;
+  if (req.body.highway) updateVehicle.highway = req.body.highway;
+  if (req.body.combined) updateVehicle.combined = req.body.combined;
+
+  updateVehicle['date']['modified'] = new Date();
+
+  // check if any of the nested documents is empty, if it is, delete it
+  if (_.isEmpty(updateVehicle.basic_info)) delete updateVehicle.basic_info;
+  if (_.isEmpty(updateVehicle.mechanical_info)) delete updateVehicle.mechanical_info;
+  if (_.isEmpty(updateVehicle.fuel_economy)) delete updateVehicle.fuel_economy;
+
+  updateVehicleDotNotation = dot.dot(updateVehicle);
+
+  try {
+    let vehicle = await Vehicles.findById(vehicleId);
+    let updated = await Vehicles.update({ _id: vehicleId }, updateVehicleDotNotation);
+
+    if (updated.n === 0) {
+      deleteFiles(req.files);
+      return res.status(500).send('could not find anything associated with that id');
+    }
+
+    if (includesPhotos) {
+      try {
+        let awsCopy = {};
+        let awsDelete = {};
+        let fileLocations = [];
+
+        for (const file of req.files) {
+          awsCopy = {
+            Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}`,
+            CopySource: file.location,
+            Key: file.key.split('/')[2]
+          };
+          awsDelete = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: file.key
+          };
+
+          fileLocations.push(`${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`);
+          await s3.copyObject(awsCopy).promise();
+          await s3.deleteObject(awsDelete).promise();
+
+          let updatedPhotos = await Vehicles.findOneAndUpdate({ _id: vehicleId }, { $push: { 'images': fileLocations } });
+          if (updatedPhotos.n === 0) {
+            deleteFiles(req.files);
+            return res.status(500).send('failed to upload photos');
+          }
+        }
+      } catch (e) {
+        console.log(e);
+        deleteFiles(req.files);
+        return res.status(500).send('failed to upload photos');
+      }
+    }
+
+    res.status(200).send('vehicle successfully updated');
+  } catch (e) {
+    console.log(e);
+    deleteFiles(req.files);
+    return res.status(500).send('failed to update vehicle');
   }
 }
 

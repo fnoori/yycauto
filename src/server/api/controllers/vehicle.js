@@ -29,6 +29,38 @@ exports.getAllVehicles = (req, res) => {
     });
 }
 
+exports.getVehicleById = (req, res) => {
+  const vehicleId = req.params.vehicle_id;
+
+  Vehicles.find({ _id: vehicleId })
+  .then(vehicle => {
+
+    // update view count
+    Vehicles.update({ _id: vehicleId }, { $inc: { 'views': 1 } })
+    .then(updated => {
+      res.status(200).send(vehicle);
+    }).catch(updateViewCountErr => {
+      console.log(updateViewCountErr);
+      return res.status(500).send('failed to update view count');
+    });
+  }).catch(findErr => {
+    console.log(findErr);
+    return res.status(500).send('error finding vehicle');
+  });
+}
+
+exports.getVehiclesByDealershipId = (req, res) => {
+  const dealershipId = req.params.dealership_id;
+
+  Vehicles.find({ dealership: dealershipId })
+  .then(vehicles => {
+    res.status(200).send(vehicles);
+  }).catch(findErr => {
+    console.log(findErr);
+    return res.status(500).send('error finding the dealership\'s vehicles');
+  });
+}
+
 exports.addNewVehicle = async (req, res) => {
   let validations = validationResult(req);
   let saved;

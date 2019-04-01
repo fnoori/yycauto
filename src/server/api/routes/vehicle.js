@@ -38,6 +38,8 @@ upload = multer({
 });
 
 router.get('/get-all-vehicles/:skip/:limit', Controller.getAllVehicles);
+router.get('/get-vehicle-by-id/:vehicle_id', Controller.getVehicleById);
+router.get('/get-vehicles-by-dealership-id/:dealership_id', Controller.getVehiclesByDealershipId);
 
 router.post('/new-vehicle',
   passport.authenticate('jwt', { session: false }),

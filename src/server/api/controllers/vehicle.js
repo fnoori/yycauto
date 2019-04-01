@@ -125,7 +125,12 @@ exports.addNewVehicle = async (req, res) => {
           Key: file.key
         }
 
-        fileLocations.push(`${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}/${file.key.split('/')[2]}`)
+        fileLocations.push({
+          Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}`,
+          Key: file.key.split('/')[2],
+          url: `${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}/${file.key.split('/')[2]}`
+        })
+
         await s3.copyObject(awsCopy).promise()
         await s3.deleteObject(awsDelete).promise()
       }
@@ -226,7 +231,14 @@ exports.updateVehicle = async (req, res) => {
             Key: file.key
           }
 
-          fileLocations.push(`${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`)
+          //fileLocations.push(`${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`)
+
+          fileLocations.push({
+            Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}`,
+            Key: file.key.split('/')[2],
+            url: `${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`
+          })
+
           await s3.copyObject(awsCopy).promise()
           await s3.deleteObject(awsDelete).promise()
 
@@ -249,6 +261,49 @@ exports.updateVehicle = async (req, res) => {
     this.deleteFiles(req.files)
     return res.status(500).send('failed to update vehicle')
   }
+}
+
+exports.deleteVehicle = async (req, res) => {
+
+  const vehicle = await Vehicles
+                  .find({
+                      _id: req.params.vehicle_id,
+                      dealership: req['user']['_id']
+                    })
+
+  try {
+    let images = vehicle[0].images
+    let awsDelete = {}
+    for (const image of images) {
+      awsDelete = {
+        'Bucket': image.Bucket,
+        'Key': image.Key
+      }
+
+      console.log(awsDelete)
+
+      await s3.deleteObject(awsDelete).promise()
+    }
+
+    try {
+      const deleted = await Vehicles.findOneAndDelete({
+        _id: req.params.vehicle_id,
+        dealership: req['user']['_id']
+      })
+
+      if (deleted) {
+        res.status(200).send(`successfully delete vehicle ${deleted._id}`)
+      }
+
+    } catch (e) {
+      console.log(e);
+      return res.status(500).send('successfully delete images, but failed to delete vehicle')
+    }
+  } catch (e) {
+    console.log(e)
+    return res.status(500).send('failed to delete images')
+  }
+
 }
 
 this.deleteOnFail = async (id, files) => {

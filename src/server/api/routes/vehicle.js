@@ -53,4 +53,8 @@ router.patch('/update-vehicle/:vehicle_id',
   validation.validate('updateVehicle'),
   Controller.updateVehicle)
 
+router.delete('/delete-vehicle/:vehicle_id',
+  passport.authenticate('jwt', { session: false }),
+  Controller.deleteVehicle)
+
 module.exports = router

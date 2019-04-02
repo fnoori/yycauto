@@ -163,7 +163,7 @@ exports.updateVehicle = async (req, res) => {
   let vehicleId = req.params.vehicle_id
 
   if (!validations.isEmpty()) {
-    // const deleteRes = this.deleteFiles(req.files);
+    this.deleteFiles(req.files)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
   }
 
@@ -234,8 +234,6 @@ exports.updateVehicle = async (req, res) => {
             Key: file.key
           }
 
-          //fileLocations.push(`${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`)
-
           fileLocations.push({
             Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}`,
             Key: file.key.split('/')[2],
@@ -267,7 +265,6 @@ exports.updateVehicle = async (req, res) => {
 }
 
 exports.deleteVehicle = async (req, res) => {
-
   const vehicle = await Vehicles
     .find({
       _id: req.params.vehicle_id,
@@ -283,8 +280,6 @@ exports.deleteVehicle = async (req, res) => {
         'Key': image.Key
       }
 
-      console.log(awsDelete)
-
       await s3.deleteObject(awsDelete).promise()
     }
 
@@ -297,16 +292,14 @@ exports.deleteVehicle = async (req, res) => {
       if (deleted) {
         res.status(200).send(`successfully delete vehicle ${deleted._id}`)
       }
-
     } catch (e) {
-      console.log(e);
+      console.log(e)
       return res.status(500).send('successfully delete images, but failed to delete vehicle')
     }
   } catch (e) {
     console.log(e)
     return res.status(500).send('failed to delete images')
   }
-
 }
 
 this.deleteOnFail = async (id, files) => {

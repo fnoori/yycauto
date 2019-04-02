@@ -264,6 +264,54 @@ exports.updateVehicle = async (req, res) => {
   }
 }
 
+exports.deletePhotos = async (req, res) => {
+  let toDelete = req.body.images;
+
+  try {
+    let vehicle = await Vehicles
+      .find({
+        _id: req.params.vehicle_id,
+        dealership: req['user']['_id']
+      })
+
+    // look through the vehicle in db for matching images to verify they exist
+    let matchingImages = []
+    let matchingImageUrl = []
+    for (const image of toDelete) {
+      vehicle[0]['images'].find( details => {
+        if (details.url === image.url) {
+          matchingImages.push(image)
+          matchingImageUrl.push(image.url)
+        }
+      })
+    }
+
+    for (const image of matchingImages) {
+      awsDelete = {
+        Bucket: image.Bucket,
+        Key: image.Key
+      }
+
+      await s3.deleteObject(awsDelete).promise()
+    }
+
+    const updated = await Vehicles
+      .update({
+        _id: req.params.vehicle_id, dealership: req['user']['_id']
+      },
+      {
+        $pull: { images: { url: { $in: matchingImageUrl } } }
+      })
+
+    return res.status(200).json({
+      'deleted': matchingImages
+    })
+  } catch (e) {
+    console.log(e)
+    return res.status(500).send('unable to delete photos')
+  }
+}
+
 exports.deleteVehicle = async (req, res) => {
   const vehicle = await Vehicles
     .find({

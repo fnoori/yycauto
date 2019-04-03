@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Users = require('../models/user')
 const validator = require('validator')
+const _ = require('underscore')
 const argon2 = require('argon2')
 const passport = require('passport')
 const jwt = require('jsonwebtoken')
@@ -92,6 +93,86 @@ exports.register = async (req, res) => {
     this.deleteFile(req.file)
     return res.status(500).send('error registering')
   }
+}
+
+exports.updateUser = (req, res) => {
+  let validations = validationResult(req)
+  let includesPhotos = false
+  let changingPassword = false
+  let changingEmail = false
+  let changingDealership = false
+  let updateUser = {
+    email: [],
+    password: [],
+    dealership: [],
+    date: {}
+  }
+  let updateUserParsed = {
+    dealership: {},
+    date: {}
+  }
+
+  if (!validations.isEmpty()) {
+    //this.deleteFile(req.file)
+    return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
+  }
+
+  if (!_.isEmpty(req.files)) {
+    includesPhotos = true
+  }
+
+  if (req.body.confirmation_email) {
+    changingEmail = true
+
+    try {
+      const user = await Users
+        .find({
+          email: req.body.email,
+          _id: req['user']['_id']
+        })
+    } catch (e) {
+
+    }
+
+    updateUserParsed['email'] = req.body.email
+  }
+
+  if (req.body.password_confirmation) {
+    changingPassword = true
+    try {
+      const hash = await argon2.hash(req.body.password)
+      updateUserParsed['password'] = hash
+    } catch (e) {
+      console.log(e)
+      return res.status(500).send('unable to update password"')
+    }
+  }
+
+  if (req.bodoy.dealership_confirmation) {
+    changingDealership = true
+    updateUserParsed['dealership']['name'] = req.body.dealership
+  }
+
+/*
+  if (req.body.email) updateUser['email'].push(req.body.email)
+  if (req.body.confirmation_email) updateUser['email'].push(req.body.confirmation_email)
+  if (req.body.password) updateUser['password'].push(req.body.password)
+  if (req.body.password_confirmation) updateUser['password'].push(req.body.password_confirmation)
+  if (req.body.dealership) updateUser['dealership'].push(req.body.dealership)
+  if (req.body.dealership_confirmation) updateUser['dealership'].push(req.body.dealership_confirmation)
+
+  if (_.isEmpty(updateUser['email'])) delete updateUser['email']
+  if (_.isEmpty(updateUser['confirmation_email'])) delete updateUser['confirmation_email']
+  if (_.isEmpty(updateUser['password'])) delete updateUser['password']
+  if (_.isEmpty(updateUser['password_confirmation'])) delete updateUser['password_confirmation']
+  if (_.isEmpty(updateUser['dealership']['name'])) delete updateUser['dealership']['name']
+  if (_.isEmpty(updateUser['dealership_confirmation'])) delete updateUser['dealership_confirmation']
+
+  updateUser['date']['modified'] = new Date()
+*/
+
+
+  res.send(updateUser)
 }
 
 exports.login = (req, res) => {

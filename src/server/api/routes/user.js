@@ -41,4 +41,8 @@ router.post('/register', upload.single('logo'),
   Controller.register)
 router.post('/login', Controller.login)
 
+router.patch('/update-user/:user_id', upload.single('logo'),
+  validation.validate('updateUser'),
+  Controller.updateUser)
+
 module.exports = router

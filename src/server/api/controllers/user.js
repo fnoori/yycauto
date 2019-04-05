@@ -95,84 +95,88 @@ exports.register = async (req, res) => {
   }
 }
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
   let validations = validationResult(req)
   let includesPhotos = false
   let changingPassword = false
   let changingEmail = false
   let changingDealership = false
   let updateUser = {
-    email: [],
-    password: [],
-    dealership: [],
-    date: {}
-  }
-  let updateUserParsed = {
     dealership: {},
     date: {}
   }
 
   if (!validations.isEmpty()) {
-    //this.deleteFile(req.file)
+    this.deleteFile(req.file)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
   }
 
-  if (!_.isEmpty(req.files)) {
+  if (!_.isEmpty(req.file)) {
     includesPhotos = true
   }
 
-  if (req.body.confirmation_email) {
-    changingEmail = true
+  try {
+    const user = await Users.findOne({
+      _id: req['user']['_id'],
+      email: req['user']['email']
+    })
 
-    try {
-      const user = await Users
-        .find({
-          email: req.body.email,
-          _id: req['user']['_id']
-        })
-    } catch (e) {
-
+    if (req.body.confirmation_email) updateUser['email'] = req.body.confirmation_email
+    if (req.body.dealership_confirmation) updateUser['dealership']['name'] = req.body.dealership_confirmation
+    if (req.body.password_confirmation) {
+      try {
+        updateUser['password'] = await argon2.hash(req.body.password)
+      } catch (e) {
+        console.log(e)
+        return res.status(500).send('unable to update password')
+      }
     }
 
-    updateUserParsed['email'] = req.body.email
-  }
+    updateUser['date']['modified'] = new Date()
 
-  if (req.body.password_confirmation) {
-    changingPassword = true
+    if (_.isEmpty(updateUser.dealership)) delete updateUser.dealership
+
     try {
-      const hash = await argon2.hash(req.body.password)
-      updateUserParsed['password'] = hash
+      let updated = await Users.update({
+        _id: req['user']['_id'],
+        email: req['user']['email']
+      }, updateUser)
+
+      if (updated.n === 0) {
+        this.deleteFile(req.file)
+        return res.status(500).send('unable to find user')
+      }
+
+      if (includesPhotos) {
+        try {
+          asdf
+          let awsCopy = {
+            Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${user._id}`,
+            CopySource: req['file']['location'],
+            Key: `logo.${req['file']['mimetype'].split('/')[1]}`
+          }
+          let awsDelete = {
+            Bucket: process.env.AWS_BUCKET_NAME,
+            Key: `${req['file']['key']}`
+          }
+
+          await s3.copyObject(awsCopy).promise()
+          await s3.deleteObject(awsDelete).promise()
+        } catch (e) {
+          console.log(e)
+          this.deleteFile(req.file)
+          return res.status(500).send('unable to update logo')
+        }
+      }
+      res.status(200).send('successfully updated user')
     } catch (e) {
       console.log(e)
-      return res.status(500).send('unable to update password"')
+      return res.status(500).send('unable to update user')
     }
+  } catch (e) {
+    console.log(e)
+    return res.status(500).send('unable to find user')
   }
-
-  if (req.bodoy.dealership_confirmation) {
-    changingDealership = true
-    updateUserParsed['dealership']['name'] = req.body.dealership
-  }
-
-/*
-  if (req.body.email) updateUser['email'].push(req.body.email)
-  if (req.body.confirmation_email) updateUser['email'].push(req.body.confirmation_email)
-  if (req.body.password) updateUser['password'].push(req.body.password)
-  if (req.body.password_confirmation) updateUser['password'].push(req.body.password_confirmation)
-  if (req.body.dealership) updateUser['dealership'].push(req.body.dealership)
-  if (req.body.dealership_confirmation) updateUser['dealership'].push(req.body.dealership_confirmation)
-
-  if (_.isEmpty(updateUser['email'])) delete updateUser['email']
-  if (_.isEmpty(updateUser['confirmation_email'])) delete updateUser['confirmation_email']
-  if (_.isEmpty(updateUser['password'])) delete updateUser['password']
-  if (_.isEmpty(updateUser['password_confirmation'])) delete updateUser['password_confirmation']
-  if (_.isEmpty(updateUser['dealership']['name'])) delete updateUser['dealership']['name']
-  if (_.isEmpty(updateUser['dealership_confirmation'])) delete updateUser['dealership_confirmation']
-
-  updateUser['date']['modified'] = new Date()
-*/
-
-
-  res.send(updateUser)
 }
 
 exports.login = (req, res) => {
@@ -239,12 +243,11 @@ this.deleteOnFail = async (id, file) => {
 
 this.deleteFile = async (file) => {
   try {
-    if (file.length > 0) {
+    if (!_.isUndefined(file)) {
       let awsDelete = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: file.key
       }
-
       await s3.deleteObject(awsDelete).promise()
     }
 

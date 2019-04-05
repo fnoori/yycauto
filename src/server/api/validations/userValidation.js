@@ -26,9 +26,12 @@ exports.validate = (method) => {
           .optional()
           .custom((confirmation_email, { req }) => {
             if (
+              (
                 (!_.isUndefined(confirmation_email) && !_.isUndefined(req.body.email)) &&
                 (confirmation_email !== req.body.email)
-              ) {
+              ) ||
+              (!_.isUndefined(confirmation_email) && _.isUndefined(req.body.email))
+            ) {
               throw new Error('email confirmation does not match')
             } else {
               return true
@@ -40,10 +43,13 @@ exports.validate = (method) => {
           .optional()
           .custom((password_confirmation, { req }) => {
             if (
-              (!_.isUndefined(req.body.password) && !_.isUndefined(password_confirmation)) &&
-              (password_confirmation !== req.body.password)
+              (
+                (!_.isUndefined(password_confirmation) && !_.isUndefined(req.body.password)) &&
+                (password_confirmation !== req.body.password)
+              ) ||
+              (!_.isUndefined(password_confirmation) && _.isUndefined(req.body.password))
             ) {
-              throw new Error('password confirmation does not match'())
+              throw new Error('password confirmation does not match')
             } else {
               return true
             }
@@ -55,8 +61,11 @@ exports.validate = (method) => {
           .optional()
           .custom((dealership_confirmation, { req }) => {
             if (
-              (!_.isUndefined(req.body.dealership) && !_.isUndefined(dealership_confirmation)) &&
-              (dealership_confirmation !== req.body.dealership)
+              (
+                (!_.isUndefined(dealership_confirmation) && !_.isUndefined(req.body.dealership)) &&
+                (dealership_confirmation !== req.body.dealership)
+              ) ||
+              (!_.isUndefined(dealership_confirmation) && _.isUndefined(req.body.dealership))
             ) {
               throw new Error('dealership confirmation does not match')
             } else {

@@ -3,6 +3,7 @@ const router = express.Router()
 const Controller = require('../controllers/user')
 const validation = require('../validations/userValidation')
 const mongoose = require('mongoose')
+const passport = require('passport')
 
 let aws = require('aws-sdk')
 let multer = require('multer')
@@ -29,6 +30,7 @@ upload = multer({
     s3: s3,
     bucket: process.env.AWS_BUCKET_NAME,
     acl: 'public-read',
+    cacheControl: 'no-cache',
     key: function (req, file, cb) {
       cb(null, `${process.env.NODE_ENV}/uploads/${mongoose.Types.ObjectId()}.${file.mimetype.split('/')[1]}`)
     }
@@ -41,7 +43,9 @@ router.post('/register', upload.single('logo'),
   Controller.register)
 router.post('/login', Controller.login)
 
-router.patch('/update-user/:user_id', upload.single('logo'),
+router.patch('/update-user/:user_id',
+  passport.authenticate('jwt', { session: false }),
+  upload.single('logo'),
   validation.validate('updateUser'),
   Controller.updateUser)
 

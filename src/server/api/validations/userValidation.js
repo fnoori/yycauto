@@ -1,6 +1,7 @@
 const { check } = require('express-validator/check')
 const globalVars = require('../utils/globalVars')
 const _ = require('underscore')
+const Users = require('../models/user')
 
 exports.validate = (method) => {
   switch (method) {
@@ -24,7 +25,7 @@ exports.validate = (method) => {
           .isLength({ max: globalVars.EMAIL_MAX_LENGTH }),
         check('confirmation_email')
           .optional()
-          .custom((confirmation_email, { req }) => {
+          .custom(async (confirmation_email, { req }) => {
             if (
               (
                 (!_.isUndefined(confirmation_email) && !_.isUndefined(req.body.email)) &&
@@ -34,6 +35,10 @@ exports.validate = (method) => {
             ) {
               throw new Error('email confirmation does not match')
             } else {
+              const user = await Users.findOne({ email: req.body.confirmation_email })
+              if (user) {
+                throw new Error('email is already taken')
+              }
               return true
             }
           }),
@@ -59,7 +64,7 @@ exports.validate = (method) => {
           .isLength({ max: globalVars.DEALERSHIP_NAME_MAX_LENGTH }),
         check('dealership_confirmation')
           .optional()
-          .custom((dealership_confirmation, { req }) => {
+          .custom(async (dealership_confirmation, { req }) => {
             if (
               (
                 (!_.isUndefined(dealership_confirmation) && !_.isUndefined(req.body.dealership)) &&
@@ -69,6 +74,11 @@ exports.validate = (method) => {
             ) {
               throw new Error('dealership confirmation does not match')
             } else {
+              const user = await Users.findOne({ dealership: { name: req.body.dealership_confirmation } })
+              if (user) {
+                throw new Error('dealership name is already taken')
+              }
+
               return true
             }
           })

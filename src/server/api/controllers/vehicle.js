@@ -265,7 +265,7 @@ exports.updateVehicle = async (req, res) => {
 }
 
 exports.deletePhotos = async (req, res) => {
-  let toDelete = req.body.images;
+  let toDelete = req.body.images
 
   try {
     let vehicle = await Vehicles
@@ -278,7 +278,7 @@ exports.deletePhotos = async (req, res) => {
     let matchingImages = []
     let matchingImageUrl = []
     for (const image of toDelete) {
-      vehicle[0]['images'].find( details => {
+      vehicle[0]['images'].find(details => {
         if (details.url === image.url) {
           matchingImages.push(image)
           matchingImageUrl.push(image.url)
@@ -286,6 +286,7 @@ exports.deletePhotos = async (req, res) => {
       })
     }
 
+    let awsDelete = {}
     for (const image of matchingImages) {
       awsDelete = {
         Bucket: image.Bucket,
@@ -295,7 +296,7 @@ exports.deletePhotos = async (req, res) => {
       await s3.deleteObject(awsDelete).promise()
     }
 
-    const updated = await Vehicles
+    await Vehicles
       .update({
         _id: req.params.vehicle_id, dealership: req['user']['_id']
       },

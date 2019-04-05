@@ -98,9 +98,6 @@ exports.register = async (req, res) => {
 exports.updateUser = async (req, res) => {
   let validations = validationResult(req)
   let includesPhotos = false
-  let changingPassword = false
-  let changingEmail = false
-  let changingDealership = false
   let updateUser = {
     dealership: {},
     date: {}
@@ -137,7 +134,7 @@ exports.updateUser = async (req, res) => {
     if (_.isEmpty(updateUser.dealership)) delete updateUser.dealership
 
     try {
-      let updated = await Users.update({
+      const updated = await Users.update({
         _id: req['user']['_id'],
         email: req['user']['email']
       }, updateUser)
@@ -149,7 +146,6 @@ exports.updateUser = async (req, res) => {
 
       if (includesPhotos) {
         try {
-          asdf
           let awsCopy = {
             Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${user._id}`,
             CopySource: req['file']['location'],

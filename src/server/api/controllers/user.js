@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Users = require('../models/user')
-const validator = require('validator')
 const _ = require('underscore')
 const argon2 = require('argon2')
 const passport = require('passport')

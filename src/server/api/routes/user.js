@@ -41,7 +41,7 @@ upload = multer({
 router.post('/register', upload.single('logo'),
   validation.validate('registration'),
   Controller.register)
-router.post('/login', Controller.login)
+  router.post('/login', Controller.login)
 
 router.patch('/update-user/:user_id',
   passport.authenticate('jwt', { session: false }),

@@ -18,32 +18,23 @@ AWS.config.update({
 s3 = new AWS.S3()
 
 exports.register = async (req, res) => {
-  let email = validator.isEmail(req.body.email) ? req.body.email : null
-  let password = req.body.password
-  let dealership = req.body.dealership
-  let hash
-  let user
-  let saved
-  let validations = validationResult(req)
+  const email = req.body.email
+  const password = req.body.password
+  const dealership = req.body.dealership
+  const validations = validationResult(req)
 
   if (!validations.isEmpty()) {
     this.deleteFile(req.file)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
   }
 
-  // Validates email
-  if (!email) {
-    this.deleteFile(req.file)
-    return res.status(400).send('invalid email')
-  }
-
   // Check if a logo is included
   if (!req.file) {
-    return res.status(400).send('must include a logo')
+    return res.status(500).send('must include a logo')
   }
 
   // Check if email/dealership already exists
-  user = await Users.find().or([{ 'email': email }, { 'dealership.name': dealership }])
+  const user = await Users.find().or([{ 'email': email }, { 'dealership.name': dealership }])
   if (user.length > 0) {
     this.deleteFile(req.file)
     return res.status(500).send('user already exists')
@@ -51,7 +42,7 @@ exports.register = async (req, res) => {
 
   // Hash password, create new user and save
   try {
-    hash = await argon2.hash(password)
+    const hash = await argon2.hash(password)
 
     const newUser = new Users({
       '_id': new mongoose.Types.ObjectId(),
@@ -66,15 +57,14 @@ exports.register = async (req, res) => {
       }
     })
 
-    saved = await newUser.save()
-
+    const saved = await newUser.save()
     try {
-      let awsCopy = {
+      const awsCopy = {
         Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved._id}`,
         CopySource: req['file']['location'],
         Key: `logo.${req['file']['mimetype'].split('/')[1]}`
       }
-      let awsDelete = {
+      const awsDelete = {
         Bucket: process.env.AWS_BUCKET_NAME,
         Key: `${req['file']['key']}`
       }
@@ -96,8 +86,8 @@ exports.register = async (req, res) => {
 }
 
 exports.updateUser = async (req, res) => {
-  let validations = validationResult(req)
-  let includesPhotos = false
+  const validations = validationResult(req)
+  const includesPhotos = !_.isEmpty(req.file)
   let updateUser = {
     dealership: {},
     date: {}
@@ -106,10 +96,6 @@ exports.updateUser = async (req, res) => {
   if (!validations.isEmpty()) {
     this.deleteFile(req.file)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
-  }
-
-  if (!_.isEmpty(req.file)) {
-    includesPhotos = true
   }
 
   try {
@@ -146,12 +132,12 @@ exports.updateUser = async (req, res) => {
 
       if (includesPhotos) {
         try {
-          let awsCopy = {
+          const awsCopy = {
             Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${user._id}`,
             CopySource: req['file']['location'],
             Key: `logo.${req['file']['mimetype'].split('/')[1]}`
           }
-          let awsDelete = {
+          const awsDelete = {
             Bucket: process.env.AWS_BUCKET_NAME,
             Key: `${req['file']['key']}`
           }

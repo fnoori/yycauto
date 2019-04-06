@@ -2,7 +2,7 @@
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a class="navbar-item" href="https://bulma.io">
-        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+        <img src="@/assets/logos/primary_logo.png" width="112" height="28">
       </a>
 
       <a role="button"
@@ -23,7 +23,7 @@
           :class="{ 'is-active': menuExpanded }">
       <div class="navbar-start">
         <a class="navbar-item">
-          Home
+          <img src="@/assets/logos/sponsored_logo.png" width="112" height="28"/>
         </a>
 
         <a class="navbar-item">

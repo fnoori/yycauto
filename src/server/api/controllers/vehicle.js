@@ -31,7 +31,7 @@ exports.getVehicleById = (req, res) => {
 
   Vehicles.find({ _id: vehicleId })
     .then(vehicle => {
-    // update view count
+      // update view count
       Vehicles.update({ _id: vehicleId }, { $inc: { 'views': 1 } })
         .then(updated => {
           res.status(200).send(vehicle)
@@ -59,7 +59,6 @@ exports.getVehiclesByDealershipId = (req, res) => {
 
 exports.addNewVehicle = async (req, res) => {
   let validations = validationResult(req)
-  let saved
 
   if (!validations.isEmpty()) {
     this.deleteFiles(req.files)
@@ -106,12 +105,12 @@ exports.addNewVehicle = async (req, res) => {
   })
 
   try {
-    saved = await newVehicle.save()
+    const saved = await newVehicle.save()
 
     try {
       let awsCopy = {}
       let awsDelete = {}
-      let filesToCopy = req.files
+      const filesToCopy = req.files
       let fileLocations = []
 
       for (const file of filesToCopy) {
@@ -151,7 +150,7 @@ exports.addNewVehicle = async (req, res) => {
 }
 
 exports.updateVehicle = async (req, res) => {
-  let validations = validationResult(req)
+  const validations = validationResult(req)
   let includesPhotos = false
   let updateVehicle = {
     basic_info: {},
@@ -159,7 +158,6 @@ exports.updateVehicle = async (req, res) => {
     fuel_economy: {},
     date: {}
   }
-  let updateVehicleDotNotation
   let vehicleId = req.params.vehicle_id
 
   if (!validations.isEmpty()) {
@@ -203,7 +201,7 @@ exports.updateVehicle = async (req, res) => {
   if (_.isEmpty(updateVehicle.mechanical_info)) delete updateVehicle.mechanical_info
   if (_.isEmpty(updateVehicle.fuel_economy)) delete updateVehicle.fuel_economy
 
-  updateVehicleDotNotation = dot.dot(updateVehicle)
+  const updateVehicleDotNotation = dot.dot(updateVehicle)
 
   try {
     let vehicle = await Vehicles.findById(vehicleId)
@@ -243,7 +241,7 @@ exports.updateVehicle = async (req, res) => {
           await s3.copyObject(awsCopy).promise()
           await s3.deleteObject(awsDelete).promise()
 
-          let updatedPhotos = await Vehicles.findOneAndUpdate({ _id: vehicleId }, { $push: { 'images': fileLocations } })
+          const updatedPhotos = await Vehicles.findOneAndUpdate({ _id: vehicleId }, { $push: { 'images': fileLocations } })
           if (updatedPhotos.n === 0) {
             this.deleteFiles(req.files)
             return res.status(500).send('failed to upload photos')
@@ -265,10 +263,10 @@ exports.updateVehicle = async (req, res) => {
 }
 
 exports.deletePhotos = async (req, res) => {
-  let toDelete = req.body.images
+  const toDelete = req.body.images
 
   try {
-    let vehicle = await Vehicles
+    const vehicle = await Vehicles
       .find({
         _id: req.params.vehicle_id,
         dealership: req['user']['_id']

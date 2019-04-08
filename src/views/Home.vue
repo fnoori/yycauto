@@ -6,17 +6,27 @@
       <premium-card/>
       <premium-card/>
     </div>
+
+    <div class="regular-row">
+      <regular-card/>
+      <regular-card/>
+      <regular-card/>
+      <regular-card/>
+      <regular-card/>
+    </div>
   </div>
 </template>
 
 <script>
 import PremiumCards from '@/components/PremiumCards'
+import RegularCards from '@/components/RegularCards'
 import axios from 'axios'
 
 export default {
   name: 'Home',
   components: {
-    'premium-card': PremiumCards
+    'premium-card': PremiumCards,
+    'regular-card': RegularCards
   },
   data () {
     return {
@@ -38,6 +48,10 @@ export default {
     padding-bottom: 5px;
     white-space: nowrap;
     position: relative;
+  }
+
+  .regular-row {
+    margin: 1rem;
   }
 }
 </style>

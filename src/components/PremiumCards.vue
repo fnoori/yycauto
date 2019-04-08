@@ -3,7 +3,7 @@
     :title="year + ' ' + make + ' ' + model + ' ' + trim"
     :sub-title="'$ ' + price"
     title-tag="h6"
-    img-src="https://picsum.photos/300/300/?image=41"
+    :img-src="require('@/assets/no-photo.png')"
     img-alt="Image"
     class="premium-card"
     img-top>
@@ -29,7 +29,7 @@
 
 <script>
 export default {
-  name: 'Premium Cards',
+  name: 'PremiumCard',
   data () {
     return {
       make: 'Honda',
@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 320px) {
   .premium-card {
-    width: 15rem;
+    width: 18.5rem;
     display: inline-block !important;
     margin: auto .5rem;
 

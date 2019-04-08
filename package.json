@@ -17,7 +17,6 @@
     "argon2": "^0.21.0",
     "aws-sdk": "^2.429.0",
     "body-parser": "^1.18.3",
-    "buefy": "^0.7.3",
     "concurrently": "^4.1.0",
     "dot-object": "^1.7.1",
     "dotenv": "^7.0.0",

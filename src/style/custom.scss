@@ -1,0 +1,18 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+@import url('https://fonts.googleapis.com/css?family=Comfortaa');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+// set font
+$font-family-base: 'Comfortaa', cursive;
+
+$theme-colors: (
+  "primary": #f44336,
+  "info": white
+);
+
+@mixin footer-style {
+    background-color: $primary;
+}
+
+@import "node_modules/bootstrap/scss/bootstrap";

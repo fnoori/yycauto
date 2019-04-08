@@ -1,7 +1,25 @@
 <template>
-  <nav>
-    
-  </nav>
+  <b-navbar type="dark" variant="primary">
+    <b-navbar-brand>
+      <router-link :to="{ name: 'home' }">
+        <img src="@/assets/logos/primary.png" class="logo">
+      </router-link>
+    </b-navbar-brand>
+
+    <div class="search-bar">
+      <b-input-group class="mt-3">
+        <b-form-input></b-form-input>
+        <b-input-group-append>
+          <b-button variant="info btn-sm">
+            <i class="material-icons">
+            search
+            </i>
+          </b-button>
+        </b-input-group-append>
+      </b-input-group>
+    </div>
+
+  </b-navbar>
 </template>
 
 <script>
@@ -22,5 +40,44 @@ export default {
 <style lang="scss" scoped>
   nav {
     box-shadow: 0 0px 1px 0px rgba(0,0,0,.15);
+  }
+
+  input:focus {
+    box-shadow: none !important;
+    border-color: white !important;
+  }
+  input {
+    border-radius: 0 !important;
+    border: white !important;
+  }
+
+  .material-icons {
+    line-height: 1;
+  }
+  .btn {
+    border-radius: 0 !important;
+    line-height: 1;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    width: 5rem;
+  }
+
+
+  .search-bar {
+
+  }
+
+  @media (max-width: 768px) {
+    nav {
+      display: block;
+      .logo {
+        width: 6rem;
+      }
+      .navbar-brand {
+        display: block;
+      }
+      .search-bar {
+        display: block;
+      }
+    }
   }
 </style>

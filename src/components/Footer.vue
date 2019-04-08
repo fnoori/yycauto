@@ -1,5 +1,10 @@
 <template>
-  <footer class="footer">
+  <footer class="text-muted" variant="primary">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">fnoori431@gmail.com</a>
+      </p>
+    </div>
   </footer>
 </template>
 
@@ -14,5 +19,8 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="scss" scoped>
+  footer {
+    @include footer-style;
+  }
 </style>

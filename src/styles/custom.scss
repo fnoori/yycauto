@@ -9,8 +9,22 @@ $theme-colors: (
   "info": white
 );
 
+// mixins
 @mixin footer-style {
     background-color: $primary;
+}
+
+// global bootstrap overrides
+.card {
+  border-radius: 0 !important;
+  border: 0 !important;
+  box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+  img {
+    border-radius: 0 !important;
+  }
+  .card-footer {
+    border-radius: 0 !important;
+  }
 }
 
 @import 'node_modules/bootstrap/scss/bootstrap';

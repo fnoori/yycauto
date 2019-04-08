@@ -1,8 +1,27 @@
 <template>
-  <b-card title="Title" img-src="https://picsum.photos/300/300/?image=41" img-alt="Image" img-top>
-    <b-card-text>
-      This is a wider card with supporting text below as a natural lead-in to additional content.
-      This content is a little bit longer.
+  <b-card
+    :title="year + ' ' + make + ' ' + model + ' ' + trim"
+    :sub-title="'$ ' + price"
+    title-tag="h6"
+    img-src="https://picsum.photos/300/300/?image=41"
+    img-alt="Image"
+    class="premium-card"
+    img-top>
+    <b-card-text class="row text-right">
+      <div class="col">
+        <div class="d-block quick-info">
+          <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
+          10,000
+        </div>
+        <div class="d-block quick-info">
+          <img src="@/assets/icons/transmission.png" class="quick-icons" alt="">
+          Automatic
+        </div>
+        <div class="d-block quick-info">
+          <img src="@/assets/icons/gaspump.png" class="quick-icons" alt="">
+          Gasoline
+        </div>
+      </div>
     </b-card-text>
     <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
   </b-card>
@@ -10,9 +29,40 @@
 
 <script>
 export default {
-  name: 'Premium Cards'
+  name: 'Premium Cards',
+  data () {
+    return {
+      make: 'Honda',
+      model: 'Civic',
+      trim: 'SE',
+      year: '2018',
+      price: '23,000'
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
+@media (min-width: 320px) {
+  .premium-card {
+    width: 15rem;
+    display: inline-block !important;
+    margin: auto .5rem;
+
+    img {
+      width: 100%;
+    }
+    .card-body {
+      height: 10rem;
+
+      .quick-info {
+        letter-spacing: 1px;
+      }
+      .quick-icons {
+        width: 1rem;
+        padding-bottom: .3rem;
+      }
+    }
+  }
+}
 </style>

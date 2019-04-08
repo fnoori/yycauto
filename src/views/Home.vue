@@ -1,6 +1,11 @@
 <template>
   <div class="home">
-    <premium-card/>
+    <div class="premium-row">
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+      <premium-card/>
+    </div>
   </div>
 </template>
 
@@ -22,7 +27,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.home {
-  height: 100vh
+@media (max-width: 768px) {
+  .home {
+    margin: 1rem 0;
+  }
+
+  .premium-row {
+    width: 100%;
+    overflow-x: scroll;
+    padding-bottom: 5px;
+    white-space: nowrap;
+    position: relative;
+  }
 }
 </style>

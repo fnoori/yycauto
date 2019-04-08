@@ -45,10 +45,24 @@ exports.getVehicleById = (req, res) => {
     })
 }
 
+exports.getPremiumVehicles = (req, res) => {
+  const limit = parseInt(req.params.limit)
+  const skip = parseInt(req.params.skip)
+
+  Vehicles.find().where('premium_ad.end').gt(new Date())
+  .then(premiumVehicles => {
+    res.send(premiumVehicles)
+  }).catch(findErr => {
+    console.log(findErr)
+    return res.status(500).send('unexpected error when retrieving premium vehicles')
+  })
+}
+
 exports.getVehiclesByDealershipId = (req, res) => {
   const dealershipId = req.params.dealership_id
 
   Vehicles.find({ dealership: dealershipId })
+    .skip(skip).limit(limit)
     .then(vehicles => {
       res.status(200).send(vehicles)
     }).catch(findErr => {

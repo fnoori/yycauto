@@ -50,33 +50,40 @@ export default {
     border-radius: 0 !important;
     border: white !important;
   }
-
-  .material-icons {
-    line-height: 1;
+  .form-control:focus {
+    z-index: 1 !important;
   }
   .btn {
     border-radius: 0 !important;
     line-height: 1;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: white;
+    border-top: white;
     width: 5rem;
   }
 
+  .material-icons {
+    line-height: 1;
+    color: #56423a;
+  }
+
+
 
   .search-bar {
-
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
   }
 
   @media (max-width: 768px) {
     nav {
-      display: block;
+      display: block !important;
       .logo {
         width: 6rem;
       }
       .navbar-brand {
-        display: block;
+        display: block !important;
       }
       .search-bar {
-        display: block;
+        display: block !important;
       }
     }
   }

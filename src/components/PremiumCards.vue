@@ -54,6 +54,7 @@ export default {
     width: 18.5rem;
     display: inline-block !important;
     margin: auto .5rem;
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1) !important;
 
     img {
       width: 100%;

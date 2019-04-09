@@ -44,34 +44,40 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-body {
-  flex: 1 0 auto;
-  padding: 0;
-
-  .card-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-}
-
 .regular-card {
   width: 100%;
   margin: .8rem auto;
-}
-.card-img-left {
-  height: 30vw !important;
-}
-.quick-icons {
-  width: .9rem;
-  padding-bottom: .3rem;
-}
-.dollar-icon {
-  width: 0.8rem;
-}
-.quick-info {
-  font-size: .8rem;
-  letter-spacing: 1px;
+
+  .card {
+    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1) !important;
+
+    .card-img-left {
+      height: 30vw !important;
+    }
+
+    .card-body {
+      flex: 1 0 auto;
+      padding: 0;
+
+      .card-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        .quick-icons {
+          width: .9rem;
+          padding-bottom: .3rem;
+        }
+        .dollar-icon {
+          width: 0.8rem;
+        }
+        .quick-info {
+          font-size: .8rem;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
 }
 </style>

@@ -49,8 +49,6 @@ export default {
   margin: .8rem auto;
 
   .card {
-    box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.1) !important;
-
     .card-img-left {
       height: 30vw !important;
     }

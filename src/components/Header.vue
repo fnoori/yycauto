@@ -71,17 +71,25 @@ export default {
     box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
   }
 
-  @media (min-width: 320px) {
+  @media (min-width: 319px) {
     nav {
       display: block !important;
       .logo {
-        width: 6rem;
+        width: 6rem !important;
       }
       .navbar-brand {
         display: block !important;
       }
       .search-bar {
         display: block !important;
+      }
+    }
+  }
+
+  @media (min-width: 374px) {
+    nav {
+      .logo {
+        width: 6rem !important;
       }
     }
   }

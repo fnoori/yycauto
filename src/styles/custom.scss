@@ -3,6 +3,7 @@
 
 // set font
 $font-family-base: 'Comfortaa', cursive;
+$primary: #f44336;
 
 $theme-colors: (
   "primary": #f44336,
@@ -11,7 +12,8 @@ $theme-colors: (
 
 // mixins
 @mixin footer-style {
-    background-color: $primary;
+    background-color: $primary !important;
+    height: 3rem;
 }
 
 // global bootstrap overrides

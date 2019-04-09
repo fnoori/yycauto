@@ -23,7 +23,11 @@
         </div>
       </div>
     </b-card-text>
-    <div slot="footer"><small class="text-muted">Last updated 3 mins ago</small></div>
+    <div slot="footer">
+      <small class="text-muted">
+        <a href="#">{{ dealershipName }}</a>
+      </small>
+    </div>
   </b-card>
 </template>
 
@@ -36,7 +40,9 @@ export default {
       model: 'Civic',
       trim: 'SE',
       year: '2018',
-      price: '23,000'
+      price: '23,000',
+
+      dealershipName: 'Generic Dealership'
     }
   }
 }
@@ -62,6 +68,10 @@ export default {
         width: 1rem;
         padding-bottom: .3rem;
       }
+    }
+    .card-footer a {
+      text-decoration: none;
+      color: #6c757d !important;
     }
   }
 }

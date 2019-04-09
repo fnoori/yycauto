@@ -10,10 +10,6 @@
         <div>
           <div class="col">
             <div class="d-block quick-info">
-              <img src="@/assets/icons/dollar.png" class="quick-icons dollar-icon" alt="">
-              10,000
-            </div>
-            <div class="d-block quick-info">
               <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
               10,000
             </div>
@@ -68,7 +64,7 @@ export default {
   height: 30vw !important;
 }
 .quick-icons {
-  width: 1rem;
+  width: .9rem;
   padding-bottom: .3rem;
 }
 .dollar-icon {

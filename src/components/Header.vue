@@ -7,7 +7,7 @@
     </b-navbar-brand>
 
     <div class="search-bar">
-      <b-input-group class="mt-3">
+      <b-input-group>
         <b-form-input></b-form-input>
         <b-input-group-append>
           <b-button variant="info btn-sm">
@@ -74,6 +74,10 @@ export default {
   @media (min-width: 319px) {
     nav {
       display: block !important;
+
+      .input-group {
+        margin-top: 3 !important;
+      }
       .logo {
         width: 6rem !important;
       }
@@ -90,6 +94,27 @@ export default {
     nav {
       .logo {
         width: 6rem !important;
+      }
+    }
+  }
+
+  @media (min-width: 767px) {
+    nav {
+      display: inline-block !important;
+      width: 100%;
+
+      .input-group {
+        margin-top: 3 !important;
+      }
+      .logo {
+        width: 6rem !important;
+      }
+      .navbar-brand {
+        display: inline-block !important;
+      }
+      .search-bar {
+        display: inline-block !important;
+        width: 80vw;
       }
     }
   }

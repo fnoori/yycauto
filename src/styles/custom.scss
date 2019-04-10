@@ -17,10 +17,14 @@ $theme-colors: (
     height: 3rem;
     padding: 1rem;
 }
-
 @mixin no-default-link {
   text-decoration: none !important;
   color: white !important;
+}
+@mixin vehicle-gallery {
+  overflow-x: scroll !important;
+  white-space: nowrap !important;
+  position: relative !important;
 }
 
 // global bootstrap overrides

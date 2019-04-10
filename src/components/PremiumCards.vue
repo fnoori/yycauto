@@ -1,34 +1,37 @@
 <template>
-  <b-card
-    :title="year + ' ' + make + ' ' + model + ' ' + trim"
-    :sub-title="'$ ' + price"
-    title-tag="h6"
-    :img-src="require('@/assets/no-photo.png')"
-    img-alt="Image"
-    class="premium-card"
-    img-top>
-    <b-card-text class="row text-right">
-      <div class="col">
-        <div class="d-block quick-info">
-          <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
-          10,000
+  <router-link :to="{ name: 'vehicle', params: { vehicle_id: vehicle_id } }">
+    <b-card
+      :title="year + ' ' + make + ' ' + model + ' ' + trim"
+      :sub-title="'$ ' + price"
+      title-tag="h6"
+      :img-src="require('@/assets/no-photo.png')"
+      img-alt="Image"
+      class="premium-card"
+      img-top>
+
+      <b-card-text class="row text-right">
+        <div class="col">
+          <div class="d-block quick-info">
+            <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
+            10,000
+          </div>
+          <div class="d-block quick-info">
+            <img src="@/assets/icons/transmission.png" class="quick-icons" alt="">
+            Automatic
+          </div>
+          <div class="d-block quick-info">
+            <img src="@/assets/icons/gaspump.png" class="quick-icons" alt="">
+            Gasoline
+          </div>
         </div>
-        <div class="d-block quick-info">
-          <img src="@/assets/icons/transmission.png" class="quick-icons" alt="">
-          Automatic
-        </div>
-        <div class="d-block quick-info">
-          <img src="@/assets/icons/gaspump.png" class="quick-icons" alt="">
-          Gasoline
-        </div>
+      </b-card-text>
+      <div slot="footer">
+        <small class="text-muted">
+          <a href="#">{{ dealershipName }}</a>
+        </small>
       </div>
-    </b-card-text>
-    <div slot="footer">
-      <small class="text-muted">
-        <a href="#">{{ dealershipName }}</a>
-      </small>
-    </div>
-  </b-card>
+    </b-card>
+  </router-link>
 </template>
 
 <script>
@@ -36,6 +39,7 @@ export default {
   name: 'PremiumCard',
   data () {
     return {
+      vehicle_id: '1234',
       make: 'Honda',
       model: 'Civic',
       trim: 'SE',
@@ -49,6 +53,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  text-decoration: none !important;
+  color: black !important;
+}
+
 .premium-card {
   display: inline-block !important;
 }

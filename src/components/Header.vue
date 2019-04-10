@@ -68,7 +68,9 @@ export default {
   }
 
   .search-bar {
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+    .input-group {
+      box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+    }
   }
 
   @media (min-width: 319px) {
@@ -115,6 +117,11 @@ export default {
       .search-bar {
         display: inline-block !important;
         width: 80vw;
+
+        .input-group {
+          width: 40rem !important;
+          margin: 0 auto;
+        }
       }
     }
   }

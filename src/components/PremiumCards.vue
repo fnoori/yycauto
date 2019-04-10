@@ -49,10 +49,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.premium-card {
+  display: inline-block !important;
+}
 @media (min-width: 320px) {
   .premium-card {
     width: 18.5rem;
-    display: inline-block !important;
     margin: auto .5rem;
 
     img {
@@ -73,6 +75,12 @@ export default {
       text-decoration: none;
       color: #6c757d !important;
     }
+  }
+}
+
+@media (min-width: 767px) {
+  .premium-card {
+    margin: 0.5rem;
   }
 }
 </style>

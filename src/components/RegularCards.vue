@@ -93,4 +93,28 @@ export default {
       }
     }
   }
+
+  @media (min-width: 800px) {
+    .regular-card {
+      width: 50vw;
+
+      .card {
+        .card-img-left {
+          height: 15vw !important;
+        }
+      }
+    }
+  }
+
+  @media (min-width: 800px) {
+    .regular-card {
+      width: 30rem !important;
+
+      .card {
+        .card-img-left {
+          height: 10rem !important;
+        }
+      }
+    }
+  }
 </style>

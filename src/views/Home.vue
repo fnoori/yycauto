@@ -20,7 +20,7 @@
 <script>
 import PremiumCards from '@/components/PremiumCards'
 import RegularCards from '@/components/RegularCards'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
   name: 'Home',
@@ -37,17 +37,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.premium-row {
+  width: 100%;
+  overflow-x: scroll;
+  padding-bottom: 5px;
+  white-space: nowrap;
+  position: relative;
+}
+
 @media (max-width: 768px) {
   .home {
     margin: 1rem 0;
-  }
-
-  .premium-row {
-    width: 100%;
-    overflow-x: scroll;
-    padding-bottom: 5px;
-    white-space: nowrap;
-    position: relative;
   }
 
   .regular-row {

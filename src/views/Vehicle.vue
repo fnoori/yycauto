@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="row">
-      
+
     </div>
   </div>
 </template>
@@ -76,6 +76,7 @@ export default {
 
       img {
         width: 1rem;
+        padding-bottom: .2rem;
       }
     }
   }

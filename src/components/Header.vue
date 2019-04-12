@@ -63,8 +63,11 @@ export default {
   }
 
   .material-icons {
-    line-height: 1;
     color: #56423a;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 
   .search-bar {

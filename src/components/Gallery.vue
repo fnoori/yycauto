@@ -1,41 +1,33 @@
 <template>
   <div class="gallery">
-    <div class="gallery-thumbnail">
-      <b-img v-for="(image, index) in images"
-        thumbnail fluid
-        :src="image.thumb"
-        :key="image.thumb"
-        @click="openGallery(index)"
-        class="my-thumbnail"></b-img>
-    </div>
-    <light-box
-      :images="images"
-      ref="lightbox"
-      :show-caption="false"
-      :show-light-box="false"></light-box>
+    <b-carousel
+      :interval="0"
+      slide
+      indicators>
+        <b-carousel-slide
+          v-for="(image, index) in images"
+          :img-src="image"/>
+    </b-carousel>
   </div>
 </template>
 
 <script>
-import LightBox from 'vue-image-lightbox'
 
 export default {
   name: 'Gallery',
-  components: {
-    'light-box': LightBox
-  },
   props: {
     images: Array
   },
   data () {
     return {
+      mainProps: {
+        blank: true,
+        blankColor: '#bbb'
+      }
     }
   },
 
   methods: {
-    openGallery (index) {
-      this.$refs.lightbox.showImage(index)
-    }
   }
 }
 </script>
@@ -43,12 +35,30 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 320px) {
   .gallery {
-    .gallery-thumbnail {
-      @include vehicle-gallery;
+    padding: .5rem;
+
+    .viewed {
+      margin: 0 auto;
+      overflow-x: auto;
+      white-space: nowrap;
+      scroll-snap-type: x mandatory;
+
+      img {
+        width: 95%;
+        margin: .5rem;
+        scroll-snap-align: center;
+      }
+
     }
-    img {
-      width: 15rem;
-      margin: .5rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .gallery {
+    .viewed {
+      img {
+        width: 100%;
+      }
     }
   }
 }

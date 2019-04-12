@@ -40,8 +40,6 @@
     "underscore": "^1.9.1",
     "validator": "^10.11.0",
     "vue": "^2.6.6",
-    "vue-image-lightbox": "^6.1.2",
-    "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

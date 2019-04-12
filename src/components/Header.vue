@@ -1,5 +1,5 @@
 <template>
-  <b-navbar type="dark" variant="primary" :sticky="true">
+  <b-navbar type="dark" variant="primary">
     <b-navbar-brand>
       <router-link :to="{ name: 'home' }">
         <img src="@/assets/logos/primary.png" class="logo">

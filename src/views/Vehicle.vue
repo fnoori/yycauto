@@ -1,10 +1,14 @@
 <template>
   <div class="vehicle container">
-    <div class="row">
+    <div class="row m-0">
       <h5>{{ year }} {{ make }} {{ model }} {{ trim }}</h5>
     </div>
     <div class="row">
-      <gallery :images="images"/>
+      <my-gallery
+        :images="images"
+        ref="lightbox"
+        :show-caption="true"
+        :show-light-box="false"/>
     </div>
   </div>
 </template>
@@ -15,7 +19,7 @@ import Gallery from '@/components/Gallery'
 export default {
   name: 'Vehicle',
   components: {
-    'gallery': Gallery
+    'my-gallery': Gallery
   },
   data () {
     return {
@@ -26,12 +30,30 @@ export default {
       year: '2018',
       price: '23,000',
       images: [
-        'https://picsum.photos/250/250/?image=54',
-        'https://picsum.photos/250/250/?image=58',
-        'https://picsum.photos/250/250/?image=59',
-        'https://picsum.photos/250/250/?image=59',
-        'https://picsum.photos/250/250/?image=59',
-        'https://picsum.photos/250/250/?image=59'
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image1',
+          src: 'https://via.placeholder.com/1920x1080?text=image1'
+        },
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image2',
+          src: 'https://via.placeholder.com/1920x1080?text=image2'
+        },
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image3',
+          src: 'https://via.placeholder.com/1920x1080?text=image3'
+        },
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image4',
+          src: 'https://via.placeholder.com/1920x1080?text=image4'
+        },
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image5',
+          src: 'https://via.placeholder.com/1920x1080?text=image5'
+        },
+        {
+          thumb: 'https://via.placeholder.com/1920x1080?text=image6',
+          src: 'https://via.placeholder.com/1920x1080?text=image6'
+        }
       ],
 
       dealershipName: 'Generic Dealership'
@@ -43,12 +65,8 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 320px) {
   .vehicle {
-    margin: .5rem;
     height: 20rem;
-
-    .gallery {
-      @include vehicle-gallery;
-    }
+    margin-top: 1rem;
   }
 }
 </style>

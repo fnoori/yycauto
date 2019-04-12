@@ -56,6 +56,7 @@ export default {
 a {
   text-decoration: none !important;
   color: black !important;
+  cursor: default;
 }
 
 .premium-card {

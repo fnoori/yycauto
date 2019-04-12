@@ -3,7 +3,7 @@
     <div class="row m-0">
       <h5>{{ year }} {{ make }} {{ model }} {{ trim }}</h5>
     </div>
-    <div class="row">
+    <div class="row p-1">
       <my-gallery :images="images"/>
     </div>
     <div class="row basic-info">
@@ -19,8 +19,98 @@
         </h6>
       </div>
     </div>
-    <div class="row">
+    <div class="row p-4">
+      <h6>Basic Info.</h6>
+      <div class="basic-info">
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Make</div>
+            <div class="value">Honda</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Model</div>
+            <div class="value">Civic</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Trim</div>
+            <div class="value">SE</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Type</div>
+            <div class="value">Hatchback</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Exterior Colour</div>
+            <div class="value">Black</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Interior Colour</div>
+            <div class="value">Grey</div>
+          </div>
+        </div>
+      </div>
 
+      <h6 class="mt-3">Mechanical Info.</h6>
+      <div class="basic-info">
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">CarProof</div>
+            <div class="value">False</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Transmission</div>
+            <div class="value">Auto</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Engine Size</div>
+            <div class="value">1.8</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Cylinders</div>
+            <div class="value">4</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Horsepower</div>
+            <div class="value">142</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Torque</div>
+            <div class="value">144</div>
+          </div>
+        </div>
+      </div>
+
+      <h6 class="mt-3">Fuel Economy</h6>
+      <div class="basic-info">
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">City</div>
+            <div class="value">8.9</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Highway</div>
+            <div class="value">10.9</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Combined</div>
+            <div class="value">9.2</div>
+          </div>
+          <div class="col text-left">
+            <div class="title"></div>
+            <div class="value"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -59,9 +149,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.list-group-item {
+  border-radius: 0 !important;
+}
+
 @media (min-width: 320px) {
   .vehicle {
-    height: 40rem;
     margin-top: 1rem;
 
     .basic-info {
@@ -77,6 +170,19 @@ export default {
       img {
         width: 1rem;
         padding-bottom: .2rem;
+      }
+    }
+
+    .basic-info {
+      width: 100%;
+
+      .title {
+        color: rgba(0,0,0,0.5);
+        font-size: 0.8rem;
+      }
+      .value {
+        color: black;
+        font-size: 1rem;
       }
     }
   }

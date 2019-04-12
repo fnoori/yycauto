@@ -35,8 +35,6 @@ export default {
 <style lang="scss" scoped>
 @media (min-width: 320px) {
   .gallery {
-    padding: .5rem;
-
     .viewed {
       margin: 0 auto;
       overflow-x: auto;

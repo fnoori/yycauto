@@ -1,3 +1,8 @@
+/*
+  mongoose model for user
+  specifies all the fields requirements and performs limited validation
+*/
+
 const mongoose = require('mongoose')
 const globalVars = require('../utils/globalVars')
 

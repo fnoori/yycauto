@@ -1,5 +1,11 @@
+/*
+  entry point of backend
+*/
+
+// immediately import .env file
 require('dotenv').config()
 
+// import all libraries needed for server
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -34,12 +40,14 @@ app.use('/users', userRoutes)
 app.use('/vehicles', vehicleRoutes)
 
 // error handling
+// page not found
 app.use((req, res, next) => {
   const error = new Error('Route Not Found')
   error.status = 404
   next(error)
 })
 
+// internal server error
 app.use((error, req, res, next) => {
   res.status(error.status || 500)
   res.json({
@@ -49,6 +57,7 @@ app.use((error, req, res, next) => {
   })
 })
 
+// listen on port
 server.listen(3000, () => {
   console.log(`listening on port 3000`)
 })

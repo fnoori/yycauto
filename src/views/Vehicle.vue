@@ -124,6 +124,10 @@ export default {
     'my-gallery': Gallery
   },
   data () {
+    // temporary data
+    // data will be retrieved from backend
+    //  vehicle_id comes from the url params
+    //  this is to enable sharing of url to view vehicle
     return {
       vehicle_id: '1234',
       make: 'Honda',

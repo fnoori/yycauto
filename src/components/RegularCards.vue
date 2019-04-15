@@ -32,6 +32,8 @@
 export default {
   name: 'RegularCard',
   data () {
+    // temporary data
+    //  data will be passes as props
     return {
       make: 'Honda',
       model: 'Civic',

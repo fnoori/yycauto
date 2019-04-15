@@ -1,3 +1,8 @@
+/*
+  mongoose model for vehicle
+  specifies all field requirements
+*/
+
 const mongoose = require('mongoose')
 const globalVars = require('../utils/globalVars')
 

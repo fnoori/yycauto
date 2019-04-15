@@ -38,6 +38,8 @@
 export default {
   name: 'PremiumCard',
   data () {
+    // temporary data
+    //  this data will passes as props
     return {
       vehicle_id: '1234',
       make: 'Honda',

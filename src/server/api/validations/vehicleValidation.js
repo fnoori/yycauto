@@ -1,8 +1,15 @@
+/*
+  using express-validator to validate incoming vehicle data
+*/
+
 const { check } = require('express-validator/check')
 const globalVars = require('../utils/globalVars')
 
 exports.validate = (method) => {
   switch (method) {
+
+    // on new vehicle, some fields are required
+    //  as per the vehicle model and some are optional
     case 'addNewVehicle': {
       return [
         check('make')
@@ -98,6 +105,7 @@ exports.validate = (method) => {
       ]
     }
 
+    // on update, all fields are optional
     case 'updateVehicle': {
       return [
         check('make')

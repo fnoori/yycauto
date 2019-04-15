@@ -1,10 +1,17 @@
+/*
+  using express-validator to validate incoming vehicle data
+*/
+
 const { check } = require('express-validator/check')
 const globalVars = require('../utils/globalVars')
 const _ = require('underscore')
 const Users = require('../models/user')
 
+// switch conditions for all possible condition
 exports.validate = (method) => {
   switch (method) {
+
+    // on registration, all the fields are required
     case 'registration': {
       return [
         check('email')
@@ -18,6 +25,8 @@ exports.validate = (method) => {
       ]
     }
 
+    // on update, all the fields are optional
+    //  only required fields are the confirm email/password fields
     case 'updateUser': {
       return [
         check('email')

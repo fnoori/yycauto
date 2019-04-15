@@ -1,3 +1,7 @@
+/*
+  utility files for various constants
+*/
+
 exports.EMAIL_MAX_LENGTH = 80
 exports.DEALERSHIP_NAME_MAX_LENGTH = 80
 

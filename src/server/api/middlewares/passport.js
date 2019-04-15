@@ -1,3 +1,8 @@
+/*
+  using PassportJS for authentication
+*/
+
+// passport imports
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const JwtStrategy = require('passport-jwt').Strategy
@@ -5,6 +10,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt
 const argon2 = require('argon2')
 const User = require('../models/user')
 
+// configure passport
 let options = {
   'jwtFromRequest': ExtractJwt.fromAuthHeaderAsBearerToken(),
   'secretOrKey': process.env.PUBLIC_KEY,
@@ -12,6 +18,7 @@ let options = {
   'audience': process.env.AUDIENCE
 }
 
+// strategy for local-login
 passport.use(new LocalStrategy(
   {
     usernameField: 'email',
@@ -21,6 +28,8 @@ passport.use(new LocalStrategy(
     let user
     let verification
 
+    // find email and verify password
+    //  uses argon2 for authentication
     try {
       user = await User.find({ 'email': username })
 
@@ -41,6 +50,8 @@ passport.use(new LocalStrategy(
   }
 ))
 
+// strategy for token validation
+// this is used to protect routes
 passport.use(new JwtStrategy(options, (jwt_payload, done) => {
   User.findById(jwt_payload['user']['_id'], (err, user) => {
     if (err) {

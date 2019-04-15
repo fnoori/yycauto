@@ -12,10 +12,11 @@
 </template>
 
 <script>
-
+// uses bootstrap-vue's carousel component to view vehicle images
 export default {
   name: 'Gallery',
   props: {
+    // images coming from Vehicle page
     images: Array
   },
   data () {

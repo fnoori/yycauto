@@ -14,6 +14,8 @@ AWS.config.update({
 
 s3 = new AWS.S3()
 
+// get all vehicles functions
+// arguments: { how much to skip, and limit of how much to retrieve }
 exports.getAllVehicles = (req, res) => {
   const limit = parseInt(req.params.limit)
   const skip = parseInt(req.params.skip)
@@ -26,12 +28,14 @@ exports.getAllVehicles = (req, res) => {
     })
 }
 
+// get vehicle by provided id
+// arguments: { vehicle_id }
 exports.getVehicleById = (req, res) => {
   const vehicleId = req.params.vehicle_id
 
   Vehicles.find({ _id: vehicleId })
     .then(vehicle => {
-      // update view count
+      // update view count of vehicle data
       Vehicles.update({ _id: vehicleId }, { $inc: { 'views': 1 } })
         .then(updated => {
           res.status(200).send(vehicle)
@@ -45,6 +49,9 @@ exports.getVehicleById = (req, res) => {
     })
 }
 
+// get premium ad vehicles
+// arguments: { how much to skip, and limit of how much to retrieve }
+// TODO: this could be joined with getVehicles function
 exports.getPremiumVehicles = (req, res) => {
   const limit = parseInt(req.params.limit)
   const skip = parseInt(req.params.skip)
@@ -59,6 +66,8 @@ exports.getPremiumVehicles = (req, res) => {
     })
 }
 
+// get dealerships vehicles
+// arguments: { how much to skip, and limit of how much to retrieve, user_id }
 exports.getVehiclesByDealershipId = (req, res) => {
   const dealershipId = req.params.dealership_id
   const skip = req.params.skip
@@ -74,14 +83,17 @@ exports.getVehiclesByDealershipId = (req, res) => {
     })
 }
 
+// add new vehicle to user
 exports.addNewVehicle = async (req, res) => {
   let validations = validationResult(req)
 
+  // ensure validations pass
   if (!validations.isEmpty()) {
     this.deleteFiles(req.files)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
   }
 
+  // since all data is already validated, add to newVehicle
   let newVehicle = new Vehicles({
     '_id': new mongoose.Types.ObjectId(),
     'basic_info': {
@@ -130,6 +142,8 @@ exports.addNewVehicle = async (req, res) => {
       const filesToCopy = req.files
       let fileLocations = []
 
+      // step through vehicle images and move from
+      //  temporary directory to vehicle's directory
       for (const file of filesToCopy) {
         awsCopy = {
           Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}`,
@@ -141,20 +155,25 @@ exports.addNewVehicle = async (req, res) => {
           Key: file.key
         }
 
+        // add links to the vehicle data in db
         fileLocations.push({
           Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}`,
           Key: file.key.split('/')[2],
           url: `${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved.dealership}/${saved._id}/${file.key.split('/')[2]}`
         })
 
+        // perform aws operations
         await s3.copyObject(awsCopy).promise()
         await s3.deleteObject(awsDelete).promise()
       }
 
+      // update the images of vehicle
+      // TODO: this could be joined with the save operation
       await Vehicles.findOneAndUpdate({ _id: saved._id }, { images: fileLocations })
 
       res.status(200).send('vehicle created successfully')
     } catch (e) {
+      // on fail, delete vehicle from db and delete temporary files
       console.log(e)
       this.deleteOnFail(saved._id, req.files)
       return res.status(500).send('failed to upload images')
@@ -166,6 +185,7 @@ exports.addNewVehicle = async (req, res) => {
   }
 }
 
+// update user's vehicle
 exports.updateVehicle = async (req, res) => {
   const validations = validationResult(req)
   let includesPhotos = false
@@ -177,11 +197,13 @@ exports.updateVehicle = async (req, res) => {
   }
   let vehicleId = req.params.vehicle_id
 
+  // ensure validations pass
   if (!validations.isEmpty()) {
     this.deleteFiles(req.files)
     return res.status(422).json({ validations: validations.array({ onlyFirstError: true }) })
   }
 
+  // check if new photos are being uploaded
   if (!_.isEmpty(req.files)) {
     includesPhotos = true
   }
@@ -211,6 +233,7 @@ exports.updateVehicle = async (req, res) => {
   if (req.body.highway) updateVehicle['fuel_economy']['highway'] = req.body.highway
   if (req.body.combined) updateVehicle['fuel_economy']['combined'] = req.body.combined
 
+  // update modified date/time
   updateVehicle['date']['modified'] = new Date()
 
   // check if any of the nested documents is empty, if it is, delete it
@@ -218,26 +241,34 @@ exports.updateVehicle = async (req, res) => {
   if (_.isEmpty(updateVehicle.mechanical_info)) delete updateVehicle.mechanical_info
   if (_.isEmpty(updateVehicle.fuel_economy)) delete updateVehicle.fuel_economy
 
+  // need to convert JSON to 'dot' notation
+  //  mongoose requires this format for correct update
   const updateVehicleDotNotation = dot.dot(updateVehicle)
 
   try {
+    // attempt to find the vehicle
+    // on update, check token data is correct
     let vehicle = await Vehicles.findById(vehicleId)
     let updated = await Vehicles.update({
       _id: vehicleId,
       dealership: req['user']['_id']
     }, updateVehicleDotNotation)
 
+    // if update fails, delete temporary files
     if (updated.n === 0) {
       this.deleteFiles(req.files)
       return res.status(500).send('could not find anything associated with that id')
     }
 
+    // if new photos are being uploaded, perform this
     if (includesPhotos) {
       try {
         let awsCopy = {}
         let awsDelete = {}
         let fileLocations = []
 
+        // need for-loop here, user could upload 1 photo, or 7 photos
+        //  this loop catches all conditions
         for (const file of req.files) {
           awsCopy = {
             Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}`,
@@ -249,15 +280,19 @@ exports.updateVehicle = async (req, res) => {
             Key: file.key
           }
 
+          // update photos list in vehicle data
           fileLocations.push({
             Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}`,
             Key: file.key.split('/')[2],
             url: `${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${vehicle.dealership}/${vehicle._id}/${file.key.split('/')[2]}`
           })
 
+          // perform aws operations
           await s3.copyObject(awsCopy).promise()
           await s3.deleteObject(awsDelete).promise()
 
+          // update vehicle photos array
+          // TODO: combine this with the the first update operation
           const updatedPhotos = await Vehicles.findOneAndUpdate({ _id: vehicleId }, { $push: { 'images': fileLocations } })
           if (updatedPhotos.n === 0) {
             this.deleteFiles(req.files)
@@ -279,10 +314,14 @@ exports.updateVehicle = async (req, res) => {
   }
 }
 
+// function to delete vehicle photo(s)
+// this function is ONLY called when photos are being
+//  deleted
 exports.deletePhotos = async (req, res) => {
   const toDelete = req.body.images
 
   try {
+    // ensure the user deleting is allowed to, via the token
     const vehicle = await Vehicles
       .find({
         _id: req.params.vehicle_id,
@@ -301,6 +340,7 @@ exports.deletePhotos = async (req, res) => {
       })
     }
 
+    // loop through files to delete
     let awsDelete = {}
     for (const image of matchingImages) {
       awsDelete = {
@@ -311,6 +351,7 @@ exports.deletePhotos = async (req, res) => {
       await s3.deleteObject(awsDelete).promise()
     }
 
+    // finally update the vehicles data in db
     await Vehicles
       .update({
         _id: req.params.vehicle_id, dealership: req['user']['_id']
@@ -328,7 +369,9 @@ exports.deletePhotos = async (req, res) => {
   }
 }
 
+// function to delete vehicle
 exports.deleteVehicle = async (req, res) => {
+  // find vehicle and check with token that user is allowed to delete
   const vehicle = await Vehicles
     .find({
       _id: req.params.vehicle_id,
@@ -338,6 +381,8 @@ exports.deleteVehicle = async (req, res) => {
   try {
     let images = vehicle[0].images
     let awsDelete = {}
+
+    // delete images first from aws
     for (const image of images) {
       awsDelete = {
         'Bucket': image.Bucket,
@@ -348,6 +393,8 @@ exports.deleteVehicle = async (req, res) => {
     }
 
     try {
+      // delete vehicle
+      // again check with the token that user is allowed to delete
       const deleted = await Vehicles.findOneAndDelete({
         _id: req.params.vehicle_id,
         dealership: req['user']['_id']
@@ -366,6 +413,8 @@ exports.deleteVehicle = async (req, res) => {
   }
 }
 
+// deletes on failed add new vehicle attempt
+// deletes the vehicle from db and its temporary files from aws
 this.deleteOnFail = async (id, files) => {
   try {
     await Vehicles.findOneAndRemove({ _id: id })
@@ -389,10 +438,13 @@ this.deleteOnFail = async (id, files) => {
   }
 }
 
+// delete an array of files
+// TODO: could be moved in a separate utils file
 this.deleteFiles = async (files) => {
   try {
     let awsDelete = {}
 
+    // check if there are files to delete
     if (files.length > 0) {
       for (const file of files) {
         awsDelete = {

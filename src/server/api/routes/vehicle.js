@@ -74,7 +74,7 @@ router.delete('/delete-vehicle/:vehicle_id',
   Controller.deleteVehicle)
 
 // delete vehicle photos
-// arguments: { vehicle_id }
+// arguments: { vehicle_id, images[] }
 // protected route
 router.delete('/delete-photos/:vehicle_id',
   passport.authenticate('jwt', { session: false }),

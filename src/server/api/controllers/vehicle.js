@@ -318,7 +318,8 @@ exports.updateVehicle = async (req, res) => {
 // this function is ONLY called when photos are being
 //  deleted
 exports.deletePhotos = async (req, res) => {
-  const toDelete = req.body.images
+  const toDelete = []
+  toDelete.push(req.body.images)
 
   try {
     // ensure the user deleting is allowed to, via the token
@@ -333,12 +334,14 @@ exports.deletePhotos = async (req, res) => {
     let matchingImageUrl = []
     for (const image of toDelete) {
       vehicle[0]['images'].find(details => {
-        if (details.url === image.url) {
-          matchingImages.push(image)
-          matchingImageUrl.push(image.url)
+        if (details.url === image) {
+          matchingImages.push(details)
+          matchingImageUrl.push(details.url)
         }
       })
     }
+
+
 
     // loop through files to delete
     let awsDelete = {}

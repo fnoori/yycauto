@@ -44,17 +44,7 @@ export default {
     }
   },
   data () {
-    // temporary data
-    //  this data will passes as props
     return {
-      vehicle_id: '1234',
-      make: 'Honda',
-      model: 'Civic',
-      trim: 'SE',
-      year: '2018',
-      price: '23,000',
-
-      dealershipName: 'Generic Dealership'
     }
   }
 }

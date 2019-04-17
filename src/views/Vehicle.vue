@@ -1,21 +1,21 @@
 <template>
-  <div class="vehicle container">
+  <div v-if="isLoaded" class="vehicle container">
     <div class="row m-0">
-      <h5>{{ year }} {{ make }} {{ model }} {{ trim }}</h5>
+      <h5>{{ vehicle.basic_info.year }} {{ vehicle.basic_info.make }} {{ vehicle.basic_info.model }} {{ vehicle.basic_info.trim }}</h5>
     </div>
     <div class="row p-1">
-      <my-gallery :images="images"/>
+      <my-gallery :images="vehicle.images"/>
     </div>
     <div class="row basic-info">
       <div>
-        <h5 class="price">$ {{ price }}</h5>
+        <h5 class="price">$ {{ vehicle.basic_info.price }}</h5>
         <h6>
           <img src="@/assets/icons/kilometres.png" alt="">
-          {{ kilometres }}
+          {{ vehicle.basic_info.kilometres }}
         </h6>
         <h6>
           <img src="@/assets/icons/transmission.png" alt="">
-          {{ transmission }}
+          {{ vehicle.mechanical_info.transmission }}
         </h6>
       </div>
     </div>
@@ -24,31 +24,31 @@
         <div class="row">
           <div class="col text-right">
             <div class="title">Make</div>
-            <div class="value">Honda</div>
+            <div class="value">{{ vehicle.basic_info.make }}</div>
           </div>
           <div class="col text-left">
             <div class="title">Model</div>
-            <div class="value">Civic</div>
+            <div class="value">{{ vehicle.basic_info.model }}</div>
           </div>
         </div>
         <div class="row">
           <div class="col text-right">
             <div class="title">Trim</div>
-            <div class="value">SE</div>
+            <div class="value">{{ vehicle.basic_info.trim }}</div>
           </div>
           <div class="col text-left">
             <div class="title">Type</div>
-            <div class="value">Hatchback</div>
+            <div class="value">{{ vehicle.basic_info.type }}</div>
           </div>
         </div>
         <div class="row">
           <div class="col text-right">
             <div class="title">Exterior Colour</div>
-            <div class="value">Black</div>
+            <div class="value">{{ vehicle.basic_info.exterior_colour }}</div>
           </div>
           <div class="col text-left">
-            <div class="title">Interior Colour</div>
-            <div class="value">Grey</div>
+            <div v-if="vehicle.basic_info.interior_colour" class="title">Interior Colour</div>
+            <div v-if="vehicle.basic_info.interior_colour" class="value">{{ vehicle.basic_info.interior_colour }}</div>
           </div>
         </div>
       </b-card>
@@ -56,51 +56,55 @@
       <b-card border-variant="light" header="Mechanical Info." class="text-left basic-info">
         <div class="row">
           <div class="col text-right">
-            <div class="title">CarProof</div>
-            <div class="value">False</div>
-          </div>
-          <div class="col text-left">
             <div class="title">Transmission</div>
-            <div class="value">Auto</div>
+            <div class="value">{{ vehicle.mechanical_info.transmission }}</div>
+          </div>
+          <div class="col text-left">
+            <div v-if="vehicle.mechanical_info.car_proof" class="title">CarProof</div>
+            <div v-if="vehicle.mechanical_info.car_proof" class="value">{{ vehicle.mechanical_info.car_proof }}</div>
           </div>
         </div>
         <div class="row">
           <div class="col text-right">
-            <div class="title">Engine Size</div>
-            <div class="value">1.8</div>
+            <div v-if="vehicle.mechanical_info.engine_size" class="title">Engine Size</div>
+            <div v-if="vehicle.mechanical_info.engine_size" class="value">{{ vehicle.mechanical_info.engine_size }}</div>
           </div>
           <div class="col text-left">
-            <div class="title">Cylinders</div>
-            <div class="value">4</div>
+            <div v-if="vehicle.mechanical_info.cylinders" class="title">Cylinders</div>
+            <div v-if="vehicle.mechanical_info.cylinders" class="value">{{ vehicle.mechanical_info.cylinders }}</div>
           </div>
         </div>
         <div class="row">
           <div class="col text-right">
-            <div class="title">Horsepower</div>
-            <div class="value">142</div>
+            <div v-if="vehicle.mechanical_info.horsepower" class="title">Horsepower</div>
+            <div v-if="vehicle.mechanical_info.horsepower" class="value">{{ vehicle.mechanical_info.horsepower }}</div>
           </div>
           <div class="col text-left">
-            <div class="title">Torque</div>
-            <div class="value">144</div>
+            <div v-if="vehicle.mechanical_info.torque" class="title">Torque</div>
+            <div v-if="vehicle.mechanical_info.torque" class="value">{{ vehicle.mechanical_info.torque }}</div>
           </div>
         </div>
       </b-card>
 
-      <b-card border-variant="light" header="Fuel Economy" class="text-left basic-info">
+      <b-card
+        v-if="vehicle.fuel_economy && (vehicle.fuel_economy.city || vehicle.fuel_economy.highway || vehicle.fuel_economy.combined)"
+        border-variant="light"
+        header="Fuel Economy"
+        class="text-left basic-info">
         <div class="row">
           <div class="col text-right">
-            <div class="title">City</div>
-            <div class="value">8.9</div>
+            <div v-if="vehicle.fuel_economy.city" class="title">City</div>
+            <div v-if="vehicle.fuel_economy.city" class="value">{{ vehicle.fuel_economy.city }}</div>
           </div>
           <div class="col text-left">
-            <div class="title">Highway</div>
-            <div class="value">10.9</div>
+            <div v-if="vehicle.fuel_economy.highway" class="title">Highway</div>
+            <div v-if="vehicle.fuel_economy.highway" class="value">{{ vehicle.fuel_economy.highway }}</div>
           </div>
         </div>
         <div class="row">
           <div class="col text-right">
-            <div class="title">Combined</div>
-            <div class="value">9.2</div>
+            <div v-if="vehicle.fuel_economy.combined" class="title">Combined</div>
+            <div v-if="vehicle.fuel_economy.combined" class="value">{{ vehicle.fuel_economy.combined }}</div>
           </div>
           <div class="col text-left">
             <div class="title"></div>
@@ -114,6 +118,7 @@
 
 <script>
 import Gallery from '@/components/Gallery'
+import axios from 'axios'
 
 export default {
   name: 'Vehicle',
@@ -121,29 +126,24 @@ export default {
     'my-gallery': Gallery
   },
   data () {
-    // temporary data
-    // data will be retrieved from backend
-    //  vehicle_id comes from the url params
-    //  this is to enable sharing of url to view vehicle
     return {
-      vehicle_id: '1234',
-      make: 'Honda',
-      model: 'Civic',
-      trim: 'SE',
-      year: '2018',
-      price: '23,000',
-      kilometres: '5,000',
-      transmission: 'Automatic',
-      images: [
-        'https://via.placeholder.com/1920x1080?text=image1',
-        'https://via.placeholder.com/1920x1080?text=image2',
-        'https://via.placeholder.com/1920x1080?text=image3',
-        'https://via.placeholder.com/1920x1080?text=image4',
-        'https://via.placeholder.com/1920x1080?text=image5',
-        'https://via.placeholder.com/1920x1080?text=image6'
-      ],
-
-      dealershipName: 'Generic Dealership'
+      vehicle: Object,
+      isLoaded: false
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      console.log(to)
+      console.log(from)
+      if (from.name === 'home') {
+        axios.get(`${process.env.VUE_APP_API_ROUTE}/vehicles/get-vehicle-by-id/${this.$route.params.vehicle_id}`)
+          .then((vehicle) => {
+            this.vehicle = vehicle.data
+            this.isLoaded = true
+          }).catch(vehicleGetErr => {
+            alert(`unexpected error when retrieving vehicle`)
+          })
+      }
     }
   }
 }

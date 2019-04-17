@@ -34,7 +34,8 @@ exports.getRegularVehicles = (req, res) => {
 exports.getVehicleById = (req, res) => {
   const vehicleId = req.params.vehicle_id
 
-  Vehicles.find({ _id: vehicleId })
+  Vehicles.findOne({ _id: vehicleId })
+    .populate('dealership')
     .then(vehicle => {
       // update view count of vehicle data
       Vehicles.update({ _id: vehicleId }, { $inc: { 'views': 1 } })
@@ -44,8 +45,8 @@ exports.getVehicleById = (req, res) => {
           console.log(updateViewCountErr)
           return res.status(500).send('failed to update view count')
         })
-    }).catch(findErr => {
-      console.log(findErr)
+    }).catch(findOne => {
+      console.log(findOne)
       return res.status(500).send('error finding vehicle')
     })
 }

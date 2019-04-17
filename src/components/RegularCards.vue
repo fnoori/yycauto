@@ -43,14 +43,7 @@ export default {
     }
   },
   data () {
-    // temporary data
-    //  data will be passes as props
     return {
-      make: 'Honda',
-      model: 'Civic',
-      trim: 'SE',
-      year: '2018',
-      price: '23,000'
     }
   }
 }

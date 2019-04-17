@@ -43,7 +43,7 @@ upload = multer({
 
 // get routes with various parameters
 //  parameters are passed as query.parameters
-router.get('/get-all-vehicles/:skip/:limit', Controller.getAllVehicles)
+router.get('/get-regular-vehicles/:skip/:limit', Controller.getRegularVehicles)
 router.get('/get-vehicle-by-id/:vehicle_id', Controller.getVehicleById)
 router.get('/get-vehicles-by-dealership-id/:dealership_id', Controller.getVehiclesByDealershipId)
 router.get('/get-premium-vehicles/:skip/:limit', Controller.getPremiumVehicles)

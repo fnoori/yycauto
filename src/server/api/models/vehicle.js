@@ -38,10 +38,13 @@ const vehicleSchema = mongoose.Schema({
     combined: { type: Number, required: false, maxlength: globalVars.FUEL_ECONOMY_COMBINED }
   },
   premium_ad: {
-    start: { type: Date, required: false },
-    end: { type: Date, required: false }
+    start: { type: Date, required: true },
+    end: { type: Date, required: true }
   },
-  dealership: mongoose.Schema.Types.ObjectId,
+  dealership: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
   images: { type: Array, required: false },
   date: {
     created: { type: Date, required: true },

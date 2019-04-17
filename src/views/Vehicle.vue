@@ -108,32 +108,6 @@
           </div>
         </div>
       </b-card>
-<!--
-
-      <div class="mt-3 basic-info">
-        <div class="info-title">Fuel Economy</div>
-        <div class="row">
-          <div class="col text-right">
-            <div class="title">City</div>
-            <div class="value">8.9</div>
-          </div>
-          <div class="col text-left">
-            <div class="title">Highway</div>
-            <div class="value">10.9</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col text-right">
-            <div class="title">Combined</div>
-            <div class="value">9.2</div>
-          </div>
-          <div class="col text-left">
-            <div class="title"></div>
-            <div class="value"></div>
-          </div>
-        </div>
-      -->
-      </div>
     </div>
   </div>
 </template>
@@ -161,12 +135,12 @@ export default {
       kilometres: '5,000',
       transmission: 'Automatic',
       images: [
-          'https://via.placeholder.com/1920x1080?text=image1',
-          'https://via.placeholder.com/1920x1080?text=image2',
-          'https://via.placeholder.com/1920x1080?text=image3',
-          'https://via.placeholder.com/1920x1080?text=image4',
-          'https://via.placeholder.com/1920x1080?text=image5',
-          'https://via.placeholder.com/1920x1080?text=image6'
+        'https://via.placeholder.com/1920x1080?text=image1',
+        'https://via.placeholder.com/1920x1080?text=image2',
+        'https://via.placeholder.com/1920x1080?text=image3',
+        'https://via.placeholder.com/1920x1080?text=image4',
+        'https://via.placeholder.com/1920x1080?text=image5',
+        'https://via.placeholder.com/1920x1080?text=image6'
       ],
 
       dealershipName: 'Generic Dealership'

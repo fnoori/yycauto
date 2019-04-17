@@ -1,10 +1,10 @@
 <template>
-  <router-link :to="{ name: 'vehicle', params: { vehicle_id: vehicle_id } }">
+  <router-link :to="{ name: 'vehicle', params: { vehicle_id: vehicle._id } }">
     <b-card
-      :title="year + ' ' + make + ' ' + model + ' ' + trim"
-      :sub-title="'$ ' + price"
+      :title="vehicle.basic_info.year + ' ' + vehicle.basic_info.make + ' ' + vehicle.basic_info.model + ' ' + vehicle.basic_info.trim"
+      :sub-title="'$ ' + vehicle.basic_info.price"
       title-tag="h6"
-      :img-src="require('@/assets/no-photo.png')"
+      :img-src="vehicle.images[0].url"
       img-alt="Image"
       class="premium-card"
       img-top>
@@ -13,21 +13,21 @@
         <div class="col">
           <div class="d-block quick-info">
             <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
-            10,000
+            {{ vehicle.basic_info.kilometres }}
           </div>
           <div class="d-block quick-info">
             <img src="@/assets/icons/transmission.png" class="quick-icons" alt="">
-            Automatic
+            {{ vehicle.mechanical_info.transmission }}
           </div>
           <div class="d-block quick-info">
             <img src="@/assets/icons/gaspump.png" class="quick-icons" alt="">
-            Gasoline
+            {{ vehicle.basic_info.fuel_type }}
           </div>
         </div>
       </b-card-text>
       <div slot="footer">
         <small class="text-muted">
-          <a href="#">{{ dealershipName }}</a>
+          <a href="#">{{ vehicle.dealership.dealership.name }}</a>
         </small>
       </div>
     </b-card>
@@ -37,6 +37,12 @@
 <script>
 export default {
   name: 'PremiumCard',
+  props: {
+    vehicle: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     // temporary data
     //  this data will passes as props

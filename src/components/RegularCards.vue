@@ -1,8 +1,13 @@
 <template>
   <div class="regular-card">
-    <h6>{{year}} {{make}} {{model}} {{trim}}</h6>
+    <h6>
+      {{ vehicle.basic_info.year }}
+      {{ vehicle.basic_info.make }}
+      {{ vehicle.basic_info.model }}
+      {{ vehicle.basic_info.trim }}
+    </h6>
     <b-card
-      :img-src="require('@/assets/no-photo.png')"
+      :img-src="vehicle.images[0].url"
       img-alt="Image"
       img-left
       tag="article">
@@ -11,15 +16,15 @@
           <div class="col">
             <div class="d-block quick-info">
               <img src="@/assets/icons/kilometres.png" class="quick-icons" alt="">
-              10,000
+              {{ vehicle.basic_info.kilometres }}
             </div>
             <div class="d-block quick-info">
               <img src="@/assets/icons/transmission.png" class="quick-icons" alt="">
-              Automatic
+              {{ vehicle.mechanical_info.transmission }}
             </div>
             <div class="d-block quick-info">
               <img src="@/assets/icons/gaspump.png" class="quick-icons" alt="">
-              Gasoline
+              {{ vehicle.basic_info.fuel_type }}
             </div>
           </div>
         </div>
@@ -31,6 +36,12 @@
 <script>
 export default {
   name: 'RegularCard',
+  props: {
+    vehicle: {
+      type: Object,
+      required: true
+    }
+  },
   data () {
     // temporary data
     //  data will be passes as props
@@ -50,7 +61,7 @@ export default {
   @media (min-width: 319px) {
     .regular-card {
       width: 100%;
-      margin: .8rem auto;
+      margin: 1.5rem auto;
 
       .card {
         .card-img-left {

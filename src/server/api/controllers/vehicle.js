@@ -16,11 +16,12 @@ s3 = new AWS.S3()
 
 // get all vehicles functions
 // arguments: { how much to skip, and limit of how much to retrieve }
-exports.getAllVehicles = (req, res) => {
+exports.getRegularVehicles = (req, res) => {
   const limit = parseInt(req.params.limit)
   const skip = parseInt(req.params.skip)
 
-  Vehicles.find().skip(skip).limit(limit)
+  Vehicles.find().where('premium_ad.end').lt(new Date())
+    .skip(skip).limit(limit)
     .then(vehicles => {
       res.status(200).send(vehicles)
     }).catch(findErr => {
@@ -56,7 +57,9 @@ exports.getPremiumVehicles = (req, res) => {
   const limit = parseInt(req.params.limit)
   const skip = parseInt(req.params.skip)
 
-  Vehicles.find().where('premium_ad.end').gt(new Date())
+  Vehicles.find()
+    .where('premium_ad.end').gt(new Date())
+    .populate('dealership')
     .skip(skip).limit(limit)
     .then(premiumVehicles => {
       res.send(premiumVehicles)
@@ -129,6 +132,10 @@ exports.addNewVehicle = async (req, res) => {
     'date': {
       'created': new Date(),
       'modified': new Date()
+    },
+    'premium_ad': {
+      'start': new Date('1969-12-19T00:58:02+0000').toISOString(),
+      'end' : new Date('1969-12-19T00:58:02+0000').toISOString()
     },
     'views': 0
   })

@@ -6,23 +6,30 @@
     <div class="row p-1">
       <my-gallery :images="vehicle.images"/>
     </div>
+
     <div class="row basic-info">
-      <!--<img class="col" :src="vehicle.dealership.logo.url"/>-->
-      <router-link class="col" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
-        <img src="@/assets/logos/sponsored_logo.png"/>
-      </router-link>
-      <div class="col" >
-        <h5 class="price">${{ vehicle.basic_info.price.toLocaleString() }}</h5>
-        <h6 class="kilometres">
-          <img src="@/assets/icons/kilometres.png" alt="">
-          {{ vehicle.basic_info.kilometres.toLocaleString() }}
-        </h6>
-        <h6>
-          <img src="@/assets/icons/transmission.png" alt="">
-          {{ vehicle.mechanical_info.transmission }}
-        </h6>
+      <div class="col-md">
+        <router-link class="row justify-content-center" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
+          <img src="@/assets/logos/sponsored_logo.png"/>
+        </router-link>
+      </div>
+      <div class="col-md">
+        <div class="row">
+          <div class="col">
+            <h5 class="price row justify-content-center">${{ vehicle.basic_info.price.toLocaleString() }}</h5>
+            <h6 class="kilometres row justify-content-center">
+              <img src="@/assets/icons/kilometres.png" alt="">
+              {{ vehicle.basic_info.kilometres.toLocaleString() }}
+            </h6>
+            <h6 class="row justify-content-center">
+              <img src="@/assets/icons/transmission.png" alt="">
+              {{ vehicle.mechanical_info.transmission }}
+            </h6>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="row detailed-info">
       <div class="col-md">
         <b-card
@@ -154,7 +161,6 @@ export default {
         .then((vehicle) => {
           vm.vehicle = vehicle.data
           vm.isLoaded = true
-          console.log(vm.vehicle)
         }).catch(vehicleGetErr => {
           alert(`unexpected error when retrieving vehicle`)
         })
@@ -173,11 +179,9 @@ export default {
     margin-top: 1rem;
 
     .basic-info {
-      margin: .25rem 0rem;
-      text-align: end;
-      justify-content: end;
+      margin-bottom: 1rem;
       align-items: center;
-
+      
       .price {
         color: green;
         letter-spacing: 1px;
@@ -190,9 +194,10 @@ export default {
         width: 1rem;
         padding-bottom: .2rem;
       }
-      a img {
-        width: 100%;
-        padding: 0;
+      a {
+        img {
+          width: 15rem;
+        }
       }
     }
 

@@ -1,5 +1,7 @@
 <template>
-  <router-link :to="{ name: 'vehicle', params: { vehicle_id: vehicle._id } }">
+  <router-link
+    :to="{ name: 'vehicle', params: { vehicle_id: vehicle._id } }"
+    :key="vehicle._id">
     <b-card
       :title="vehicle.basic_info.year + ' ' + vehicle.basic_info.make + ' ' + vehicle.basic_info.model + ' ' + vehicle.basic_info.trim"
       :sub-title="'$ ' + vehicle.basic_info.price"
@@ -27,7 +29,7 @@
       </b-card-text>
       <div slot="footer">
         <small class="text-muted">
-          <a href="#">{{ vehicle.dealership.dealership.name }}</a>
+          <a href="#">{{ vehicle.dealership.name }}</a>
         </small>
       </div>
     </b-card>
@@ -54,7 +56,7 @@ export default {
 a {
   text-decoration: none !important;
   color: black !important;
-  cursor: default;
+  cursor: pointer;
 }
 
 .premium-card {

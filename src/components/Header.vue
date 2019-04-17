@@ -122,7 +122,7 @@ export default {
         width: 80vw;
 
         .input-group {
-          width: 40rem !important;
+          width: 35rem !important;
           margin: 0 auto;
         }
       }

@@ -6,7 +6,7 @@
       indicators>
         <b-carousel-slide
           v-for="(image, index) in images"
-          :img-src="image.url"/>
+          img-src="https://via.placeholder.com/1920x1080?text=Visit+Blogging.com+Now"/>
     </b-carousel>
   </div>
 </template>

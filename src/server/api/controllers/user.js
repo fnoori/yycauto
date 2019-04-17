@@ -54,9 +54,7 @@ exports.register = async (req, res) => {
       '_id': new mongoose.Types.ObjectId(),
       'email': email,
       'password': hash,
-      'dealership': {
-        'name': dealership
-      },
+      'name': dealership,
       'date': {
         'created': new Date(),
         'modified': new Date()
@@ -77,9 +75,19 @@ exports.register = async (req, res) => {
         Key: `${req['file']['key']}`
       }
 
+      const logoLocation = {
+        Bucket: `${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved._id}`,
+        Key: `logo.${req['file']['mimetype'].split('/')[1]}`,
+        url: `${process.env.AWS_BASE_URL}/${process.env.AWS_BUCKET_NAME}/${process.env.NODE_ENV}/users/${saved._id}/logo.${req['file']['mimetype'].split('/')[1]}`
+      }
+
       // perform operations
       await s3.copyObject(awsCopy).promise()
       await s3.deleteObject(awsDelete).promise()
+
+      // update the images of vehicle
+      // TODO: this could be joined with the save operation
+      await Users.findOneAndUpdate({ _id: saved._id }, { logo: logoLocation })
 
       res.status(200).send('user created successfully')
     } catch (e) {
@@ -212,7 +220,7 @@ exports.login = (req, res) => {
       const jwtBody = {
         '_id': user[0]._id,
         'email': user[0].email,
-        'dealership.name': user[0]['dealership']['name'],
+        'dealership': user[0]['dealership'],
         'date': user[0].date
       }
 

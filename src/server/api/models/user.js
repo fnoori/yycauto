@@ -18,22 +18,21 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  dealership: {
-    name: {
-      type: String,
-      maxLength: globalVars.DEALERSHIP_NAME_MAX_LENGTH,
-      required: true
-    },
-    hours: {
-      monday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      tuesday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      wednesday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      thursday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      friday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      saturday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
-      sunday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } }
-    }
+  name: {
+    type: String,
+    maxLength: globalVars.DEALERSHIP_NAME_MAX_LENGTH,
+    required: true
   },
+  hours: {
+    monday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    tuesday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    wednesday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    thursday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    friday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    saturday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } },
+    sunday: { from: { type: String, max: 4, min: 4 }, to: { type: String, max: 4, min: 4 } }
+  },
+  logo: { type: Object },
   date: {
     created: {
       type: Date,

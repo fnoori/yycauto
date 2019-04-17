@@ -20,8 +20,7 @@
       </div>
     </div>
     <div class="row p-4">
-      <h6>Basic Info.</h6>
-      <div class="basic-info">
+      <b-card border-variant="light" header="Basic Info." class="text-left basic-info">
         <div class="row">
           <div class="col text-right">
             <div class="title">Make</div>
@@ -52,10 +51,9 @@
             <div class="value">Grey</div>
           </div>
         </div>
-      </div>
+      </b-card>
 
-      <h6 class="mt-3">Mechanical Info.</h6>
-      <div class="basic-info">
+      <b-card border-variant="light" header="Mechanical Info." class="text-left basic-info">
         <div class="row">
           <div class="col text-right">
             <div class="title">CarProof</div>
@@ -86,10 +84,9 @@
             <div class="value">144</div>
           </div>
         </div>
-      </div>
+      </b-card>
 
-      <h6 class="mt-3">Fuel Economy</h6>
-      <div class="basic-info">
+      <b-card border-variant="light" header="Fuel Economy" class="text-left basic-info">
         <div class="row">
           <div class="col text-right">
             <div class="title">City</div>
@@ -110,6 +107,32 @@
             <div class="value"></div>
           </div>
         </div>
+      </b-card>
+<!--
+
+      <div class="mt-3 basic-info">
+        <div class="info-title">Fuel Economy</div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">City</div>
+            <div class="value">8.9</div>
+          </div>
+          <div class="col text-left">
+            <div class="title">Highway</div>
+            <div class="value">10.9</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-right">
+            <div class="title">Combined</div>
+            <div class="value">9.2</div>
+          </div>
+          <div class="col text-left">
+            <div class="title"></div>
+            <div class="value"></div>
+          </div>
+        </div>
+      -->
       </div>
     </div>
   </div>
@@ -188,6 +211,10 @@ export default {
         color: black;
         font-size: 1rem;
       }
+    }
+
+    .info-title {
+      font-size: 1.1rem;
     }
   }
 }

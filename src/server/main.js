@@ -14,9 +14,10 @@ const passport = require('passport')
 const http = require('http')
 const server = http.createServer(app)
 const expressValidator = require('express-validator')
+const cors = require('cors')
 const userRoutes = require('./api/routes/user')
 const vehicleRoutes = require('./api/routes/vehicle')
-require('./config').configureEnvironment()
+require('./config').configureEnvironment(app, cors)
 
 // configure mongoose
 mongoose.connect(process.env.MONGO_DB_URI, { useNewUrlParser: true })

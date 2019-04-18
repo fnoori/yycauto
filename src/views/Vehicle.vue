@@ -24,8 +24,10 @@
         </div>
       </div>
       <div class="col-md">
-        <router-link class="row justify-content-center" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
-          <img src="@/assets/logos/sponsored_logo.png"/>
+        <router-link class="row" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
+          <div class="col-md text-center">
+            <img src="@/assets/logos/sponsored_logo.png"/>
+          </div>
         </router-link>
       </div>
     </div>
@@ -203,9 +205,15 @@ export default {
         letter-spacing: 1px;
       }
 
+      h5,
+      h6 {
+        display: -webkit-box;
+      }
+
       img {
         width: 1rem;
       }
+
       a {
         img {
           width: 15rem;

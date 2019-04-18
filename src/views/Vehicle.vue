@@ -9,11 +9,6 @@
 
     <div class="row basic-info">
       <div class="col-md">
-        <router-link class="row justify-content-center" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
-          <img src="@/assets/logos/sponsored_logo.png"/>
-        </router-link>
-      </div>
-      <div class="col-md">
         <div class="row">
           <div class="col">
             <h5 class="price row justify-content-center">${{ vehicle.basic_info.price.toLocaleString() }}</h5>
@@ -27,6 +22,24 @@
             </h6>
           </div>
         </div>
+      </div>
+      <div class="col-md">
+        <router-link class="row justify-content-center" :to="{ name: 'dealership', params: { dealership_id: vehicle.dealership._id } }">
+          <img src="@/assets/logos/sponsored_logo.png"/>
+        </router-link>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md">
+        <b-card
+          border-variant="light"
+          header="Description"
+          class="text-left description">
+          <div>
+            {{ vehicle.basic_info.description }}
+          </div>
+        </b-card>
       </div>
     </div>
 
@@ -179,9 +192,9 @@ export default {
     margin-top: 1rem;
 
     .basic-info {
-      margin-bottom: 1rem;
       align-items: center;
-      
+      padding-top: 1rem;
+
       .price {
         color: green;
         letter-spacing: 1px;
@@ -192,12 +205,19 @@ export default {
 
       img {
         width: 1rem;
-        padding-bottom: .2rem;
       }
       a {
         img {
           width: 15rem;
         }
+      }
+    }
+
+    .description {
+      margin-bottom: 1rem;
+
+      .card-body {
+        padding: 1rem;
       }
     }
 
@@ -222,6 +242,7 @@ export default {
     }
   }
 }
+
 @media (min-width: 576px) {
   .vehicle {
     .detailed-info {
@@ -230,6 +251,40 @@ export default {
       }
       .value {
         font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .vehicle {
+    .basic-info {
+      padding-top: 0;
+    }
+
+    .detailed-info {
+      .sub-detailed-info{
+        .title {
+          font-size: 0.7rem;
+        }
+        .value {
+          font-size: .8rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .vehicle {
+    .detailed-info {
+      .sub-detailed-info{
+        .title {
+          font-size: 0.9rem;
+        }
+        .value {
+          font-size: 1rem;
+        }
       }
     }
   }
